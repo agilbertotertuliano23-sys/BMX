@@ -306,7 +306,7 @@ body.entrada-travada .barra { opacity: 0.82; }
 
 /* ── coluna direita ────────────────────── */
 .grafo-caixa {
-  height: 210px; border-radius: 12px; overflow: hidden;
+  height: 160px; border-radius: 12px; overflow: hidden;
   background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f1f6fa 100%);
   border: 1px solid var(--linha);
 }
