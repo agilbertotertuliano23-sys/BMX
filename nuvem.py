@@ -34,7 +34,7 @@ _HOSTS = {h.strip().lower() for h in (os.environ.get("BMX_ALLOWED_HOSTS", "") + 
 LOGIN_POR_IP = (5, 15 * 60)
 LOGIN_TOTAL = (40, 15 * 60)
 # Limite de uso por rota (n, janela em segundos). Protege a chave da API contra laço ou abuso.
-USO = {"/api/run": (40, 600), "/api/speak": (60, 600), "/api/listen": (30, 600)}
+USO = {"/api/run": (40, 600), "/api/speak": (60, 600), "/api/listen": (30, 600), "/api/demo": (20, 600)}
 MAX_MENSAGEM = 4000
 
 _lock = threading.Lock()

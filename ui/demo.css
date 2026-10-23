@@ -1,0 +1,75 @@
+/* Demonstrações guiadas: palco (sobre o corpo 3D) e catálogo. Visual claro, como o resto do painel do caso. */
+.demo { position: absolute; inset: 0; z-index: 8; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 12px; gap: 8px; pointer-events: none; }
+.demo[hidden] { display: none; }
+.demo > * { pointer-events: auto; }
+.demo-topo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 12px; border-radius: 14px;
+  background: rgba(255,255,255,.88); border: 1px solid #dce6ee; backdrop-filter: blur(10px); }
+.demo-topo > div:first-child { flex: 1; min-width: 160px; display: flex; flex-direction: column; }
+.demo-rotulo { font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #076a9a; }
+#demoTitulo { font-size: 16px; }
+.demo-niveis { display: inline-flex; border: 1px solid #c5d3df; border-radius: 999px; overflow: hidden; }
+.demo-niveis button { border: 0; background: #fff; padding: 6px 11px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; color: #34495e; }
+.demo-niveis button.on { background: #14212e; color: #fff; }
+#demoFechar { border: 0; background: #eef3f7; width: 30px; height: 30px; border-radius: 50%; font-size: 18px; cursor: pointer; line-height: 1; }
+.demo-aviso { align-self: flex-start; max-width: 520px; font-size: 11.5px; font-weight: 700; color: #6b4a00; background: #fff6e0;
+  border: 1px solid #f0d9a0; padding: 5px 10px; border-radius: 10px; }
+.demo-aviso:empty { display: none; }
+.demo-miolo { display: flex; gap: 10px; align-items: flex-end; justify-content: space-between; flex: 1; min-height: 0; }
+.demo-legenda { max-width: min(520px, 55%); padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.92);
+  border: 1px solid #dce6ee; box-shadow: 0 8px 26px rgba(20,33,46,.12); }
+.demo-legenda b { display: block; font-size: 16px; line-height: 1.3; }
+.demo-legenda p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; color: #34495e; }
+.demo-legenda .demo-aprof { padding-top: 8px; border-top: 1px dashed #cfdbe6; color: #4a5f72; }
+.demo-termos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.demo-termos[hidden], .demo-legenda p[hidden] { display: none; }
+.termo { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: #e8f5fb; color: #075d88; }
+.demo-cartao { max-width: min(340px, 40%); max-height: 100%; overflow: auto; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.94);
+  border: 1px solid #dce6ee; box-shadow: 0 8px 26px rgba(20,33,46,.12); font-size: 13px; }
+.demo-cartao[hidden] { display: none; }
+.demo-cartao b { display: block; margin-bottom: 6px; font-size: 14px; }
+.demo-cartao p, .demo-cartao li { line-height: 1.45; color: #34495e; }
+.demo-cartao ul { margin: 6px 0 0; padding-left: 18px; }
+.demo-cartao.alerta { border-left: 5px solid #d97706; background: #fff7e8; }
+.demo-cartao.remedio small { display: block; margin-top: 8px; color: #6b7c8c; }
+.demo-cartao .pista { margin: 8px 0; padding: 8px 10px; border-radius: 10px; background: #f1f6fa; }
+.demo-cartao .pista span { display: block; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #076a9a; }
+.demo-cartao .pista small { display: block; margin-top: 3px; color: #6b7c8c; }
+.demo-fotos { display: flex; gap: 8px; margin-top: 8px; }
+.demo-fotos figure { margin: 0; flex: 1; min-width: 0; font-size: 10px; color: #6b7c8c; }
+.demo-fotos img { width: 100%; height: 70px; object-fit: cover; border-radius: 8px; display: block; }
+.demo-fotos figcaption { margin-top: 3px; line-height: 1.25; }
+.demo-cartao .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.demo-cartao .chip { font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: #e8f5fb; color: #075d88; border: 0; }
+.demo-cartao button.chip { cursor: pointer; }
+.demo-controle { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 12px; border-radius: 14px;
+  background: rgba(255,255,255,.9); border: 1px solid #dce6ee; }
+.demo-controle button { border: 1px solid #c5d3df; background: #fff; border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.demo-controle #demoPlay { background: #14212e; color: #fff; border-color: #14212e; min-width: 92px; }
+.demo-trilha { display: flex; gap: 4px; flex: 1; min-width: 120px; }
+.demo-trilha button { flex: 1; height: 8px; padding: 0; border: 0; border-radius: 4px; background: #d5e0ea; min-width: 6px; }
+.demo-trilha button.feito { background: #6fb7da; }
+.demo-trilha button.atual { background: #14212e; }
+#demoContagem { font-size: 11.5px; font-weight: 700; color: #5a6b7a; }
+body.em-demo .pergunta, body.em-demo .resposta { visibility: hidden; }   /* a demonstração ocupa o palco */
+
+/* catálogo */
+.demos-secao { margin-top: 18px; }
+.demos-topo { display: flex; justify-content: space-between; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.demos-filtros { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.demo-filtro { border: 1px solid #c5d3df; background: #fff; border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.demo-filtro.on { background: #14212e; color: #fff; border-color: #14212e; }
+.demos-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.demo-card { padding: 12px; border-radius: 14px; background: #fff; border: 1px solid #dce6ee; display: flex; flex-direction: column; gap: 4px; }
+.demo-card h3 { margin: 4px 0 0; font-size: 15px; }
+.demo-card p { margin: 0; font-size: 12px; color: #5a6b7a; flex: 1; }
+.demo-tag { align-self: flex-start; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; background: #e8f5fb; color: #075d88; }
+.demo-tag.t-regiao { background: #eaf6ec; color: #1d6b34; }
+.demo-tag.t-remedio { background: #f5ecfa; color: #6a2a8f; }
+.demo-tag.t-camada { background: #fdf0e3; color: #8a4b08; }
+.demo-btn { align-self: flex-start; margin-top: 6px; border: 0; background: #14212e; color: #fff; border-radius: 999px; padding: 6px 13px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; }
+.guia-painel .demo-btn { margin: 4px 0 10px; }
+@media (max-width: 960px) {
+  .demo-miolo { flex-direction: column; align-items: stretch; justify-content: flex-end; }
+  .demo-legenda, .demo-cartao { max-width: 100%; }
+}

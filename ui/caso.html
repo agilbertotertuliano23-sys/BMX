@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <link rel="stylesheet" href="caso.css">
+<link rel="stylesheet" href="demo.css">
 <script type="importmap">
   { "imports": { "three": "./vendor/three/three.module.min.js" } }
 </script>
@@ -89,6 +90,32 @@
     <div class="pontos" id="pontos" aria-hidden="true"></div>
     <div class="carregando" id="carregando">carregando o corpo…</div>
 
+    <!-- demonstração guiada (ui/demo.js): fala + câmera e destaques no corpo + cartões, em níveis de profundidade -->
+    <div class="demo" id="demo" hidden>
+      <div class="demo-topo">
+        <div><span class="demo-rotulo" id="demoRotulo">Demonstração</span><b id="demoTitulo"></b></div>
+        <div class="demo-niveis" id="demoNiveis" role="group" aria-label="Profundidade da explicação"></div>
+        <button type="button" id="demoFechar" aria-label="Fechar a demonstração">×</button>
+      </div>
+      <div class="demo-aviso" id="demoAviso"></div>
+      <div class="demo-miolo">
+        <div class="demo-legenda" id="demoLegenda" aria-live="polite">
+          <b id="demoResumo"></b>
+          <p id="demoExplicacao"></p>
+          <div class="demo-termos" id="demoTermos"></div>
+          <p class="demo-aprof" id="demoAprofundar"></p>
+        </div>
+        <div class="demo-cartao" id="demoCartao" hidden></div>
+      </div>
+      <div class="demo-controle">
+        <button type="button" id="demoAnt">Anterior</button>
+        <button type="button" id="demoPlay">Pausar</button>
+        <button type="button" id="demoProx">Próximo</button>
+        <div class="demo-trilha" id="demoTrilha"></div>
+        <span id="demoContagem"></span>
+      </div>
+    </div>
+
     <div class="camadas" id="camadas" role="group" aria-label="Camadas do corpo"></div>
     <div class="vista">
       <button id="vFrente" title="Vista de frente">Frente</button>
@@ -148,12 +175,23 @@
       <div class="galeria-grade" id="galeriaGrade" aria-live="polite"><p>Carregando imagens…</p></div>
     </details>
   </section>
+
+  <section class="card demos-secao" id="demos" aria-labelledby="demosTitulo">
+    <div class="demos-topo">
+      <div><p class="sobretitulo">DEMONSTRAÇÕES GUIADAS</p><h2 id="demosTitulo">Veja explicado, no corpo, passo a passo</h2>
+        <p>A IA conduz: fala, move a câmera, destaca cada parte e mostra o que observar. Escolha a profundidade (Simples, Intermediário ou Aprofundado). É um atlas de referência: não mostra o seu exame.</p></div>
+      <label class="busca-wrap"><span>Buscar demonstração <em id="demosConta"></em></span><input id="demosBusca" type="search" placeholder="Ex.: cabeça, joelho, ossos" autocomplete="off"></label>
+    </div>
+    <div class="demos-filtros" id="demosFiltros" role="group" aria-label="Tipo de demonstração"></div>
+    <div class="demos-grade" id="demosGrade" aria-live="polite"><p>Carregando demonstrações…</p></div>
+  </section>
 </main>
 
 <footer class="rodape">O BMX organiza o caso e explica a anatomia; as possibilidades e remédios são informação para conversar com um profissional, sem diagnóstico ou prescrição.
   Emergência: <a href="tel:192">192</a> · Anatomia 3D: BodyParts3D © DBCLS, CC BY 4.0 (via Human Atlas).</footer>
 
 <script src="caso.js"></script>
+<script src="demo.js"></script>
 <script type="module" src="corpo3d.js"></script>
 </body>
 </html>

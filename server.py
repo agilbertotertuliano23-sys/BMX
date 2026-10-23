@@ -44,6 +44,7 @@ import anatomia    # noqa: E402
 import casos       # noqa: E402
 import clinica     # noqa: E402
 import commands    # noqa: E402
+import demo        # noqa: E402
 import memory      # noqa: E402
 import nuvem       # noqa: E402
 import painel      # noqa: E402
@@ -89,6 +90,17 @@ class _SessaoPorPaciente:
 
 
 SESSION = _SessaoPorPaciente()
+
+
+def _llm_demo(sistema, mensagem):
+    """Uma chamada à LLM do BMX, sem histórico, devolvendo o texto inteiro (usada para redigir as demonstrações)."""
+    texto = []
+    for ev in runtime.run(mensagem, None, sistema):
+        if ev.get("t") == "delta":
+            texto.append(ev.get("text") or "")
+        elif ev.get("t") == "error":
+            raise RuntimeError(ev.get("message") or "erro da LLM")
+    return "".join(texto)
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -297,6 +309,9 @@ class Handler(BaseHTTPRequestHandler):
             force = parse_qs(urlparse(self.path).query).get("force", ["0"])[0] == "1"
             return self._json(memory.graph_view(force=force))
 
+        if p == "/api/demos":   # catálogo de demonstrações guiadas (50), sem dados da pessoa
+            return self._json(demo.catalogo())
+
         if p == "/api/caso":
             cid = parse_qs(urlparse(self.path).query).get("id", [""])[0]
             return self._json(painel.dados(cid))
@@ -362,6 +377,24 @@ class Handler(BaseHTTPRequestHandler):
             raw = self._read(MAX_AUDIO if p == "/api/listen" else MAX_JSON)
         except (TypeError, ValueError):
             return self._json({"error": "body too large"}, 413)
+
+        if p == "/api/demo":
+            try:
+                d = json.loads(raw or b"{}")
+                rid, rapido = str(d.get("roteiro") or ""), bool(d.get("rapido"))
+            except (json.JSONDecodeError, UnicodeDecodeError, AttributeError):
+                return self._json({"error": "JSON inválido"}, 400)
+            if rid not in {c["id"] for c in demo.catalogo()}:
+                return self._json({"error": "roteiro desconhecido"}, 404)
+            # a LLM só entra quando está livre (uma por vez, como no chat); ocupada ou "rápido": texto-padrão do roteiro
+            if not rapido and RUN_LOCK.acquire(blocking=False):
+                try:
+                    r = demo.roteiro(rid, _llm_demo)
+                finally:
+                    RUN_LOCK.release()
+            else:
+                r = demo.roteiro(rid)
+            return self._json(r)
 
         if p == "/api/speak":
             try:

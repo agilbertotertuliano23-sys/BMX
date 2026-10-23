@@ -163,6 +163,7 @@ function renderExploracao(d) {
   var anotadas = respostasGuia[g.id] || {};
   var quantidade = Object.keys(anotadas).filter(function (k) { return !!anotadas[k]; }).length;
   var html = '<div class="guia-cabeca"><span class="guia-etapa">1 · OBSERVE</span><h3>' + esc(g.queixa) + '</h3>'
+    + '<button type="button" class="demo-btn" data-demo="queixa:' + esc(g.id) + '">▶ Ver demonstração no corpo</button>'
     + '<p>Comece pelo que você percebeu, quando surgiu e o que mudou. Suas anotações ficam nesta tela até você enviar.</p>'
     + '<span class="guia-progresso" id="progressoGuia">' + quantidade + ' de ' + g.pistas.length + ' observações anotadas</span></div>'
     + '<div class="pistas">' + g.pistas.map(function (p, i) {

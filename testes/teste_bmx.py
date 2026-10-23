@@ -271,6 +271,61 @@ def estruturas_hubmap():
             "autoria do HuBMAP (CC BY 4.0) registrada")
 
 
+def demonstracoes():
+    print("\n7. Demonstrações guiadas (demo.py)")
+    import json as _json
+    import demo
+    cat = demo.catalogo()
+    tipos = {}
+    for c in cat:
+        tipos[c["tipo"]] = tipos.get(c["tipo"], 0) + 1
+    confere(len(cat) == 50 and tipos == {"queixa": 22, "regiao": 17, "remedio": 5, "camada": 6},
+            "50 roteiros catalogados: 22 queixas, 17 regiões, 5 remédios, 6 camadas")
+    rs = {c["id"]: demo.roteiro(c["id"]) for c in cat}
+    confere(all(r and 5 <= len(r["passos"]) <= 18 and r["passos"][0]["acao"]["tipo"] == "corpo"
+                and r["passos"][-1]["acao"]["tipo"] == "fim" for r in rs.values()),
+            "todos têm de 5 a 18 passos, abrem no corpo e fecham no fim")
+    confere(all(p["resumo"] and p["explicacao"] and not demo._PROIBIDO.search(p["fala"])
+                for r in rs.values() for p in r["passos"]), "resumo e explicação em todo passo, sem dose nem diagnóstico")
+    confere(all(p["acao"].get("regiao3d", {}).get("arquivo") for r in rs.values() for p in r["passos"]
+                if p["acao"]["tipo"] == "regiao"), "todo passo de região aponta o GLB da região")
+    ok = True
+    for r in rs.values():          # toda estrutura destacada pertence à região aberta antes dela
+        regiao = {}
+        for p in r["passos"]:
+            a = p["acao"]
+            if a["tipo"] == "regiao":
+                regiao = {e["id"] for e in a["estruturas"]}
+            elif a["tipo"] == "estrutura" and a["id"] not in regiao:
+                ok = False
+    confere(ok, "toda estrutura destacada pertence à região mostrada antes")
+    cef = rs["queixa:cefaleia"]
+    confere(cef["passos"][1]["acao"]["tipo"] == "alerta" and cef["passos"][1]["acao"]["texto"][:20].lower()
+            in (cef["passos"][1]["resumo"] + cef["passos"][1]["explicacao"]).lower(), "sinais de alerta vêm logo depois da abertura")
+    rem = rs["remedio:dor_febre"]["passos"][1]["acao"]
+    confere(rem["tipo"] == "remedio" and len(rem["fotos"]) == 3 and all(f["autor"] and f["licenca"] for f in rem["fotos"]),
+            "tema de remédio traz 3 fotos com autoria e licença")
+    p0 = cef["passos"][2]
+    n = [len(demo.compor(p0, nv)) for nv in demo.NIVEIS]
+    confere(n[0] < n[1] <= n[2], "profundidade: simples < intermediário <= aprofundado")
+
+    def llm_falsa(sistema, mensagem):
+        lote = _json.loads(mensagem)
+        return _json.dumps([{"resumo": f"Resumo simples do passo {x['n']}.", "explicacao": f"Explicação do passo {x['n']} em palavras do dia a dia.",
+                             "termos": [{"tecnico": "encéfalo", "simples": "o cérebro e partes ligadas"}], "aprofundar": "Detalhe a mais para quem quer entender."}
+                            if x["n"] != 3 else {"resumo": "Tome 500 mg de dipirona agora.", "explicacao": "Use 500 mg a cada seis horas.", "termos": [], "aprofundar": ""}
+                            for x in lote], ensure_ascii=False)
+    demo._CACHE.clear()
+    r = demo.roteiro("queixa:cefaleia", llm_falsa)
+    origens = [p["origem_texto"] for p in r["passos"]]
+    confere(origens[3] == "padrao" and origens.count("llm") == len(origens) - 1, "a LLM que sugere dose é recusada só naquele passo")
+    confere(r["passos"][2]["termos"][0]["simples"], "glossário simplificado chega ao passo")
+    demo._CACHE.clear()
+    confere({p["origem_texto"] for p in demo.roteiro("queixa:cefaleia", lambda s, m: "isto não é json")["passos"]} == {"padrao"},
+            "LLM quebrada não impede a demonstração (texto-padrão)")
+    demo._CACHE.clear()
+
+
 if __name__ == "__main__":
     try:
         vinhetas()
@@ -279,6 +334,7 @@ if __name__ == "__main__":
         investigacao_pesquisada()
         imagens_remedios()
         estruturas_hubmap()
+        demonstracoes()
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     print(f"\n{'TUDO OK' if not FALHAS else str(len(FALHAS)) + ' FALHA(S)'}")
