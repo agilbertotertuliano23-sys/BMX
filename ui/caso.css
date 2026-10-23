@@ -104,8 +104,8 @@ h1, h2, h3 { margin: 0; }
 .painel {
   display: grid; gap: 16px; padding: 0 24px 16px; min-height: 0;
   grid-template-columns: minmax(240px, 290px) minmax(0, 1fr) minmax(280px, 360px);
-  grid-template-rows: minmax(420px, 1fr) auto auto;
-  grid-template-areas: "esq palco dir" "esq base base" "explorar explorar explorar";
+  grid-template-rows: minmax(420px, 1fr) auto auto auto;
+  grid-template-areas: "esq palco dir" "esq base base" "explorar explorar explorar" "demos demos demos";
 }
 .col { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
 .esq { grid-area: esq; overflow: auto; }
@@ -424,8 +424,8 @@ html.incorporado .painel { padding: 12px 14px 14px; }
 @media (max-width: 1180px) {
   .painel {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
-    grid-template-areas: "palco dir" "esq esq" "base base" "explorar explorar";
-    grid-template-rows: minmax(460px, 62vh) auto auto auto;
+    grid-template-areas: "palco dir" "esq esq" "base base" "explorar explorar" "demos demos";
+    grid-template-rows: minmax(460px, 62vh) auto auto auto auto;
   }
   .esq { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); overflow: visible; }
   .base { grid-template-columns: 1fr; }
@@ -436,8 +436,8 @@ html.incorporado .painel { padding: 12px 14px 14px; }
   .seletores { margin-left: 0; width: 100%; }
   .sel-wrap { flex: 1; }
   .sel-wrap select { flex: 1; max-width: none; }
-  .painel { padding: 0 16px 16px; grid-template-columns: 1fr; grid-template-areas: "palco" "dir" "esq" "base" "explorar";
-    grid-template-rows: minmax(440px, 70vh) auto auto auto auto; }
+  .painel { padding: 0 16px 16px; grid-template-columns: 1fr; grid-template-areas: "palco" "dir" "esq" "base" "explorar" "demos";
+    grid-template-rows: minmax(440px, 70vh) auto auto auto auto auto; }
   .sistemas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .estruturas { grid-template-columns: 1fr; }
   .alerta { margin: 0 16px 8px; }
