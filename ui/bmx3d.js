@@ -288,6 +288,10 @@ function ajusta() {
   // tela em pé: afasta a câmera para o Baymax caber na largura
   const visivelL = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect;
   camera.zoom = Math.min(1, visivelL / (ALTURA * 1.15));
+  // o canvas cobre a janela inteira, mas o espaço livre é o palco (entre as colunas): leva o Baymax para o meio dele
+  const palco = document.querySelector('.palco');
+  const dx = palco ? palco.getBoundingClientRect().left + palco.clientWidth / 2 - w / 2 : 0;
+  camera.setViewOffset(w, h, -dx, 0, w, h);
   camera.updateProjectionMatrix();
 }
 window.addEventListener('resize', ajusta);

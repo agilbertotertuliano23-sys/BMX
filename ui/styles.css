@@ -263,7 +263,8 @@ body.alerta-on .halo {
 .coluna .conversa { width: auto; flex: 1 1 0; min-height: 200px; border-radius: var(--raio); padding: 14px 16px; background: var(--vidro); }
 .coluna.esq { overflow-y: auto; scrollbar-width: thin; }
 .coluna .conversa .transcricao { flex: 1; min-height: 0; max-height: none; }
-.coluna.esq .painel.ficha { flex: 1 1 0; min-height: 120px; }
+.coluna .painel.ficha { flex: 1 1 0; min-height: 120px; }
+.coluna.dir { overflow-y: auto; scrollbar-width: thin; }
 .vazio { font-size: 13px; color: var(--tinta-3); padding: 6px 2px; }
 .bolha { max-width: 86%; padding: 9px 13px; border-radius: 16px; font-size: 14px; line-height: 1.45; white-space: pre-wrap; }
 .bolha.eu { align-self: flex-end; background: var(--azul); color: #fff; border-bottom-right-radius: 6px; }
@@ -423,7 +424,7 @@ body.modo-caso .holo { opacity: 0; pointer-events: none; transition: opacity 0.3
   .transcricao { max-height: 40vh; }
   .coluna .conversa { flex: none; min-height: 340px; }
   .coluna .conversa .transcricao { max-height: 50vh; }
-  .coluna.esq .painel.ficha { flex: none; }
+  .coluna .painel.ficha { flex: none; }
 }
 /* ── holograma da escala de dor (sai da tela da barriga; holograma.js posiciona) ── */
 .holo { position: fixed; inset: 0; z-index: 6; pointer-events: none; }

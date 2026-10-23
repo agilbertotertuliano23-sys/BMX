@@ -59,8 +59,9 @@
     </div>
   </div>
   <div class="pills">
-    <div class="pill"><i class="dot" id="dServidor"></i><span>Servidor</span><b id="pServidor">iniciando</b></div>
-    <div class="pill"><i class="dot" id="dCerebro"></i><span>Cérebro</span><b id="pCerebro">Claude</b></div>
+    <!-- servidor e cérebro ficam fora da tela (o app.js ainda escreve neles, por isso seguem no HTML) -->
+    <div class="pill" style="display:none"><i class="dot" id="dServidor"></i><span>Servidor</span><b id="pServidor">iniciando</b></div>
+    <div class="pill" style="display:none"><i class="dot" id="dCerebro"></i><span>Cérebro</span><b id="pCerebro">Claude</b></div>
     <div class="pill"><i class="dot" id="dVoz"></i><span>Voz</span><b id="pVoz">navegador</b></div>
   </div>
   <a class="btn-caso" id="btnCaso" href="caso.html" title="Painel do caso: corpo 3D, sinais de alerta e linha do tempo">Painel do caso</a>
@@ -83,11 +84,6 @@
     <section class="painel">
       <h2>Ações</h2>
       <div class="matriz" id="matriz"></div>
-    </section>
-
-    <section class="painel cresce ficha">
-      <h2>Ficha <em id="fichaTipo">prontuário</em></h2>
-      <div id="inspetor" class="inspetor"></div>
     </section>
   </aside>
 
@@ -133,13 +129,19 @@
       <ul class="filtro" id="filtro"></ul>
     </section>
 
+    <section class="painel cresce ficha">
+      <h2>Ficha <em id="fichaTipo">prontuário</em></h2>
+      <div id="inspetor" class="inspetor"></div>
+    </section>
+
     <section class="painel voz-painel">
       <div class="voz-linha"><i class="dot" id="vozDot"></i><b id="vozEstado">PRONTO</b>
         <span class="voz-dica" id="vozDica">diga “BMX…”</span></div>
       <div class="vu"><i class="vu-barra" id="vuBarra"></i></div>
     </section>
 
-    <section class="painel cresce">
+    <!-- telemetria (sessão, modelo, tokens, latência) fora da tela; o app.js ainda escreve nela -->
+    <section class="painel" style="display:none">
       <h2>Telemetria <em>ao vivo</em></h2>
       <div class="stats">
         <div><span>SESSÃO</span><b id="sSessao">—</b></div>
