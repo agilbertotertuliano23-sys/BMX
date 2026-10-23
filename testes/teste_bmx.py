@@ -246,6 +246,31 @@ def imagens_remedios():
             "arquivos JPEG locais com origem, licença e autoria")
 
 
+def estruturas_hubmap():
+    print("\n6. Estruturas 3D do HuBMAP (tools/anexar_hubmap.py)")
+    import struct
+    pasta = RAIZ / "vault" / "40-Conhecimento" / "Anatomia"
+    bib = json.loads((pasta / "malhas.json").read_text(encoding="utf-8"))["bibliotecas"]["human-atlas"]
+    novas = {"utero": "suprapubica", "ovario-direito": "fossa-iliaca-direita", "ovario-esquerdo": "fossa-iliaca-esquerda",
+             "colon-sigmoide": "suprapubica", "lca": "coxa-joelho"}
+
+    def nos_do_glb(regiao):
+        with open(RAIZ / "ui" / "models" / "anatomia" / "regioes" / f"{regiao}.glb", "rb") as f:
+            f.read(12)
+            n, _ = struct.unpack("<I4s", f.read(8))
+            return {nd["name"] for nd in json.loads(f.read(n))["nodes"]}
+
+    confere(all(s in bib["estruturas"] and s not in bib["faltando"] and len(bib["estruturas"][s]["centro"]) == 3
+                for s in novas), "cinco estruturas com malha, centro e fora da lista de faltando")
+    confere(all(s in nos_do_glb(r) for s, r in novas.items()), "cada estrutura é um nó do GLB da sua região")
+    confere(all(s in bib["regioes"][r]["estruturas"] for s, r in novas.items()), "regiões listam as estruturas novas")
+    u, b = bib["estruturas"]["utero"]["centro"], bib["estruturas"]["bexiga"]
+    confere(u[1] > b["centro"][1] and u[2] < b["centro"][2], "útero fica acima e atrás da bexiga")
+    confere(set(bib["estruturas"]["lca"]["lados"]) == {"direito", "esquerdo"}, "LCA nos dois joelhos")
+    confere("HuBMAP" in (RAIZ / "ui" / "models" / "anatomia" / "ATTRIBUTION.md").read_text(encoding="utf-8"),
+            "autoria do HuBMAP (CC BY 4.0) registrada")
+
+
 if __name__ == "__main__":
     try:
         vinhetas()
@@ -253,6 +278,7 @@ if __name__ == "__main__":
         isolamento()
         investigacao_pesquisada()
         imagens_remedios()
+        estruturas_hubmap()
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     print(f"\n{'TUDO OK' if not FALHAS else str(len(FALHAS)) + ' FALHA(S)'}")

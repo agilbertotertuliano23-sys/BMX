@@ -3036,6 +3036,141 @@
        0.0408
       ]
      }
+    },
+    "utero": {
+     "fma": "",
+     "nome": "Útero",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/suprapubica.glb"
+     ],
+     "partes": {
+      "centro": [
+       "VH_F_body_of_uterus",
+       "VH_F_fundus_of_uterus",
+       "VH_F_lower_uterine_segment",
+       "VH_F_cervix"
+      ]
+     },
+     "centro": [
+      -0.011,
+      0.9377,
+      -0.0377
+     ],
+     "raio": 0.0447,
+     "lados": {},
+     "fonte": "HuBMAP feminino"
+    },
+    "ovario-direito": {
+     "fma": "",
+     "nome": "Ovário direito",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-direita.glb"
+     ],
+     "partes": {
+      "direito": [
+       "VH_F_right_ovary"
+      ]
+     },
+     "centro": [
+      -0.0708,
+      0.9698,
+      -0.026
+     ],
+     "raio": 0.015,
+     "lados": {
+      "direito": [
+       -0.0708,
+       0.9698,
+       -0.026
+      ]
+     },
+     "fonte": "HuBMAP feminino"
+    },
+    "ovario-esquerdo": {
+     "fma": "",
+     "nome": "Ovário esquerdo",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-esquerda.glb"
+     ],
+     "partes": {
+      "esquerdo": [
+       "VH_F_left_ovary"
+      ]
+     },
+     "centro": [
+      0.0478,
+      0.9699,
+      -0.0259
+     ],
+     "raio": 0.0149,
+     "lados": {
+      "esquerdo": [
+       0.0478,
+       0.9699,
+       -0.0259
+      ]
+     },
+     "fonte": "HuBMAP feminino"
+    },
+    "colon-sigmoide": {
+     "fma": "",
+     "nome": "Cólon sigmoide",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-esquerda.glb",
+      "regioes/suprapubica.glb"
+     ],
+     "partes": {
+      "centro": [
+       "VH_F_sigmoid_colon"
+      ]
+     },
+     "centro": [
+      -0.008,
+      0.9725,
+      -0.023
+     ],
+     "raio": 0.0736,
+     "lados": {},
+     "fonte": "HuBMAP feminino"
+    },
+    "lca": {
+     "fma": "",
+     "nome": "Ligamento cruzado anterior",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "VH_F_anterior_cruciate_ligament_of_knee_R"
+      ],
+      "esquerdo": [
+       "VH_F_anterior_cruciate_ligament_of_knee_L"
+      ]
+     },
+     "centro": [
+      -0.0001,
+      0.4356,
+      -0.0177
+     ],
+     "raio": 0.0931,
+     "lados": {
+      "direito": [
+       -0.0786,
+       0.4356,
+       -0.0176
+      ],
+      "esquerdo": [
+       0.0785,
+       0.4355,
+       -0.0177
+      ]
+     },
+     "fonte": "HuBMAP feminino"
     }
    },
    "faltando": [
@@ -3046,17 +3181,12 @@
     "atm",
     "tireoide",
     "linfonodos-cervicais",
-    "colon-sigmoide",
-    "utero",
-    "ovario-direito",
-    "ovario-esquerdo",
     "reto-abdominal",
     "eretor-da-espinha",
     "quadrado-lombar",
     "nervo-isquiatico",
     "nervo-ulnar",
     "nervo-mediano",
-    "lca",
     "menisco-medial",
     "ligamento-talofibular",
     "aponeurose-plantar"
@@ -3210,42 +3340,47 @@
      "arquivo": "regioes/fossa-iliaca-direita.glb",
      "centro": [
       -0.0681,
-      1.0122,
+      1.0124,
       0.003
      ],
-     "raio": 0.1427,
+     "raio": 0.1425,
      "estruturas": [
       "ceco",
       "apendice",
       "colon-ascendente",
-      "ureter-direito"
+      "ureter-direito",
+      "ovario-direito"
      ]
     },
     "fossa-iliaca-esquerda": {
      "arquivo": "regioes/fossa-iliaca-esquerda.glb",
      "centro": [
-      0.0498,
+      0.0319,
       1.0234,
-      -0.0039
+      -0.0146
      ],
-     "raio": 0.1512,
+     "raio": 0.1632,
      "estruturas": [
       "colon-descendente",
-      "ureter-esquerdo"
+      "ureter-esquerdo",
+      "ovario-esquerdo",
+      "colon-sigmoide"
      ]
     },
     "suprapubica": {
      "arquivo": "regioes/suprapubica.glb",
      "centro": [
-      0.0006,
-      0.8937,
+      -0.008,
+      0.9203,
       -0.0302
      ],
-     "raio": 0.0896,
+     "raio": 0.1126,
      "estruturas": [
       "reto",
       "bexiga",
-      "prostata"
+      "prostata",
+      "utero",
+      "colon-sigmoide"
      ]
     },
     "lombar": {
@@ -3331,7 +3466,8 @@
       "isquiotibiais",
       "tibia",
       "gastrocnemio",
-      "veia-poplitea"
+      "veia-poplitea",
+      "lca"
      ]
     },
     "perna-pe": {
@@ -3390,6 +3526,15 @@
     "regioes/punho-mao.glb": 0.6,
     "regioes/coxa-joelho.glb": 0.8,
     "regioes/perna-pe.glb": 0.8
+   },
+   "fontes_extras": {
+    "hubmap-feminino": {
+     "arquivo": "3d-vh-f-united.glb",
+     "licenca": "CC BY 4.0",
+     "autores": "Browne e Schlehlein, Human Reference Atlas / HuBMAP, 2023",
+     "url": "https://lod.humanatlas.io/ref-organ/united-female/v1.5",
+     "nota": "Malhas femininas movidas para o corpo masculino por escala e âncora; posição aproximada, uso educativo."
+    }
    }
   }
  },
