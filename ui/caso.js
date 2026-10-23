@@ -319,10 +319,8 @@ function renderAchado(c) {
   $('#proxima').textContent = c.proximo_sinal ? '“' + c.proximo_sinal + '?”' : '';
   $('#blocoAnatomia').hidden = !c.anatomia.length;
   $('#anatomiaTxt').textContent = c.anatomia.join(' ');
+  // possibilidades, "não deixar passar" e perguntas agora vivem na Investigação guiada (renderExploracao)
   $('#blocoDev').hidden = !c.causas.length;
-  $('#causas').textContent = c.causas.join('; ');
-  $('#naoPerder').textContent = c.nao_perder.join('; ');
-  $('#perguntas').textContent = c.perguntas.join(' ');
 }
 
 function renderSistemas(lista) {
