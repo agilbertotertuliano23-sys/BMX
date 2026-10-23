@@ -1,0 +1,3397 @@
+{
+ "bibliotecas": {
+  "human-atlas": {
+   "pasta": "human-atlas/models",
+   "saida": "ui/models/anatomia",
+   "versao": "BodyParts3D 4.0",
+   "licenca": "CC BY 4.0",
+   "estruturas": {
+    "encefalo": {
+     "fma": "FMA50801",
+     "nome": "brain",
+     "camada": "nervos",
+     "arquivos": [
+      "regioes/cabeca.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1733",
+       "FJ1740",
+       "FJ1745",
+       "FJ1747",
+       "FJ1749",
+       "FJ1751",
+       "FJ1784",
+       "FJ1786",
+       "FJ1788",
+       "FJ1790",
+       "FJ1792",
+       "FJ1798",
+       "FJ1801",
+       "FJ1806",
+       "FJ1807",
+       "FJ1810",
+       "FJ1814",
+       "FJ1826",
+       "FJ1834",
+       "FJ1836",
+       "FJ1842"
+      ],
+      "esquerdo": [
+       "FJ1732",
+       "FJ1739",
+       "FJ1744",
+       "FJ1746",
+       "FJ1748",
+       "FJ1750",
+       "FJ1758",
+       "FJ1759",
+       "FJ1762",
+       "FJ1767",
+       "FJ1779",
+       "FJ1783",
+       "FJ1785",
+       "FJ1787",
+       "FJ1789",
+       "FJ1791",
+       "FJ1797",
+       "FJ1800",
+       "FJ1833",
+       "FJ1835",
+       "FJ1841"
+      ],
+      "centro": [
+       "FJ1730",
+       "FJ1731",
+       "FJ1738",
+       "FJ1743",
+       "FJ1760",
+       "FJ1769",
+       "FJ1770",
+       "FJ1775",
+       "FJ1780",
+       "FJ1781",
+       "FJ1795",
+       "FJ1808",
+       "FJ1817",
+       "FJ1822",
+       "FJ1828",
+       "FJ1830",
+       "FJ1831"
+      ]
+     },
+     "centro": [
+      -0.0005,
+      1.6256,
+      -0.0203
+     ],
+     "raio": 0.1407,
+     "lados": {
+      "direito": [
+       -0.0354,
+       1.6501,
+       -0.0203
+      ],
+      "esquerdo": [
+       0.0342,
+       1.6501,
+       -0.0203
+      ]
+     }
+    },
+    "cranio": {
+     "fma": "FMA46565",
+     "nome": "skull",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/cabeca.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1336",
+       "FJ1337",
+       "FJ1340",
+       "FJ1348",
+       "FJ1350",
+       "FJ1356",
+       "FJ1368",
+       "FJ1371",
+       "FJ1382",
+       "FJ3369",
+       "FJ3371",
+       "FJ3375",
+       "FJ3378",
+       "FJ3379",
+       "FJ3380",
+       "FJ3386",
+       "FJ3392"
+      ],
+      "esquerdo": [
+       "FJ1282",
+       "FJ1285",
+       "FJ1286",
+       "FJ1289",
+       "FJ1297",
+       "FJ1299",
+       "FJ1305",
+       "FJ1317",
+       "FJ1320",
+       "FJ1331",
+       "FJ3263",
+       "FJ3265",
+       "FJ3269",
+       "FJ3272",
+       "FJ3273",
+       "FJ3274",
+       "FJ3281",
+       "FJ3287"
+      ],
+      "centro": [
+       "FJ2772",
+       "FJ3199",
+       "FJ3200",
+       "FJ3201",
+       "FJ3289",
+       "FJ3309",
+       "FJ3394",
+       "FJ3395"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.6071,
+      -0.0136
+     ],
+     "raio": 0.1677,
+     "lados": {
+      "direito": [
+       -0.0194,
+       1.6282,
+       -0.012
+      ],
+      "esquerdo": [
+       0.0335,
+       1.6282,
+       -0.0127
+      ]
+     }
+    },
+    "olho": {
+     "fma": "FMA58082",
+     "nome": "anterior chamber of left eyeball",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/cabeca.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1332",
+       "FJ1336",
+       "FJ1337",
+       "FJ1338",
+       "FJ1340",
+       "FJ1348",
+       "FJ1356",
+       "FJ1367",
+       "FJ1368",
+       "FJ1371",
+       "FJ1382"
+      ],
+      "esquerdo": [
+       "FJ1282",
+       "FJ1285",
+       "FJ1286",
+       "FJ1287",
+       "FJ1289",
+       "FJ1297",
+       "FJ1305",
+       "FJ1316",
+       "FJ1317",
+       "FJ1320",
+       "FJ1331"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.5962,
+      0.0524
+     ],
+     "raio": 0.0469,
+     "lados": {
+      "direito": [
+       -0.0031,
+       1.5962,
+       0.0524
+      ],
+      "esquerdo": [
+       0.0291,
+       1.5962,
+       0.0524
+      ]
+     }
+    },
+    "mandibula": {
+     "fma": "FMA52748",
+     "nome": "mandible",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/cabeca.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3289"
+      ]
+     },
+     "centro": [
+      -0.0006,
+      1.542,
+      0.0318
+     ],
+     "raio": 0.0799,
+     "lados": {}
+    },
+    "nervo-trigemeo": {
+     "fma": "FMA52677",
+     "nome": "branch of trigeminal nerve",
+     "camada": "nervos",
+     "arquivos": [
+      "regioes/cabeca.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1333",
+       "FJ1341",
+       "FJ1347",
+       "FJ1351",
+       "FJ1361",
+       "FJ1362",
+       "FJ1363",
+       "FJ1366",
+       "FJ1369",
+       "FJ1376",
+       "FJ1377"
+      ],
+      "esquerdo": [
+       "FJ1283",
+       "FJ1290",
+       "FJ1296",
+       "FJ1300",
+       "FJ1310",
+       "FJ1311",
+       "FJ1312",
+       "FJ1315",
+       "FJ1318",
+       "FJ1325",
+       "FJ1326"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.6159,
+      0.04
+     ],
+     "raio": 0.0669,
+     "lados": {
+      "direito": [
+       -0.0234,
+       1.6159,
+       0.04
+      ],
+      "esquerdo": [
+       0.0221,
+       1.6159,
+       0.04
+      ]
+     }
+    },
+    "faringe": {
+     "fma": "FMA46636",
+     "nome": "muscle of pharynx",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ2742",
+       "FJ2752",
+       "FJ2755",
+       "FJ2757",
+       "FJ2758",
+       "FJ2759"
+      ],
+      "esquerdo": [
+       "FJ2740",
+       "FJ2743",
+       "FJ2745",
+       "FJ2746",
+       "FJ2747",
+       "FJ2754"
+      ],
+      "centro": [
+       "FJ2770"
+      ]
+     },
+     "centro": [
+      -0.0006,
+      1.5206,
+      0.0059
+     ],
+     "raio": 0.073,
+     "lados": {
+      "direito": [
+       -0.0114,
+       1.5206,
+       0.0059
+      ],
+      "esquerdo": [
+       0.0099,
+       1.5206,
+       0.0059
+      ]
+     }
+    },
+    "laringe": {
+     "fma": "FMA9615",
+     "nome": "muscle of larynx",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ2792",
+       "FJ2793",
+       "FJ2795",
+       "FJ2796",
+       "FJ2798",
+       "FJ2800",
+       "FJ2802",
+       "FJ2803",
+       "FJ2806"
+      ],
+      "esquerdo": [
+       "FJ2773",
+       "FJ2775",
+       "FJ2776",
+       "FJ2778",
+       "FJ2780",
+       "FJ2782",
+       "FJ2784",
+       "FJ2785",
+       "FJ2788"
+      ],
+      "centro": [
+       "FJ2440",
+       "FJ2769",
+       "FJ2771",
+       "FJ2807",
+       "FJ2808",
+       "FJ2809"
+      ]
+     },
+     "centro": [
+      -0.0006,
+      1.4892,
+      0.0083
+     ],
+     "raio": 0.035,
+     "lados": {
+      "direito": [
+       -0.0029,
+       1.4884,
+       0.0051
+      ],
+      "esquerdo": [
+       0.0016,
+       1.4884,
+       0.0051
+      ]
+     }
+    },
+    "traqueia": {
+     "fma": "FMA7394",
+     "nome": "trachea",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/pescoco.glb",
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2541"
+      ]
+     },
+     "centro": [
+      -0.0002,
+      1.4184,
+      -0.0063
+     ],
+     "raio": 0.059,
+     "lados": {}
+    },
+    "esofago": {
+     "fma": "FMA7131",
+     "nome": "esophagus",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/pescoco.glb",
+      "regioes/torax.glb",
+      "regioes/epigastrio.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2563"
+      ]
+     },
+     "centro": [
+      0.0074,
+      1.3313,
+      -0.0047
+     ],
+     "raio": 0.1412,
+     "lados": {}
+    },
+    "coluna-cervical": {
+     "fma": "FMA24138",
+     "nome": "cervical vertebral column",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3161",
+       "FJ3164",
+       "FJ3167",
+       "FJ3170",
+       "FJ3172",
+       "FJ3176",
+       "FJ3177",
+       "FJ3202",
+       "FJ3213",
+       "FJ3218",
+       "FJ3219",
+       "FJ3220",
+       "FJ3221"
+      ]
+     },
+     "centro": [
+      -0.0006,
+      1.4988,
+      -0.0434
+     ],
+     "raio": 0.0812,
+     "lados": {}
+    },
+    "esternocleidomastoideo": {
+     "fma": "FMA13407",
+     "nome": "sternocleidomastoid",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1595"
+      ],
+      "esquerdo": [
+       "FJ1573"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.4807,
+      -0.0029
+     ],
+     "raio": 0.1326,
+     "lados": {
+      "direito": [
+       -0.0008,
+       1.4807,
+       -0.0029
+      ],
+      "esquerdo": [
+       0.0311,
+       1.4806,
+       -0.0029
+      ]
+     }
+    },
+    "trapezio": {
+     "fma": "FMA33581",
+     "nome": "ascending part of right trapezius",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/pescoco.glb",
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1520",
+       "FJ1521",
+       "FJ1554"
+      ],
+      "esquerdo": [
+       "FJ1520M",
+       "FJ1521M",
+       "FJ1554M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.3582,
+      -0.0619
+     ],
+     "raio": 0.2858,
+     "lados": {
+      "direito": [
+       -0.0797,
+       1.3582,
+       -0.0619
+      ],
+      "esquerdo": [
+       0.0797,
+       1.3582,
+       -0.0619
+      ]
+     }
+    },
+    "carotida-comum": {
+     "fma": "FMA3939",
+     "nome": "common carotid artery",
+     "camada": "arterias",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3564"
+      ],
+      "esquerdo": [
+       "FJ3483"
+      ]
+     },
+     "centro": [
+      0.0008,
+      1.4186,
+      0.0068
+     ],
+     "raio": 0.0413,
+     "lados": {
+      "direito": [
+       -0.0149,
+       1.4295,
+       0.0115
+      ],
+      "esquerdo": [
+       0.0169,
+       1.4186,
+       0.0041
+      ]
+     }
+    },
+    "jugular-interna": {
+     "fma": "FMA4724",
+     "nome": "internal jugular vein",
+     "camada": "veias",
+     "arquivos": [
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3585"
+      ],
+      "esquerdo": [
+       "FJ3485"
+      ]
+     },
+     "centro": [
+      -0.0001,
+      1.4377,
+      0.0169
+     ],
+     "raio": 0.0385,
+     "lados": {
+      "direito": [
+       -0.0264,
+       1.4392,
+       0.0175
+      ],
+      "esquerdo": [
+       0.0245,
+       1.437,
+       0.0169
+      ]
+     }
+    },
+    "coracao": {
+     "fma": "FMA7088",
+     "nome": "heart",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ2419",
+       "FJ2423",
+       "FJ2424",
+       "FJ2430",
+       "FJ2431",
+       "FJ2434",
+       "FJ2437",
+       "FJ2439",
+       "FJ2632",
+       "FJ2641",
+       "FJ2645",
+       "FJ2646",
+       "FJ2647",
+       "FJ2667",
+       "FJ2668",
+       "FJ2670",
+       "FJ2671",
+       "FJ2672",
+       "FJ2673",
+       "FJ2674",
+       "FJ2675",
+       "FJ2676",
+       "FJ2677",
+       "FJ2692",
+       "FJ2693",
+       "FJ2694",
+       "FJ2695",
+       "FJ2696",
+       "FJ2697",
+       "FJ2698",
+       "FJ2699",
+       "FJ2700",
+       "FJ2714",
+       "FJ2715",
+       "FJ2716",
+       "FJ2717",
+       "FJ2718",
+       "FJ2719",
+       "FJ2720",
+       "FJ2721",
+       "FJ2722",
+       "FJ2723",
+       "FJ2727",
+       "FJ2728",
+       "FJ2729"
+      ],
+      "esquerdo": [
+       "FJ2417",
+       "FJ2418",
+       "FJ2422",
+       "FJ2425",
+       "FJ2426",
+       "FJ2429",
+       "FJ2438",
+       "FJ2631",
+       "FJ2633",
+       "FJ2634",
+       "FJ2635",
+       "FJ2636",
+       "FJ2637",
+       "FJ2638",
+       "FJ2639",
+       "FJ2640",
+       "FJ2642",
+       "FJ2643",
+       "FJ2644",
+       "FJ2648",
+       "FJ2649",
+       "FJ2650",
+       "FJ2651",
+       "FJ2652",
+       "FJ2653",
+       "FJ2654",
+       "FJ2737"
+      ],
+      "centro": [
+       "FJ2420",
+       "FJ2421",
+       "FJ2427",
+       "FJ2432",
+       "FJ2433",
+       "FJ2435",
+       "FJ2436",
+       "FJ2655",
+       "FJ2656",
+       "FJ2724",
+       "FJ2731"
+      ]
+     },
+     "centro": [
+      0.0215,
+      1.3053,
+      0.0233
+     ],
+     "raio": 0.0944,
+     "lados": {
+      "direito": [
+       0.0186,
+       1.3053,
+       0.0326
+      ],
+      "esquerdo": [
+       0.0283,
+       1.304,
+       0.021
+      ]
+     }
+    },
+    "aorta": {
+     "fma": "FMA3734",
+     "nome": "aorta",
+     "camada": "arterias",
+     "arquivos": [
+      "regioes/torax.glb",
+      "regioes/epigastrio.glb",
+      "regioes/periumbilical.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ1931",
+       "FJ1932",
+       "FJ3411",
+       "FJ3413",
+       "FJ3427"
+      ]
+     },
+     "centro": [
+      0.014,
+      1.21,
+      -0.0087
+     ],
+     "raio": 0.192,
+     "lados": {}
+    },
+    "pulmao-direito": {
+     "fma": "FMA7309",
+     "nome": "right lung",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ2041",
+       "FJ2044",
+       "FJ2452",
+       "FJ2453",
+       "FJ2454",
+       "FJ2455",
+       "FJ2456",
+       "FJ2457",
+       "FJ2458",
+       "FJ2459",
+       "FJ2470",
+       "FJ2481",
+       "FJ2486",
+       "FJ2487",
+       "FJ2488",
+       "FJ2489",
+       "FJ2490",
+       "FJ2491",
+       "FJ2492",
+       "FJ2493",
+       "FJ2494",
+       "FJ2495",
+       "FJ2496",
+       "FJ2497",
+       "FJ2498",
+       "FJ2499",
+       "FJ2500",
+       "FJ2501",
+       "FJ2502",
+       "FJ2509",
+       "FJ2510",
+       "FJ2511",
+       "FJ2512",
+       "FJ2513",
+       "FJ2514",
+       "FJ2515",
+       "FJ2516",
+       "FJ2517",
+       "FJ2518",
+       "FJ2519",
+       "FJ2520",
+       "FJ2521",
+       "FJ2522",
+       "FJ2523",
+       "FJ2524",
+       "FJ2525",
+       "FJ2526",
+       "FJ2967",
+       "FJ2968",
+       "FJ2969",
+       "FJ2970",
+       "FJ2971",
+       "FJ2972",
+       "FJ2973",
+       "FJ2974",
+       "FJ2975",
+       "FJ2976",
+       "FJ2977",
+       "FJ2978",
+       "FJ2979",
+       "FJ2980",
+       "FJ2981",
+       "FJ2989",
+       "FJ2991",
+       "FJ2992",
+       "FJ2993",
+       "FJ2994",
+       "FJ2995",
+       "FJ2996",
+       "FJ2997",
+       "FJ2998",
+       "FJ2999",
+       "FJ3000",
+       "FJ3001",
+       "FJ3002",
+       "FJ3003",
+       "FJ3004",
+       "FJ3005",
+       "FJ3006",
+       "FJ3007",
+       "FJ3008",
+       "FJ3009",
+       "FJ3010",
+       "FJ3011",
+       "FJ3012",
+       "FJ3013",
+       "FJ3014",
+       "FJ3015",
+       "FJ3016",
+       "FJ3017",
+       "FJ3018",
+       "FJ3021",
+       "FJ3022",
+       "FJ3023",
+       "FJ3024",
+       "FJ3025",
+       "FJ3026",
+       "FJ3027",
+       "FJ3028",
+       "FJ3029",
+       "FJ3031",
+       "FJ3041",
+       "FJ3042",
+       "FJ3043",
+       "FJ3044",
+       "FJ3045",
+       "FJ3046",
+       "FJ3047",
+       "FJ3048",
+       "FJ3049",
+       "FJ3050",
+       "FJ3051",
+       "FJ3052",
+       "FJ3053",
+       "FJ3054",
+       "FJ3055",
+       "FJ3056",
+       "FJ3057",
+       "FJ3058",
+       "FJ3059",
+       "FJ3060",
+       "FJ3061",
+       "FJ3062",
+       "FJ3063",
+       "FJ3064",
+       "FJ3065",
+       "FJ3066",
+       "FJ3067",
+       "FJ3068",
+       "FJ3069",
+       "FJ3070"
+      ],
+      "centro": [
+       "FJ2449",
+       "FJ2451",
+       "FJ2503",
+       "FJ2504",
+       "FJ2505",
+       "FJ2506",
+       "FJ2507",
+       "FJ2508",
+       "FJ2982",
+       "FJ2983",
+       "FJ2984",
+       "FJ2985",
+       "FJ2986",
+       "FJ2987",
+       "FJ2988",
+       "FJ2990",
+       "FJ3030",
+       "FJ3032",
+       "FJ3033",
+       "FJ3034",
+       "FJ3035",
+       "FJ3036",
+       "FJ3037",
+       "FJ3038",
+       "FJ3039"
+      ]
+     },
+     "centro": [
+      -0.0559,
+      1.2594,
+      -0.0026
+     ],
+     "raio": 0.1932,
+     "lados": {
+      "direito": [
+       -0.0559,
+       1.2594,
+       -0.0152
+      ]
+     }
+    },
+    "pulmao-esquerdo": {
+     "fma": "FMA7310",
+     "nome": "left lung",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "esquerdo": [
+       "FJ2442",
+       "FJ2443",
+       "FJ2444",
+       "FJ2445",
+       "FJ2446",
+       "FJ2447",
+       "FJ2448",
+       "FJ2460",
+       "FJ2461",
+       "FJ2462",
+       "FJ2463",
+       "FJ2464",
+       "FJ2465",
+       "FJ2466",
+       "FJ2467",
+       "FJ2468",
+       "FJ2469",
+       "FJ2471",
+       "FJ2472",
+       "FJ2473",
+       "FJ2474",
+       "FJ2479",
+       "FJ2480",
+       "FJ2482",
+       "FJ2483",
+       "FJ2484",
+       "FJ2485",
+       "FJ2527",
+       "FJ2528",
+       "FJ2529",
+       "FJ2530",
+       "FJ2531",
+       "FJ2532",
+       "FJ2533",
+       "FJ2534",
+       "FJ2535",
+       "FJ2536",
+       "FJ2537",
+       "FJ2538",
+       "FJ2881",
+       "FJ2882",
+       "FJ2883",
+       "FJ2884",
+       "FJ2885",
+       "FJ2886",
+       "FJ2887",
+       "FJ2888",
+       "FJ2889",
+       "FJ2890",
+       "FJ2891",
+       "FJ2892",
+       "FJ2893",
+       "FJ2894",
+       "FJ2895",
+       "FJ2902",
+       "FJ2903",
+       "FJ2904",
+       "FJ2905",
+       "FJ2906",
+       "FJ2907",
+       "FJ2908",
+       "FJ2909",
+       "FJ2910",
+       "FJ2911",
+       "FJ2912",
+       "FJ2913",
+       "FJ2914",
+       "FJ2915",
+       "FJ2916",
+       "FJ2917",
+       "FJ2918",
+       "FJ2919",
+       "FJ2920",
+       "FJ2921",
+       "FJ2922",
+       "FJ2923",
+       "FJ2926",
+       "FJ2927",
+       "FJ2928",
+       "FJ2929",
+       "FJ2930",
+       "FJ2931",
+       "FJ2932",
+       "FJ2936",
+       "FJ2939",
+       "FJ2940",
+       "FJ2941",
+       "FJ2942",
+       "FJ2943",
+       "FJ2945",
+       "FJ2946",
+       "FJ2947",
+       "FJ2948",
+       "FJ2949",
+       "FJ2951",
+       "FJ2952",
+       "FJ2953",
+       "FJ2954",
+       "FJ2956",
+       "FJ2957",
+       "FJ2958",
+       "FJ2959",
+       "FJ2960",
+       "FJ2961",
+       "FJ2962",
+       "FJ2963",
+       "FJ2964",
+       "FJ2965"
+      ],
+      "centro": [
+       "FJ2441",
+       "FJ2475",
+       "FJ2476",
+       "FJ2477",
+       "FJ2478",
+       "FJ2540",
+       "FJ2896",
+       "FJ2897",
+       "FJ2898",
+       "FJ2899",
+       "FJ2900",
+       "FJ2901",
+       "FJ2934",
+       "FJ2935",
+       "FJ2937",
+       "FJ2938"
+      ]
+     },
+     "centro": [
+      0.0725,
+      1.3176,
+      -0.0009
+     ],
+     "raio": 0.1502,
+     "lados": {
+      "esquerdo": [
+       0.0725,
+       1.3176,
+       -0.0095
+      ]
+     }
+    },
+    "bronquios": {
+     "fma": "FMA7405",
+     "nome": "main bronchus",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "esquerdo": [
+       "FJ2450"
+      ]
+     },
+     "centro": [
+      0.0364,
+      1.3369,
+      -0.0228
+     ],
+     "raio": 0.0547,
+     "lados": {
+      "esquerdo": [
+       0.0364,
+       1.3369,
+       -0.0228
+      ]
+     }
+    },
+    "diafragma": {
+     "fma": "FMA13295",
+     "nome": "diaphragm",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/torax.glb",
+      "regioes/epigastrio.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3131"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.1673,
+      0.0156
+     ],
+     "raio": 0.1831,
+     "lados": {}
+    },
+    "esterno": {
+     "fma": "FMA7485",
+     "nome": "sternum",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3153",
+       "FJ3178",
+       "FJ3290"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.3227,
+      0.0723
+     ],
+     "raio": 0.0947,
+     "lados": {}
+    },
+    "costelas": {
+     "fma": "FMA7574",
+     "nome": "rib",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3330",
+       "FJ3331",
+       "FJ3332",
+       "FJ3334",
+       "FJ3336",
+       "FJ3338",
+       "FJ3340",
+       "FJ3342",
+       "FJ3344",
+       "FJ3346",
+       "FJ3347",
+       "FJ3348"
+      ],
+      "esquerdo": [
+       "FJ3225",
+       "FJ3226",
+       "FJ3227",
+       "FJ3228",
+       "FJ3229",
+       "FJ3230",
+       "FJ3231",
+       "FJ3232",
+       "FJ3233",
+       "FJ3234",
+       "FJ3235",
+       "FJ3236"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.2674,
+      0.0007
+     ],
+     "raio": 0.2467,
+     "lados": {
+      "direito": [
+       -0.0754,
+       1.2674,
+       0.0006
+      ],
+      "esquerdo": [
+       0.0741,
+       1.2674,
+       0.0007
+      ]
+     }
+    },
+    "peitoral-maior": {
+     "fma": "FMA45874",
+     "nome": "abdominal part of right pectoralis major",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/torax.glb",
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1446",
+       "FJ1447",
+       "FJ1464"
+      ],
+      "esquerdo": [
+       "FJ1446M",
+       "FJ1447M",
+       "FJ1464M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.2985,
+      0.0502
+     ],
+     "raio": 0.2364,
+     "lados": {
+      "direito": [
+       -0.0995,
+       1.2985,
+       0.0502
+      ],
+      "esquerdo": [
+       0.0995,
+       1.2985,
+       0.0502
+      ]
+     }
+    },
+    "intercostais": {
+     "fma": "FMA13354",
+     "nome": "intercostal muscle",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ1451",
+       "FJ1451M",
+       "FJ1454",
+       "FJ1454M",
+       "FJ1455",
+       "FJ1455M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.2666,
+      0.0063
+     ],
+     "raio": 0.2459,
+     "lados": {}
+    },
+    "coluna-toracica": {
+     "fma": "FMA9140",
+     "nome": "thoracic vertebral column",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/torax.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3154",
+       "FJ3155",
+       "FJ3156",
+       "FJ3158",
+       "FJ3160",
+       "FJ3163",
+       "FJ3166",
+       "FJ3169",
+       "FJ3171",
+       "FJ3173",
+       "FJ3174",
+       "FJ3175",
+       "FJ3203",
+       "FJ3204",
+       "FJ3205",
+       "FJ3206",
+       "FJ3207",
+       "FJ3208",
+       "FJ3209",
+       "FJ3210",
+       "FJ3222",
+       "FJ3223",
+       "FJ3224"
+      ]
+     },
+     "centro": [
+      -0.0005,
+      1.2915,
+      -0.0493
+     ],
+     "raio": 0.1751,
+     "lados": {}
+    },
+    "estomago": {
+     "fma": "FMA7148",
+     "nome": "stomach",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/epigastrio.glb",
+      "regioes/hipocondrio-esquerdo.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2564"
+      ]
+     },
+     "centro": [
+      0.0383,
+      1.1765,
+      0.0379
+     ],
+     "raio": 0.1055,
+     "lados": {}
+    },
+    "duodeno": {
+     "fma": "FMA7206",
+     "nome": "duodenum",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/epigastrio.glb",
+      "regioes/hipocondrio-direito.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2573"
+      ]
+     },
+     "centro": [
+      -0.0166,
+      1.1095,
+      0.0304
+     ],
+     "raio": 0.0721,
+     "lados": {}
+    },
+    "figado": {
+     "fma": "FMA7197",
+     "nome": "liver",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/hipocondrio-direito.glb",
+      "regioes/epigastrio.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1913",
+       "FJ1914",
+       "FJ1916",
+       "FJ2386",
+       "FJ2405",
+       "FJ2416",
+       "FJ3071",
+       "FJ3072",
+       "FJ3073",
+       "FJ3074",
+       "FJ3108",
+       "FJ3109",
+       "FJ3110",
+       "FJ3111",
+       "FJ3112",
+       "FJ3113",
+       "FJ3117",
+       "FJ3122",
+       "FJ3123"
+      ],
+      "esquerdo": [
+       "FJ1883",
+       "FJ1893",
+       "FJ2404",
+       "FJ2415",
+       "FJ3077",
+       "FJ3088",
+       "FJ3089",
+       "FJ3090",
+       "FJ3095",
+       "FJ3096",
+       "FJ3102",
+       "FJ3103",
+       "FJ3104",
+       "FJ3105",
+       "FJ3124",
+       "FJ3125",
+       "FJ3126",
+       "FJ3127",
+       "FJ3128"
+      ],
+      "centro": [
+       "FJ2409",
+       "FJ2816",
+       "FJ2818",
+       "FJ2819",
+       "FJ2820",
+       "FJ2821",
+       "FJ2822",
+       "FJ2823",
+       "FJ2824",
+       "FJ3075",
+       "FJ3076",
+       "FJ3081",
+       "FJ3083",
+       "FJ3086",
+       "FJ3091",
+       "FJ3092",
+       "FJ3093",
+       "FJ3106",
+       "FJ3107",
+       "FJ3114",
+       "FJ3115",
+       "FJ3116"
+      ]
+     },
+     "centro": [
+      -0.0103,
+      1.1837,
+      0.0229
+     ],
+     "raio": 0.1527,
+     "lados": {
+      "direito": [
+       -0.0616,
+       1.1954,
+       0.0121
+      ],
+      "esquerdo": [
+       -0.0147,
+       1.1974,
+       0.058
+      ]
+     }
+    },
+    "vesicula-biliar": {
+     "fma": "FMA7202",
+     "nome": "gallbladder",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/hipocondrio-direito.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2817"
+      ]
+     },
+     "centro": [
+      -0.0451,
+      1.1494,
+      0.0544
+     ],
+     "raio": 0.0364,
+     "lados": {}
+    },
+    "pancreas": {
+     "fma": "FMA7198",
+     "nome": "pancreas",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/epigastrio.glb",
+      "regioes/hipocondrio-esquerdo.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ1895",
+       "FJ1896",
+       "FJ2629",
+       "FJ2630"
+      ]
+     },
+     "centro": [
+      0.008,
+      1.1193,
+      0.0209
+     ],
+     "raio": 0.0787,
+     "lados": {}
+    },
+    "baco": {
+     "fma": "FMA7196",
+     "nome": "spleen",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/hipocondrio-esquerdo.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2561"
+      ]
+     },
+     "centro": [
+      0.0848,
+      1.1648,
+      -0.0063
+     ],
+     "raio": 0.0659,
+     "lados": {}
+    },
+    "intestino-delgado": {
+     "fma": "FMA7200",
+     "nome": "small intestine",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/periumbilical.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2573",
+       "FJ2574",
+       "FJ2575",
+       "FJ2576",
+       "FJ2577",
+       "FJ2578",
+       "FJ2579",
+       "FJ2580",
+       "FJ2581",
+       "FJ2582",
+       "FJ2583",
+       "FJ2584",
+       "FJ2585",
+       "FJ2586",
+       "FJ2587",
+       "FJ2588",
+       "FJ2589",
+       "FJ2590",
+       "FJ2591",
+       "FJ2592",
+       "FJ2593",
+       "FJ2594",
+       "FJ2595",
+       "FJ2596",
+       "FJ2597",
+       "FJ2598",
+       "FJ2599",
+       "FJ2600",
+       "FJ2601",
+       "FJ2602",
+       "FJ2603",
+       "FJ2604",
+       "FJ2605",
+       "FJ2606",
+       "FJ2607",
+       "FJ2608",
+       "FJ2609",
+       "FJ2610",
+       "FJ2611",
+       "FJ2612",
+       "FJ2613",
+       "FJ2614",
+       "FJ2615",
+       "FJ2616",
+       "FJ2617",
+       "FJ2618",
+       "FJ2619",
+       "FJ2620",
+       "FJ2621",
+       "FJ2622",
+       "FJ2623",
+       "FJ2624",
+       "FJ2625",
+       "FJ2626",
+       "FJ2627",
+       "FJ2628"
+      ]
+     },
+     "centro": [
+      0.0098,
+      1.0193,
+      0.0437
+     ],
+     "raio": 0.1716,
+     "lados": {}
+    },
+    "ceco": {
+     "fma": "FMA14541",
+     "nome": "cecum",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-direita.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2599"
+      ]
+     },
+     "centro": [
+      -0.0656,
+      0.9748,
+      0.0242
+     ],
+     "raio": 0.0346,
+     "lados": {}
+    },
+    "apendice": {
+     "fma": "FMA14542",
+     "nome": "appendix",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-direita.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2565"
+      ]
+     },
+     "centro": [
+      -0.0536,
+      0.9527,
+      0.0013
+     ],
+     "raio": 0.0409,
+     "lados": {}
+    },
+    "colon-ascendente": {
+     "fma": "FMA14545",
+     "nome": "ascending colon",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/fossa-iliaca-direita.glb",
+      "regioes/hipocondrio-direito.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2566"
+      ]
+     },
+     "centro": [
+      -0.0953,
+      1.0393,
+      0.0182
+     ],
+     "raio": 0.1018,
+     "lados": {}
+    },
+    "colon-transverso": {
+     "fma": "FMA14546",
+     "nome": "transverse colon",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/periumbilical.glb",
+      "regioes/epigastrio.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2572"
+      ]
+     },
+     "centro": [
+      0.0039,
+      1.1072,
+      0.0519
+     ],
+     "raio": 0.109,
+     "lados": {}
+    },
+    "colon-descendente": {
+     "fma": "FMA14547",
+     "nome": "descending colon",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/hipocondrio-esquerdo.glb",
+      "regioes/fossa-iliaca-esquerda.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2567"
+      ]
+     },
+     "centro": [
+      0.0498,
+      1.0199,
+      -0.0039
+     ],
+     "raio": 0.1448,
+     "lados": {}
+    },
+    "reto": {
+     "fma": "FMA14544",
+     "nome": "rectum",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/suprapubica.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ2571"
+      ]
+     },
+     "centro": [
+      0.0046,
+      0.8937,
+      -0.0576
+     ],
+     "raio": 0.0729,
+     "lados": {}
+    },
+    "rim-direito": {
+     "fma": "FMA7204",
+     "nome": "right kidney",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/hipocondrio-direito.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3147"
+      ]
+     },
+     "centro": [
+      -0.059,
+      1.0971,
+      -0.0117
+     ],
+     "raio": 0.064,
+     "lados": {
+      "direito": [
+       -0.059,
+       1.0971,
+       -0.0117
+      ]
+     }
+    },
+    "rim-esquerdo": {
+     "fma": "FMA7205",
+     "nome": "left kidney",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/hipocondrio-esquerdo.glb"
+     ],
+     "partes": {
+      "esquerdo": [
+       "FJ3145"
+      ]
+     },
+     "centro": [
+      0.0616,
+      1.1156,
+      -0.0201
+     ],
+     "raio": 0.0636,
+     "lados": {
+      "esquerdo": [
+       0.0616,
+       1.1156,
+       -0.0201
+      ]
+     }
+    },
+    "ureter-direito": {
+     "fma": "FMA15571",
+     "nome": "right ureter",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/fossa-iliaca-direita.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3146"
+      ]
+     },
+     "centro": [
+      -0.0411,
+      1.0122,
+      -0.0103
+     ],
+     "raio": 0.1303,
+     "lados": {
+      "direito": [
+       -0.0411,
+       1.0122,
+       -0.0103
+      ]
+     }
+    },
+    "ureter-esquerdo": {
+     "fma": "FMA15572",
+     "nome": "left ureter",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/fossa-iliaca-esquerda.glb"
+     ],
+     "partes": {
+      "esquerdo": [
+       "FJ3144"
+      ]
+     },
+     "centro": [
+      0.0513,
+      1.0234,
+      -0.0093
+     ],
+     "raio": 0.1335,
+     "lados": {
+      "esquerdo": [
+       0.0513,
+       1.0234,
+       -0.0093
+      ]
+     }
+    },
+    "bexiga": {
+     "fma": "FMA15900",
+     "nome": "urinary bladder",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/suprapubica.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3149"
+      ]
+     },
+     "centro": [
+      -0.0008,
+      0.888,
+      -0.0076
+     ],
+     "raio": 0.053,
+     "lados": {}
+    },
+    "prostata": {
+     "fma": "FMA9600",
+     "nome": "prostate",
+     "camada": "orgaos",
+     "arquivos": [
+      "regioes/suprapubica.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3139"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      0.8604,
+      -0.0195
+     ],
+     "raio": 0.0255,
+     "lados": {}
+    },
+    "coluna-lombar": {
+     "fma": "FMA16203",
+     "nome": "lumbar vertebral column",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/lombar.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3157",
+       "FJ3159",
+       "FJ3162",
+       "FJ3165",
+       "FJ3168",
+       "FJ3212",
+       "FJ3214",
+       "FJ3215",
+       "FJ3216",
+       "FJ3217"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.0615,
+      -0.0329
+     ],
+     "raio": 0.113,
+     "lados": {}
+    },
+    "discos-intervertebrais": {
+     "fma": "FMA10446",
+     "nome": "intervertebral disk",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/pescoco.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3202",
+       "FJ3203",
+       "FJ3204",
+       "FJ3205",
+       "FJ3206",
+       "FJ3207",
+       "FJ3208",
+       "FJ3209",
+       "FJ3210",
+       "FJ3211",
+       "FJ3212",
+       "FJ3213",
+       "FJ3214",
+       "FJ3215",
+       "FJ3216",
+       "FJ3217",
+       "FJ3218",
+       "FJ3219",
+       "FJ3220",
+       "FJ3221",
+       "FJ3222",
+       "FJ3223",
+       "FJ3224"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.251,
+      -0.0267
+     ],
+     "raio": 0.2824,
+     "lados": {}
+    },
+    "sacro": {
+     "fma": "FMA16202",
+     "nome": "sacrum",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/lombar.glb",
+      "regioes/quadril.glb"
+     ],
+     "partes": {
+      "centro": [
+       "FJ3393"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      0.9331,
+      -0.0629
+     ],
+     "raio": 0.1032,
+     "lados": {}
+    },
+    "escapula": {
+     "fma": "FMA13394",
+     "nome": "scapula",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3384"
+      ],
+      "esquerdo": [
+       "FJ3279"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.345,
+      -0.0511
+     ],
+     "raio": 0.1937,
+     "lados": {
+      "direito": [
+       -0.1118,
+       1.345,
+       -0.0511
+      ],
+      "esquerdo": [
+       0.1118,
+       1.345,
+       -0.0511
+      ]
+     }
+    },
+    "clavicula": {
+     "fma": "FMA13321",
+     "nome": "clavicle",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3362"
+      ],
+      "esquerdo": [
+       "FJ3237"
+      ]
+     },
+     "centro": [
+      -0.0007,
+      1.4101,
+      0.0007
+     ],
+     "raio": 0.1537,
+     "lados": {
+      "direito": [
+       -0.0775,
+       1.4101,
+       0.0007
+      ],
+      "esquerdo": [
+       0.0762,
+       1.41,
+       0.0007
+      ]
+     }
+    },
+    "umero": {
+     "fma": "FMA13303",
+     "nome": "humerus",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/ombro.glb",
+      "regioes/braco-cotovelo.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3368"
+      ],
+      "esquerdo": [
+       "FJ3262"
+      ]
+     },
+     "centro": [
+      -0.0,
+      1.261,
+      -0.0244
+     ],
+     "raio": 0.2867,
+     "lados": {
+      "direito": [
+       -0.1905,
+       1.261,
+       -0.0244
+      ],
+      "esquerdo": [
+       0.1904,
+       1.261,
+       -0.0244
+      ]
+     }
+    },
+    "deltoide": {
+     "fma": "FMA34682",
+     "nome": "acromial part of right deltoid",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1467",
+       "FJ1468",
+       "FJ1513"
+      ],
+      "esquerdo": [
+       "FJ1467M",
+       "FJ1468M",
+       "FJ1513M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.3497,
+      -0.038
+     ],
+     "raio": 0.2493,
+     "lados": {
+      "direito": [
+       -0.155,
+       1.3497,
+       -0.038
+      ],
+      "esquerdo": [
+       0.155,
+       1.3497,
+       -0.038
+      ]
+     }
+    },
+    "supraespinal": {
+     "fma": "FMA9629",
+     "nome": "supraspinatus",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/ombro.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1506"
+      ],
+      "esquerdo": [
+       "FJ1506M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.403,
+      -0.0476
+     ],
+     "raio": 0.1933,
+     "lados": {
+      "direito": [
+       -0.1262,
+       1.403,
+       -0.0476
+      ],
+      "esquerdo": [
+       0.1262,
+       1.403,
+       -0.0476
+      ]
+     }
+    },
+    "radio": {
+     "fma": "FMA23463",
+     "nome": "radius",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/braco-cotovelo.glb",
+      "regioes/punho-mao.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3349"
+      ],
+      "esquerdo": [
+       "FJ3277"
+      ]
+     },
+     "centro": [
+      -0.0002,
+      0.9986,
+      -0.0058
+     ],
+     "raio": 0.3037,
+     "lados": {
+      "direito": [
+       -0.2497,
+       0.9986,
+       -0.006
+      ],
+      "esquerdo": [
+       0.2495,
+       0.9987,
+       -0.0056
+      ]
+     }
+    },
+    "ulna": {
+     "fma": "FMA23466",
+     "nome": "ulna",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/braco-cotovelo.glb",
+      "regioes/punho-mao.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3391"
+      ],
+      "esquerdo": [
+       "FJ3286"
+      ]
+     },
+     "centro": [
+      -0.0,
+      1.0069,
+      -0.016
+     ],
+     "raio": 0.2792,
+     "lados": {
+      "direito": [
+       -0.222,
+       1.0069,
+       -0.0159
+      ],
+      "esquerdo": [
+       0.222,
+       1.0069,
+       -0.0161
+      ]
+     }
+    },
+    "biceps": {
+     "fma": "FMA37686",
+     "nome": "long head of right biceps brachii",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/braco-cotovelo.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1478",
+       "FJ1512"
+      ],
+      "esquerdo": [
+       "FJ1478M",
+       "FJ1512M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.2449,
+      -0.0114
+     ],
+     "raio": 0.2882,
+     "lados": {
+      "direito": [
+       -0.1825,
+       1.2449,
+       -0.0114
+      ],
+      "esquerdo": [
+       0.1825,
+       1.2449,
+       -0.0114
+      ]
+     }
+    },
+    "triceps": {
+     "fma": "FMA37697",
+     "nome": "lateral head of right triceps brachii",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/braco-cotovelo.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1477",
+       "FJ1479",
+       "FJ1480"
+      ],
+      "esquerdo": [
+       "FJ1477M",
+       "FJ1479M",
+       "FJ1480M"
+      ]
+     },
+     "centro": [
+      0.0,
+      1.2432,
+      -0.0547
+     ],
+     "raio": 0.2667,
+     "lados": {
+      "direito": [
+       -0.1813,
+       1.2432,
+       -0.0547
+      ],
+      "esquerdo": [
+       0.1813,
+       1.2432,
+       -0.0547
+      ]
+     }
+    },
+    "carpo": {
+     "fma": "FMA23889",
+     "nome": "carpal bone",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/punho-mao.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3361",
+       "FJ3367",
+       "FJ3374",
+       "FJ3382",
+       "FJ3383",
+       "FJ3388",
+       "FJ3389",
+       "FJ3390"
+      ],
+      "esquerdo": [
+       "FJ3257",
+       "FJ3261",
+       "FJ3268",
+       "FJ3276",
+       "FJ3278",
+       "FJ3283",
+       "FJ3284",
+       "FJ3285"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.8746,
+      0.0241
+     ],
+     "raio": 0.2825,
+     "lados": {
+      "direito": [
+       -0.2568,
+       0.8747,
+       0.0241
+      ],
+      "esquerdo": [
+       0.2568,
+       0.8746,
+       0.0241
+      ]
+     }
+    },
+    "falanges-mao": {
+     "fma": "FMA23953",
+     "nome": "distal phalanx of left index finger",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/punho-mao.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3193",
+       "FJ3194",
+       "FJ3196",
+       "FJ3197",
+       "FJ3198",
+       "FJ3292",
+       "FJ3303",
+       "FJ3304",
+       "FJ3306",
+       "FJ3322",
+       "FJ3323",
+       "FJ3325",
+       "FJ3326",
+       "FJ3327"
+      ],
+      "esquerdo": [
+       "FJ3183",
+       "FJ3184",
+       "FJ3186",
+       "FJ3187",
+       "FJ3188",
+       "FJ3291",
+       "FJ3296",
+       "FJ3297",
+       "FJ3299",
+       "FJ3313",
+       "FJ3314",
+       "FJ3316",
+       "FJ3317",
+       "FJ3318"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.7882,
+      0.0648
+     ],
+     "raio": 0.3303,
+     "lados": {
+      "direito": [
+       -0.2714,
+       0.7882,
+       0.0648
+      ],
+      "esquerdo": [
+       0.2714,
+       0.7884,
+       0.0646
+      ]
+     }
+    },
+    "flexores-dedos": {
+     "fma": "FMA38469",
+     "nome": "flexor digitorum superficialis",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/punho-mao.glb",
+      "regioes/braco-cotovelo.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1475",
+       "FJ1499"
+      ],
+      "esquerdo": [
+       "FJ1475M",
+       "FJ1499M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.9426,
+      0.0177
+     ],
+     "raio": 0.3628,
+     "lados": {
+      "direito": [
+       -0.242,
+       0.9426,
+       0.0177
+      ],
+      "esquerdo": [
+       0.242,
+       0.9426,
+       0.0177
+      ]
+     }
+    },
+    "osso-do-quadril": {
+     "fma": "FMA16585",
+     "nome": "hip bone",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/quadril.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3152"
+      ],
+      "esquerdo": [
+       "FJ3288"
+      ]
+     },
+     "centro": [
+      -0.0001,
+      0.9331,
+      -0.0299
+     ],
+     "raio": 0.1907,
+     "lados": {
+      "direito": [
+       -0.0738,
+       0.9331,
+       -0.0299
+      ],
+      "esquerdo": [
+       0.0738,
+       0.9331,
+       -0.0298
+      ]
+     }
+    },
+    "femur": {
+     "fma": "FMA9611",
+     "nome": "femur",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/quadril.glb",
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3365"
+      ],
+      "esquerdo": [
+       "FJ3259"
+      ]
+     },
+     "centro": [
+      0.0001,
+      0.6793,
+      -0.0191
+     ],
+     "raio": 0.2791,
+     "lados": {
+      "direito": [
+       -0.091,
+       0.6793,
+       -0.0191
+      ],
+      "esquerdo": [
+       0.0911,
+       0.6793,
+       -0.0191
+      ]
+     }
+    },
+    "gluteo-maximo": {
+     "fma": "FMA22314",
+     "nome": "gluteus maximus",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/quadril.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1418"
+      ],
+      "esquerdo": [
+       "FJ1418M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.8783,
+      -0.0709
+     ],
+     "raio": 0.2027,
+     "lados": {
+      "direito": [
+       -0.0719,
+       0.8783,
+       -0.0709
+      ],
+      "esquerdo": [
+       0.0719,
+       0.8783,
+       -0.0709
+      ]
+     }
+    },
+    "gluteo-medio": {
+     "fma": "FMA22315",
+     "nome": "gluteus medius",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/quadril.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1419"
+      ],
+      "esquerdo": [
+       "FJ1419M"
+      ]
+     },
+     "centro": [
+      -0.0,
+      0.9479,
+      -0.0405
+     ],
+     "raio": 0.1755,
+     "lados": {
+      "direito": [
+       -0.1047,
+       0.9479,
+       -0.0405
+      ],
+      "esquerdo": [
+       0.1047,
+       0.9479,
+       -0.0405
+      ]
+     }
+    },
+    "piriforme": {
+     "fma": "FMA19082",
+     "nome": "piriformis",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/quadril.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1428"
+      ],
+      "esquerdo": [
+       "FJ1428M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.9173,
+      -0.0579
+     ],
+     "raio": 0.1442,
+     "lados": {
+      "direito": [
+       -0.0813,
+       0.9173,
+       -0.0579
+      ],
+      "esquerdo": [
+       0.0813,
+       0.9173,
+       -0.0579
+      ]
+     }
+    },
+    "patela": {
+     "fma": "FMA24485",
+     "nome": "patella",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3381"
+      ],
+      "esquerdo": [
+       "FJ3275"
+      ]
+     },
+     "centro": [
+      -0.0,
+      0.4593,
+      0.0118
+     ],
+     "raio": 0.1047,
+     "lados": {
+      "direito": [
+       -0.0815,
+       0.4593,
+       0.0119
+      ],
+      "esquerdo": [
+       0.0814,
+       0.4592,
+       0.0118
+      ]
+     }
+    },
+    "quadriceps": {
+     "fma": "FMA38928",
+     "nome": "zone of quadriceps femoris",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1433",
+       "FJ1441",
+       "FJ1442",
+       "FJ1443"
+      ],
+      "esquerdo": [
+       "FJ1433M",
+       "FJ1441M",
+       "FJ1442M",
+       "FJ1443M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.671,
+      0.005
+     ],
+     "raio": 0.3242,
+     "lados": {
+      "direito": [
+       -0.0973,
+       0.671,
+       0.005
+      ],
+      "esquerdo": [
+       0.0973,
+       0.671,
+       0.005
+      ]
+     }
+    },
+    "isquiotibiais": {
+     "fma": "FMA45888",
+     "nome": "long head of right biceps femoris",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1395",
+       "FJ1444"
+      ],
+      "esquerdo": [
+       "FJ1395M",
+       "FJ1444M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.6244,
+      -0.0471
+     ],
+     "raio": 0.2548,
+     "lados": {
+      "direito": [
+       -0.0877,
+       0.6244,
+       -0.0471
+      ],
+      "esquerdo": [
+       0.0877,
+       0.6244,
+       -0.0471
+      ]
+     }
+    },
+    "tibia": {
+     "fma": "FMA24476",
+     "nome": "tibia",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/coxa-joelho.glb",
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3387"
+      ],
+      "esquerdo": [
+       "FJ3282"
+      ]
+     },
+     "centro": [
+      0.0001,
+      0.262,
+      -0.0166
+     ],
+     "raio": 0.2215,
+     "lados": {
+      "direito": [
+       -0.0723,
+       0.2621,
+       -0.0165
+      ],
+      "esquerdo": [
+       0.0722,
+       0.262,
+       -0.0168
+      ]
+     }
+    },
+    "fibula": {
+     "fma": "FMA24479",
+     "nome": "fibula",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3366"
+      ],
+      "esquerdo": [
+       "FJ3260"
+      ]
+     },
+     "centro": [
+      -0.0,
+      0.245,
+      -0.0367
+     ],
+     "raio": 0.2272,
+     "lados": {
+      "direito": [
+       -0.1023,
+       0.245,
+       -0.0367
+      ],
+      "esquerdo": [
+       0.1023,
+       0.2451,
+       -0.0367
+      ]
+     }
+    },
+    "gastrocnemio": {
+     "fma": "FMA45960",
+     "nome": "lateral head of right gastrocnemius",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/perna-pe.glb",
+      "regioes/coxa-joelho.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1394",
+       "FJ1397"
+      ],
+      "esquerdo": [
+       "FJ1394M",
+       "FJ1397M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.3556,
+      -0.0507
+     ],
+     "raio": 0.1987,
+     "lados": {
+      "direito": [
+       -0.0694,
+       0.3556,
+       -0.0507
+      ],
+      "esquerdo": [
+       0.0694,
+       0.3556,
+       -0.0507
+      ]
+     }
+    },
+    "soleo": {
+     "fma": "FMA22542",
+     "nome": "soleus",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1437"
+      ],
+      "esquerdo": [
+       "FJ1437M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.2737,
+      -0.0383
+     ],
+     "raio": 0.2022,
+     "lados": {
+      "direito": [
+       -0.0757,
+       0.2737,
+       -0.0383
+      ],
+      "esquerdo": [
+       0.0757,
+       0.2737,
+       -0.0383
+      ]
+     }
+    },
+    "veia-poplitea": {
+     "fma": "FMA44327",
+     "nome": "popliteal vein",
+     "camada": "veias",
+     "arquivos": [
+      "regioes/coxa-joelho.glb",
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ2171"
+      ],
+      "esquerdo": [
+       "FJ2117"
+      ]
+     },
+     "centro": [
+      -0.0,
+      0.4859,
+      -0.0253
+     ],
+     "raio": 0.1362,
+     "lados": {
+      "direito": [
+       -0.083,
+       0.4859,
+       -0.0253
+      ],
+      "esquerdo": [
+       0.083,
+       0.4859,
+       -0.0253
+      ]
+     }
+    },
+    "tendao-calcaneo": {
+     "fma": "FMA51061",
+     "nome": "calcaneal tendon",
+     "camada": "musculos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ1405"
+      ],
+      "esquerdo": [
+       "FJ1405M"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.1289,
+      -0.06
+     ],
+     "raio": 0.1457,
+     "lados": {
+      "direito": [
+       -0.0693,
+       0.1289,
+       -0.06
+      ],
+      "esquerdo": [
+       0.0693,
+       0.1289,
+       -0.06
+      ]
+     }
+    },
+    "talus": {
+     "fma": "FMA9708",
+     "nome": "talus",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3385"
+      ],
+      "esquerdo": [
+       "FJ3280"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.064,
+      -0.0228
+     ],
+     "raio": 0.0961,
+     "lados": {
+      "direito": [
+       -0.0699,
+       0.0641,
+       -0.0228
+      ],
+      "esquerdo": [
+       0.0699,
+       0.064,
+       -0.0228
+      ]
+     }
+    },
+    "calcaneo": {
+     "fma": "FMA24496",
+     "nome": "calcaneus",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3360"
+      ],
+      "esquerdo": [
+       "FJ3256"
+      ]
+     },
+     "centro": [
+      -0.0,
+      0.0343,
+      -0.0409
+     ],
+     "raio": 0.1095,
+     "lados": {
+      "direito": [
+       -0.0728,
+       0.0343,
+       -0.0409
+      ],
+      "esquerdo": [
+       0.0729,
+       0.0344,
+       -0.0408
+      ]
+     }
+    },
+    "metatarsos": {
+     "fma": "FMA24492",
+     "nome": "metatarsal bone",
+     "camada": "ossos",
+     "arquivos": [
+      "regioes/perna-pe.glb"
+     ],
+     "partes": {
+      "direito": [
+       "FJ3351",
+       "FJ3353",
+       "FJ3355",
+       "FJ3357",
+       "FJ3359"
+      ],
+      "esquerdo": [
+       "FJ3241",
+       "FJ3244",
+       "FJ3247",
+       "FJ3250",
+       "FJ3253"
+      ]
+     },
+     "centro": [
+      0.0,
+      0.034,
+      0.0408
+     ],
+     "raio": 0.1629,
+     "lados": {
+      "direito": [
+       -0.1136,
+       0.034,
+       0.0408
+      ],
+      "esquerdo": [
+       0.1136,
+       0.0341,
+       0.0408
+      ]
+     }
+    }
+   },
+   "faltando": [
+    "seio-maxilar",
+    "orelha-interna",
+    "temporal-musculo",
+    "masseter",
+    "atm",
+    "tireoide",
+    "linfonodos-cervicais",
+    "colon-sigmoide",
+    "utero",
+    "ovario-direito",
+    "ovario-esquerdo",
+    "reto-abdominal",
+    "eretor-da-espinha",
+    "quadrado-lombar",
+    "nervo-isquiatico",
+    "nervo-ulnar",
+    "nervo-mediano",
+    "lca",
+    "menisco-medial",
+    "ligamento-talofibular",
+    "aponeurose-plantar"
+   ],
+   "regioes": {
+    "cabeca": {
+     "arquivo": "regioes/cabeca.glb",
+     "centro": [
+      -0.0007,
+      1.6071,
+      -0.0136
+     ],
+     "raio": 0.1677,
+     "estruturas": [
+      "encefalo",
+      "cranio",
+      "olho",
+      "mandibula",
+      "nervo-trigemeo"
+     ]
+    },
+    "pescoco": {
+     "arquivo": "regioes/pescoco.glb",
+     "centro": [
+      0.0,
+      1.2786,
+      -0.0338
+     ],
+     "raio": 0.3582,
+     "estruturas": [
+      "faringe",
+      "laringe",
+      "traqueia",
+      "esofago",
+      "coluna-cervical",
+      "esternocleidomastoideo",
+      "trapezio",
+      "carotida-comum",
+      "jugular-interna",
+      "discos-intervertebrais"
+     ]
+    },
+    "torax": {
+     "arquivo": "regioes/torax.glb",
+     "centro": [
+      0.0,
+      1.2492,
+      0.0097
+     ],
+     "raio": 0.3164,
+     "estruturas": [
+      "traqueia",
+      "esofago",
+      "coracao",
+      "aorta",
+      "pulmao-direito",
+      "pulmao-esquerdo",
+      "bronquios",
+      "diafragma",
+      "esterno",
+      "costelas",
+      "peitoral-maior",
+      "intercostais",
+      "coluna-toracica"
+     ]
+    },
+    "epigastrio": {
+     "arquivo": "regioes/epigastrio.glb",
+     "centro": [
+      -0.0007,
+      1.2467,
+      0.0156
+     ],
+     "raio": 0.2684,
+     "estruturas": [
+      "esofago",
+      "aorta",
+      "diafragma",
+      "estomago",
+      "duodeno",
+      "figado",
+      "pancreas",
+      "colon-transverso"
+     ]
+    },
+    "ombro": {
+     "arquivo": "regioes/ombro.glb",
+     "centro": [
+      -0.0,
+      1.3458,
+      -0.0026
+     ],
+     "raio": 0.3602,
+     "estruturas": [
+      "trapezio",
+      "peitoral-maior",
+      "escapula",
+      "clavicula",
+      "umero",
+      "deltoide",
+      "supraespinal"
+     ]
+    },
+    "periumbilical": {
+     "arquivo": "regioes/periumbilical.glb",
+     "centro": [
+      0.0089,
+      1.1393,
+      0.021
+     ],
+     "raio": 0.2842,
+     "estruturas": [
+      "aorta",
+      "intestino-delgado",
+      "colon-transverso"
+     ]
+    },
+    "hipocondrio-esquerdo": {
+     "arquivo": "regioes/hipocondrio-esquerdo.glb",
+     "centro": [
+      0.0304,
+      1.0677,
+      0.0203
+     ],
+     "raio": 0.2026,
+     "estruturas": [
+      "estomago",
+      "pancreas",
+      "baco",
+      "colon-descendente",
+      "rim-esquerdo"
+     ]
+    },
+    "hipocondrio-direito": {
+     "arquivo": "regioes/hipocondrio-direito.glb",
+     "centro": [
+      -0.0162,
+      1.1039,
+      0.0229
+     ],
+     "raio": 0.2082,
+     "estruturas": [
+      "duodeno",
+      "figado",
+      "vesicula-biliar",
+      "colon-ascendente",
+      "rim-direito"
+     ]
+    },
+    "fossa-iliaca-direita": {
+     "arquivo": "regioes/fossa-iliaca-direita.glb",
+     "centro": [
+      -0.0681,
+      1.0122,
+      0.003
+     ],
+     "raio": 0.1427,
+     "estruturas": [
+      "ceco",
+      "apendice",
+      "colon-ascendente",
+      "ureter-direito"
+     ]
+    },
+    "fossa-iliaca-esquerda": {
+     "arquivo": "regioes/fossa-iliaca-esquerda.glb",
+     "centro": [
+      0.0498,
+      1.0234,
+      -0.0039
+     ],
+     "raio": 0.1512,
+     "estruturas": [
+      "colon-descendente",
+      "ureter-esquerdo"
+     ]
+    },
+    "suprapubica": {
+     "arquivo": "regioes/suprapubica.glb",
+     "centro": [
+      0.0006,
+      0.8937,
+      -0.0302
+     ],
+     "raio": 0.0896,
+     "estruturas": [
+      "reto",
+      "bexiga",
+      "prostata"
+     ]
+    },
+    "lombar": {
+     "arquivo": "regioes/lombar.glb",
+     "centro": [
+      0.0014,
+      1.195,
+      -0.0438
+     ],
+     "raio": 0.3515,
+     "estruturas": [
+      "rim-direito",
+      "rim-esquerdo",
+      "ureter-direito",
+      "ureter-esquerdo",
+      "coluna-lombar",
+      "discos-intervertebrais",
+      "sacro"
+     ]
+    },
+    "quadril": {
+     "arquivo": "regioes/quadril.glb",
+     "centro": [
+      0.0001,
+      0.7412,
+      -0.0404
+     ],
+     "raio": 0.3405,
+     "estruturas": [
+      "sacro",
+      "osso-do-quadril",
+      "femur",
+      "gluteo-maximo",
+      "gluteo-medio",
+      "piriforme"
+     ]
+    },
+    "braco-cotovelo": {
+     "arquivo": "regioes/braco-cotovelo.glb",
+     "centro": [
+      0.0,
+      1.0857,
+      -0.0067
+     ],
+     "raio": 0.4574,
+     "estruturas": [
+      "umero",
+      "radio",
+      "ulna",
+      "biceps",
+      "triceps",
+      "flexores-dedos"
+     ]
+    },
+    "punho-mao": {
+     "arquivo": "regioes/punho-mao.glb",
+     "centro": [
+      0.0,
+      0.9312,
+      0.02
+     ],
+     "raio": 0.3881,
+     "estruturas": [
+      "radio",
+      "ulna",
+      "carpo",
+      "falanges-mao",
+      "flexores-dedos"
+     ]
+    },
+    "coxa-joelho": {
+     "arquivo": "regioes/coxa-joelho.glb",
+     "centro": [
+      0.0,
+      0.5106,
+      -0.0209
+     ],
+     "raio": 0.4725,
+     "estruturas": [
+      "femur",
+      "patela",
+      "quadriceps",
+      "isquiotibiais",
+      "tibia",
+      "gastrocnemio",
+      "veia-poplitea"
+     ]
+    },
+    "perna-pe": {
+     "arquivo": "regioes/perna-pe.glb",
+     "centro": [
+      0.0,
+      0.2913,
+      -0.001
+     ],
+     "raio": 0.3346,
+     "estruturas": [
+      "tibia",
+      "fibula",
+      "gastrocnemio",
+      "soleo",
+      "veia-poplitea",
+      "tendao-calcaneo",
+      "talus",
+      "calcaneo",
+      "metatarsos"
+     ]
+    }
+   },
+   "camadas": {
+    "ossos": "camadas/ossos.glb",
+    "orgaos": "camadas/orgaos.glb",
+    "nervos": "camadas/nervos.glb",
+    "musculos": "camadas/musculos.glb",
+    "arterias": "camadas/arterias.glb",
+    "veias": "camadas/veias.glb",
+    "pele": "camadas/pele.glb"
+   },
+   "malhas_na_pasta": 2234,
+   "megabytes": {
+    "camadas/ossos.glb": 11.4,
+    "camadas/orgaos.glb": 10.9,
+    "camadas/nervos.glb": 5.5,
+    "camadas/musculos.glb": 24.5,
+    "camadas/arterias.glb": 9.6,
+    "camadas/veias.glb": 8.2,
+    "camadas/pele.glb": 1.9,
+    "regioes/cabeca.glb": 10.0,
+    "regioes/pescoco.glb": 5.1,
+    "regioes/torax.glb": 12.7,
+    "regioes/epigastrio.glb": 2.6,
+    "regioes/ombro.glb": 1.6,
+    "regioes/periumbilical.glb": 0.5,
+    "regioes/hipocondrio-esquerdo.glb": 0.5,
+    "regioes/hipocondrio-direito.glb": 1.8,
+    "regioes/fossa-iliaca-direita.glb": 0.1,
+    "regioes/fossa-iliaca-esquerda.glb": 0.1,
+    "regioes/suprapubica.glb": 0.1,
+    "regioes/lombar.glb": 2.6,
+    "regioes/quadril.glb": 0.5,
+    "regioes/braco-cotovelo.glb": 0.5,
+    "regioes/punho-mao.glb": 0.6,
+    "regioes/coxa-joelho.glb": 0.8,
+    "regioes/perna-pe.glb": 0.8
+   }
+  }
+ },
+ "gerado": "2026-10-22T00:30:38"
+}
