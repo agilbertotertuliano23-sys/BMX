@@ -1,0 +1,160 @@
+{
+  "versao": "2026-10-23",
+  "escopo": "Conteúdo educativo para adultos. Padrões servem para formular perguntas, nunca para estimar probabilidade, diagnosticar ou escolher tratamento.",
+  "fontes": {
+    "diferencial": {"titulo": "MedlinePlus — Differential Diagnosis", "url": "https://medlineplus.gov/lab-tests/differential-diagnosis/"},
+    "samu": {"titulo": "Ministério da Saúde — Quando chamar o SAMU 192", "url": "https://www.gov.br/saude/pt-br/composicao/saes/samu-192"},
+    "abdome": {"titulo": "NHS — Stomach ache", "url": "https://www.nhs.uk/symptoms/stomach-ache/"},
+    "gravidez": {"titulo": "NHS — Stomach pain in pregnancy", "url": "https://www.nhs.uk/pregnancy/common-symptoms/stomach-pain/"},
+    "peito": {"titulo": "Ministério da Saúde — Infarto", "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/i/infarto"},
+    "cabeca": {"titulo": "NHS — Headaches", "url": "https://www.nhs.uk/symptoms/headaches/"},
+    "lombar": {"titulo": "NICE NG127 — Suspected neurological conditions", "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16"},
+    "urinario": {"titulo": "NICE QS90 — Urinary tract infections in adults", "url": "https://www.nice.org.uk/guidance/qs90"},
+    "diarreia": {"titulo": "MedlinePlus — Diarrhea", "url": "https://medlineplus.gov/diarrhea.html"},
+    "dengue": {"titulo": "Ministério da Saúde — Suporte à decisão clínica em dengue", "url": "https://sisaps.saude.gov.br/sistemas/esusaps/docs/manual/PEC/PEC_16_suporte_decisaoclinica_dengue/"},
+    "dengue_medicamentos": {"titulo": "Ministério da Saúde — Guia e-SUS APS no manejo da dengue", "url": "https://bvsms.saude.gov.br/bvs/publicacoes/guia_prontuario_eletronico_esus.pdf"},
+    "paracetamol": {"titulo": "NHS — Paracetamol for adults", "url": "https://www.nhs.uk/medicines/paracetamol-for-adults/"},
+    "ibuprofeno": {"titulo": "NHS — Ibuprofen for adults", "url": "https://www.nhs.uk/medicines/ibuprofen-for-adults/"},
+    "palpitacoes": {"titulo": "NHS — Heart palpitations", "url": "https://www.nhs.uk/symptoms/heart-palpitations/"},
+    "trombose": {"titulo": "NHS — Deep vein thrombosis", "url": "https://www.nhs.uk/conditions/deep-vein-thrombosis-dvt/"},
+    "ectopica": {"titulo": "NHS — Ectopic pregnancy symptoms", "url": "https://www.nhs.uk/conditions/ectopic-pregnancy/symptoms/"},
+    "anafilaxia": {"titulo": "NHS — Anaphylaxis", "url": "https://www.nhs.uk/conditions/anaphylaxis/"},
+    "tosse": {"titulo": "NHS — Cough", "url": "https://www.nhs.uk/symptoms/cough/"},
+    "dispneia": {"titulo": "NHS — Shortness of breath", "url": "https://www.nhs.uk/symptoms/shortness-of-breath/"},
+    "fadiga": {"titulo": "NHS — Tiredness and fatigue", "url": "https://www.nhs.uk/symptoms/tiredness-and-fatigue/"},
+    "garganta": {"titulo": "NHS — Sore throat", "url": "https://www.nhs.uk/symptoms/sore-throat/"},
+    "entorse": {"titulo": "NHS — Sprains and strains", "url": "https://www.nhs.uk/conditions/sprains-and-strains/"},
+    "ansiedade": {"titulo": "NHS — Anxiety, fear and panic", "url": "https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/anxiety-fear-panic/"},
+    "cvv": {"titulo": "Ministério da Saúde — Prevenção do suicídio e CVV 188", "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/suicidio-prevencao"},
+    "pressao": {"titulo": "NHS — High blood pressure", "url": "https://www.nhs.uk/conditions/high-blood-pressure/"},
+    "urticaria": {"titulo": "NHS — Hives", "url": "https://www.nhs.uk/conditions/hives/"},
+    "olho": {"titulo": "NHS — Uveitis and red eye", "url": "https://www.nhs.uk/conditions/uveitis/"},
+    "ouvido": {"titulo": "NHS — Earache", "url": "https://www.nhs.uk/symptoms/earache/"},
+    "loratadina": {"titulo": "NHS — Who can and cannot take loratadine", "url": "https://www.nhs.uk/medicines/loratadine/who-can-and-cannot-take-loratadine/"}
+  },
+  "medicamentos": {
+    "dor_febre": {
+      "titulo": "Dor ou febre: conversa sobre analgésico",
+      "texto": "Analgésicos podem aliviar dor ou febre em adultos, conforme a causa e a avaliação individual. Confira alergias, remédios em uso e a bula; peça orientação ao farmacêutico ou profissional antes de usar.",
+      "exemplos": ["paracetamol", "dipirona"],
+      "cautelas": "Paracetamol pode exigir cuidado em doença do fígado, uso excessivo de álcool ou se outro produto já o contém. Não use um analgésico para adiar avaliação de sinais de alerta.",
+      "fontes": ["paracetamol", "dengue"]
+    },
+    "antiinflamatorio": {
+      "titulo": "Anti-inflamatório: checar antes",
+      "texto": "Anti-inflamatórios podem aliviar alguns tipos de dor, mas dependem da história de saúde e dos remédios em uso. Pergunte ao farmacêutico ou profissional de saúde se são adequados ao seu caso.",
+      "exemplos": ["ibuprofeno"],
+      "cautelas": "Evite na suspeita de dengue. Há restrições em gravidez, úlcera ou sangramento, doença renal, uso de anticoagulantes e alergia a anti-inflamatórios.",
+      "fontes": ["ibuprofeno", "dengue_medicamentos"]
+    },
+    "reidratacao": {
+      "titulo": "Vômitos ou diarreia: reposição de líquidos",
+      "texto": "Pequenos goles frequentes e solução de reidratação oral podem ajudar a repor água e sais. Se não consegue manter líquidos, urina pouco, há sangue ou dor forte, procure avaliação.",
+      "cautelas": "Crianças pequenas, idosos e pessoas com doença renal precisam de orientação individual. Antibiótico e antidiarreico dependem da causa; não inicie por conta própria.",
+      "fontes": ["diarreia"]
+    },
+    "urticaria": {
+      "titulo": "Urticária ou coceira: perguntar sobre antialérgico",
+      "texto": "Se o problema parece limitado à pele, um farmacêutico pode orientar sobre anti-histamínicos para aliviar a coceira. Primeiro confirme se há inchaço na boca, falta de ar ou tontura, que exigem atendimento imediato.",
+      "exemplos": ["loratadina"],
+      "cautelas": "Nem todo anti-histamínico serve para todas as pessoas. Informe alergias, doença do fígado, gravidez, remédios em uso e necessidade de dirigir; alguns podem causar sonolência.",
+      "fontes": ["urticaria", "loratadina"]
+    },
+    "alivio_tosse": {
+      "titulo": "Tosse: o que perguntar ao farmacêutico",
+      "texto": "Pastilhas ou alguns produtos para tosse podem aliviar o incômodo, sem resolver a causa. O farmacêutico pode avaliar a bula e se algum produto combina com sua idade e outros medicamentos.",
+      "cautelas": "Produtos com descongestionantes ou codeína não costumam parar a tosse. Tosse por mais de três semanas, sangue, dor no peito ou falta de ar exigem avaliação.",
+      "fontes": ["tosse"]
+    }
+  },
+  "queixas": {
+    "dor-abdominal": {"pistas": [
+      {"rotulo": "Local e trajetória", "pergunta": "Onde começou e para onde a dor foi?", "por_que": "Dor que se concentra no lado inferior direito ou piora continuamente merece avaliação; a localização também ajuda a separar causas urinárias, biliares e intestinais."},
+      {"rotulo": "Gravidez possível", "pergunta": "Há chance de gravidez, atraso menstrual ou sangramento?", "por_que": "Dor pélvica e sangramento com possível gravidez exigem avaliação urgente para excluir gestação ectópica."}],
+      "cuidado": "Dor súbita e intensa, barriga muito rígida, desmaio, fezes pretas ou vômito com sangue pedem emergência.", "medicamentos": [], "fontes": ["abdome", "gravidez"]},
+    "dor-toracica": {"pistas": [
+      {"rotulo": "Sensação e contexto", "pergunta": "É pressão ou aperto? Começou no esforço ou em repouso?", "por_que": "A forma e o início ajudam o profissional a investigar; nenhum padrão isolado exclui infarto."},
+      {"rotulo": "Sinais associados", "pergunta": "Há falta de ar, suor frio, desmaio ou dor irradiando?", "por_que": "Esses sinais elevam a urgência e pedem atendimento imediato."}],
+      "cuidado": "Dor no peito nova ou intensa, especialmente com falta de ar, suor frio ou desmaio: ligue 192.", "medicamentos": [], "fontes": ["peito", "samu"]},
+    "febre": {"pistas": [
+      {"rotulo": "Duração e foco", "pergunta": "Há quantos dias, quanto mediu e que outros sintomas surgiram?", "por_que": "Tosse, ardor ao urinar, manchas e dor atrás dos olhos orientam avaliações diferentes."},
+      {"rotulo": "Possível dengue", "pergunta": "Há dor no corpo, atrás dos olhos, manchas ou casos de dengue por perto?", "por_que": "Na suspeita de dengue, a avaliação e a hidratação são prioritárias; sinais de alarme podem aparecer quando a febre baixa."}],
+      "cuidado": "Confusão, rigidez de nuca, sangramento, dor abdominal intensa ou vômitos persistentes precisam de atendimento imediato.", "medicamentos": ["dor_febre"], "fontes": ["dengue", "samu"]},
+    "cefaleia": {"pistas": [
+      {"rotulo": "Velocidade", "pergunta": "Começou de repente e atingiu o máximo em segundos?", "por_que": "Uma dor explosiva é sinal de emergência, mesmo em quem costuma ter enxaqueca."},
+      {"rotulo": "Padrão conhecido", "pergunta": "É parecida com suas dores anteriores? Há náusea ou incômodo com luz?", "por_que": "O padrão ajuda a conversa clínica, mas não confirma enxaqueca nem exclui outras causas."}],
+      "cuidado": "Dor súbita muito intensa, fraqueza, alteração da fala, convulsão ou febre com rigidez de nuca: emergência.", "medicamentos": ["dor_febre"], "fontes": ["cabeca"]},
+    "dor-lombar": {"pistas": [
+      {"rotulo": "Perna e função", "pergunta": "A dor desce pela perna? Surgiu fraqueza ou dormência?", "por_que": "Sintomas neurológicos mudam a necessidade de avaliação."},
+      {"rotulo": "Bexiga e sensibilidade", "pergunta": "Há nova dificuldade de urinar, perda do controle ou dormência na região íntima?", "por_que": "Com dor lombar forte, esse conjunto pode indicar compressão de nervos que exige avaliação imediata."}],
+      "cuidado": "Perda nova do controle da urina ou fezes, retenção urinária ou dormência íntima com dor lombar: emergência.", "medicamentos": ["dor_febre", "antiinflamatorio"], "fontes": ["lombar"]},
+    "urinario": {"pistas": [
+      {"rotulo": "Sintomas urinários", "pergunta": "Além de ardor, urina mais vezes ou com urgência?", "por_que": "Sintomas combinados ajudam a avaliação de infecção urinária; a urina pode precisar de exame."},
+      {"rotulo": "Sinais de rim", "pergunta": "Há febre, calafrios, dor nas costas abaixo das costelas ou vômitos?", "por_que": "Esses achados podem indicar infecção mais alta e pedem avaliação no mesmo dia."}],
+      "cuidado": "Febre e dor lombar, gravidez, vômitos ou piora importante: procure avaliação sem demora.", "medicamentos": [], "fontes": ["urinario"]},
+    "vomito-diarreia": {"pistas": [
+      {"rotulo": "Hidratação", "pergunta": "Consegue beber e está urinando normalmente?", "por_que": "Pouca urina e incapacidade de manter líquidos sugerem desidratação."},
+      {"rotulo": "Sangue e dor", "pergunta": "Há sangue nas fezes ou no vômito, febre ou dor forte?", "por_que": "Esses sinais mudam a necessidade de avaliação e podem indicar outra causa."}],
+      "cuidado": "Sangue, confusão, desmaio, dor intensa ou sinais de desidratação precisam de atendimento.", "medicamentos": ["reidratacao"], "fontes": ["diarreia"]},
+    "tontura": {"pistas": [
+      {"rotulo": "Tipo de tontura", "pergunta": "Parece que o ambiente gira ou que vai desmaiar?", "por_que": "Essa distinção ajuda a investigar ouvido, circulação e medicamentos."},
+      {"rotulo": "Sinais neurológicos", "pergunta": "Há dificuldade de falar, andar, enxergar ou fraqueza de um lado?", "por_que": "Déficits súbitos podem indicar AVC mesmo quando a tontura é a queixa principal."}],
+      "cuidado": "Sinais neurológicos súbitos, dor no peito ou desmaio: ligue 192.", "medicamentos": [], "fontes": ["samu", "diferencial"]},
+    "palpitacoes": {"pistas": [
+      {"rotulo": "Ritmo e duração", "pergunta": "O coração bate rápido, irregular ou forte? Quanto tempo dura?", "por_que": "O padrão e a duração orientam a avaliação e podem indicar a necessidade de eletrocardiograma."},
+      {"rotulo": "Gatilhos e sintomas", "pergunta": "Começou após cafeína, remédio ou esforço? Há dor no peito, falta de ar ou desmaio?", "por_que": "Gatilhos são úteis, mas sintomas associados exigem atendimento imediato."}],
+      "cuidado": "Palpitação persistente com dor no peito, falta de ar ou sensação de desmaio: emergência.", "medicamentos": [], "fontes": ["palpitacoes"]},
+    "perna-inchada": {"pistas": [
+      {"rotulo": "Um lado ou ambos", "pergunta": "O inchaço começou em uma perna só? Há dor ou calor?", "por_que": "Inchaço doloroso de um lado pede avaliação rápida para excluir trombose."},
+      {"rotulo": "Risco e respiração", "pergunta": "Houve cirurgia, imobilização, viagem longa ou falta de ar?", "por_que": "Esses fatores e a falta de ar alteram a urgência da investigação."}],
+      "cuidado": "Inchaço de uma perna com falta de ar, dor no peito ou sangue na tosse: ligue 192.", "medicamentos": [], "fontes": ["trombose", "samu"]},
+    "dor-pelvica": {"pistas": [
+      {"rotulo": "Gravidez e sangramento", "pergunta": "Pode estar grávida? Há atraso menstrual ou sangramento?", "por_que": "Dor pélvica com possível gravidez requer avaliação para excluir gestação ectópica."},
+      {"rotulo": "Início e lado", "pergunta": "A dor é súbita, forte e de um lado? Há náusea ou desmaio?", "por_que": "Dor súbita unilateral pode indicar causa ginecológica urgente."}],
+      "cuidado": "Dor intensa, desmaio ou sangramento com possível gravidez: emergência.", "medicamentos": [], "fontes": ["gravidez", "ectopica"]},
+    "reacao-medicamento": {"pistas": [
+      {"rotulo": "Tempo e produto", "pergunta": "Qual remédio foi iniciado e quanto tempo depois apareceram os sintomas?", "por_que": "A sequência temporal e a lista completa de produtos ajudam a diferenciar alergia de outros efeitos."},
+      {"rotulo": "Respiração e pele", "pergunta": "Há inchaço de língua ou garganta, falta de ar, tontura ou bolhas na pele?", "por_que": "Esses sinais podem indicar reação grave e não devem aguardar investigação em casa."}],
+      "cuidado": "Inchaço de língua ou garganta, falta de ar ou desmaio após produto: ligue 192.", "medicamentos": [], "fontes": ["anafilaxia"]},
+    "tosse": {"pistas": [
+      {"rotulo": "Duração", "pergunta": "Há quanto tempo tosse e houve piora rápida?", "por_que": "Tosse persistente ou em piora pode precisar de exame e investigação diferente de um resfriado recente."},
+      {"rotulo": "Respiração", "pergunta": "Há falta de ar, dor no peito ou sangue no catarro?", "por_que": "Esses sinais pedem avaliação rápida."}],
+      "cuidado": "Tosse com sangue, dor no peito ou dificuldade para respirar: procure atendimento sem demora.", "medicamentos": ["alivio_tosse"], "fontes": ["tosse"]},
+    "falta-de-ar": {"pistas": [
+      {"rotulo": "Intensidade", "pergunta": "Consegue falar frases inteiras e respirar em repouso?", "por_que": "Dificuldade para falar ou respirar em repouso indica possível emergência."},
+      {"rotulo": "Contexto", "pergunta": "Começou de repente? Há dor no peito ou uma perna inchada?", "por_que": "Início súbito e sintomas associados podem apontar para causas que exigem avaliação imediata."}],
+      "cuidado": "Se está ofegante em repouso, não consegue falar, tem lábios arroxeados ou confusão, ligue 192.", "medicamentos": [], "fontes": ["dispneia", "samu"]},
+    "saude-mental": {"pistas": [
+      {"rotulo": "Segurança agora", "pergunta": "Você está em segurança? Pensa em se machucar ou acabar com a própria vida?", "por_que": "Se houver risco imediato, a prioridade é apoio humano e atendimento, antes de investigar outras causas."},
+      {"rotulo": "Corpo e contexto", "pergunta": "Surgiram dor no peito, desmaio, remédio novo ou uso de substâncias?", "por_que": "Sintomas físicos podem coexistir e precisam ser avaliados sem atribuir tudo à ansiedade."}],
+      "cuidado": "Se há risco de se machucar, peça ajuda agora: CVV 188; em risco imediato, SAMU 192.", "medicamentos": [], "fontes": ["ansiedade", "cvv"]},
+    "garganta-gripe": {"pistas": [
+      {"rotulo": "Respiração e deglutição", "pergunta": "Consegue engolir líquidos e respirar normalmente?", "por_que": "Dificuldade para engolir ou respirar pode indicar uma urgência."},
+      {"rotulo": "Sintomas associados", "pergunta": "Há febre, tosse, coriza ou piora rápida?", "por_que": "O conjunto ajuda a separar infecção respiratória de outros problemas de garganta."}],
+      "cuidado": "Não consegue engolir, saliva escorre, respiração difícil ou piora rápida: emergência.", "medicamentos": ["dor_febre"], "fontes": ["garganta"]},
+    "dor-membros": {"pistas": [
+      {"rotulo": "Trauma e apoio", "pergunta": "Houve queda ou torção? Consegue mover e apoiar?", "por_que": "Incapacidade de apoiar após lesão exige avaliação para excluir fratura ou lesão importante."},
+      {"rotulo": "Inchaço unilateral", "pergunta": "Uma perna está inchada, quente e dolorida?", "por_que": "Esse padrão pede investigação rápida para excluir trombose."}],
+      "cuidado": "Deformidade, incapacidade de apoiar, febre em articulação ou uma perna inchada e dolorida: procure atendimento.", "medicamentos": ["dor_febre", "antiinflamatorio"], "fontes": ["entorse", "trombose"]},
+    "trauma-entorse": {"pistas": [
+      {"rotulo": "Mecanismo", "pergunta": "Como aconteceu e bateu a cabeça?", "por_que": "O mecanismo ajuda a avaliar risco de fratura ou trauma interno."},
+      {"rotulo": "Função", "pergunta": "Há deformidade, dormência ou incapacidade de apoiar peso?", "por_que": "Esses sinais pedem exame presencial."}],
+      "cuidado": "Após batida na cabeça com confusão ou vômitos, deformidade ou sangramento que não cessa: atendimento imediato.", "medicamentos": [], "fontes": ["entorse", "samu"]},
+    "pressao-alta": {"pistas": [
+      {"rotulo": "Medição", "pergunta": "Qual foi a medida, em que momento e como foi aferida?", "por_que": "Uma leitura isolada precisa ser interpretada no contexto e, muitas vezes, repetida corretamente."},
+      {"rotulo": "Sintomas agora", "pergunta": "Há dor no peito, falta de ar, alteração na fala, fraqueza ou visão alterada?", "por_que": "Sintomas de possível lesão de órgão mudam a urgência, independentemente do número medido."}],
+      "cuidado": "Pressão elevada com dor no peito, falta de ar ou sinais de AVC: ligue 192. Não ajuste remédio prescrito por conta própria.", "medicamentos": [], "fontes": ["pressao", "samu"]},
+    "pele-alergia": {"pistas": [
+      {"rotulo": "Exposição", "pergunta": "Começou após alimento, remédio, picada ou produto novo?", "por_que": "O tempo entre exposição e sintomas ajuda a investigar uma reação."},
+      {"rotulo": "Sinais sistêmicos", "pergunta": "Há inchaço na boca ou garganta, falta de ar ou tontura?", "por_que": "Sintomas além da pele podem indicar anafilaxia."}],
+      "cuidado": "Inchaço de língua ou garganta, dificuldade para respirar ou desmaio: ligue 192.", "medicamentos": ["urticaria"], "fontes": ["urticaria", "anafilaxia"]},
+    "olho-ouvido": {"pistas": [
+      {"rotulo": "Qual órgão", "pergunta": "O problema é no olho ou no ouvido? Há perda de visão ou audição?", "por_que": "Olho e ouvido têm riscos e avaliações diferentes; mudança súbita da visão precisa ser vista rapidamente."},
+      {"rotulo": "Exposição", "pergunta": "Entrou produto químico no olho ou há inchaço atrás da orelha?", "por_que": "Esses sinais exigem avaliação presencial."}],
+      "cuidado": "Perda súbita da visão, dor intensa no olho ou produto químico no olho: atendimento urgente.", "medicamentos": [], "fontes": ["olho", "ouvido"]},
+    "mal-estar": {"pistas": [
+      {"rotulo": "Evolução", "pergunta": "Começou quando e está piorando?", "por_que": "Duração, início súbito e piora ajudam a separar causas transitórias de situações que precisam de avaliação."},
+      {"rotulo": "Sintomas juntos", "pergunta": "Há febre, perda de peso, sede, urina excessiva ou falta de ar?", "por_que": "Esses achados orientam investigação de infecção, anemia, diabetes e outras causas."}],
+      "cuidado": "Fraqueza súbita de um lado, confusão, falta de ar ou desmaio: ligue 192.", "medicamentos": [], "fontes": ["fadiga", "samu"]}
+  }
+}

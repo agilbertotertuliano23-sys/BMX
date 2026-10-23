@@ -62,6 +62,7 @@ def _caso_json(c):
         hipoteses=[_sem_links(h) for h in c["hipoteses"]], resumo=[_sem_links(r) for r in c["resumo"]],
         estruturas=anatomia.detalhar(c["estruturas"]), regiao3d=anatomia.regiao_3d(reg),
         perguntas=(q or {}).get("perguntas_chave", []),
+        guia=clinica.guia(q["id"]) if q else None,
         nao_perder=[x["nome"] for x in (q or {}).get("nao_perder", [])],
         causas=[x["nome"] for x in (q or {}).get("causas_frequentes", [])],
         anatomia=notas, proximo_sinal=pend[0] if pend else "")
@@ -110,6 +111,7 @@ def dados(cid=""):
         pacientes=[dict(id=i, nome=n) for i, n in memory.listar_pacientes()],
         fixa=fixa, dor=estado.get("dor", [])[-12:], meta=estado.get("meta", ""),
         caso=_caso_json(c),
+        catalogo=[clinica.guia(q["id"]) for q in clinica.carregar()["queixas"]],
         casos=[dict(id=x["caso"], titulo=x.get("queixa", ""), status=x.get("status", ""),
                     nivel=x.get("nivel", ""), updated=x.get("updated", ""))
                for x in casos.listar(todos=True)[:12]],

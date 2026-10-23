@@ -112,12 +112,10 @@
         <h3>Anatomia</h3>
         <p id="anatomiaTxt"></p>
       </div>
-      <details class="bloco" id="blocoDev" hidden>
-        <summary>Para o desenvolvimento: o que costuma ser e o que não pode passar</summary>
-        <p><b>Costuma ser:</b> <span id="causas"></span></p>
-        <p><b>Não deixar passar:</b> <span id="naoPerder"></span></p>
-        <p><b>Perguntas-chave:</b> <span id="perguntas"></span></p>
-      </details>
+      <div class="bloco" id="blocoDev" hidden>
+        <h3>Próximo passo</h3>
+        <p>Explore abaixo as perguntas que ajudam a descrever o que sente.</p>
+      </div>
     </section>
   </aside>
 
@@ -133,9 +131,26 @@
       <ul id="plano"></ul>
     </section>
   </section>
+
+  <section class="card explorar" aria-labelledby="explorarTitulo">
+    <div class="explorar-topo">
+      <div><p class="sobretitulo">INVESTIGAÇÃO GUIADA</p><h2 id="explorarTitulo">Entenda o que está sentindo</h2>
+        <p>Escolha uma queixa e percorra as pistas. O roteiro é voltado a adultos; crianças e gestantes precisam de avaliação individual. Os nomes abaixo são possibilidades, não resultados.</p></div>
+      <label class="busca-wrap"><span>Buscar sintoma, possibilidade ou remédio</span><input id="buscaQueixa" type="search" placeholder="Ex.: perna inchada, febre, paracetamol" autocomplete="off"></label>
+    </div>
+    <div class="explorar-layout">
+      <nav class="queixas-lista" id="queixasLista" aria-label="Queixas para explorar"></nav>
+      <div class="guia" id="guia" aria-live="polite"><p class="vazio-txt">Escolha uma queixa para ver o que observar.</p></div>
+    </div>
+    <details class="galeria-remedios" id="galeriaRemedios">
+      <summary>Personalizar imagens das orientações <span>25 fotos</span></summary>
+      <p>Escolha uma imagem para cada tema. A preferência fica salva neste navegador. Fotos e embalagens são ilustrativas: não identificam comprimidos, composição, dose ou indicação para você.</p>
+      <div class="galeria-grade" id="galeriaGrade" aria-live="polite"><p>Carregando imagens…</p></div>
+    </details>
+  </section>
 </main>
 
-<footer class="rodape">O BMX organiza o caso e explica a anatomia; não dá diagnóstico nem substitui consulta.
+<footer class="rodape">O BMX organiza o caso e explica a anatomia; as possibilidades e remédios são informação para conversar com um profissional, sem diagnóstico ou prescrição.
   Emergência: <a href="tel:192">192</a> · Anatomia 3D: BodyParts3D © DBCLS, CC BY 4.0 (via Human Atlas).</footer>
 
 <script src="caso.js"></script>

@@ -322,6 +322,13 @@ function casoAberto() { return document.body.classList.contains('modo-caso'); }
 function enviarAoCaso(msg) {
   try { if (casoFrame.contentWindow) casoFrame.contentWindow.postMessage(msg, location.origin); } catch (e) { /* iframe ainda não existe */ }
 }
+window.addEventListener('message', function (e) {
+  if (e.origin !== location.origin || e.source !== casoFrame.contentWindow || !e.data || e.data.t !== 'rascunho') return;
+  var campo = $('#pergunta');
+  campo.value = String(e.data.texto || '').slice(0, 500);
+  campo.focus();
+  campo.setSelectionRange(campo.value.length, campo.value.length);
+});
 function atualizarCaso() { if (casoFramePronto) enviarAoCaso({ t: 'atualizar', id: casoIdAtual }); }
 function focarNoCaso(secao) {
   if (casoFramePronto) enviarAoCaso({ t: 'foco', secao: secao });
@@ -349,7 +356,7 @@ function voltarCaso() {
   abertoAuto = false;
   document.body.classList.remove('modo-caso');
   visaoCaso.setAttribute('aria-hidden', 'true');
-  btnCaso.textContent = 'Painel do caso';
+  btnCaso.textContent = 'Explorar sintomas';
 }
 btnCaso.addEventListener('click', function (e) {
   if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;   // abrir em outra aba continua valendo

@@ -34,6 +34,8 @@ _RULES = [
     ("emergencia", "Possível emergência cardíaca", [SAMU], [
         r"\b(dor|aperto|pressao|queimacao) (forte |no |na )*peito\b", r"\binfarto\b",
         r"\bdor no braco esquerdo\b",
+        r"\bpalpitac\w*\b.{0,80}\b(desmaio|desmaiei|quase desmaiei|falta de ar)\b",
+        r"\b(coracao disparado|coracao acelerado)\b.{0,80}\b(desmaio|desmaiei|falta de ar)\b",
     ]),
     ("emergencia", "Possível AVC", [SAMU], [
         r"\b(boca|rosto|cara) (ficou )?tort", r"\bfala (enrolada|arrastada)\b", r"\bnao consigo falar\b",
@@ -43,6 +45,8 @@ _RULES = [
     ("emergencia", "Dificuldade para respirar", [SAMU], [
         r"\bnao consigo respirar\b", r"\bsufoc", r"\blabios? (roxo|azul)",
         r"\bfalta de ar (forte|intensa|grave)\b", r"\bmuita falta de ar\b", r"\bengasg",
+        r"\b(perna|panturrilha) inchad\w*\b.{0,80}\b(falta de ar|dor no peito)\b",
+        r"\b(falta de ar|dor no peito)\b.{0,80}\b(perna|panturrilha) inchad\w*\b",
     ]),
     ("emergencia", "Reação alérgica grave", [SAMU], [
         r"\bgarganta (esta |ta |ficou |fica )?(fechando|fechada|inchada|inchando)\b",
@@ -52,11 +56,14 @@ _RULES = [
     ("emergencia", "Convulsão ou perda de consciência", [SAMU], [
         r"\bconvuls", r"\bdesmai", r"\bperd(eu|i) (a )?(consciencia|os sentidos)\b",
         r"\bnao (acorda|responde)\b", r"\bpior dor de cabeca da (minha )?vida\b", r"\brigidez (na|de) nuca\b",
+        r"\bdor de cabeca\b.{0,45}\b(de repente|subita|explosiva)\b",
+        r"\b(de repente|subita|explosiva)\b.{0,45}\bdor de cabeca\b",
     ]),
     ("emergencia", "Sangramento importante", [SAMU], [
         r"\bsangramento (forte|intenso|grande|que nao para)\b", r"\bnao para de sangrar\b",
         r"\bvomit(ando|ei|ou) sangue\b", r"\btossindo sangue\b",
         r"\bgravida\b.*\bsangr", r"\bsangr.*\bgravida\b",
+        r"\b(atraso menstrual|teste de gravidez positivo)\b.{0,80}\b(dor forte|desmaio|sangramento)\b",
     ]),
     ("emergencia", "Possível compressão dos nervos da coluna", [SAMU], [
         r"\bnao (consigo|estou conseguindo|to conseguindo|consegui) (segurar|controlar) (o |a )?(xixi|urina|coco|fezes|intestino|bexiga)\b",

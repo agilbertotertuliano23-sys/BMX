@@ -12,6 +12,7 @@ o conhecimento é copiado do cofre real, pacientes e operações começam vazios
 3. Isolamento: nada de um paciente aparece no contexto do outro.
 """
 import os
+import json
 import pathlib
 import shutil
 import sys
@@ -195,11 +196,63 @@ def isolamento():
     confere(all(n["zona"] in ("pacientes", "operacoes") for n in g["nodes"]), "grafo só com paciente e operações")
 
 
+def investigacao_pesquisada():
+    print("\n4. Investigação pesquisada")
+    pacote_ids = {q["id"] for q in clinica.carregar()["queixas"]}
+    pesquisa = clinica.carregar_investigacao()
+    confere(len(pacote_ids) >= 22 and pacote_ids <= set(pesquisa["queixas"]) and not clinica.validar(),
+            "catálogo ampliado, guias completos e ligações anatômicas/fontes válidas")
+    for relato, qid in [
+        ("meu coração está disparado", "palpitacoes"),
+        ("minha perna está inchada", "perna-inchada"),
+        ("tenho dor pélvica", "dor-pelvica"),
+        ("tive reação ao remédio", "reacao-medicamento"),
+    ]:
+        confere(qid in [q["id"] for q in clinica.identificar(relato)], f"reconhece {qid}")
+    for relato in ["perna inchada e falta de ar", "palpitações e desmaiei",
+                   "dor de cabeça súbita de repente", "atraso menstrual com dor forte e sangramento"]:
+        confere(bool(safety.check(relato)), f"alerta fixo: {relato}")
+    guia = clinica.guia("febre")
+    confere(bool(guia and guia["pistas"] and guia["medicamentos"]
+                 and all(x["url"].startswith("https://") for x in guia["fontes"])),
+            "pistas, cuidados de medicamento e links verificados chegam juntos")
+    ctx = clinica.contexto(clinica.identificar("estou com febre"))
+    confere("Pistas pesquisadas" in ctx and "não dê dose" in ctx,
+            "contexto do modelo recebe pistas e limite explícito de medicamento")
+    import painel
+    d = painel.dados()
+    confere(len(d["catalogo"]) >= 22 and any(x["id"] == "dor-pelvica" for x in d["catalogo"]),
+            "painel recebe catálogo pesquisável mesmo sem caso ativo")
+    relato = "minha perna está inchada"
+    novo, como = casos.resolver(relato, clinica.identificar(relato), anatomia.relacionar(relato))
+    confere(como == "aberto" and novo["queixa_id"] == "perna-inchada"
+            and painel.dados(novo["caso"])["caso"]["guia"]["id"] == "perna-inchada",
+            "nova queixa abre caso e liga guia ao painel")
+
+
+def imagens_remedios():
+    print("\n5. Imagens dos remédios")
+    raiz = RAIZ / "ui"
+    catalogo = json.loads((raiz / "remedios" / "catalogo.json").read_text(encoding="utf-8"))
+    temas = {"dor_febre", "antiinflamatorio", "reidratacao", "urticaria", "alivio_tosse"}
+    confere(len(catalogo) == 25 and len({x["id"] for x in catalogo}) == 25,
+            "25 imagens distintas catalogadas")
+    confere(all(sum(x["tema"] == tema for x in catalogo) == 5 for tema in temas),
+            "cinco opções por tema clínico")
+    confere(all((raiz / x["arquivo"]).is_file()
+                and (raiz / x["arquivo"]).read_bytes().startswith(b"\xff\xd8\xff")
+                and x["fonte"].startswith("https://commons.wikimedia.org/wiki/File:")
+                and x["licenca"] and x["autor"] for x in catalogo),
+            "arquivos JPEG locais com origem, licença e autoria")
+
+
 if __name__ == "__main__":
     try:
         vinhetas()
         ciclo_caso()
         isolamento()
+        investigacao_pesquisada()
+        imagens_remedios()
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     print(f"\n{'TUDO OK' if not FALHAS else str(len(FALHAS)) + ' FALHA(S)'}")

@@ -12,6 +12,60 @@ var esc = function (s) {
 };
 
 var DADOS = null, rodando = false, falar = false, corpoPronto = false, camadasConfiguradas = false;
+var guiaEscolhido = '', buscaGuia = '';
+var respostasGuia = {};
+var pacienteGuia = '';
+var imagensRemedios = [];
+var imagemPreferida = {};
+try { imagemPreferida = JSON.parse(localStorage.getItem('bmx-imagens-remedios-v1') || '{}') || {}; }
+catch (e) { imagemPreferida = {}; }
+var nomesTemasImagem = { dor_febre: 'Dor e febre', antiinflamatorio: 'Anti-inflamatório',
+  reidratacao: 'Reidratação', urticaria: 'Alergia e urticária', alivio_tosse: 'Tosse e garganta' };
+
+function imagemDoTema(tema) {
+  var grupo = imagensRemedios.filter(function (x) { return x.tema === tema; });
+  return grupo.find(function (x) { return x.id === imagemPreferida[tema]; }) || grupo[0] || null;
+}
+
+function imagemMedHtml(m) {
+  var img = imagemDoTema(m.id);
+  return (img ? '<figure class="med-foto"><img src="' + esc(img.arquivo) + '" alt="' + esc(img.descricao) + '" loading="lazy">'
+    + '<figcaption>' + esc(img.nome) + ' · foto ilustrativa</figcaption></figure>' : '')
+    + '<button type="button" class="btn-imagem-med" data-tema="' + esc(m.id) + '">Escolher imagem</button>';
+}
+
+function renderGaleriaImagens() {
+  var grade = $('#galeriaGrade');
+  if (!grade) return;
+  if (!imagensRemedios.length) { grade.innerHTML = '<p class="vazio-txt">As imagens não estão disponíveis.</p>'; return; }
+  grade.innerHTML = imagensRemedios.map(function (img) {
+    var ativo = imagemDoTema(img.tema).id === img.id;
+    return '<article class="galeria-item' + (ativo ? ' ativo' : '') + '"><img src="' + esc(img.arquivo) + '" alt="' + esc(img.descricao) + '" loading="lazy">'
+      + '<div class="galeria-item-corpo"><small>' + esc(nomesTemasImagem[img.tema] || img.tema) + '</small><b>' + esc(img.nome) + '</b>'
+      + '<p>' + esc(img.descricao) + '</p><button type="button" data-imagem="' + esc(img.id) + '" aria-pressed="' + ativo + '">'
+      + (ativo ? 'Em uso neste tema' : 'Usar neste tema') + '</button>'
+      + '<div class="galeria-credito">Foto: ' + esc(img.autor) + ' · <a href="' + esc(img.fonte) + '" target="_blank" rel="noopener noreferrer">origem</a>'
+      + (img.licenca_url ? ' · <a href="' + esc(img.licenca_url) + '" target="_blank" rel="noopener noreferrer">' + esc(img.licenca) + '</a>' : ' · ' + esc(img.licenca))
+      + '</div></div></article>';
+  }).join('');
+  Array.prototype.forEach.call(grade.querySelectorAll('[data-imagem]'), function (btn) {
+    btn.onclick = function () {
+      var img = imagensRemedios.find(function (x) { return x.id === btn.dataset.imagem; });
+      if (!img) return;
+      imagemPreferida[img.tema] = img.id;
+      try { localStorage.setItem('bmx-imagens-remedios-v1', JSON.stringify(imagemPreferida)); } catch (e) { /* preferência só nesta sessão */ }
+      renderGaleriaImagens();
+      if (DADOS) renderExploracao(DADOS);
+    };
+  });
+}
+
+fetch('remedios/catalogo.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function (lista) {
+    imagensRemedios = lista.filter(function (x) { return nomesTemasImagem[x.tema] && /^remedios\/\d{2}\.jpe?g$/.test(x.arquivo); });
+    renderGaleriaImagens();
+    if (DADOS) renderExploracao(DADOS);
+  }).catch(function () { renderGaleriaImagens(); });
 
 var NOME_CAMADA = { pele: 'Pele', musculos: 'Músculos', orgaos: 'Órgãos', arterias: 'Artérias',
   veias: 'Veias', nervos: 'Nervos', ossos: 'Ossos' };
@@ -37,6 +91,13 @@ async function carregar(cid) {
 
 function render() {
   var d = DADOS, c = d.caso;
+  if (pacienteGuia && d.paciente.id !== pacienteGuia) {
+    respostasGuia = {};
+    guiaEscolhido = '';
+    buscaGuia = '';
+    $('#buscaQueixa').value = '';
+  }
+  pacienteGuia = d.paciente.id;
   renderSeletores(d);
   renderDor(d, c);
   renderNivel(c);
@@ -48,8 +109,135 @@ function render() {
   renderSistemas(d.sistemas);
   renderTempo(c);
   renderCamadas(d.camadas);
+  renderExploracao(d);
   mostrarCorpo();
 }
+
+function semAcento(s) {
+  return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function fontesHtml(fontes) {
+  return (fontes || []).map(function (f) {
+    if (!/^https:\/\//.test(f.url || '')) return '';
+    return '<a href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.titulo) + '</a>';
+  }).join('');
+}
+
+function prepararConversa(texto) {
+  if (document.documentElement.classList.contains('incorporado')) {
+    parent.postMessage({ t: 'rascunho', texto: texto }, location.origin);
+  } else {
+    $('#entrada').value = texto;
+    $('#entrada').focus();
+    $('#entrada').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function renderExploracao(d) {
+  var catalogo = d.catalogo || [];
+  if (!guiaEscolhido && d.caso && d.caso.queixa_id) guiaEscolhido = d.caso.queixa_id;
+  var itens = catalogo.filter(function (g) {
+    var palavras = [g.queixa].concat(g.termos || [])
+      .concat((g.possibilidades || []).map(function (p) { return p.nome; }))
+      .concat((g.medicamentos || []).reduce(function (xs, m) { return xs.concat([m.titulo], m.exemplos || []); }, []));
+    return !buscaGuia || semAcento(palavras.join(' ')).indexOf(semAcento(buscaGuia)) >= 0;
+  });
+  if (buscaGuia && itens.length && !itens.some(function (x) { return x.id === guiaEscolhido; })) guiaEscolhido = itens[0].id;
+  if (!guiaEscolhido && itens.length) guiaEscolhido = itens[0].id;
+  $('#queixasLista').innerHTML = itens.length ? itens.map(function (g) {
+    return '<button type="button" data-id="' + esc(g.id) + '" aria-current="' + (guiaEscolhido === g.id ? 'true' : 'false') + '">'
+      + esc(g.queixa) + '<span aria-hidden="true">›</span></button>';
+  }).join('') : '<p class="vazio-txt">Nenhuma queixa encontrada. Tente outra palavra ou conte ao BMX em suas palavras.</p>';
+  Array.prototype.forEach.call($('#queixasLista').querySelectorAll('button'), function (b) {
+    b.onclick = function () { guiaEscolhido = b.dataset.id; renderExploracao(DADOS); };
+  });
+  if (!itens.length) { $('#guia').innerHTML = '<p class="vazio-txt">Nenhuma correspondência. Descreva seus sintomas ao BMX para continuar.</p>'; return; }
+  var g = catalogo.find(function (x) { return x.id === guiaEscolhido; });
+  if (!g && itens.length) { g = itens[0]; guiaEscolhido = g.id; }
+  if (!g) { $('#guia').innerHTML = '<p class="vazio-txt">Escolha uma queixa para começar.</p>'; return; }
+  var alerta = d.caso && (d.caso.nivel === 'emergencia' || (d.caso.discriminadores || []).some(function (x) { return x.estado === 'sim'; }));
+  var ficha = d.fixa || [];
+  var fixa = ficha.some(function (f) { return f.tipo === 'alergia' || f.tipo === 'medicamento' || f.tipo === 'condicao'; });
+  var alergias = ficha.filter(function (f) { return f.tipo === 'alergia'; }).map(function (f) { return semAcento(f.titulo); });
+  var anotadas = respostasGuia[g.id] || {};
+  var quantidade = Object.keys(anotadas).filter(function (k) { return !!anotadas[k]; }).length;
+  var html = '<div class="guia-cabeca"><span class="guia-etapa">1 · OBSERVE</span><h3>' + esc(g.queixa) + '</h3>'
+    + '<p>Comece pelo que você percebeu, quando surgiu e o que mudou. Suas anotações ficam nesta tela até você enviar.</p>'
+    + '<span class="guia-progresso" id="progressoGuia">' + quantidade + ' de ' + g.pistas.length + ' observações anotadas</span></div>'
+    + '<div class="pistas">' + g.pistas.map(function (p, i) {
+      return '<article class="pista"><span class="pista-num">' + (i + 1) + '</span><div><b>' + esc(p.rotulo) + '</b>'
+        + '<p class="pista-pergunta">' + esc(p.pergunta) + '</p><p>' + esc(p.por_que) + '</p>'
+        + '<label class="anotar"><span>Minha observação (opcional)</span><input class="nota-pista" data-indice="' + i + '" maxlength="160" value="' + esc(anotadas[i] || '') + '" placeholder="Escreva em suas palavras"></label>'
+        + '<button type="button" class="btn-rascunho" data-indice="' + i + '">Levar esta resposta à conversa ↗</button></div></article>';
+    }).join('') + '</div>'
+    + '<div class="guia-alerta"><b>Quando procurar ajuda</b><p>' + esc(g.cuidado) + '</p></div>'
+    + '<button type="button" class="btn-resumo" id="btnResumo">Levar minhas observações à conversa ↗</button>'
+    + '<details class="guia-detalhes"><summary>2 · Possibilidades para discutir com um profissional</summary>'
+    + '<p>Condições diferentes podem causar o mesmo sintoma. Esta lista não calcula chance nem confirma uma causa.</p>'
+    + '<div class="possibilidades">' + g.possibilidades.map(function (p) {
+      return '<span class="possibilidade"><small>' + (p.tipo === 'atenção' ? 'Não deixar passar' : 'Também pode ser') + '</small>' + esc(p.nome) + '</span>';
+    }).join('') + '</div></details>';
+  if (g.medicamentos.length) {
+    html += '<details class="guia-detalhes"><summary>3 · Alívio e remédios: o que conferir</summary>';
+    if (alerta) html += '<p>Há sinal de alerta neste caso. Procure atendimento antes de pensar em remédios para aliviar os sintomas.</p>';
+    else {
+      html += '<p>Informação geral para adultos. Não é prescrição nem escolha individual de medicamento.'
+        + (fixa ? ' Confira as alergias, condições e medicamentos da Ficha fixa com um profissional.' : ' Informe alergias, doenças, gravidez e remédios em uso ao farmacêutico ou profissional.') + '</p>'
+        + g.medicamentos.map(function (m) {
+          var exemplos = m.exemplos || [];
+          var bloqueados = exemplos.filter(function (nome) { return alergias.some(function (a) { return a.indexOf(semAcento(nome)) >= 0; }); });
+          var disponiveis = exemplos.filter(function (nome) { return bloqueados.indexOf(nome) < 0; });
+          return '<div class="med-card">' + imagemMedHtml(m) + '<b>' + esc(m.titulo) + '</b><p>' + esc(m.texto) + '</p>'
+            + (bloqueados.length ? '<p class="alergia-aviso">Sua ficha registra alergia a ' + esc(bloqueados.join(', ')) + '. Evite essa opção e confirme o registro com um profissional.</p>' : '')
+            + (disponiveis.length ? '<p><b>Exemplo para conferir:</b> ' + esc(disponiveis.join(' ou ')) + '.</p>' : '')
+            + '<p class="cautela">' + esc(m.cautelas) + '</p><div class="fontes">' + fontesHtml(m.referencias) + '</div></div>';
+        }).join('');
+    }
+    html += '</details>';
+  }
+  html += '<div class="guia-fontes"><b>Fontes desta investigação</b><div class="fontes">' + fontesHtml(g.fontes) + '</div></div>';
+  var painelGuia = $('#guia');
+  var abertos = painelGuia.dataset.guiaId === g.id
+    ? Array.prototype.map.call(painelGuia.querySelectorAll('.guia-detalhes'), function (n) { return n.open; }) : [];
+  painelGuia.innerHTML = html;
+  painelGuia.dataset.guiaId = g.id;
+  Array.prototype.forEach.call(painelGuia.querySelectorAll('.guia-detalhes'), function (n, i) { n.open = !!abertos[i]; });
+  Array.prototype.forEach.call($('#guia').querySelectorAll('.nota-pista'), function (campo) {
+    campo.oninput = function () {
+      respostasGuia[g.id] = respostasGuia[g.id] || {};
+      respostasGuia[g.id][campo.dataset.indice] = campo.value.trim();
+      var n = Object.keys(respostasGuia[g.id]).filter(function (k) { return !!respostasGuia[g.id][k]; }).length;
+      $('#progressoGuia').textContent = n + ' de ' + g.pistas.length + ' observações anotadas';
+    };
+  });
+  Array.prototype.forEach.call($('#guia').querySelectorAll('.btn-rascunho'), function (b) {
+    b.onclick = function () {
+      var i = +b.dataset.indice, resposta = (respostasGuia[g.id] || {})[i];
+      prepararConversa('Quero investigar ' + g.queixa.toLowerCase() + '. ' + g.pistas[i].pergunta + ' Minha observação: ' + (resposta || ''));
+    };
+  });
+  $('#btnResumo').onclick = function () {
+    var partes = g.pistas.map(function (p, i) {
+      var r = (respostasGuia[g.id] || {})[i];
+      return r ? p.rotulo + ': ' + r : '';
+    }).filter(Boolean);
+    prepararConversa(partes.length ? 'Quero investigar ' + g.queixa.toLowerCase() + '. Observei: ' + partes.join('; ') + '.'
+      : 'Quero investigar ' + g.queixa.toLowerCase() + '. Pode me fazer a primeira pergunta?');
+  };
+  Array.prototype.forEach.call($('#guia').querySelectorAll('.btn-imagem-med'), function (b) {
+    b.onclick = function () {
+      var galeria = $('#galeriaRemedios');
+      galeria.open = true;
+      galeria.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var atual = imagemDoTema(b.dataset.tema);
+      var botao = atual && $('#galeriaGrade [data-imagem="' + atual.id + '"]');
+      if (botao) botao.focus({ preventScroll: true });
+    };
+  });
+}
+
+$('#buscaQueixa').addEventListener('input', function () { buscaGuia = this.value.trim(); renderExploracao(DADOS || { catalogo: [] }); });
 
 function renderSeletores(d) {
   $('#selPaciente').innerHTML = d.pacientes.map(function (p) {
@@ -278,7 +466,11 @@ $('#btnVoz').onclick = function () {
   this.setAttribute('aria-pressed', String(falar));
   if (!falar && window.speechSynthesis) speechSynthesis.cancel();
 };
-$('#selPaciente').onchange = function () { enviar('/paciente ' + this.value, true); };
+$('#selPaciente').onchange = function () {
+  respostasGuia = {};
+  $('#guia').innerHTML = '<p class="vazio-txt">Carregando o painel desta pessoa…</p>';
+  enviar('/paciente ' + this.value, true);
+};
 $('#selCaso').onchange = function () { if (this.value) enviar('/caso ' + this.value, true); };
 $('#btnFicha').onclick = function () {
   if (DADOS && DADOS.caso) window.open('/ficha?caso=' + encodeURIComponent(DADOS.caso.id), '_blank', 'noopener');
