@@ -154,6 +154,12 @@
   },
 
   "sintomas": [
+    {"id": "dor-pelvica", "termos": ["dor pelvica", "dor no baixo ventre", "dor na pelve", "dor embaixo da barriga"],
+     "regioes": ["suprapubica", "fossa-iliaca-direita", "fossa-iliaca-esquerda"],
+     "estruturas": ["utero", "ovario-direito", "ovario-esquerdo", "bexiga", "colon-sigmoide"],
+     "nota": "No baixo ventre, no meio, ficam a bexiga e, em mulheres, o útero; de cada lado ficam os ovários, e por trás o intestino grosso.",
+     "atencao": "Dor forte, desmaio, sangramento, febre ou atraso menstrual com dor: atendimento hoje."},
+
     {"id": "dor-de-cabeca", "termos": ["dor de cabeca", "cefaleia", "enxaqueca", "cabeca doendo", "dor na cabeca"],
      "regioes": ["cabeca", "pescoco"], "estruturas": ["temporal-musculo", "trapezio", "coluna-cervical", "seio-maxilar", "olho"],
      "nota": "A maior parte das dores de cabeça vem de estruturas ao redor do crânio (músculos da cabeça e do pescoço, seios da face), não do encéfalo.",

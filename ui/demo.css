@@ -31,7 +31,8 @@
 .demo-cartao b { display: block; margin-bottom: 6px; font-size: 14px; }
 .demo-cartao p, .demo-cartao li { line-height: 1.45; color: #34495e; }
 .demo-cartao ul { margin: 6px 0 0; padding-left: 18px; }
-.demo-cartao.alerta { border-left: 5px solid #d97706; background: #fff7e8; }
+.demo-cartao.demo-alerta { border-left: 5px solid #d97706; background: #fff7e8; }   /* não usar .alerta: é o banner vermelho da página */
+.demo-cartao.demo-alerta b { color: #8a4b08; }
 .demo-cartao.remedio small { display: block; margin-top: 8px; color: #6b7c8c; }
 .demo-cartao .pista { margin: 8px 0; padding: 8px 10px; border-radius: 10px; background: #f1f6fa; }
 .demo-cartao .pista span { display: block; font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #076a9a; }

@@ -119,7 +119,7 @@
     var c = limpar($('#demoCartao')); c.hidden = true; c.className = 'demo-cartao';
     function lista(itens) { var u = el('ul'); itens.forEach(function (x) { u.appendChild(el('li', null, x)); }); return u; }
     if (a.tipo === 'alerta') {
-      c.className += ' alerta'; c.appendChild(el('b', null, 'Quando procurar ajuda')); c.appendChild(el('p', null, a.texto));
+      c.className += ' demo-alerta'; c.appendChild(el('b', null, 'Quando procurar ajuda')); c.appendChild(el('p', null, a.texto));
       if ((a.nao_perder || []).length) c.appendChild(lista(a.nao_perder));
     } else if (a.tipo === 'remedio') {
       c.className += ' remedio'; c.appendChild(el('b', null, a.titulo)); c.appendChild(el('p', null, a.texto));
@@ -164,6 +164,13 @@
 
   async function tocarDe(i) {
     pararFala(); var rodada = ++st.rodada; st.tocando = true; botaoPlay();
+    // ao pular direto para uma estrutura, a região dela precisa estar aberta: refaz o passo de região anterior
+    if (st.r.passos[i].acao.tipo === 'estrutura') {
+      for (var k = i - 1; k >= 0; k--) {
+        if (st.r.passos[k].acao.tipo === 'regiao') { await agir(st.r.passos[k].acao, rodada); break; }
+      }
+    }
+    if (rodada !== st.rodada) return;
     for (st.i = i; st.i < st.r.passos.length; st.i++) {
       var p = st.r.passos[st.i]; mostrarPasso(p); agir(p.acao, rodada);
       await falar(compor(p), rodada);

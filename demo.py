@@ -77,7 +77,7 @@ def _montar_queixa(qid):
         padrao="Antes de tudo, os sinais que pedem ajuda agora. " + g["cuidado"]))
     vistas = set()
     for s in _sintomas(q):
-        regioes = s.get("regioes", [])[:2]
+        regioes = s.get("regioes", [])[:3]
         por_regiao = {}
         for e in _estruturas(s.get("estruturas", [])):
             por_regiao.setdefault((e["regioes"] or [regioes[0] if regioes else ""])[0], []).append(e)

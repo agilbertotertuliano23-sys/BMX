@@ -306,7 +306,7 @@
      "nao_perder": [{"nome": "Gravidez ectópica", "cid10": "O00"}, {"nome": "Torção ovariana", "cid10": "N83.5"}, {"nome": "Apendicite", "cid10": "K35"}],
      "sinais_de_alerta": ["possível gravidez com dor ou sangramento", "dor súbita e forte de um lado", "desmaio", "sangramento intenso"],
      "perguntas_chave": ["Pode estar grávida ou a menstruação atrasou?", "Há sangramento?", "A dor é de um lado e começou de repente?", "Há febre ou dor ao urinar?"],
-     "sintoma_anatomico": ["abdome-inferior-direito", "abdome-inferior-esquerdo"]},
+     "sintoma_anatomico": ["dor-pelvica", "abdome-inferior-direito", "abdome-inferior-esquerdo"]},
 
     {"id": "reacao-medicamento", "queixa": "Possível reação a medicamento", "ciap2": "",
      "termos": ["reacao a remedio", "reacao ao remedio", "alergia a remedio", "alergia ao remedio", "efeito colateral", "reacao a medicamento"],

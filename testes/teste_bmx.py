@@ -28,6 +28,9 @@ for _s in (sys.stdout, sys.stderr):
 
 
 def _cofre_real():
+    # o vault/ do projeto é o conhecimento que vai para a nuvem: testar ele, e não o cofre pessoal do Obsidian
+    if (RAIZ / "vault" / "40-Conhecimento").exists():
+        return RAIZ / "vault"
     env = RAIZ / ".env"
     for ln in (env.read_text(encoding="utf-8").splitlines() if env.exists() else []):
         if ln.startswith("BMX_VAULT="):
@@ -282,9 +285,9 @@ def demonstracoes():
     confere(len(cat) == 50 and tipos == {"queixa": 22, "regiao": 17, "remedio": 5, "camada": 6},
             "50 roteiros catalogados: 22 queixas, 17 regiões, 5 remédios, 6 camadas")
     rs = {c["id"]: demo.roteiro(c["id"]) for c in cat}
-    confere(all(r and 5 <= len(r["passos"]) <= 18 and r["passos"][0]["acao"]["tipo"] == "corpo"
+    confere(all(r and 5 <= len(r["passos"]) <= 20 and r["passos"][0]["acao"]["tipo"] == "corpo"
                 and r["passos"][-1]["acao"]["tipo"] == "fim" for r in rs.values()),
-            "todos têm de 5 a 18 passos, abrem no corpo e fecham no fim")
+            "todos têm de 5 a 20 passos, abrem no corpo e fecham no fim")
     confere(all(p["resumo"] and p["explicacao"] and not demo._PROIBIDO.search(p["fala"])
                 for r in rs.values() for p in r["passos"]), "resumo e explicação em todo passo, sem dose nem diagnóstico")
     confere(all(p["acao"].get("regiao3d", {}).get("arquivo") for r in rs.values() for p in r["passos"]
