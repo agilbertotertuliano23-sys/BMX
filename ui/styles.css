@@ -164,7 +164,7 @@ body.alerta-on .halo {
 /* ── grade ─────────────────────────────── */
 .grade {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: 256px 340px minmax(0, 1fr) 320px; gap: 16px;
+  display: grid; grid-template-columns: 340px 256px minmax(0, 1fr) 320px; gap: 16px;
   padding: 4px 22px 8px; min-height: 0;
 }
 .coluna { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
@@ -365,8 +365,8 @@ body.entrada-travada .barra { opacity: 0.82; }
 
 /* ── painel do caso incorporado: ocupa o centro e a coluna da direita; o Baymax recua e volta ── */
 /* posição explícita: um item fixo nas colunas 2–3 faria o grid empurrar os outros para uma 2ª linha */
-.grade > .coluna.esq { grid-column: 1; grid-row: 1; }
-.grade > .coluna.atend { grid-column: 2; grid-row: 1; }
+.grade > .coluna.atend { grid-column: 1; grid-row: 1; }   /* Atendimento à esquerda, Ações ao lado */
+.grade > .coluna.esq { grid-column: 2; grid-row: 1; }
 .grade > .palco { grid-column: 3; grid-row: 1; }
 .grade > .coluna.dir { grid-column: 4; grid-row: 1; }
 .visao-caso {
@@ -409,7 +409,7 @@ body.modo-caso .holo { opacity: 0; pointer-events: none; transition: opacity 0.3
 
 /* ── telas menores ─────────────────────── */
 @media (max-width: 1180px) {
-  .grade { grid-template-columns: 210px 300px minmax(0, 1fr) 270px; gap: 12px; padding: 4px 14px 8px; }
+  .grade { grid-template-columns: 300px 210px minmax(0, 1fr) 270px; gap: 12px; padding: 4px 14px 8px; }
   .pills .pill:nth-child(2) { display: none; }
 }
 @media (max-width: 960px) {
