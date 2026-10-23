@@ -13,13 +13,14 @@ import urllib.request
 
 import cerebro_comum as comum
 
-MODELO = os.environ.get("BMX_GEMINI_MODEL", "gemini-2.5-flash").strip()
+MODELO = os.environ.get("BMX_GEMINI_MODEL", "gemini-3.5-flash").strip()   # o 2.5 não é mais liberado a chaves novas
 BASE = os.environ.get("BMX_GEMINI_BASE", "https://generativelanguage.googleapis.com/v1beta").rstrip("/")
 MAX_TOKENS = int(os.environ.get("BMX_MAX_TOKENS", "1500"))
 
 
 def _chave():
-    return (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip()
+    # Chaves do Google não têm aspas nem colchetes: tira o que vem junto na colagem.
+    return (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip(" \t\r\n\"'[]")
 
 
 def disponivel():
