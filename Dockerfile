@@ -6,6 +6,8 @@ ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
 
 RUN useradd --create-home --uid 10001 bmx
 WORKDIR /app
+# /app precisa ser do usuário bmx: o servidor grava state.json, voz_cache e o prontuário aqui.
+RUN chown bmx:bmx /app
 COPY --chown=bmx:bmx . /app
 USER bmx
 
