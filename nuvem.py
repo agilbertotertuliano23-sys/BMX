@@ -154,11 +154,12 @@ def ip_cliente(cabecalhos, endereco):
 # ── Cabeçalhos de segurança ────────────────────────────────────────────────
 
 # A interface usa <script> inline pequeno (intro, importmap) e Google Fonts; o resto é do próprio domínio.
+# connect-src precisa de blob:/data:: o GLTFLoader do three busca as texturas dos .glb por fetch em blob:.
 CSP = ("default-src 'self'; "
        "script-src 'self' 'unsafe-inline'; "
        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
        "font-src https://fonts.gstatic.com; "
-       "img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src 'self'; "
+       "img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src 'self' blob: data:; "
        "worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'self'; "
        "frame-ancestors 'self'")
 
