@@ -1,0 +1,141 @@
+/* Intro do BMX — mesma mecânica do IntroEntrada do PROMETEUS:
+   `html.intro-on` (posto no <head> antes da 1ª pintura) esconde a interface e
+   mostra o overlay; intro.js põe `html.intro-go`, que dispara tudo abaixo em
+   CSS com atraso, e limpa no fim.
+
+   A cena: o overlay é o rosto do BMX (branco, sombreado como uma esfera).
+     1. olhos fechados — dois traços finos ligados pela linha;
+     2. "Olá." e a apresentação sobem de dentro de uma máscara (fala junto);
+     3. os olhos abrem devagar, e o BMX pisca uma vez;
+     4. o texto sai pra cima e os olhos crescem até sair da tela (a câmera
+        "entra" no rosto); o overlay some — o fundo da página também é branco,
+        então não há pulo;
+     5. a interface aparece: topo, colunas laterais e a conversa subindo como
+        uma janela; o Baymax 3D sobe por trás (bmx3d.js, evento bmx:revelar).
+
+   Tempos: só nos --i-* abaixo. Mudou a duração? Ajuste UI_MS/FIM_MS em intro.js. */
+html {
+  --i-ease: cubic-bezier(0.72, 0, 0.28, 1);
+  --i-ola: 0.35s;
+  --i-sub: 0.75s;
+  --i-abre: 1.5s;
+  --i-pisca: 2.6s;
+  --i-sai: 3.15s;
+  --i-fim: 3.7s;
+  --i-ui: 3.55s;
+}
+
+.intro { display: none; }
+
+html.intro-on { overflow: hidden; }
+html.intro-on .intro {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: fixed; inset: 0; z-index: 9999;
+  background:
+    radial-gradient(ellipse 75% 65% at 50% 42%, #ffffff 0%, #f6f9fb 62%, #e4ebf1 100%);
+  pointer-events: all;
+}
+
+/* ── olhos ─────────────────────────────── */
+.intro-olhos {
+  display: flex; align-items: center;
+  width: min(54vmin, 560px);
+  margin-top: -6vmin;
+}
+.intro-olho {
+  flex: none;
+  width: min(12vmin, 128px); aspect-ratio: 1 / 0.92;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #3a434d 0%, #0d1116 55%, #050709 100%);
+  transform: scaleY(0.07);
+  position: relative; z-index: 1;
+}
+.intro-linha {
+  flex: 1; height: max(1.1vmin, 9px);
+  margin: 0 -1.5vmin;
+  background: #0d1116; border-radius: 99px;
+}
+
+/* ── texto ─────────────────────────────── */
+.intro-texto {
+  display: flex; flex-direction: column; align-items: center; gap: 1.4vmin;
+  margin-top: 11vmin; text-align: center; padding: 0 20px;
+}
+.intro-mascara { overflow: hidden; padding-block: 0.08em; margin-block: -0.08em; }
+.intro-ola, .intro-sub { margin: 0; transform: translateY(115%); font-family: var(--fonte); }
+.intro-ola { font-size: clamp(30px, 6.4vmin, 76px); font-weight: 900; letter-spacing: -0.01em; color: var(--tinta); line-height: 1; }
+.intro-sub { font-size: clamp(15px, 2.5vmin, 26px); font-weight: 700; color: var(--tinta-2); }
+
+/* ── sequência (só com html.intro-go) ──── */
+html.intro-go .intro-ola {
+  animation:
+    intro-sobe 0.8s var(--i-ease) var(--i-ola) forwards,
+    intro-sai 0.55s var(--i-ease) var(--i-sai) forwards;
+}
+html.intro-go .intro-sub {
+  animation:
+    intro-sobe 0.8s var(--i-ease) var(--i-sub) forwards,
+    intro-sai 0.55s var(--i-ease) calc(var(--i-sai) + 0.06s) forwards;
+}
+html.intro-go .intro-olho {
+  animation:
+    intro-abre 0.75s cubic-bezier(0.3, 0.9, 0.35, 1.25) var(--i-abre) forwards,
+    intro-pisca 0.42s ease-in-out var(--i-pisca);
+}
+html.intro-go .intro-olhos {
+  animation:
+    intro-respira 2.6s ease-in-out 0s 1,
+    intro-mergulho 0.8s cubic-bezier(0.55, 0, 0.85, 0.35) var(--i-sai) forwards;
+}
+html.intro-go .intro {
+  animation: intro-some 0.5s ease var(--i-fim) forwards;
+}
+
+@keyframes intro-sobe { from { transform: translateY(115%); } to { transform: translateY(0); } }
+@keyframes intro-sai { from { transform: translateY(0); } to { transform: translateY(-115%); } }
+@keyframes intro-abre {
+  0% { transform: scaleY(0.07); }
+  100% { transform: scaleY(1); }
+}
+/* piscada lenta, do jeito do Baymax: desce, segura um instante, sobe */
+@keyframes intro-pisca {
+  0%, 100% { transform: scaleY(1); }
+  40%, 55% { transform: scaleY(0.07); }
+}
+@keyframes intro-respira { 50% { transform: translateY(-0.6vmin); } }
+@keyframes intro-mergulho {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(7); opacity: 0; }
+}
+@keyframes intro-some { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* ── a interface por baixo ─────────────── */
+html.intro-on .topo,
+html.intro-on .coluna,
+html.intro-on .estado,
+html.intro-on .rodape { opacity: 0; }
+html.intro-on .conversa,
+html.intro-on .barra { clip-path: inset(100% -40px -40px -40px); }
+
+html.intro-go .topo { animation: ui-desce 0.8s var(--i-ease) var(--i-ui) both; }
+html.intro-go .coluna.esq { animation: ui-da-esquerda 0.9s var(--i-ease) calc(var(--i-ui) + 0.1s) both; }
+html.intro-go .coluna.atend { animation: ui-da-esquerda 0.9s var(--i-ease) calc(var(--i-ui) + 0.2s) both; }
+html.intro-go .coluna.dir { animation: ui-da-direita 0.9s var(--i-ease) calc(var(--i-ui) + 0.1s) both; }
+html.intro-go .conversa { animation: ui-janela 1s var(--i-ease) calc(var(--i-ui) + 0.2s) both; }
+html.intro-go .barra { animation: ui-janela 1s var(--i-ease) calc(var(--i-ui) + 0.3s) both; }
+html.intro-go .estado { animation: ui-fade 0.8s var(--i-ease) calc(var(--i-ui) + 0.45s) both; }
+html.intro-go .rodape { animation: ui-fade 0.8s var(--i-ease) calc(var(--i-ui) + 0.5s) both; }
+
+@keyframes ui-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ui-desce { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@keyframes ui-da-esquerda { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: none; } }
+@keyframes ui-da-direita { from { opacity: 0; transform: translateX(36px); } to { opacity: 1; transform: none; } }
+/* como a Hero do PROMETEUS: uma janela que sobe de baixo enquanto assenta */
+@keyframes ui-janela {
+  from { clip-path: inset(100% -40px -40px -40px); transform: translateY(8%) scale(1.03); }
+  to { clip-path: inset(-40px); transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none !important; }
+}

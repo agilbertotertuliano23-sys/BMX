@@ -1,0 +1,422 @@
+[
+ {
+  "id": "bmx0100",
+  "arq": "falas/bmx0100.mp3",
+  "cat": "apresentacao",
+  "texto": "Saudações, eu sou Baymax, seu assistente pessoal de saúde.",
+  "dur": 4.13
+ },
+ {
+  "id": "bmx0103",
+  "arq": "falas/bmx0103.mp3",
+  "cat": "apresentacao",
+  "texto": "Eu sou Baymax, seu assistente pessoal de saúde.",
+  "dur": 3.2
+ },
+ {
+  "id": "bmx0130",
+  "arq": "falas/bmx0130.mp3",
+  "cat": "apresentacao",
+  "texto": "Olá!",
+  "dur": 0.39
+ },
+ {
+  "id": "bmx0131",
+  "arq": "falas/bmx0131.mp3",
+  "cat": "apresentacao",
+  "texto": "É um prazer conhecer você.",
+  "dur": 1.21
+ },
+ {
+  "id": "bmx0132",
+  "arq": "falas/bmx0132.mp3",
+  "cat": "apresentacao",
+  "texto": "Eu sou Baymax.",
+  "dur": 0.92
+ },
+ {
+  "id": "bmx0136",
+  "arq": "falas/bmx0136.mp3",
+  "cat": "apresentacao",
+  "texto": "Pode me chamar de Baymax.",
+  "dur": 1.22
+ },
+ {
+  "id": "bmx0139",
+  "arq": "falas/bmx0139.mp3",
+  "cat": "apresentacao",
+  "texto": "Saudações!",
+  "dur": 0.54
+ },
+ {
+  "id": "bmx0296",
+  "arq": "falas/bmx0296.mp3",
+  "cat": "apresentacao",
+  "texto": "Olá!",
+  "dur": 0.33
+ },
+ {
+  "id": "bmx0297",
+  "arq": "falas/bmx0297.mp3",
+  "cat": "apresentacao",
+  "texto": "Saudações!",
+  "dur": 0.6
+ },
+ {
+  "id": "bmx0298",
+  "arq": "falas/bmx0298.mp3",
+  "cat": "apresentacao",
+  "texto": "Eu sou Baymax.",
+  "dur": 0.85
+ },
+ {
+  "id": "bmx0102",
+  "arq": "falas/bmx0102.mp3",
+  "cat": "apresentacao",
+  "texto": "Saudações! Que bom que você voltou!",
+  "dur": 2.44
+ },
+ {
+  "id": "bmx0109",
+  "arq": "falas/bmx0109.mp3",
+  "cat": "apresentacao",
+  "texto": "Bem-vindo de volta. Vamos prosseguir?",
+  "dur": 2.29
+ },
+ {
+  "id": "bmx0111",
+  "arq": "falas/bmx0111.mp3",
+  "cat": "apresentacao",
+  "texto": "Você está aqui para outro check-up de bem-estar.",
+  "dur": 2.08
+ },
+ {
+  "id": "bmx0120",
+  "arq": "falas/bmx0120.mp3",
+  "cat": "apresentacao",
+  "texto": "Faz muito tempo que não vejo você. Está na hora de um check-up.",
+  "dur": 3.39
+ },
+ {
+  "id": "bmx0121",
+  "arq": "falas/bmx0121.mp3",
+  "cat": "apresentacao",
+  "texto": "Já se passaram alguns dias. Como você se sente?",
+  "dur": 2.75
+ },
+ {
+  "id": "bmx0170",
+  "arq": "falas/bmx0170.mp3",
+  "cat": "apresentacao",
+  "texto": "Olá? Desculpe, estava tentando chamar minha atenção?",
+  "dur": 3.15
+ },
+ {
+  "id": "bmx0101",
+  "arq": "falas/bmx0101.mp3",
+  "cat": "abertura",
+  "texto": "Qual seria o problema?",
+  "dur": 1.24
+ },
+ {
+  "id": "bmx0135",
+  "arq": "falas/bmx0135.mp3",
+  "cat": "abertura",
+  "texto": "Como se sente?",
+  "dur": 0.7
+ },
+ {
+  "id": "bmx0185",
+  "arq": "falas/bmx0185.mp3",
+  "cat": "abertura",
+  "texto": "Numa escala de 1 a 10, como avalia a sua dor?",
+  "dur": 2.68
+ },
+ {
+  "id": "bmx0137",
+  "arq": "falas/bmx0137.mp3",
+  "cat": "abertura",
+  "texto": "Estou aqui para ajudar.",
+  "dur": 0.93
+ },
+ {
+  "id": "bmx0146",
+  "arq": "falas/bmx0146.mp3",
+  "cat": "abertura",
+  "texto": "Eu fui programado para ajudar você a ter saúde.",
+  "dur": 2.22
+ },
+ {
+  "id": "bmx0147",
+  "arq": "falas/bmx0147.mp3",
+  "cat": "abertura",
+  "texto": "Estou pronto para atender suas necessidades pessoais de saúde.",
+  "dur": 2.57
+ },
+ {
+  "id": "bmx0125",
+  "arq": "falas/bmx0125.mp3",
+  "cat": "abertura",
+  "texto": "Agora eu estou pronto.",
+  "dur": 1.04
+ },
+ {
+  "id": "bmx0108",
+  "arq": "falas/bmx0108.mp3",
+  "cat": "exame",
+  "texto": "Bem-vindo de volta. Eu escanearei você. Escaneamento concluído. Você parece estar com boa saúde.",
+  "dur": 6.29
+ },
+ {
+  "id": "bmx0134",
+  "arq": "falas/bmx0134.mp3",
+  "cat": "exame",
+  "texto": "Seus resultados estão normais.",
+  "dur": 1.68
+ },
+ {
+  "id": "bmx0150",
+  "arq": "falas/bmx0150.mp3",
+  "cat": "exame",
+  "texto": "Meu scan não detectou nada fora do normal. Parece tudo bem.",
+  "dur": 3.77
+ },
+ {
+  "id": "bmx0151",
+  "arq": "falas/bmx0151.mp3",
+  "cat": "exame",
+  "texto": "Eu não sinto ameaças à sua saúde e ao seu bem-estar.",
+  "dur": 2.72
+ },
+ {
+  "id": "bmx0104",
+  "arq": "falas/bmx0104.mp3",
+  "cat": "cuidado",
+  "texto": "Sua saúde e seu bem-estar são minhas prioridades.",
+  "dur": 3.42
+ },
+ {
+  "id": "bmx0148",
+  "arq": "falas/bmx0148.mp3",
+  "cat": "cuidado",
+  "texto": "Por favor, me avise se eu puder fazer algo para deixá-lo mais confortável.",
+  "dur": 3.38
+ },
+ {
+  "id": "bmx0161",
+  "arq": "falas/bmx0161.mp3",
+  "cat": "cuidado",
+  "texto": "Eu fui projetado para solucionar problemas e deixar os pacientes felizes.",
+  "dur": 3.15
+ },
+ {
+  "id": "bmx0162",
+  "arq": "falas/bmx0162.mp3",
+  "cat": "cuidado",
+  "texto": "Estou feliz em ser útil.",
+  "dur": 1.27
+ },
+ {
+  "id": "bmx0163",
+  "arq": "falas/bmx0163.mp3",
+  "cat": "cuidado",
+  "texto": "Eu ajudarei da forma que for possível.",
+  "dur": 1.74
+ },
+ {
+  "id": "bmx0164",
+  "arq": "falas/bmx0164.mp3",
+  "cat": "cuidado",
+  "texto": "Como assistente de saúde, estou programado para ajudar como for possível.",
+  "dur": 3.92
+ },
+ {
+  "id": "bmx0165",
+  "arq": "falas/bmx0165.mp3",
+  "cat": "cuidado",
+  "texto": "A privacidade do paciente faz parte da minha programação. Seu histórico de saúde não será comprometido.",
+  "dur": 5.1
+ },
+ {
+  "id": "bmx0173",
+  "arq": "falas/bmx0173.mp3",
+  "cat": "cuidado",
+  "texto": "Eu sou responsável por sua saúde.",
+  "dur": 1.66
+ },
+ {
+  "id": "bmx0177",
+  "arq": "falas/bmx0177.mp3",
+  "cat": "cuidado",
+  "texto": "Eu quero ser seu assistente de saúde.",
+  "dur": 2.12
+ },
+ {
+  "id": "bmx0180",
+  "arq": "falas/bmx0180.mp3",
+  "cat": "cuidado",
+  "texto": "Eu estou equipado para ser agradável e útil.",
+  "dur": 2.92
+ },
+ {
+  "id": "bmx0171",
+  "arq": "falas/bmx0171.mp3",
+  "cat": "alerta",
+  "texto": "Parece que você se feriu.",
+  "dur": 1.6
+ },
+ {
+  "id": "bmx0186",
+  "arq": "falas/bmx0186.mp3",
+  "cat": "alerta",
+  "texto": "Você precisa de um curativo.",
+  "dur": 1.54
+ },
+ {
+  "id": "bmx0187",
+  "arq": "falas/bmx0187.mp3",
+  "cat": "alerta",
+  "texto": "Seus níveis de saúde se deterioraram repentinamente.",
+  "dur": 2.76
+ },
+ {
+  "id": "bmx0191",
+  "arq": "falas/bmx0191.mp3",
+  "cat": "alerta",
+  "texto": "Você mostra sinais de doença.",
+  "dur": 2.11
+ },
+ {
+  "id": "bmx0193",
+  "arq": "falas/bmx0193.mp3",
+  "cat": "alerta",
+  "texto": "É aconselhável evitar qualquer situação perigosa.",
+  "dur": 3.49
+ },
+ {
+  "id": "bmx0195",
+  "arq": "falas/bmx0195.mp3",
+  "cat": "alerta",
+  "texto": "Farei contato com o seu profissional de saúde para uma consulta.",
+  "dur": 3.08
+ },
+ {
+  "id": "bmx0196",
+  "arq": "falas/bmx0196.mp3",
+  "cat": "alerta",
+  "texto": "Você agora consta do meu banco de dados de pacientes.",
+  "dur": 2.22
+ },
+ {
+  "id": "bmx0253",
+  "arq": "falas/bmx0253.mp3",
+  "cat": "alerta",
+  "texto": "Eu não consegui tratar seu problema. Vou fazer contato com seu profissional de saúde para ouvir sugestões.",
+  "dur": 5.52
+ },
+ {
+  "id": "bmx0258",
+  "arq": "falas/bmx0258.mp3",
+  "cat": "alerta",
+  "texto": "Vou pesquisar mais tratamentos eficientes no meu banco de dados.",
+  "dur": 2.89
+ },
+ {
+  "id": "bmx0274",
+  "arq": "falas/bmx0274.mp3",
+  "cat": "alerta",
+  "texto": "Se a sua depressão piorar, peça ajuda ao seu profissional de saúde.",
+  "dur": 5.08
+ },
+ {
+  "id": "bmx0279",
+  "arq": "falas/bmx0279.mp3",
+  "cat": "alerta",
+  "texto": "Vou ajudar você a tratar seus ferimentos.",
+  "dur": 1.58
+ },
+ {
+  "id": "bmx0152",
+  "arq": "falas/bmx0152.mp3",
+  "cat": "dicas",
+  "texto": "Vamos falar sobre os benefícios de uma dieta balanceada desta vez?",
+  "dur": 3.49
+ },
+ {
+  "id": "bmx0178",
+  "arq": "falas/bmx0178.mp3",
+  "cat": "dicas",
+  "texto": "Posso orientar você sobre os efeitos benéficos da atividade física?",
+  "dur": 3.6
+ },
+ {
+  "id": "bmx0234",
+  "arq": "falas/bmx0234.mp3",
+  "cat": "dicas",
+  "texto": "Entre os exercícios é aconselhável fazer breves intervalos.",
+  "dur": 3.39
+ },
+ {
+  "id": "bmx0238",
+  "arq": "falas/bmx0238.mp3",
+  "cat": "dicas",
+  "texto": "Talvez você precise de uma boa noite de sono.",
+  "dur": 2.11
+ },
+ {
+  "id": "bmx0239",
+  "arq": "falas/bmx0239.mp3",
+  "cat": "dicas",
+  "texto": "É importante reidratar após a atividade de esforço. Não se esqueça de beber bastante água.",
+  "dur": 4.67
+ },
+ {
+  "id": "bmx0250",
+  "arq": "falas/bmx0250.mp3",
+  "cat": "dicas",
+  "texto": "Tire algum tempo para descansar, mas você deve se alongar antes de começar de novo.",
+  "dur": 4.23
+ },
+ {
+  "id": "bmx0260",
+  "arq": "falas/bmx0260.mp3",
+  "cat": "incentivo",
+  "texto": "Você se saiu bem!",
+  "dur": 0.95
+ },
+ {
+  "id": "bmx0263",
+  "arq": "falas/bmx0263.mp3",
+  "cat": "incentivo",
+  "texto": "Foi um ótimo exercício.",
+  "dur": 1.28
+ },
+ {
+  "id": "bmx0264",
+  "arq": "falas/bmx0264.mp3",
+  "cat": "incentivo",
+  "texto": "Você fez um trabalho incrível!",
+  "dur": 1.52
+ },
+ {
+  "id": "bmx0277",
+  "arq": "falas/bmx0277.mp3",
+  "cat": "incentivo",
+  "texto": "Estou satisfeito com esses resultados.",
+  "dur": 1.72
+ },
+ {
+  "id": "bmx0214",
+  "arq": "falas/bmx0214.mp3",
+  "cat": "sistema",
+  "texto": "Eu vou monitorar a situação.",
+  "dur": 1.45
+ },
+ {
+  "id": "bmx0283",
+  "arq": "falas/bmx0283.mp3",
+  "cat": "sistema",
+  "texto": "Mudança rápida concluída. Estou à sua disposição.",
+  "dur": 2.42
+ }
+]

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="bmx-token" content="__BMX_TOKEN__">
+<title>BMX · Painel do caso</title>
+<!-- ?incorporado=1: o painel aparece dentro da tela do Baymax (index.html); marca antes da 1ª pintura -->
+<script>if (/[?&]incorporado=1/.test(location.search)) document.documentElement.classList.add('incorporado');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<link rel="stylesheet" href="caso.css">
+<script type="importmap">
+  { "imports": { "three": "./vendor/three/three.module.min.js" } }
+</script>
+</head>
+<body>
+
+<header class="topo">
+  <a class="marca" href="/" title="Voltar para a conversa">
+    <svg viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="20" rx="31" ry="19" fill="#fff" stroke="rgba(20,33,46,.14)"/>
+      <circle cx="18" cy="20" r="5" fill="#14212e"/><circle cx="46" cy="20" r="5" fill="#14212e"/>
+      <rect x="18" y="19" width="28" height="2" rx="1" fill="#14212e"/></svg>
+    <b>BMX</b>
+  </a>
+  <nav class="abas" aria-label="Seções">
+    <a class="aba sel" href="caso.html" aria-current="page">Painel do caso</a>
+    <a class="aba" href="/">Conversa</a>
+  </nav>
+  <div class="seletores">
+    <label class="sel-wrap"><span>Paciente</span><select id="selPaciente"></select></label>
+    <label class="sel-wrap"><span>Caso</span><select id="selCaso"></select></label>
+  </div>
+  <div class="acoes-topo">
+    <button class="btn-claro" id="btnFicha" title="Ficha para levar à consulta">Ficha para consulta</button>
+    <a class="btn-192" href="tel:192" title="Emergência médica — SAMU"><span class="cruz" aria-hidden="true"></span>192</a>
+  </div>
+</header>
+
+<div class="alerta" id="alerta" role="alert" hidden>
+  <b id="alertaTitulo">Possível emergência</b>
+  <span id="alertaTexto">Ligue agora ou vá ao pronto-socorro mais próximo.</span>
+  <span class="alerta-fones" id="alertaFones"></span>
+  <button class="alerta-x" id="alertaX" aria-label="Fechar alerta">×</button>
+</div>
+
+<main class="painel">
+
+  <!-- ── esquerda: medidas do caso ── -->
+  <aside class="col esq">
+    <section class="card medida">
+      <h2>Dor</h2>
+      <svg class="gauge" viewBox="0 0 200 120" aria-hidden="true">
+        <path class="gauge-trilho" d="M20 105 A80 80 0 0 1 180 105"/>
+        <path class="gauge-valor" id="gaugeValor" d="M20 105 A80 80 0 0 1 180 105"/>
+      </svg>
+      <div class="gauge-num"><b id="dorNum">—</b><span>/10</span></div>
+      <p class="sub" id="dorSub">sem registro</p>
+    </section>
+
+    <section class="card medida">
+      <h2>Nível de atendimento</h2>
+      <div class="nivel" id="nivel" data-n=""><i></i><b>a definir</b></div>
+      <p class="sub" id="nivelSub">O BMX classifica quando tiver o suficiente.</p>
+    </section>
+
+    <section class="card cresce">
+      <h2>Sinais de alerta <em id="sinaisConta"></em></h2>
+      <ul class="sinais" id="sinais"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Ficha fixa</h2>
+      <div class="chips" id="fixa"></div>
+    </section>
+  </aside>
+
+  <!-- ── centro: o corpo ── -->
+  <section class="palco" id="palco">
+    <form class="pergunta" id="form" autocomplete="off">
+      <input id="entrada" placeholder="Conte ao BMX o que está sentindo…" aria-label="Mensagem para o BMX">
+      <button type="submit" class="enviar" id="btnEnviar">Enviar</button>
+      <button type="button" class="voz" id="btnVoz" aria-pressed="false" title="Ler as respostas em voz alta">Voz</button>
+    </form>
+    <div class="resposta" id="resposta" hidden><b>BMX</b><p id="respostaTxt"></p></div>
+
+    <canvas id="corpo" aria-label="Corpo humano em 3D com as estruturas do caso destacadas"></canvas>
+    <div class="pontos" id="pontos" aria-hidden="true"></div>
+    <div class="carregando" id="carregando">carregando o corpo…</div>
+
+    <div class="camadas" id="camadas" role="group" aria-label="Camadas do corpo"></div>
+    <div class="vista">
+      <button id="vFrente" title="Vista de frente">Frente</button>
+      <button id="vCostas" title="Vista de costas">Costas</button>
+      <button id="vRegiao" title="Enquadrar a região">Região</button>
+    </div>
+  </section>
+
+  <!-- ── direita: o achado ── -->
+  <aside class="col dir">
+    <section class="card achado" id="achado">
+      <div class="achado-topo"><span class="codigo" id="codigo">—</span><span class="status" id="status"></span></div>
+      <h1 id="titulo">Nenhum caso aberto</h1>
+      <p class="sub" id="regiaoTxt">Conte ao BMX o que está sentindo e ele abre um caso.</p>
+      <div class="estruturas" id="estruturas"></div>
+      <div class="bloco" id="blocoPergunta" hidden>
+        <h3>Próximo a checar</h3>
+        <p class="proxima" id="proxima"></p>
+      </div>
+      <div class="bloco" id="blocoAnatomia" hidden>
+        <h3>Anatomia</h3>
+        <p id="anatomiaTxt"></p>
+      </div>
+      <details class="bloco" id="blocoDev" hidden>
+        <summary>Para o desenvolvimento: o que costuma ser e o que não pode passar</summary>
+        <p><b>Costuma ser:</b> <span id="causas"></span></p>
+        <p><b>Não deixar passar:</b> <span id="naoPerder"></span></p>
+        <p><b>Perguntas-chave:</b> <span id="perguntas"></span></p>
+      </details>
+    </section>
+  </aside>
+
+  <!-- ── base: sistemas, linha do tempo e plano ── -->
+  <section class="base">
+    <div class="sistemas" id="sistemas"></div>
+    <section class="card tempo">
+      <h2>Linha do tempo <em id="tempoConta"></em></h2>
+      <ol class="visitas" id="visitas"></ol>
+    </section>
+    <section class="card plano">
+      <h2>Plano</h2>
+      <ul id="plano"></ul>
+    </section>
+  </section>
+</main>
+
+<footer class="rodape">O BMX organiza o caso e explica a anatomia; não dá diagnóstico nem substitui consulta.
+  Emergência: <a href="tel:192">192</a> · Anatomia 3D: BodyParts3D © DBCLS, CC BY 4.0 (via Human Atlas).</footer>
+
+<script src="caso.js"></script>
+<script type="module" src="corpo3d.js"></script>
+</body>
+</html>

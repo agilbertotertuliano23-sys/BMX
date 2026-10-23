@@ -1,0 +1,23 @@
+# Render (plano free). Os valores sync:false são digitados no painel, nunca ficam no repositório.
+services:
+  - type: web
+    name: bmx
+    runtime: docker
+    plan: free
+    autoDeploy: false
+    healthCheckPath: /healthz
+    envVars:
+      - key: BMX_CLOUD
+        value: "1"
+      - key: BMX_BRAIN
+        value: gemini
+      - key: BMX_PASSWORD
+        sync: false
+      - key: BMX_ALLOWED_HOSTS
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FISH_AUDIO_API_KEY
+        sync: false
+      - key: FISH_AUDIO_VOICE_ID
+        sync: false

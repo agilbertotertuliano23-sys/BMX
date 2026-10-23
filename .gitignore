@@ -1,0 +1,10 @@
+# Segredos e dados reais nunca vão para o repositório
+.env
+.env.*
+state.json
+voz_cache/
+__pycache__/
+*.pyc
+*.mp3
+trechos_voz_baymax/
+trechos_baymax.md
