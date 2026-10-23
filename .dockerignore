@@ -6,6 +6,7 @@ voz_cache/
 __pycache__/
 *.pyc
 *.mp3
+!ui/voz/falas/*.mp3
 trechos_voz_baymax/
 trechos_baymax.md
 testes/

@@ -6,5 +6,7 @@ voz_cache/
 __pycache__/
 *.pyc
 *.mp3
+# ...exceto as falas gravadas que a interface toca (ui/voz/falas.json aponta para elas)
+!ui/voz/falas/*.mp3
 trechos_voz_baymax/
 trechos_baymax.md
