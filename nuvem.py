@@ -14,6 +14,7 @@ import base64
 import hashlib
 import hmac
 import os
+import re
 import secrets
 import threading
 import time
@@ -73,9 +74,10 @@ def _assina(carga):
     return hmac.new(_SEGREDO, carga.encode(), hashlib.sha256).hexdigest()
 
 
-def novo_cookie():
+def novo_cookie(pid=""):
+    """Sessão de 12 h. `pid` é a ficha em uso (vazio = só passou da senha, falta dizer quem é)."""
     validade = str(int(time.time()) + SESSAO_SEG)
-    carga = base64.urlsafe_b64encode(validade.encode()).decode()
+    carga = base64.urlsafe_b64encode(f"{validade}|{pid}".encode()).decode()
     return f"{COOKIE}={carga}.{_assina(carga)}; Max-Age={SESSAO_SEG}; Path=/; HttpOnly; Secure; SameSite=Strict"
 
 
@@ -83,9 +85,10 @@ def cookie_apagar():
     return f"{COOKIE}=; Max-Age=0; Path=/; HttpOnly; Secure; SameSite=Strict"
 
 
-def logado(cabecalho_cookie):
+def sessao(cabecalho_cookie):
+    """(logado, pid) lidos do cookie de sessão; o pid só vale se a assinatura confere."""
     if not CLOUD:
-        return True
+        return True, ""
     for par in (cabecalho_cookie or "").split(";"):
         nome, _, valor = par.strip().partition("=")
         if nome != COOKIE or "." not in valor:
@@ -94,10 +97,64 @@ def logado(cabecalho_cookie):
         if not hmac.compare_digest(assinatura, _assina(carga)):
             continue
         try:
-            return int(base64.urlsafe_b64decode(carga.encode()).decode()) > time.time()
+            validade, _, pid = base64.urlsafe_b64decode(carga.encode()).decode().partition("|")
+            if int(validade) > time.time():
+                return True, pid
         except (ValueError, UnicodeDecodeError):
             continue
-    return False
+    return False, ""
+
+
+def logado(cabecalho_cookie):
+    return sessao(cabecalho_cookie)[0]
+
+
+# ── Aparelho (cookie de 1 ano) ─────────────────────────────────────────────
+
+APARELHO = "bmx_aparelho"
+
+
+def ler_cookie(cabecalho_cookie, nome):
+    for par in (cabecalho_cookie or "").split(";"):
+        n, _, v = par.strip().partition("=")
+        if n == nome:
+            return v
+    return ""
+
+
+def cookie_aparelho(valor):
+    return f"{APARELHO}={valor}; Max-Age=31536000; Path=/; HttpOnly; Secure; SameSite=Strict"
+
+
+_UA_ANDROID = re.compile(r"Android [\d.]+; ([^;)]+?)(?: Build|\)|;)")
+
+
+def modelo_aparelho(cabecalhos):
+    """Rótulo do aparelho (só informativo). Chrome em Android manda o modelo em Sec-CH-UA-Model."""
+    dica = (cabecalhos.get("Sec-CH-UA-Model") or "").strip('" ')
+    if dica:
+        return dica[:60]
+    ua = cabecalhos.get("User-Agent") or ""
+    m = _UA_ANDROID.search(ua)
+    if m and m.group(1).strip() not in ("K", ""):
+        return m.group(1).strip()[:60]
+    for marca in ("iPhone", "iPad", "Android"):
+        if marca in ua:
+            return marca
+    return "computador"
+
+
+# ── Limite de tentativas genérico (PIN) ────────────────────────────────────
+
+def bloqueado(chave, n=5, seg=15 * 60):
+    with _lock:
+        return len(_janela(_falhas.setdefault(chave, []), time.time(), seg)) >= n
+
+
+def falha(chave):
+    with _lock:
+        _falhas.setdefault(chave, []).append(time.time())
+    time.sleep(1)
 
 
 # ── Login e limites ────────────────────────────────────────────────────────
@@ -171,6 +228,7 @@ _CABECALHOS = (
     ("Permissions-Policy", "microphone=(self), camera=(), geolocation=(), payment=()"),
     ("Cross-Origin-Opener-Policy", "same-origin"),
     ("X-Robots-Tag", "noindex, nofollow"),
+    ("Accept-CH", "Sec-CH-UA-Model, Sec-CH-UA-Platform"),
     ("Strict-Transport-Security", "max-age=31536000; includeSubDomains"),
 )
 

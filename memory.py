@@ -67,10 +67,31 @@ DEFAULT_COLOUR = "#8a9bb0"
 # anatomia pelo anatomia.py (estruturas da pergunta), não por busca de texto.
 ANATOMY_TYPES = {"anatomia", "regiao", "sistema", "biblioteca"}
 
-_CACHE = {"at": 0.0, "data": None, "sig": None}
 _LOCK = threading.Lock()
 CACHE_TTL = 2.0
 _PACIENTE = {"id": os.environ.get("BMX_PACIENTE", "P0001").strip() or "P0001"}
+_TL = threading.local()   # paciente da requisição em curso (nuvem: cada pessoa tem o seu)
+
+
+class _CachePorPaciente:
+    """O grafo é de um paciente: com vários usuários ao mesmo tempo, cada um tem o seu cache."""
+    def __init__(self):
+        self._d = {}
+
+    def _c(self):
+        return self._d.setdefault(paciente(), {"at": 0.0, "data": None, "sig": None})
+
+    def __getitem__(self, k):
+        return self._c()[k]
+
+    def __setitem__(self, k, v):
+        self._c()[k] = v
+
+    def update(self, **kw):
+        self._c().update(kw)
+
+
+_CACHE = _CachePorPaciente()
 
 
 def legado():
@@ -79,7 +100,12 @@ def legado():
 
 
 def paciente():
-    return _PACIENTE["id"]
+    return getattr(_TL, "id", None) or _PACIENTE["id"]
+
+
+def usar_paciente(pid):
+    """Fixa o paciente só nesta requisição (thread). None volta ao paciente global."""
+    _TL.id = pid or None
 
 
 def set_paciente(pid):

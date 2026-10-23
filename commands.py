@@ -50,7 +50,7 @@ def load():
 
 def _p(d):
     """Meta e escala de dor do paciente ativo: nada disso vaza para outro paciente."""
-    return d["pacientes"].setdefault(d["paciente"], {"meta": "", "dor": []})
+    return d["pacientes"].setdefault(memory.paciente(), {"meta": "", "dor": []})
 
 
 def update_state(mutator):
@@ -284,6 +284,9 @@ def handle(message, runner=None):
             f"{len(g['links'])} ligações. Centro: {hub}."))
 
     if cmd == "paciente":
+        if os.environ.get("BMX_CLOUD") == "1":   # na nuvem a ficha vem do login; listar ou trocar vazaria os outros
+            return dict(message=None, note="paciente",
+                        reply="Aqui cada pessoa tem a sua ficha, ligada ao seu acesso. Para entrar em outra, use \"Trocar de pessoa\".")
         if not arg:
             linhas = [f"{'▸' if pid == memory.paciente() else '·'} {pid}" + (f" — {n}" if n else "")
                       for pid, n in memory.listar_pacientes()]

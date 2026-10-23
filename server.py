@@ -8,6 +8,7 @@ The brain is your own `claude` CLI, so this inherits your subscription, your
 tools, your MCP servers and your CLAUDE.md. The memory is a folder of markdown
 you can open in Obsidian. Nothing is hosted; it binds to localhost only.
 """
+import html
 import json
 import re
 import mimetypes
@@ -46,9 +47,11 @@ import commands    # noqa: E402
 import memory      # noqa: E402
 import nuvem       # noqa: E402
 import painel      # noqa: E402
+import persistencia  # noqa: E402
 import registro    # noqa: E402
 import runtime     # noqa: E402
 import safety      # noqa: E402
+import usuarios    # noqa: E402
 import voice       # noqa: E402
 
 # O registro do Windows às vezes diz que .js é text/plain, e o navegador recusa
@@ -63,7 +66,29 @@ API_TOKEN = secrets.token_urlsafe(32)
 RUN_LOCK = threading.Lock()
 MAX_JSON = 1024 * 1024
 MAX_AUDIO = 12 * 1024 * 1024
-SESSION = {"id": None, "ultima": ""}   # ultima: última fala do BMX, para ler "sim"/"não" curtos
+class _SessaoPorPaciente:
+    """id: conversa em andamento; ultima: última fala do BMX, para ler "sim"/"não" curtos.
+    Cada paciente tem a sua: na nuvem, duas pessoas nunca dividem a mesma conversa."""
+    def __init__(self):
+        self._d = {}
+
+    def _s(self):
+        return self._d.setdefault(memory.paciente(), {"id": None, "ultima": ""})
+
+    def __getitem__(self, k):
+        return self._s()[k]
+
+    def __setitem__(self, k, v):
+        self._s()[k] = v
+
+    def get(self, k, padrao=None):
+        return self._s().get(k, padrao)
+
+    def update(self, **kw):
+        self._s().update(kw)
+
+
+SESSION = _SessaoPorPaciente()
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -76,8 +101,8 @@ class Handler(BaseHTTPRequestHandler):
     def _seg(self, cookie=None):
         for k, v in nuvem.cabecalhos_seguranca():
             self.send_header(k, v)
-        if cookie:
-            self.send_header("Set-Cookie", cookie)
+        for c in ([cookie] if isinstance(cookie, str) else (cookie or ())):
+            self.send_header("Set-Cookie", c)
 
     def _json(self, body, code=200, cookie=None):
         data = json.dumps(body).encode()
@@ -125,7 +150,92 @@ class Handler(BaseHTTPRequestHandler):
             registro.acesso("login_falhou")
             return self._json({"error": "senha incorreta"}, 401)
         registro.acesso("login")
-        return self._json({"ok": True}, cookie=nuvem.novo_cookie())
+        # Aparelho já conhecido: entra direto na última ficha dele, sem perguntar o nome.
+        aparelho, cookies = self._aparelho()
+        return self._json({"ok": True}, cookie=[nuvem.novo_cookie(usuarios.ultimo(aparelho) or "")] + cookies)
+
+    def _aparelho(self):
+        """(id do aparelho, [Set-Cookie a enviar]). O id é aleatório: o modelo do celular só vira rótulo."""
+        atual = nuvem.ler_cookie(self.headers.get("Cookie", ""), nuvem.APARELHO)
+        if re.fullmatch(r"[A-Za-z0-9_-]{20,64}", atual):
+            return atual, []
+        novo = usuarios.novo_aparelho()
+        return novo, [nuvem.cookie_aparelho(novo)]
+
+    def _trocar_html(self):
+        """Link 'Olá, nome · trocar' (só na nuvem). O nome é digitado por pessoas: sempre escapado."""
+        if not nuvem.CLOUD:
+            return b""
+        nome = html.escape(usuarios.nome_de(memory.paciente()).split(" ")[0] or "você")
+        return (f'<a class="btn-caso" href="/trocar" title="Sair desta ficha e entrar em outra">'
+                f'Olá, {nome} · trocar</a>').encode("utf-8")
+
+    def _vincular(self):
+        """Fixa nesta thread a ficha da sessão. Devolve o pid ('' = ainda não disse quem é)."""
+        if not nuvem.CLOUD:
+            return "local"
+        pid = nuvem.sessao(self.headers.get("Cookie", ""))[1]
+        pid = pid if pid and usuarios.existe(pid) else ""
+        memory.usar_paciente(pid)
+        return pid
+
+    def _entrou(self, pid, aparelho, cookies):
+        usuarios.vincular(aparelho, pid, nuvem.modelo_aparelho(self.headers))
+        memory.usar_paciente(pid)
+        registro.acesso("entrou", aparelho=nuvem.modelo_aparelho(self.headers))
+        persistencia.agendar(pid)
+        return self._json({"estado": "entrou"}, cookie=[nuvem.novo_cookie(pid)] + cookies)
+
+    def _identidade(self, raw):
+        """POST /api/identidade: nome -> ficha existente (PIN em aparelho novo), parecido ou novo."""
+        try:
+            d = json.loads(raw or b"{}")
+            nome, pin = " ".join(str(d.get("nome") or "").split())[:80], str(d.get("pin") or "")[:12]
+            novo = bool(d.get("novo"))
+        except (json.JSONDecodeError, UnicodeDecodeError, AttributeError):
+            return self._json({"error": "JSON inválido"}, 400)
+        if len(usuarios.normalizar(nome)) < 2:
+            return self._json({"error": "Digite o seu nome."}, 400)
+        aparelho, cookies = self._aparelho()
+        estado, achado = usuarios.buscar(nome)
+        if estado == "parecido" and not novo:
+            return self._json({"estado": "parecido", "candidatos": [n for _, n in achado]})
+        if estado != "existe":
+            return self._json({"estado": "novo"})
+        pid = achado
+        if not usuarios.vinculado(aparelho, pid):   # aparelho novo para esta ficha: pede o PIN
+            ip = self._ip()
+            if nuvem.bloqueado(f"pin:{pid}") or nuvem.bloqueado(f"pin-ip:{ip}", 10):
+                return self._json({"error": "Muitas tentativas. Aguarde alguns minutos."}, 429)
+            if not pin:
+                return self._json({"estado": "pin"})
+            if not usuarios.verificar_pin(pid, pin):
+                nuvem.falha(f"pin:{pid}")
+                nuvem.falha(f"pin-ip:{ip}")
+                registro.acesso("pin_falhou", ficha=pid)
+                return self._json({"estado": "pin", "error": "PIN incorreto."}, 401)
+        return self._entrou(pid, aparelho, cookies)
+
+    def _cadastro(self, raw):
+        """POST /api/cadastro: cria a ficha com as informações rápidas e já entra nela."""
+        try:
+            d = json.loads(raw or b"{}")
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return self._json({"error": "JSON inválido"}, 400)
+        dados, erro = usuarios.validar(d if isinstance(d, dict) else {})
+        if erro:
+            return self._json({"error": erro}, 400)
+        if usuarios.buscar(dados["nome"])[0] == "existe":
+            return self._json({"error": "Já existe uma ficha com esse nome. Volte e entre com o seu PIN."}, 409)
+        ip = self._ip()
+        if nuvem.bloqueado(f"cad:{ip}", 10, 3600) or usuarios.total() >= usuarios.MAX_FICHAS:
+            return self._json({"error": "Limite de cadastros atingido. Tente mais tarde."}, 429)
+        nuvem.falha(f"cad:{ip}")   # conta cada cadastro: segura quem tenta encher o disco
+        aparelho, cookies = self._aparelho()
+        pid = usuarios.criar(dados, aparelho, nuvem.modelo_aparelho(self.headers))
+        registro.acesso("cadastro", ficha=pid)
+        memory.build_graph(force=True)
+        return self._entrou(pid, aparelho, cookies)
 
     def _read(self, limit):
         n = int(self.headers.get("Content-Length", 0))
@@ -158,6 +268,17 @@ class Handler(BaseHTTPRequestHandler):
                 if p.startswith("/api/") or p == "/ficha":
                     return self._json({"error": "unauthorized"}, 401)
                 return self._redirect("/login")
+            if p == "/trocar":   # sai da ficha atual (continua logado com a senha) e volta a perguntar o nome
+                return self._redirect("/entrada", cookie=nuvem.novo_cookie(""))
+            if not self._vincular():   # logado com a senha, mas ainda sem dizer quem é
+                if p in ("/entrada", "/entrada.html", "/entrada.js"):
+                    p = "/entrada.html" if p == "/entrada" else p
+                elif p.startswith("/api/") or p == "/ficha":
+                    return self._json({"error": "identifique-se"}, 403)
+                else:
+                    return self._redirect("/entrada")
+            elif p in ("/entrada", "/entrada.html"):
+                return self._redirect("/")
 
         if p == "/api/status":
             g = memory.graph_view()
@@ -169,7 +290,8 @@ class Handler(BaseHTTPRequestHandler):
                 links=len(g["links"]), voice=voice.describe(),
                 listener=voice.describe_stt(), stt=voice.stt_kind(),
                 server_stt=voice.stt_kind() in ("whisper", "fish"),
-                server_voice=voice.available(), session=SESSION["id"]))
+                server_voice=voice.available(), session=SESSION["id"],
+                usuario=usuarios.nome_de(memory.paciente()) if nuvem.CLOUD else ""))
 
         if p == "/api/graph":
             force = parse_qs(urlparse(self.path).query).get("force", ["0"])[0] == "1"
@@ -203,6 +325,7 @@ class Handler(BaseHTTPRequestHandler):
         data = f.read_bytes()
         if f.suffix == ".html":
             data = data.replace(b"__BMX_TOKEN__", API_TOKEN.encode())
+            data = data.replace(b"__BMX_TROCAR__", self._trocar_html())
         ctype = mimetypes.guess_type(f.name)[0] or "application/octet-stream"
         if ctype.startswith("text/") or ctype == "application/json":
             ctype += "; charset=utf-8"
@@ -210,6 +333,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         p = urlparse(self.path).path
+        if nuvem.CLOUD:
+            memory.usar_paciente(None)   # a thread pode ter atendido outra pessoa na conexão anterior
         if not self._host_ok() or not self._origin_ok():
             return self._json({"error": "origin rejected"}, 403)
         if nuvem.CLOUD and p == "/login":
@@ -219,6 +344,15 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json({"error": "body too large"}, 413)
         if not self._logado() or not self._token_ok():
             return self._json({"error": "unauthorized"}, 401)
+        if nuvem.CLOUD:
+            if p in ("/api/identidade", "/api/cadastro"):   # só pedem a senha: é aqui que se diz quem é
+                try:
+                    raw = self._read(MAX_JSON)
+                except (TypeError, ValueError):
+                    return self._json({"error": "body too large"}, 413)
+                return self._identidade(raw) if p == "/api/identidade" else self._cadastro(raw)
+            if not self._vincular():
+                return self._json({"error": "identifique-se"}, 403)
         if nuvem.uso_excedido(p):
             return self._json({"error": "limite de uso atingido, aguarde alguns minutos"}, 429)
         ctype = self.headers.get("Content-Type", "").split(";", 1)[0].lower()
@@ -383,12 +517,20 @@ class Handler(BaseHTTPRequestHandler):
                 memory.build_graph(force=True)
                 emit(dict(t="caso", id=caso["caso"], como="atualizado", titulo=caso.get("queixa", "")))
             SESSION["ultima"] = texto
+            if nuvem.CLOUD:
+                persistencia.agendar(memory.paciente())
         except (OSError, ValueError) as e:
             sys.stderr.write(f"  registro falhou: {e}\n")
 
 
 def main():
-    commands.ensure_perfil()
+    if nuvem.CLOUD:
+        # Sem ficha padrão: cada pessoa cria a sua. Traz de volta do Upstash o que o disco apagou.
+        (memory.VAULT / memory.ZONAS["pacientes"]).mkdir(parents=True, exist_ok=True)
+        print(f"  fichas restauradas do Upstash: {persistencia.restaurar()}" if persistencia.ativo()
+              else "  Upstash não configurado: os cadastros somem quando o servidor reinicia", flush=True)
+    else:
+        commands.ensure_perfil()
     registro.acesso("servidor_inicio", porta=PORT)
     kind = runtime.runtime_kind()
     g = memory.graph_view(force=True)

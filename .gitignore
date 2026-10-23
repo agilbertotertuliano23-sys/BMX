@@ -2,6 +2,7 @@
 .env
 .env.*
 state.json
+usuarios.json
 voz_cache/
 __pycache__/
 *.pyc

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="bmx-token" content="__BMX_TOKEN__">
+<title>BMX · quem é você?</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 20px 0;
+         background: #eef3f7; font: 16px system-ui, sans-serif; color: #14212e; }
+  .cartao { background: #fff; padding: 28px; border-radius: 16px; width: min(420px, 92vw);
+            box-shadow: 0 8px 30px rgba(20,33,46,.12); }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  p { margin: 0 0 16px; color: #5a6b7a; font-size: 14px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  input, select, textarea, button { width: 100%; padding: 11px; border-radius: 10px; font: inherit; }
+  input, select, textarea { border: 1px solid #c5d0da; background: #fff; }
+  textarea { resize: vertical; min-height: 54px; }
+  .par { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  button { border: 0; background: #14212e; color: #fff; cursor: pointer; margin-top: 16px; }
+  button.sec { background: #e3eaf0; color: #14212e; margin-top: 8px; }
+  .erro { color: #b3261e; font-size: 14px; min-height: 18px; margin-top: 10px; }
+  .dica { font-size: 12px; color: #5a6b7a; margin-top: 4px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main class="cartao">
+
+  <section id="passo-nome">
+    <h1>Qual é o seu nome?</h1>
+    <p>Assim o BMX abre a sua ficha, ou cria uma nova se ainda não existir.</p>
+    <label for="nome">Nome completo</label>
+    <input id="nome" autocomplete="name" maxlength="80" autofocus>
+    <button id="continuar">Continuar</button>
+  </section>
+
+  <section id="passo-pin" hidden>
+    <h1 id="pin-titulo">Ficha encontrada</h1>
+    <p>Para abrir esta ficha neste aparelho, digite o PIN (4 a 6 números) criado no cadastro.</p>
+    <label for="pin-entrada">PIN</label>
+    <input id="pin-entrada" type="password" inputmode="numeric" maxlength="6" autocomplete="off">
+    <button id="entrar-pin">Entrar</button>
+    <button class="sec" data-voltar>Voltar</button>
+  </section>
+
+  <section id="passo-parecido" hidden>
+    <h1>Já existe alguém parecido</h1>
+    <p>Para não duplicar a ficha, confirme: você é uma destas pessoas?</p>
+    <div id="candidatos"></div>
+    <button class="sec" id="outra-pessoa">Não, sou outra pessoa</button>
+    <button class="sec" data-voltar>Voltar</button>
+  </section>
+
+  <section id="passo-cadastro" hidden>
+    <h1>Informações rápidas</h1>
+    <p>Leva um minuto. Só o que ajuda o BMX a orientar você com segurança.</p>
+    <label for="c-nome">Nome completo</label>
+    <input id="c-nome" maxlength="80">
+    <div class="par">
+      <div><label for="c-idade">Idade (anos)</label><input id="c-idade" type="number" min="0" max="120" inputmode="numeric"></div>
+      <div><label for="c-sexo">Sexo</label>
+        <select id="c-sexo"><option value="">—</option><option>Feminino</option><option>Masculino</option>
+          <option>Outro</option><option>Prefiro não informar</option></select></div>
+    </div>
+    <div class="par">
+      <div><label for="c-peso">Peso (kg)</label><input id="c-peso" maxlength="10" inputmode="decimal"></div>
+      <div><label for="c-altura">Altura (cm)</label><input id="c-altura" maxlength="10" inputmode="decimal"></div>
+    </div>
+    <label for="c-alergias">Alergias</label>
+    <textarea id="c-alergias" maxlength="400" placeholder="Separe por vírgula. Deixe vazio se não tiver."></textarea>
+    <label for="c-remedios">Remédios em uso</label>
+    <textarea id="c-remedios" maxlength="400" placeholder="Nome e dose, separados por vírgula."></textarea>
+    <label for="c-condicoes">Condições de saúde</label>
+    <textarea id="c-condicoes" maxlength="400" placeholder="Ex.: diabetes, hipertensão."></textarea>
+    <label for="c-contato">Contato de emergência</label>
+    <input id="c-contato" maxlength="120" placeholder="Nome e telefone">
+    <label for="c-pin">Crie um PIN (4 a 6 números)</label>
+    <input id="c-pin" type="password" inputmode="numeric" maxlength="6" autocomplete="off">
+    <div class="dica">O PIN protege a sua ficha quando você entrar de outro aparelho.</div>
+    <button id="salvar">Criar minha ficha</button>
+    <button class="sec" data-voltar>Voltar</button>
+  </section>
+
+  <div class="erro" id="erro" role="alert"></div>
+</main>
+<script src="entrada.js"></script>
+</body>
+</html>

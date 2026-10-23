@@ -17,6 +17,12 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+      - key: BMX_SECRET
+        generateValue: true
       - key: FISH_AUDIO_API_KEY
         sync: false
       - key: FISH_AUDIO_VOICE_ID
