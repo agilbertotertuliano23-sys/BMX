@@ -10,3 +10,8 @@ __pycache__/
 !ui/voz/falas/*.mp3
 trechos_voz_baymax/
 trechos_baymax.md
+
+# vault/ leva só conhecimento e esquemas; pacientes, operações e acessos ficam no PC
+vault/10-Pacientes/
+vault/20-Operacoes/
+vault/30-Acessos/

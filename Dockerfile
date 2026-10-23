@@ -2,7 +2,7 @@
 FROM python:3.12-slim
 
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 \
-    BMX_CLOUD=1 BMX_BRAIN=gemini BMX_OPEN=0
+    BMX_CLOUD=1 BMX_BRAIN=gemini BMX_OPEN=0 BMX_VAULT=/app/vault
 
 RUN useradd --create-home --uid 10001 bmx
 WORKDIR /app
