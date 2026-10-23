@@ -204,8 +204,30 @@
     st.r = r; montarPalco(r); irPara(0);
   }
 
+  /* ── abas: Investigar sintoma | Demonstrações (uma de cada vez) ─────── */
+  function criarAbas() {
+    var itens = [['investigar', 'Investigar sintoma', '.explorar'], ['demos', 'Demonstrações guiadas', '.demos-secao']];
+    document.body.dataset.aba = document.body.dataset.aba || 'investigar';
+    itens.forEach(function (alvo) {
+      var card = $(alvo[2]); if (!card) return;
+      var nav = el('div', 'abas'); nav.setAttribute('role', 'tablist');
+      itens.forEach(function (it) {
+        var b = el('button', document.body.dataset.aba === it[0] ? 'on' : '', it[1]); b.type = 'button';
+        b.setAttribute('role', 'tab'); b.dataset.aba = it[0];
+        b.onclick = function () {
+          document.body.dataset.aba = it[0];
+          Array.prototype.forEach.call(document.querySelectorAll('.abas button'), function (x) { x.className = x.dataset.aba === it[0] ? 'on' : ''; });
+          var destino = $(it[0] === 'demos' ? '.demos-secao' : '.explorar'); if (destino && destino.scrollIntoView) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+        nav.appendChild(b);
+      });
+      card.insertBefore(nav, card.firstChild);
+    });
+  }
+
   /* ── ligação ──────────────────────────────────────────────────────── */
   function ligar() {
+    criarAbas();
     document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('[data-demo]'); if (b) assistir(b.dataset.demo); });
     $('#demoFechar').onclick = fechar;
     $('#demoPlay').onclick = function () { if (st.tocando) { st.rodada++; st.tocando = false; pararFala(); botaoPlay(); } else irPara(st.i); };
