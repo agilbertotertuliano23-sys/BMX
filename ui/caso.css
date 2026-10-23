@@ -347,7 +347,8 @@ details.bloco summary { cursor: pointer; font-size: 12.5px; font-weight: 800; co
 .queixas-lista button { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 44px; padding: 9px 12px; border: 1px solid transparent; border-radius: 12px; background: rgba(255,255,255,.72); text-align: left; cursor: pointer; font-size: 13px; font-weight: 800; }
 .queixas-lista button span { font-size: 20px; color: var(--tinta-3); }
 .queixas-lista button:hover, .queixas-lista button[aria-current="true"] { border-color: #b0d9ee; background: #eaf6fc; color: #076a9a; }
-.guia { min-width: 0; padding: 18px; border: 1px solid #dce6ee; border-radius: 18px; background: rgba(255,255,255,.75); }
+/* painel da Investigação guiada: não usar a classe .guia, que é a linha sobre o corpo 3D (fixa, tela cheia) */
+.guia-painel { min-width: 0; padding: 18px; border: 1px solid #dce6ee; border-radius: 18px; background: rgba(255,255,255,.75); }
 .guia-cabeca h3 { font-size: 19px; margin: 4px 0; }
 .guia-cabeca p { margin: 0 0 14px; color: var(--tinta-2); font-size: 13px; }
 .guia-etapa { color: #076a9a; font-size: 11px; font-weight: 900; letter-spacing: .1em; }
