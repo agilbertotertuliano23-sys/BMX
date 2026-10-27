@@ -12,6 +12,7 @@
   var ACENO_MS = 1100;      // depois de revelar: dá tempo de ele terminar de subir
   var TELA_MS = 4200;       // o braço já desceu e assentou (aceno: 2,6 s no alto): a barriga acende
   var HOLO_MS = 4800;       // a escala sai junto com "Em uma escala de zero a dez…"
+  var HOLO_CABINE_MS = 3800; // na cabine, contado da abertura (quando a fala começa)
 
   var holo = document.getElementById('holo');
   var painel = holo.querySelector('.holo-painel');
@@ -67,9 +68,17 @@
   }
 
   function abertura() {
-    setTimeout(function () { com3d(function () { window.BMX3D.acenar(); }); }, ACENO_MS);
-    setTimeout(function () { com3d(function () { window.BMX3D.tela('on'); }); }, TELA_MS);
-    setTimeout(abrir, HOLO_MS);
+    com3d(function () {
+      if (window.BMX3D.desativado) {
+        // Baymax na cabine: sem barriga que acenda; a escala sai do peito dele, junto com a fala
+        // (que começa quando a cabine abre), "…escala de 1 a 10" uns segundos depois
+        window.addEventListener('bmx:cabine-aberta', function () { setTimeout(abrir, HOLO_CABINE_MS); }, { once: true });
+        return;
+      }
+      setTimeout(function () { window.BMX3D.acenar(); }, ACENO_MS);
+      setTimeout(function () { window.BMX3D.tela('on'); }, TELA_MS);
+      setTimeout(abrir, HOLO_MS);
+    });
   }
 
   document.getElementById('holoX').onclick = fechar;

@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: articular
 camada: ossos
 ---
@@ -19,3 +19,7 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Ossos e articulações**.
 - Menisco medial · medial meniscus · [[Região — Coxa e joelho]]
 - Ligamento talofibular anterior · anterior talofibular ligament · [[Região — Perna, tornozelo e pé]]
 - Fáscia plantar · plantar aponeurosis · [[Região — Perna, tornozelo e pé]]
+- Discos intervertebrais cervicais · cervical intervertebral discs · [[Região — Pescoço]]
+- Discos intervertebrais torácicos · thoracic intervertebral discs · [[Região — Tórax]]
+- Discos intervertebrais lombares · lumbar intervertebral discs · [[Região — Lombar (costas baixas)]]
+- Ligamento plantar longo · long plantar ligament · [[Região — Perna, tornozelo e pé]]

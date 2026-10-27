@@ -305,7 +305,7 @@ def demonstracoes():
     cef = rs["queixa:cefaleia"]
     confere(cef["passos"][1]["acao"]["tipo"] == "alerta" and cef["passos"][1]["acao"]["texto"][:20].lower()
             in (cef["passos"][1]["resumo"] + cef["passos"][1]["explicacao"]).lower(), "sinais de alerta vêm logo depois da abertura")
-    rem = rs["remedio:dor_febre"]["passos"][1]["acao"]
+    rem = next(p["acao"] for p in rs["remedio:dor_febre"]["passos"] if p["acao"]["tipo"] == "remedio")
     confere(rem["tipo"] == "remedio" and len(rem["fotos"]) == 3 and all(f["autor"] and f["licenca"] for f in rem["fotos"]),
             "tema de remédio traz 3 fotos com autoria e licença")
     p0 = cef["passos"][2]
@@ -321,12 +321,63 @@ def demonstracoes():
     demo._CACHE.clear()
     r = demo.roteiro("queixa:cefaleia", llm_falsa)
     origens = [p["origem_texto"] for p in r["passos"]]
-    confere(origens[3] == "padrao" and origens.count("llm") == len(origens) - 1, "a LLM que sugere dose é recusada só naquele passo")
+    confere(origens[3] == "padrao" and all(p["origem_texto"] == "llm" for i, p in enumerate(r["passos"])
+            if i != 3 and p["id"] != "exemplo"), "dose é recusada; exemplos fictícios preservam o texto editorial")
     confere(r["passos"][2]["termos"][0]["simples"], "glossário simplificado chega ao passo")
     demo._CACHE.clear()
     confere({p["origem_texto"] for p in demo.roteiro("queixa:cefaleia", lambda s, m: "isto não é json")["passos"]} == {"padrao"},
             "LLM quebrada não impede a demonstração (texto-padrão)")
     demo._CACHE.clear()
+
+
+def revisao_conhecimento():
+    import atlas
+    import demo
+    import re
+    print("\n8. Evidências, exemplos e conservação de alertas")
+    inv = clinica.carregar_investigacao()
+    guias = [clinica.guia(q["id"]) for q in clinica.carregar()["queixas"]]
+    confere(all(g["exemplo"]["tipo"] == "ficticio" and g["consulta"] and g["compreensao"] for g in guias),
+            "todas as queixas entregam exemplo fictício e preparação para consulta")
+    confere(all(g["exemplo"]["relato"] not in clinica.contexto([q]) for g, q in zip(guias, clinica.carregar()["queixas"])),
+            "casos didáticos não são injetados como relato do paciente")
+    confere(all(fid in inv["fontes"] for g in guias for fid in g["exemplo"]["fontes"]),
+            "origem de cada exemplo resolve no registro de fontes")
+    for rid in demo.ids_roteiros():
+        r = demo.roteiro(rid)
+        if not r:
+            continue
+        for p in r["passos"]:
+            if p["acao"]["tipo"] == "alerta":
+                assert all(p["acao"]["texto"] in demo.compor(p, nv) for nv in demo.NIVEIS), rid
+        if rid.startswith("remedio:"):
+            tipos = [p["acao"]["tipo"] for p in r["passos"]]
+            assert tipos.index("alerta") < tipos.index("remedio"), rid
+    confere(True, "alertas integrais em toda profundidade e antes dos temas de medicamentos")
+    base = json.loads(atlas.ARQUIVO.read_text(encoding="utf-8"))
+    cat, _ = anatomia.carregar()
+    erros = []
+    for sid, estrutura in cat["estruturas"].items():
+        if estrutura["sistema"] not in cat["sistemas"] or estrutura["camada"] not in cat["camadas"]:
+            erros.append(sid)
+        erros += [sid + ":" + r for r in estrutura["regioes"] if r not in cat["regioes"]]
+    for sintoma in cat["sintomas"]:
+        erros += [sintoma["id"] + ":" + sid for sid in sintoma["estruturas"] if sid not in cat["estruturas"]]
+    for estudo in base["estudos"]:
+        ids = {x["id"] for x in estudo["componentes"]}
+        erros += [estudo["id"] + ":" + sid for sid in ids if sid not in cat["estruturas"]]
+        assert all(p["comp"] in ids for p in estudo["pontos"])
+        assert set(estudo["montagem"]["ordem"]) <= ids
+        assert all(p["origem"] in ids and set(p["afeta"]) <= ids for p in estudo["problemas"])
+        assert estudo["exemplo"]["tipo"] == "ficticio" and estudo["fontes"]
+        assert all(f["id"] in base["fontes"] for f in estudo["fontes"])
+    confere(not erros, f"integridade das {len(cat['estruturas'])} estruturas, sintomas e 11 aulas: {erros}")
+    aulas = atlas.dados()["estudos"]
+    confere(len(aulas) == len(base["estudos"]) and all(e.get("fontes") and e.get("exemplo") for e in aulas),
+            "fontes e exemplos chegam ao atlas renderizável")
+    for nome in ["investigacao.json", "queixas-de-entrada.json"]:
+        texto = (RAIZ / "vault/40-Conhecimento/Clinica" / nome).read_text(encoding="utf-8")
+        confere(not re.search(r"[A-Za-z]+\?[A-Za-z]+|\ufffd", texto), f"UTF-8 preservado em {nome}")
 
 
 if __name__ == "__main__":
@@ -338,6 +389,7 @@ if __name__ == "__main__":
         imagens_remedios()
         estruturas_hubmap()
         demonstracoes()
+        revisao_conhecimento()
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     print(f"\n{'TUDO OK' if not FALHAS else str(len(FALHAS)) + ' FALHA(S)'}")

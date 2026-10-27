@@ -397,7 +397,13 @@ body.modo-caso .holo { opacity: 0; pointer-events: none; transition: opacity 0.3
 .seguir { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px; font-size: 11px; font-weight: 700; color: var(--tinta-3); cursor: pointer; }
 .seguir input { margin: 0; accent-color: var(--azul); }
 @media (max-width: 960px) {
-  .visao-caso, .seguir { display: none; }
+  /* celular e tablet: o painel do caso abre por cima de tudo, em tela cheia, e "Voltar ao Baymax" fecha */
+  .visao-caso { position: fixed; inset: 0; z-index: 40; border-radius: 0; border: 0; transform: translateY(18px); transform-origin: 50% 100%; }
+  body.modo-caso .visao-caso { transform: none; }
+  body.modo-caso { overflow: hidden; }
+  body.modo-caso .visao-caso iframe { margin-bottom: 0; }
+  .visao-dica { display: none; }
+  .visao-barra { padding: 6px 10px; }
   .grade > .coluna.esq, .grade > .coluna.atend, .grade > .palco, .grade > .coluna.dir { grid-column: auto; grid-row: auto; }
 }
 

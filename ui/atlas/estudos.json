@@ -1,0 +1,2428 @@
+{
+  "versao": "2026-10-27",
+  "sobre": "Roteiros do Atlas 3D de materialização. Cada estudo é uma aula em 5 estágios: escaneamento do órgão, pontos de atenção, montagem das partes, onde um problema impacta e o corpo inteiro. Todos os ids de estrutura vêm do catálogo anatômico (anatomia.py); o servidor (atlas.py) completa com malha, centro e cor. Texto educativo: descreve possibilidades, nunca diagnostica nem prescreve.",
+  "aviso": "Atlas de referência: mostra como a anatomia é e como um problema pode se propagar. Não é o seu exame e não indica o que você tem.",
+  "descricoes": {
+    "coracao": "Bomba muscular do tamanho de um punho, no centro do tórax, um pouco à esquerda.",
+    "aorta": "A maior artéria do corpo: sai do ventrículo esquerdo, faz um arco e desce levando sangue oxigenado.",
+    "pulmao-direito": "Tem três lobos; troca oxigênio e gás carbônico com o sangue.",
+    "pulmao-esquerdo": "Tem dois lobos, pois divide espaço com o coração.",
+    "traqueia": "Tubo de cartilagem que leva o ar da garganta até os brônquios.",
+    "bronquios": "Os dois grandes tubos em que a traqueia se divide, um para cada pulmão.",
+    "diafragma": "Músculo em cúpula sob os pulmões: ao contrair, desce e puxa o ar para dentro.",
+    "figado": "Maior órgão interno: filtra o sangue, produz bile e guarda energia.",
+    "vesicula-biliar": "Bolsa que guarda e concentra a bile até ela ser necessária na digestão de gorduras.",
+    "pancreas": "Produz enzimas digestivas e hormônios como a insulina.",
+    "duodeno": "Primeira porção do intestino delgado: recebe o alimento, a bile e o suco do pâncreas.",
+    "estomago": "Saco muscular que armazena o alimento, mistura com ácido e enzimas e libera aos poucos.",
+    "esofago": "Tubo muscular que leva o alimento da garganta ao estômago.",
+    "baco": "Fica atrás do estômago, à esquerda: filtra o sangue e participa da defesa do corpo.",
+    "apendice": "Pequeno tubo fechado na ponta que sai do início do intestino grosso.",
+    "ceco": "Primeira porção do intestino grosso, onde o intestino delgado desemboca.",
+    "colon-ascendente": "Sobe pelo lado direito do abdome, depois do ceco.",
+    "colon-transverso": "Cruza o abdome de um lado ao outro, sob o estômago.",
+    "rim-direito": "Filtra o sangue e produz a urina; fica um pouco mais baixo que o esquerdo.",
+    "rim-esquerdo": "Filtra o sangue e produz a urina.",
+    "ureter-direito": "Canal que leva a urina do rim direito até a bexiga.",
+    "ureter-esquerdo": "Canal que leva a urina do rim esquerdo até a bexiga.",
+    "bexiga": "Reservatório muscular que guarda a urina até a hora de esvaziar.",
+    "sacro": "Osso triangular na base da coluna, encaixado entre os ossos do quadril.",
+    "osso-do-quadril": "Forma a pelve: sustenta o tronco e articula o fêmur.",
+    "femur": "O maior e mais forte osso do corpo.",
+    "tibia": "Osso da canela que sustenta o peso da perna.",
+    "fibula": "Osso fino ao lado da tíbia: dá estabilidade ao tornozelo.",
+    "patela": "Osso em forma de escudo, dentro do tendão do quadríceps: protege o joelho.",
+    "lca": "Ligamento cruzado anterior: cruza o centro do joelho e evita que a tíbia deslize para frente.",
+    "clavicula": "Liga o ombro ao esterno e mantém o ombro afastado do tronco.",
+    "escapula": "Osso triangular das costas: base móvel de todos os movimentos do braço.",
+    "umero": "Osso do braço; sua cabeça redonda encaixa na escápula.",
+    "supraespinal": "Músculo e tendão do manguito rotador: ajudam a levantar o braço.",
+    "deltoide": "Músculo que cobre o ombro e eleva o braço.",
+    "encefalo": "Cérebro, cerebelo e tronco encefálico: o centro de comando do corpo.",
+    "cranio": "Caixa óssea que protege o encéfalo.",
+    "olho": "Globo ocular: capta a luz e a transforma em sinais nervosos.",
+    "costelas": "Doze pares de arcos ósseos que protegem o tórax.",
+    "quadriceps": "Grande músculo da frente da coxa, que estende o joelho."
+  },
+  "estudos": [
+    {
+      "id": "coracao",
+      "titulo": "Coração",
+      "subtitulo": "A bomba que não para",
+      "sistema": "Cardiovascular",
+      "regiao": "torax",
+      "cor": "#ff4d5e",
+      "resumo": "Duas bombas lado a lado, quatro câmaras e quatro portas de mão única empurrando o sangue por dois circuitos: pulmões e corpo.",
+      "intro": "Vamos materializar o coração. O sensor azul varre a peça de baixo para cima, desenha a malha e só então a superfície se completa.",
+      "componentes": [
+        {
+          "id": "coracao",
+          "papel": "principal"
+        },
+        {
+          "id": "atrio-direito",
+          "papel": "parte"
+        },
+        {
+          "id": "ventriculo-direito",
+          "papel": "parte"
+        },
+        {
+          "id": "atrio-esquerdo",
+          "papel": "parte"
+        },
+        {
+          "id": "ventriculo-esquerdo",
+          "papel": "parte"
+        },
+        {
+          "id": "valva-tricuspide",
+          "papel": "parte"
+        },
+        {
+          "id": "valva-pulmonar",
+          "papel": "parte"
+        },
+        {
+          "id": "valva-mitral",
+          "papel": "parte"
+        },
+        {
+          "id": "valva-aortica",
+          "papel": "parte"
+        },
+        {
+          "id": "aorta",
+          "papel": "parte"
+        },
+        {
+          "id": "veia-cava-superior",
+          "papel": "parte"
+        },
+        {
+          "id": "veia-cava-inferior",
+          "papel": "parte"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "coracao",
+          "a": [
+            0.55,
+            -0.85,
+            0.35
+          ],
+          "titulo": "O ápice",
+          "texto": "A ponta do coração aponta para baixo e para a esquerda. É ali que muita gente sente ou vê o batimento, entre as costelas.",
+          "atencao": "Dor ou aperto no peito que vai para braço, mandíbula ou costas, com suor ou falta de ar, pede ajuda de urgência."
+        },
+        {
+          "comp": "ventriculo-esquerdo",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Ventrículo esquerdo: a câmara mais forte",
+          "texto": "A parede dele é a mais grossa porque empurra o sangue para o corpo inteiro. Quanto mais resistência encontra, mais ele trabalha.",
+          "atencao": "Pressão alta persistente pode sobrecarregar o coração; isso não determina a evolução de uma pessoa."
+        },
+        {
+          "comp": "valva-mitral",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Valva mitral: a porta do lado esquerdo",
+          "texto": "Fica entre o átrio e o ventrículo esquerdos e abre em um só sentido. Se fecha mal, parte do sangue volta a cada batimento.",
+          "atencao": "Um sopro precisa ser interpretado junto da história e do exame; o profissional decide se é necessário ecocardiograma."
+        },
+        {
+          "comp": "aorta",
+          "a": [
+            0,
+            0.4,
+            0
+          ],
+          "titulo": "Aorta: a saída para o corpo",
+          "texto": "É a maior artéria. Sai do ventrículo esquerdo, faz um arco e desce levando sangue oxigenado a todos os órgãos.",
+          "atencao": "Dor súbita e rasgante no peito ou nas costas é emergência."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "veia-cava-superior",
+          "veia-cava-inferior",
+          "atrio-direito",
+          "valva-tricuspide",
+          "ventriculo-direito",
+          "valva-pulmonar",
+          "atrio-esquerdo",
+          "valva-mitral",
+          "ventriculo-esquerdo",
+          "valva-aortica",
+          "aorta",
+          "coracao"
+        ],
+        "texto": "Agora as peças se juntam seguindo o caminho do sangue: ele chega pelas veias cavas, passa pelo lado direito, vai aos pulmões, volta pelo lado esquerdo e sai pela aorta. As valvas atrioventriculares ficam entre câmaras; as semilunares ficam nas saídas dos ventrículos."
+      },
+      "problemas": [
+        {
+          "id": "mitral",
+          "titulo": "Valva mitral que não fecha bem",
+          "origem": "valva-mitral",
+          "afeta": [
+            "atrio-esquerdo",
+            "ventriculo-esquerdo"
+          ],
+          "mecanismo": "Quando o ventrículo esquerdo se contrai, parte do sangue volta para o átrio esquerdo em vez de seguir para a aorta.",
+          "cadeia": [
+            "Dependendo da intensidade e duração, o retorno de sangue pode aumentar a pressão ou dilatar o átrio esquerdo.",
+            "O ventrículo esquerdo precisa bombear mais volume para entregar o mesmo ao corpo.",
+            "Podem surgir cansaço, falta de ar ou palpitações; algumas pessoas permanecem sem sintomas."
+          ],
+          "sinais": [
+            "Cansaço ao subir escadas",
+            "Falta de ar ao deitar",
+            "Palpitações"
+          ],
+          "ajuda": "Falta de ar que piora ou desmaio pedem atendimento. Um sopro no coração se investiga com ecocardiograma pedido por um médico.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "valvas_nice",
+            "valvas_nhs"
+          ]
+        },
+        {
+          "id": "aortica",
+          "titulo": "Valva aórtica estreitada",
+          "origem": "valva-aortica",
+          "afeta": [
+            "ventriculo-esquerdo",
+            "aorta"
+          ],
+          "mecanismo": "A valva abre menos do que deveria e o sangue precisa passar por uma porta estreita.",
+          "cadeia": [
+            "O ventrículo esquerdo faz mais força para empurrar o sangue.",
+            "A parede do ventrículo engrossa para compensar.",
+            "Em doença importante, o aumento do fluxo no esforço pode ficar limitado, com falta de ar, dor torácica ou desmaio."
+          ],
+          "sinais": [
+            "Dor ou aperto no peito aos esforços",
+            "Tontura ou desmaio ao esforço",
+            "Falta de ar"
+          ],
+          "ajuda": "Desmaio ou dor no peito durante o esforço pedem avaliação médica sem demora.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "valvas_nice",
+            "valvas_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O coração fica no centro do tórax, um pouco à esquerda, protegido pelo esterno e pelas costelas, entre os dois pulmões. Daqui saem os dois circuitos que alimentam o corpo inteiro.",
+        "sistemas": [
+          "Cardiovascular",
+          "Respiratório",
+          "Nervoso (ritmo)"
+        ],
+        "ajuda": "Dor no peito com falta de ar, suor frio ou desmaio: ligue 192."
+      },
+      "queixas": [
+        "dor-toracica",
+        "palpitacoes",
+        "pressao-alta"
+      ],
+      "fontes": [
+        {
+          "id": "valvas_nice",
+          "titulo": "NICE NG208 — Investigação de doença valvar",
+          "url": "https://www.nice.org.uk/guidance/ng208/chapter/Recommendations",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "valvas_nhs",
+          "titulo": "NHS — Heart valve disease",
+          "url": "https://www.nhs.uk/conditions/heart-valve-disease/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Um sopro foi ouvido numa consulta, mas a pessoa não sente nada.",
+        "pergunta": "Todo sopro significa uma doença grave?",
+        "resposta": "Não. A história e o exame orientam se há suspeita valvar e necessidade de ecocardiograma."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "pulmoes",
+      "titulo": "Pulmões",
+      "subtitulo": "Onde o ar vira oxigênio",
+      "sistema": "Respiratório",
+      "regiao": "torax",
+      "cor": "#4cc9f0",
+      "resumo": "Uma árvore de tubos cada vez mais finos que termina em milhões de bolsas minúsculas, onde o oxigênio passa para o sangue.",
+      "intro": "Materializando os pulmões. Observe a malha: ela mostra o volume de cada lobo antes da superfície se fechar.",
+      "componentes": [
+        {
+          "id": "pulmao-direito",
+          "papel": "principal"
+        },
+        {
+          "id": "pulmao-esquerdo",
+          "papel": "principal"
+        },
+        {
+          "id": "traqueia",
+          "papel": "parte"
+        },
+        {
+          "id": "bronquios",
+          "papel": "parte"
+        },
+        {
+          "id": "arvore-bronquica",
+          "papel": "parte"
+        },
+        {
+          "id": "diafragma",
+          "papel": "parte"
+        },
+        {
+          "id": "coracao",
+          "papel": "contexto"
+        },
+        {
+          "id": "costelas",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "pulmao-direito",
+          "a": [
+            0,
+            0.5,
+            0
+          ],
+          "titulo": "Três lobos à direita, dois à esquerda",
+          "texto": "O pulmão direito tem três lobos e o esquerdo dois, porque o coração ocupa parte do espaço do lado esquerdo.",
+          "atencao": "Dor que piora ao respirar fundo costuma envolver a membrana que reveste o pulmão."
+        },
+        {
+          "comp": "traqueia",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Traqueia: o tubo de entrada",
+          "texto": "Tubo de cartilagem que leva o ar da garganta até os brônquios. Os anéis de cartilagem mantêm o tubo sempre aberto.",
+          "atencao": "Chiado ou ruído agudo ao respirar indica passagem de ar mais estreita."
+        },
+        {
+          "comp": "arvore-bronquica",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Árvore brônquica",
+          "texto": "Os brônquios se ramificam como uma árvore até chegar aos alvéolos, onde o oxigênio passa para o sangue e o gás carbônico sai.",
+          "atencao": "É nesta árvore que a inflamação da asma e da bronquite acontece."
+        },
+        {
+          "comp": "diafragma",
+          "a": [
+            0,
+            0.3,
+            0
+          ],
+          "titulo": "Diafragma: o motor da respiração",
+          "texto": "Músculo em forma de cúpula sob os pulmões. Ao contrair, ele desce e puxa o ar para dentro; ao relaxar, o ar sai.",
+          "atencao": "Soluço é um espasmo dele. Se não passa por dias, vale investigar."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "traqueia",
+          "bronquios",
+          "arvore-bronquica",
+          "pulmao-direito",
+          "pulmao-esquerdo",
+          "diafragma"
+        ],
+        "texto": "As peças se encaixam na ordem do ar: traqueia, brônquios, a árvore de ramos finos, os dois pulmões e, por baixo, o diafragma que faz tudo se mover."
+      },
+      "problemas": [
+        {
+          "id": "bronquios",
+          "titulo": "Vias aéreas inflamadas e estreitas (como na asma)",
+          "origem": "arvore-bronquica",
+          "afeta": [
+            "pulmao-direito",
+            "pulmao-esquerdo",
+            "diafragma"
+          ],
+          "mecanismo": "As vias aéreas inflamam e se estreitam, e o ar passa com dificuldade.",
+          "cadeia": [
+            "O ar entra e sai com mais esforço: chiado e tosse.",
+            "O diafragma e os músculos do pescoço trabalham mais para ventilar.",
+            "Se piora, cai o oxigênio no sangue: falta de ar até em repouso."
+          ],
+          "sinais": [
+            "Chiado no peito",
+            "Tosse seca persistente",
+            "Falta de ar aos esforços"
+          ],
+          "ajuda": "Falta de ar em repouso, lábios arroxeados ou dificuldade de falar frases inteiras: atendimento de urgência.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "pulmoes_nih",
+            "pneumonia_nhs"
+          ]
+        },
+        {
+          "id": "pneumonia",
+          "titulo": "Infecção no pulmão (pneumonia)",
+          "origem": "pulmao-direito",
+          "afeta": [
+            "bronquios",
+            "pulmao-esquerdo",
+            "coracao"
+          ],
+          "mecanismo": "Os alvéolos se enchem de secreção e as trocas de oxigênio ficam prejudicadas.",
+          "cadeia": [
+            "Aparecem febre, tosse com secreção e dor ao respirar fundo.",
+            "O corpo respira mais rápido para compensar.",
+            "O coração acelera para entregar mais oxigênio aos tecidos."
+          ],
+          "sinais": [
+            "Febre",
+            "Tosse com catarro",
+            "Dor ao respirar fundo"
+          ],
+          "ajuda": "Confusão súbita ou dificuldade respiratória importante: ligue 192. Febre com falta de ar também exige avaliação sem demora.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "pulmoes_nih",
+            "pneumonia_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "Os pulmões ocupam quase todo o tórax, de cada lado do coração, apoiados no diafragma. Ao inspirar, as costelas sobem e o diafragma desce.",
+        "sistemas": [
+          "Respiratório",
+          "Cardiovascular",
+          "Muscular (diafragma e intercostais)"
+        ],
+        "ajuda": "Falta de ar intensa de início súbito: ligue 192."
+      },
+      "queixas": [
+        "tosse",
+        "falta-de-ar"
+      ],
+      "fontes": [
+        {
+          "id": "pulmoes_nih",
+          "titulo": "NHLBI — Respiratory system",
+          "url": "https://www.nhlbi.nih.gov/health/lungs/respiratory-system",
+          "instituicao": "NIH/NHLBI",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "pneumonia_nhs",
+          "titulo": "NHS — Pneumonia",
+          "url": "https://www.nhs.uk/conditions/pneumonia/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa com tosse passa a ter dificuldade para falar frases inteiras.",
+        "pergunta": "É melhor terminar de investigar a tosse primeiro?",
+        "resposta": "Não. Dificuldade respiratória importante exige socorro imediato, antes da aula."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "figado",
+      "titulo": "Fígado e vias biliares",
+      "subtitulo": "A usina e o sistema de canais",
+      "sistema": "Digestório",
+      "regiao": "hipocondrio-direito",
+      "cor": "#d9822b",
+      "resumo": "O fígado produz bile, a vesícula a guarda e uma rede de canais a leva ao duodeno, onde se encontra com o suco do pâncreas.",
+      "intro": "Materializando o fígado. A malha revela os lobos e a face inferior, onde os canais saem.",
+      "componentes": [
+        {
+          "id": "figado",
+          "papel": "principal"
+        },
+        {
+          "id": "vesicula-biliar",
+          "papel": "parte"
+        },
+        {
+          "id": "vias-biliares",
+          "papel": "parte"
+        },
+        {
+          "id": "duodeno",
+          "papel": "parte"
+        },
+        {
+          "id": "pancreas",
+          "papel": "parte"
+        },
+        {
+          "id": "ducto-pancreatico",
+          "papel": "parte"
+        },
+        {
+          "id": "estomago",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "figado",
+          "a": [
+            -0.3,
+            0.2,
+            0.2
+          ],
+          "titulo": "O maior órgão interno",
+          "texto": "Fica sob as costelas do lado direito. Filtra o sangue que vem do intestino, produz a bile e armazena energia.",
+          "atencao": "Dor surda sob as costelas à direita, com urina escura ou pele amarelada, merece avaliação."
+        },
+        {
+          "comp": "vesicula-biliar",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Vesícula: o reservatório",
+          "texto": "Guarda e concentra a bile e a libera quando chega gordura ao duodeno.",
+          "atencao": "Dor após refeições pode ocorrer em problemas biliares, mas o padrão não confirma a causa."
+        },
+        {
+          "comp": "vias-biliares",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Vias biliares: a rede de canais",
+          "texto": "A bile sai do fígado por canais que se juntam e desembocam no duodeno. Um bloqueio pode impedir o fluxo; as consequências dependem do local e da duração.",
+          "atencao": "Bile represada deixa pele e olhos amarelados."
+        },
+        {
+          "comp": "ducto-pancreatico",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Bile e pâncreas dividem a saída",
+          "texto": "Em muitas pessoas, os ductos pancreático e biliar se unem perto da entrada no duodeno; há variações anatômicas. Um bloqueio ali pode afetar os dois órgãos.",
+          "atencao": "Dor forte no alto da barriga que atravessa para as costas pode envolver o pâncreas."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "figado",
+          "vias-biliares",
+          "vesicula-biliar",
+          "duodeno",
+          "pancreas",
+          "ducto-pancreatico"
+        ],
+        "texto": "As peças se juntam seguindo a bile: o fígado, os canais que saem dele, a vesícula que guarda, o duodeno que recebe e o pâncreas, que divide a mesma saída."
+      },
+      "problemas": [
+        {
+          "id": "calculo",
+          "titulo": "Pedra na vesícula (cálculo biliar)",
+          "origem": "vesicula-biliar",
+          "afeta": [
+            "vias-biliares",
+            "figado",
+            "pancreas"
+          ],
+          "mecanismo": "A bile endurece em pedras. Se uma sai e prende num canal, a bile não passa.",
+          "cadeia": [
+            "A vesícula se contrai contra a pedra: dor sob as costelas à direita, em geral após comida gordurosa.",
+            "Se a pedra obstrui a via biliar principal, pode surgir icterícia; um bloqueio apenas da saída da vesícula tem consequências diferentes.",
+            "Se a pedra tranca a saída comum, o pâncreas também pode inflamar."
+          ],
+          "sinais": [
+            "Dor sob as costelas à direita que vai para as costas ou o ombro",
+            "Enjoo e vômito após comer gordura",
+            "Pele e olhos amarelados"
+          ],
+          "ajuda": "Dor forte e contínua com febre ou amarelão: procure o pronto-socorro.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "vesicula_niddk",
+            "vesicula_nhs"
+          ]
+        },
+        {
+          "id": "sobrecarga",
+          "titulo": "Fígado sobrecarregado (gordura, álcool ou vírus)",
+          "origem": "figado",
+          "afeta": [
+            "vias-biliares",
+            "vesicula-biliar"
+          ],
+          "mecanismo": "O fígado aguenta muito, mas inflamação repetida troca células saudáveis por cicatriz.",
+          "cadeia": [
+            "No início costuma não dar sintoma nenhum.",
+            "A inflamação mantida endurece o fígado (fibrose) e reduz o que ele consegue filtrar.",
+            "Em fases avançadas aparecem cansaço, barriga e pernas inchadas e pele amarelada."
+          ],
+          "sinais": [
+            "Cansaço persistente",
+            "Urina escura",
+            "Barriga inchada"
+          ],
+          "ajuda": "Vômito com sangue, fezes pretas ou confusão mental: urgência.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "vesicula_niddk",
+            "vesicula_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O fígado ocupa o alto do abdome à direita, logo abaixo do diafragma e das costelas. A vesícula fica encostada na face inferior dele.",
+        "sistemas": [
+          "Digestório",
+          "Cardiovascular (sangue do intestino passa pelo fígado)",
+          "Endócrino (pâncreas)"
+        ],
+        "ajuda": "Dor abdominal intensa que não alivia, com febre ou vômitos: pronto-socorro."
+      },
+      "fontes": [
+        {
+          "id": "vesicula_niddk",
+          "titulo": "NIDDK — Gallstones: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gallstones/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "vesicula_nhs",
+          "titulo": "NHS — Gallstones",
+          "url": "https://www.nhs.uk/conditions/Gallstones/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pedra foi encontrada por acaso em um exame da vesícula.",
+        "pergunta": "Encontrar uma pedra prova a causa de qualquer dor abdominal?",
+        "resposta": "Não. Há cálculos sem sintomas; localização, evolução e exame orientam a avaliação."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "estomago",
+      "titulo": "Estômago",
+      "subtitulo": "O misturador ácido",
+      "sistema": "Digestório",
+      "regiao": "epigastrio",
+      "cor": "#ff9f43",
+      "resumo": "Um saco muscular em forma de J que mistura o alimento com ácido e enzimas e o libera aos poucos para o duodeno.",
+      "intro": "Materializando o estômago. A malha mostra as pregas e a curvatura maior antes do fechamento da superfície.",
+      "componentes": [
+        {
+          "id": "estomago",
+          "papel": "principal"
+        },
+        {
+          "id": "esofago",
+          "papel": "parte"
+        },
+        {
+          "id": "duodeno",
+          "papel": "parte"
+        },
+        {
+          "id": "pancreas",
+          "papel": "parte"
+        },
+        {
+          "id": "baco",
+          "papel": "parte"
+        },
+        {
+          "id": "figado",
+          "papel": "contexto"
+        },
+        {
+          "id": "diafragma",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "estomago",
+          "a": [
+            0.2,
+            0.3,
+            0.3
+          ],
+          "titulo": "Um saco muscular em J",
+          "texto": "Armazena o alimento, mistura com ácido e enzimas e libera pequenas porções ao intestino.",
+          "atencao": "O epigástrio é uma região; dor ali pode ter origem digestiva, cardíaca ou outras causas."
+        },
+        {
+          "comp": "esofago",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "A entrada: o esôfago",
+          "texto": "Tubo muscular que atravessa o diafragma e leva o alimento ao estômago. Um anel muscular na entrada evita que o ácido suba.",
+          "atencao": "Azia pode estar ligada a refluxo; frequência e sintomas associados orientam a avaliação."
+        },
+        {
+          "comp": "duodeno",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Duodeno: a primeira curva do intestino",
+          "texto": "Recebe o alimento do estômago, a bile do fígado e o suco do pâncreas.",
+          "atencao": "A relação entre dor e refeições varia e não confirma nem exclui úlcera."
+        },
+        {
+          "comp": "baco",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "O baço, ao lado",
+          "texto": "Fica atrás do estômago, à esquerda: filtra o sangue e participa da defesa do corpo.",
+          "atencao": "Pancada forte na lateral esquerda das costelas pode machucá-lo."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "esofago",
+          "estomago",
+          "duodeno",
+          "pancreas",
+          "baco"
+        ],
+        "texto": "O alimento desce pelo esôfago, é processado no estômago e segue para o duodeno, enquanto o pâncreas lança suas enzimas e o baço acompanha por trás."
+      },
+      "problemas": [
+        {
+          "id": "gastrite",
+          "titulo": "Gastrite e úlcera",
+          "origem": "estomago",
+          "afeta": [
+            "duodeno",
+            "esofago"
+          ],
+          "mecanismo": "A camada de muco que protege a parede do ácido enfraquece. Infecção por H. pylori, anti-inflamatórios e álcool são causas conhecidas.",
+          "cadeia": [
+            "O ácido irrita a parede: queimação na boca do estômago.",
+            "A dor costuma mudar com as refeições.",
+            "Úlcera é uma lesão diferente de gastrite; quando presente, pode sangrar ou perfurar. A evolução não é obrigatória."
+          ],
+          "sinais": [
+            "Queimação no alto da barriga",
+            "Estufamento e náusea",
+            "Dor que acorda à noite"
+          ],
+          "ajuda": "Vômito com sangue, fezes pretas ou dor súbita muito forte: pronto-socorro.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "ulcera_niddk",
+            "ulcera_nhs"
+          ]
+        },
+        {
+          "id": "refluxo",
+          "titulo": "Refluxo",
+          "origem": "esofago",
+          "afeta": [
+            "estomago"
+          ],
+          "mecanismo": "O anel muscular da entrada do estômago relaxa fora de hora e o ácido sobe.",
+          "cadeia": [
+            "O ácido irrita o esôfago: azia e gosto amargo na boca.",
+            "Piora ao deitar após comer ou ao se curvar.",
+            "Mantido por anos, pode inflamar o esôfago e causar tosse e rouquidão."
+          ],
+          "sinais": [
+            "Azia",
+            "Regurgitação",
+            "Tosse e rouquidão ao acordar"
+          ],
+          "ajuda": "Dificuldade para engolir, emagrecimento sem querer ou vômito com sangue pedem avaliação.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "ulcera_niddk",
+            "ulcera_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O estômago fica no alto do abdome, mais à esquerda, sob o diafragma e a parte baixa das costelas. O fígado o cobre parcialmente pela direita.",
+        "sistemas": [
+          "Digestório",
+          "Endócrino (pâncreas)",
+          "Imunológico (baço)"
+        ],
+        "ajuda": "Dor intensa no alto da barriga com suor frio ou falta de ar: ligue 192, pode ser o coração."
+      },
+      "queixas": [
+        "dor-abdominal",
+        "vomito-diarreia"
+      ],
+      "fontes": [
+        {
+          "id": "ulcera_niddk",
+          "titulo": "NIDDK — Peptic ulcers: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "ulcera_nhs",
+          "titulo": "NHS — Stomach ulcer",
+          "url": "https://www.nhs.uk/conditions/stomach-ulcer/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa sente queimação após comer e chama isso de gastrite.",
+        "pergunta": "A queimação confirma gastrite ou úlcera?",
+        "resposta": "Não. Sintomas se sobrepõem; uma úlcera também pode ocorrer sem dor."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "apendice",
+      "titulo": "Apêndice e intestino direito",
+      "subtitulo": "Onde o delgado encontra o grosso",
+      "sistema": "Digestório",
+      "regiao": "fossa-iliaca-direita",
+      "cor": "#ffb703",
+      "resumo": "O apêndice é um pequeno tubo fechado na ponta que sai do ceco, no baixo ventre direito. Na apendicite, a dor pode mudar de lugar, mas esse padrão não ocorre sempre.",
+      "intro": "Materializando o apêndice. A malha mostra um tubo fino e fechado, apoiado no ceco.",
+      "componentes": [
+        {
+          "id": "apendice",
+          "papel": "principal"
+        },
+        {
+          "id": "ceco",
+          "papel": "parte"
+        },
+        {
+          "id": "ileo",
+          "papel": "parte"
+        },
+        {
+          "id": "colon-ascendente",
+          "papel": "parte"
+        },
+        {
+          "id": "colon-transverso",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "apendice",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Um dedo de luva",
+          "texto": "Pequeno tubo, de poucos centímetros, que sai do início do intestino grosso. Tem uma ponta cega, por onde nada escoa.",
+          "atencao": "Dor perto do umbigo que desce para a parte baixa direita é um padrão conhecido da apendicite."
+        },
+        {
+          "comp": "ceco",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Ceco: o início do intestino grosso",
+          "texto": "Bolsa onde o intestino delgado desemboca e de onde sai o apêndice.",
+          "atencao": "A dor nessa região pode envolver intestino, vias urinárias, órgãos pélvicos ou outras estruturas."
+        },
+        {
+          "comp": "ileo",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Íleo: a chegada do delgado",
+          "texto": "Último trecho do intestino delgado. Absorve vitamina B12 e sais biliares e abre no ceco por uma válvula.",
+          "atencao": "Diarreia crônica e emagrecimento podem envolver o íleo."
+        },
+        {
+          "comp": "colon-ascendente",
+          "a": [
+            0,
+            0.4,
+            0
+          ],
+          "titulo": "Cólon ascendente",
+          "texto": "Sobe pelo lado direito do abdome e absorve água e sais do que sobrou da digestão.",
+          "atencao": "Sangue misturado às fezes sempre merece investigação."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "ileo",
+          "ceco",
+          "apendice",
+          "colon-ascendente"
+        ],
+        "texto": "O íleo chega, o ceco o recebe, o apêndice se pendura nele e o cólon ascendente segue para cima, completando o lado direito do intestino."
+      },
+      "problemas": [
+        {
+          "id": "apendicite",
+          "titulo": "Apendicite",
+          "origem": "apendice",
+          "afeta": [
+            "ceco",
+            "ileo"
+          ],
+          "mecanismo": "Quando algo bloqueia a abertura do apêndice, ele incha, a parede inflama e pode se infectar.",
+          "cadeia": [
+            "A dor pode começar perto do umbigo e migrar para a direita; apresentações diferentes também ocorrem.",
+            "Podem ocorrer enjoo, perda de apetite e febre, mas a ausência deles não exclui apendicite.",
+            "Sem tratamento, a parede pode se romper e espalhar infecção pela barriga (peritonite)."
+          ],
+          "sinais": [
+            "Dor no baixo ventre direito que piora ao andar ou tossir",
+            "Enjoo ou vômito",
+            "Febre baixa"
+          ],
+          "ajuda": "Dor na barriga baixa direita com febre ou vômito: pronto-socorro hoje, sem esperar passar.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "apendice_niddk",
+            "apendice_nhs"
+          ]
+        },
+        {
+          "id": "ileite",
+          "titulo": "Inflamação do íleo (como na doença de Crohn)",
+          "origem": "ileo",
+          "afeta": [
+            "ceco",
+            "colon-ascendente"
+          ],
+          "mecanismo": "A inflamação crônica da parede do intestino causa dor e diarreia que vão e voltam.",
+          "cadeia": [
+            "A parede inflamada absorve menos nutrientes.",
+            "O íleo absorve B12 e sais biliares, então a falta aparece com o tempo.",
+            "A inflamação pode estreitar o intestino e causar cólicas."
+          ],
+          "sinais": [
+            "Diarreia recorrente",
+            "Perda de peso",
+            "Cólicas no baixo ventre direito"
+          ],
+          "ajuda": "Diarreia com sangue, perda de peso ou febre persistentes: consulte um médico.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "apendice_niddk",
+            "apendice_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O apêndice se liga ao ceco e geralmente fica no abdome inferior direito; sua posição varia. Um ponto na pele não representa sua posição exata.",
+        "sistemas": [
+          "Digestório",
+          "Imunológico (tecido linfoide do apêndice)"
+        ],
+        "ajuda": "Dor abdominal que impede de se mexer: pronto-socorro."
+      },
+      "queixas": [
+        "dor-abdominal",
+        "dor-pelvica"
+      ],
+      "fontes": [
+        {
+          "id": "apendice_niddk",
+          "titulo": "NIDDK — Appendicitis: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "apendice_nhs",
+          "titulo": "NHS — Appendicitis",
+          "url": "https://www.nhs.uk/conditions/appendicitis/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa tem dor progressiva na parte baixa direita, sem febre.",
+        "pergunta": "Sem febre, dá para descartar apendicite?",
+        "resposta": "Não. Apresentações variam; dor progressiva precisa de avaliação presencial."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "rins",
+      "titulo": "Rins e vias urinárias",
+      "subtitulo": "Os filtros do corpo",
+      "sistema": "Urinário",
+      "regiao": "lombar",
+      "cor": "#8ecae6",
+      "resumo": "Dois filtros de sangue, dois canais finos e um reservatório: o caminho completo da urina.",
+      "intro": "Materializando os rins. A malha mostra a forma de feijão e o hilo, onde entram os vasos e sai o ureter.",
+      "componentes": [
+        {
+          "id": "rim-direito",
+          "papel": "principal"
+        },
+        {
+          "id": "rim-esquerdo",
+          "papel": "principal"
+        },
+        {
+          "id": "suprarrenais",
+          "papel": "parte"
+        },
+        {
+          "id": "ureter-direito",
+          "papel": "parte"
+        },
+        {
+          "id": "ureter-esquerdo",
+          "papel": "parte"
+        },
+        {
+          "id": "bexiga",
+          "papel": "parte"
+        },
+        {
+          "id": "aorta-abdominal",
+          "papel": "parte"
+        },
+        {
+          "id": "veia-cava-inferior",
+          "papel": "parte"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "rim-direito",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Dois filtros do tamanho de um punho",
+          "texto": "Ficam atrás da cavidade abdominal, um de cada lado da coluna. Filtram o sangue o dia inteiro e produzem a urina.",
+          "atencao": "Dor nas costas, na altura das últimas costelas, pode vir do rim; a dor muscular costuma mudar com o movimento."
+        },
+        {
+          "comp": "suprarrenais",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "As glândulas sobre os rins",
+          "texto": "Produzem cortisol, adrenalina e outros hormônios. Parecem pequenos chapéus sobre cada rim.",
+          "atencao": "Hormônios em excesso ou em falta mudam pressão, humor e peso."
+        },
+        {
+          "comp": "ureter-direito",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Ureter: o canal estreito",
+          "texto": "Cada ureter leva a urina do rim à bexiga e tem trechos naturalmente estreitos, onde pedras costumam parar.",
+          "atencao": "Cólica forte que desce das costas para a virilha é típica de pedra no ureter."
+        },
+        {
+          "comp": "bexiga",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Bexiga: o reservatório",
+          "texto": "Músculo elástico que guarda a urina até a hora de esvaziar. A sensação de vontade varia com o enchimento, a sensibilidade e o contexto.",
+          "atencao": "Ardor ao urinar e vontade frequente sugerem inflamação ou infecção."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "aorta-abdominal",
+          "veia-cava-inferior",
+          "rim-direito",
+          "rim-esquerdo",
+          "suprarrenais",
+          "ureter-direito",
+          "ureter-esquerdo",
+          "bexiga"
+        ],
+        "texto": "Primeiro a aorta e a veia cava, que alimentam e drenam os rins. Depois os rins, as suprarrenais, os dois ureteres descendo e, por fim, a bexiga que recebe a urina."
+      },
+      "problemas": [
+        {
+          "id": "calculo",
+          "titulo": "Pedra no rim (cálculo renal)",
+          "origem": "ureter-direito",
+          "afeta": [
+            "rim-direito",
+            "bexiga"
+          ],
+          "mecanismo": "Uma pedra pequena desce do rim e para num ponto estreito do ureter.",
+          "cadeia": [
+            "A urina fica retida acima da pedra e o rim incha.",
+            "Surge uma dor em cólica forte nas costas ou no flanco, que desce em direção à virilha.",
+            "Pode haver sangue na urina, enjoo e vontade de urinar com frequência."
+          ],
+          "sinais": [
+            "Dor em cólica no flanco",
+            "Sangue na urina",
+            "Enjoo e vômito"
+          ],
+          "ajuda": "Dor forte com febre ou calafrios, ou impossibilidade de urinar: urgência.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "rins_niddk",
+            "rins_nhs"
+          ]
+        },
+        {
+          "id": "pielonefrite",
+          "titulo": "Infecção urinária que sobe até o rim",
+          "origem": "bexiga",
+          "afeta": [
+            "ureter-direito",
+            "ureter-esquerdo",
+            "rim-direito",
+            "rim-esquerdo"
+          ],
+          "mecanismo": "Bactérias entram pela uretra e se instalam na bexiga; se sobem pelos ureteres, chegam aos rins.",
+          "cadeia": [
+            "Na bexiga: ardor ao urinar e vontade frequente.",
+            "Nos rins: febre alta, calafrios e dor nas costas.",
+            "Sem tratamento, a infecção pode passar para o sangue."
+          ],
+          "sinais": [
+            "Ardor ao urinar",
+            "Febre e calafrios",
+            "Dor lombar"
+          ],
+          "ajuda": "Febre com dor lombar e calafrios: atendimento no mesmo dia.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "rins_niddk",
+            "rins_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "Os rins ficam de cada lado da coluna, na altura das últimas costelas, protegidos por gordura e músculos. Os ureteres descem até a bexiga, na pelve.",
+        "sistemas": [
+          "Urinário",
+          "Cardiovascular (pressão arterial)",
+          "Endócrino (suprarrenais)"
+        ],
+        "ajuda": "Impossibilidade de urinar por muitas horas: urgência."
+      },
+      "queixas": [
+        "urinario"
+      ],
+      "fontes": [
+        {
+          "id": "rins_niddk",
+          "titulo": "NIDDK — Kidney stones: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/urologic-diseases/kidney-stones/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "rins_nhs",
+          "titulo": "NHS — Kidney stones",
+          "url": "https://www.nhs.uk/conditions/kidney-stones/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa com dor no flanco passa a ter febre e calafrios.",
+        "pergunta": "Ter tido pedras antes permite esperar em casa?",
+        "resposta": "Não. Febre associada exige avaliação urgente; o episódio anterior não confirma a causa atual."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "coluna-lombar",
+      "titulo": "Coluna lombar",
+      "subtitulo": "A base que sustenta o tronco",
+      "sistema": "Esquelético",
+      "regiao": "lombar",
+      "cor": "#e8d9b0",
+      "resumo": "Cinco vértebras grandes empilhadas com discos amortecedores entre elas, apoiadas no sacro. Protegem estruturas nervosas; abaixo do término da medula passam principalmente raízes da cauda equina.",
+      "intro": "Materializando a coluna lombar. A malha revela o corpo de cada vértebra e as pontes de osso que protegem os nervos.",
+      "foco": {
+        "comp": "vertebras-lombares",
+        "raio": 0.2
+      },
+      "componentes": [
+        {
+          "id": "vertebras-lombares",
+          "papel": "principal"
+        },
+        {
+          "id": "discos-lombares",
+          "papel": "parte"
+        },
+        {
+          "id": "sacro",
+          "papel": "parte"
+        },
+        {
+          "id": "osso-do-quadril",
+          "papel": "parte"
+        },
+        {
+          "id": "vertebras-toracicas",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "vertebras-lombares",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Cinco blocos que sustentam o tronco",
+          "texto": "As vértebras lombares são as maiores da coluna porque carregam o peso do tronco. Atrás de cada uma há um canal por onde passam os nervos.",
+          "atencao": "Dor lombar é muito comum e, na maioria das vezes, melhora em semanas."
+        },
+        {
+          "comp": "discos-lombares",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Discos: os amortecedores",
+          "texto": "Cada disco tem um centro gelatinoso envolto por anéis fibrosos. Amortece o impacto e deixa a coluna se curvar.",
+          "atencao": "É nos dois últimos discos lombares que a hérnia de disco é mais frequente."
+        },
+        {
+          "comp": "vertebras-lombares",
+          "a": [
+            0,
+            -0.85,
+            0
+          ],
+          "titulo": "L5: a base da coluna",
+          "texto": "A última lombar se apoia no sacro. Esse é um ponto de muita carga e de muito movimento, e por isso se desgasta mais.",
+          "atencao": "Dor que desce pela nádega e pela perna pode vir de um nervo comprimido nesta região."
+        },
+        {
+          "comp": "sacro",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Sacro: o elo com a pelve",
+          "texto": "Osso triangular encaixado entre os ossos do quadril. Passa o peso do tronco para as pernas.",
+          "atencao": "A dor da articulação sacroilíaca fica um pouco ao lado, no «bolso de trás»."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "osso-do-quadril",
+          "sacro",
+          "discos-lombares",
+          "vertebras-lombares"
+        ],
+        "texto": "A montagem sobe a partir da pelve: o osso do quadril, o sacro, e então vértebras e discos se alternam, um sobre o outro."
+      },
+      "problemas": [
+        {
+          "id": "hernia",
+          "titulo": "Hérnia de disco",
+          "origem": "discos-lombares",
+          "afeta": [
+            "vertebras-lombares",
+            "sacro"
+          ],
+          "mecanismo": "Parte do centro gelatinoso do disco sai por uma fissura do anel e pode encostar numa raiz nervosa.",
+          "cadeia": [
+            "O disco perde altura e a vértebra recebe a carga de outro jeito.",
+            "A raiz nervosa comprimida causa dor que desce pela nádega e pela perna (ciática), com formigamento.",
+            "Se a compressão é grande, pode faltar força no pé ou aparecer dormência."
+          ],
+          "sinais": [
+            "Dor que desce pela perna",
+            "Formigamento ou dormência no pé",
+            "Dor que piora ao tossir"
+          ],
+          "ajuda": "Perda de força na perna, dormência na região íntima ou perda de controle de urina e fezes: urgência.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "coluna_nice",
+            "coluna_nhs"
+          ]
+        },
+        {
+          "id": "artrose",
+          "titulo": "Desgaste das vértebras e dos discos",
+          "origem": "vertebras-lombares",
+          "afeta": [
+            "discos-lombares",
+            "sacro"
+          ],
+          "mecanismo": "Com os anos os discos perdem água e altura, e as articulações das vértebras sofrem mais atrito.",
+          "cadeia": [
+            "Os discos achatam e as vértebras ficam mais próximas.",
+            "As vértebras formam pequenos «bicos» de osso e as articulações enrijecem.",
+            "Aparecem dor e rigidez que pioram com esforço e melhoram com movimento leve."
+          ],
+          "sinais": [
+            "Rigidez ao acordar",
+            "Dor ao ficar muito tempo em pé",
+            "Melhora com movimento leve"
+          ],
+          "ajuda": "Dor que acorda à noite, febre ou dor após queda: procure avaliação.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "coluna_nice",
+            "coluna_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "A coluna lombar fica na parte baixa das costas, na altura da cintura, atrás dos rins e da aorta abdominal. É o elo entre o tronco e a pelve.",
+        "sistemas": [
+          "Esquelético",
+          "Nervoso (medula e raízes)",
+          "Muscular"
+        ],
+        "ajuda": "Dor lombar após queda forte ou com febre: avaliação sem demora."
+      },
+      "queixas": [
+        "dor-lombar"
+      ],
+      "fontes": [
+        {
+          "id": "coluna_nice",
+          "titulo": "NICE NG127 — Recomendação 1.7.3",
+          "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "coluna_nhs",
+          "titulo": "NHS — Back pain",
+          "url": "https://www.nhs.uk/conditions/back-pain/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "openstax_snc",
+          "titulo": "OpenStax — Anatomy and Physiology 2e, seção 13.2",
+          "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system",
+          "instituicao": "OpenStax/Rice University",
+          "consultado_em": "2026-10-27",
+          "escopo": "Organização do sistema nervoso central e raízes espinhais."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa com dor lombar percebe dormência íntima nova.",
+        "pergunta": "Esse detalhe pode esperar a próxima consulta de rotina?",
+        "resposta": "Não. Alteração nova de sensibilidade íntima ou função urinária exige avaliação imediata."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "joelho",
+      "titulo": "Joelho",
+      "subtitulo": "A articulação que dobra e sustenta",
+      "sistema": "Articular",
+      "regiao": "coxa-joelho",
+      "cor": "#d9c5a0",
+      "resumo": "O fêmur apoia-se na tíbia, a patela protege a frente e ligamentos cruzados no centro impedem que os ossos escorreguem.",
+      "intro": "Materializando o joelho. A varredura percorre os ossos de baixo para cima e a malha mostra as superfícies que se encaixam.",
+      "foco": {
+        "comp": "patela",
+        "raio": 0.22
+      },
+      "componentes": [
+        {
+          "id": "femur",
+          "papel": "principal"
+        },
+        {
+          "id": "tibia",
+          "papel": "principal"
+        },
+        {
+          "id": "patela",
+          "papel": "principal"
+        },
+        {
+          "id": "fibula",
+          "papel": "parte"
+        },
+        {
+          "id": "lca",
+          "papel": "parte"
+        },
+        {
+          "id": "quadriceps",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "patela",
+          "a": [
+            0,
+            0,
+            0.3
+          ],
+          "titulo": "Patela: a proteção da frente",
+          "texto": "Osso em forma de escudo dentro do tendão do quadríceps. Aumenta a força de extensão do joelho e protege a articulação.",
+          "atencao": "Dor na frente do joelho ao subir escadas costuma envolver a patela."
+        },
+        {
+          "comp": "femur",
+          "a": [
+            0,
+            -0.95,
+            0
+          ],
+          "titulo": "Fêmur: o maior osso do corpo",
+          "texto": "Termina em duas protuberâncias arredondadas, os côndilos, que rolam sobre a tíbia.",
+          "atencao": "Apesar da resistência do fêmur, ossos fragilizados podem fraturar após uma queda de baixa energia."
+        },
+        {
+          "comp": "tibia",
+          "a": [
+            0,
+            0.9,
+            0
+          ],
+          "titulo": "Tíbia: a base do joelho",
+          "texto": "O topo dela é um platô que recebe o fêmur, com meniscos que amortecem entre os dois.",
+          "atencao": "Dor na linha articular pode ocorrer em lesões meniscais e outras condições; o exame ajuda a diferenciá-las."
+        },
+        {
+          "comp": "lca",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "LCA: o ligamento que segura",
+          "texto": "O ligamento cruzado anterior cruza o centro do joelho e impede que a tíbia deslize para frente sob o fêmur.",
+          "atencao": "Estalo durante um giro, seguido de inchaço, é a história típica de lesão do LCA."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "tibia",
+          "fibula",
+          "femur",
+          "lca",
+          "patela"
+        ],
+        "texto": "A tíbia e a fíbula formam a base, o fêmur encaixa por cima, o ligamento cruzado liga os dois no centro e a patela fecha a frente da articulação."
+      },
+      "problemas": [
+        {
+          "id": "lca",
+          "titulo": "Lesão do ligamento cruzado anterior",
+          "origem": "lca",
+          "afeta": [
+            "femur",
+            "tibia"
+          ],
+          "mecanismo": "Costuma romper em giros com o pé fixo no chão ou em aterrissagens, comuns no futebol e no vôlei.",
+          "cadeia": [
+            "Pode haver estalo, dor súbita e inchaço em poucas horas.",
+            "O joelho «falseia» porque a tíbia desliza para frente.",
+            "Sem estabilidade, o menisco e a cartilagem sofrem mais desgaste."
+          ],
+          "sinais": [
+            "Estalo no momento da torção",
+            "Inchaço rápido",
+            "Joelho que falha ao apoiar"
+          ],
+          "ajuda": "Joelho que não aguenta apoio, trava ou incha muito após trauma: procure um ortopedista.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "lca_aaos",
+            "entorse_nhs",
+            "osteoporose_nih"
+          ]
+        },
+        {
+          "id": "artrose",
+          "titulo": "Desgaste da cartilagem",
+          "origem": "femur",
+          "afeta": [
+            "tibia",
+            "patela"
+          ],
+          "mecanismo": "A cartilagem que reveste as pontas dos ossos afina com os anos e com a sobrecarga.",
+          "cadeia": [
+            "Com menos amortecimento, o osso passa a suportar mais atrito.",
+            "Surgem dor ao subir escadas e rigidez ao acordar.",
+            "O joelho pode inchar e perder amplitude de movimento."
+          ],
+          "sinais": [
+            "Dor ao subir escadas",
+            "Rigidez matinal curta",
+            "Estalos e inchaço ao fim do dia"
+          ],
+          "ajuda": "Joelho quente, vermelho e inchado com febre: avaliação no mesmo dia.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "lca_aaos",
+            "entorse_nhs",
+            "osteoporose_nih"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O joelho fica no meio da perna, entre a coxa e a canela, e sustenta todo o peso do corpo ao andar. Músculos fortes na frente e atrás da coxa o protegem.",
+        "sistemas": [
+          "Esquelético",
+          "Articular (ligamentos e meniscos)",
+          "Muscular (quadríceps e posteriores)"
+        ],
+        "ajuda": "Joelho deformado após trauma ou impossível de apoiar: pronto-socorro."
+      },
+      "queixas": [
+        "dor-membros",
+        "trauma-entorse"
+      ],
+      "fontes": [
+        {
+          "id": "lca_aaos",
+          "titulo": "AAOS — Anterior cruciate ligament injuries",
+          "url": "https://www.orthoinfo.org/diseases--conditions/anterior-cruciate-ligament-acl-injuries/",
+          "instituicao": "AAOS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "entorse_nhs",
+          "titulo": "NHS — Sprains and strains",
+          "url": "https://www.nhs.uk/conditions/sprains-and-strains/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "osteoporose_nih",
+          "titulo": "NIAMS — Osteoporosis",
+          "url": "https://www.niams.nih.gov/health-topics/osteoporosis",
+          "instituicao": "NIH/NIAMS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Depois de um giro, o joelho estala e incha.",
+        "pergunta": "Estalo e inchaço confirmam ruptura do LCA?",
+        "resposta": "Não. O exame diferencia lesões; incapacidade de apoiar pede avaliação."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "ombro",
+      "titulo": "Ombro",
+      "subtitulo": "A articulação mais móvel",
+      "sistema": "Articular",
+      "regiao": "ombro",
+      "cor": "#e0b090",
+      "resumo": "Uma bola grande numa cavidade rasa, travada por tendões e músculos: muito movimento em troca de estabilidade.",
+      "intro": "Materializando o ombro. A malha mostra a cabeça redonda do úmero e a cavidade rasa da escápula onde ela se apoia.",
+      "foco": {
+        "comp": "umero",
+        "raio": 0.2
+      },
+      "componentes": [
+        {
+          "id": "escapula",
+          "papel": "principal"
+        },
+        {
+          "id": "clavicula",
+          "papel": "principal"
+        },
+        {
+          "id": "umero",
+          "papel": "principal"
+        },
+        {
+          "id": "supraespinal",
+          "papel": "parte"
+        },
+        {
+          "id": "deltoide",
+          "papel": "parte"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "umero",
+          "a": [
+            0,
+            0.92,
+            0
+          ],
+          "titulo": "A «bola» do ombro",
+          "texto": "A cabeça do úmero encaixa numa cavidade rasa da escápula. Por isso é a articulação que mais se move e uma das mais instáveis.",
+          "atencao": "Dor ao levantar o braço acima da cabeça costuma envolver os tendões do ombro."
+        },
+        {
+          "comp": "escapula",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Escápula: a base móvel",
+          "texto": "Desliza sobre as costelas e dá apoio a todos os movimentos do braço.",
+          "atencao": "Ombro «alado» ou assimétrico pode ser sinal de fraqueza muscular."
+        },
+        {
+          "comp": "clavicula",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Clavícula: o travessão",
+          "texto": "Liga o ombro ao esterno e mantém o ombro afastado do tronco. Quebra com facilidade em quedas.",
+          "atencao": "Dor e deformidade após queda precisam de exame; o profissional decide se há indicação de radiografia."
+        },
+        {
+          "comp": "supraespinal",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Supraespinal: o tendão que mais sofre",
+          "texto": "Passa sob o ponto mais alto do ombro e ajuda a elevar o braço. Faz parte do manguito rotador.",
+          "atencao": "Dor noturna pode ocorrer em problemas do manguito, mas não identifica sozinha um tendão."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "escapula",
+          "clavicula",
+          "umero",
+          "supraespinal",
+          "deltoide"
+        ],
+        "texto": "A escápula e a clavícula formam a base, o úmero se encaixa, o tendão supraespinal o prende por cima e o deltoide cobre tudo como uma capa."
+      },
+      "problemas": [
+        {
+          "id": "manguito",
+          "titulo": "Lesão do manguito rotador",
+          "origem": "supraespinal",
+          "afeta": [
+            "umero",
+            "deltoide"
+          ],
+          "mecanismo": "Alterações do manguito podem envolver degeneração, trauma e sobrecarga; não existe um único mecanismo para toda dor no ombro.",
+          "cadeia": [
+            "Dor ao levantar o braço de lado e à noite ao deitar sobre o ombro.",
+            "Se o tendão se rompe, o deltoide tenta compensar, mas o braço perde força para elevar.",
+            "O ombro fica rígido pela falta de uso."
+          ],
+          "sinais": [
+            "Dor ao elevar o braço",
+            "Dor noturna",
+            "Fraqueza ao levantar objetos"
+          ],
+          "ajuda": "Braço que não levanta depois de uma queda ou de um esforço: avaliação ortopédica.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "ombro_aaos",
+            "ombro_medline"
+          ]
+        },
+        {
+          "id": "luxacao",
+          "titulo": "Luxação do ombro",
+          "origem": "umero",
+          "afeta": [
+            "escapula",
+            "clavicula"
+          ],
+          "mecanismo": "Num trauma, a «bola» sai da cavidade, em geral para frente.",
+          "cadeia": [
+            "Dor intensa e deformidade visível; o braço não se move.",
+            "Nervos e vasos vizinhos podem ser comprimidos.",
+            "A articulação, depois de saltar uma vez, tende a soltar de novo com facilidade."
+          ],
+          "sinais": [
+            "Dor súbita após queda",
+            "Ombro com formato diferente",
+            "Formigamento no braço"
+          ],
+          "ajuda": "Ombro deformado, braço dormente ou pálido: pronto-socorro.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "ombro_aaos",
+            "ombro_medline"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O ombro conecta o braço ao tronco, entre o pescoço e o tórax. Seu conjunto de músculos permite levantar, girar e estender o braço em quase todas as direções.",
+        "sistemas": [
+          "Esquelético",
+          "Articular",
+          "Muscular"
+        ],
+        "ajuda": "Dor no ombro esquerdo com aperto no peito e suor: pode ser o coração, ligue 192."
+      },
+      "queixas": [
+        "dor-membros",
+        "trauma-entorse"
+      ],
+      "fontes": [
+        {
+          "id": "ombro_aaos",
+          "titulo": "AAOS — Rotator cuff tears",
+          "url": "https://www.orthoinfo.org/diseases--conditions/rotator-cuff-tears",
+          "instituicao": "AAOS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "ombro_medline",
+          "titulo": "MedlinePlus — Rotator cuff problems",
+          "url": "https://medlineplus.gov/ency/article/000438.htm",
+          "instituicao": "NLM/A.D.A.M.",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa tem dor noturna no ombro e dificuldade para elevar o braço.",
+        "pergunta": "A dor identifica sozinha qual tendão está lesionado?",
+        "resposta": "Não. Várias causas compartilham sintomas e precisam de avaliação clínica."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "encefalo",
+      "titulo": "Encéfalo",
+      "subtitulo": "O centro de comando",
+      "sistema": "Nervoso",
+      "regiao": "cabeca",
+      "cor": "#f4a6c1",
+      "resumo": "Cérebro, cerebelo e tronco encefálico: cada área cuida de uma função, e todas dependem do mesmo suprimento de sangue.",
+      "intro": "Materializando o encéfalo. A malha mostra os giros e sulcos que aumentam a superfície do córtex.",
+      "componentes": [
+        {
+          "id": "encefalo",
+          "papel": "principal"
+        },
+        {
+          "id": "ventriculos-laterais",
+          "papel": "parte"
+        },
+        {
+          "id": "corpo-caloso",
+          "papel": "parte"
+        },
+        {
+          "id": "talamo",
+          "papel": "parte"
+        },
+        {
+          "id": "nucleos-da-base",
+          "papel": "parte"
+        },
+        {
+          "id": "hipocampo",
+          "papel": "parte"
+        },
+        {
+          "id": "hipofise",
+          "papel": "parte"
+        },
+        {
+          "id": "tronco-encefalico",
+          "papel": "parte"
+        },
+        {
+          "id": "cerebelo",
+          "papel": "parte"
+        },
+        {
+          "id": "giro-pre-central",
+          "papel": "parte"
+        },
+        {
+          "id": "cranio",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "giro-pre-central",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Córtex motor",
+          "texto": "Uma faixa do córtex comanda os movimentos voluntários do lado oposto do corpo: cada ponto dela cuida de uma parte.",
+          "atencao": "Fraqueza súbita de um lado do corpo é sinal de alerta."
+        },
+        {
+          "comp": "cerebelo",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Cerebelo: o ajuste fino",
+          "texto": "Fica atrás e embaixo do cérebro. Coordena o movimento, o equilíbrio e a postura.",
+          "atencao": "Tontura com perda de equilíbrio e fala arrastada merece avaliação."
+        },
+        {
+          "comp": "tronco-encefalico",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Tronco encefálico: o que não pode parar",
+          "texto": "Liga o cérebro à medula espinhal. Controla respiração, batimentos e passam por ele quase todas as vias nervosas.",
+          "atencao": "Alterações aqui afetam a consciência e a respiração."
+        },
+        {
+          "comp": "hipocampo",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Hipocampo: memórias novas",
+          "texto": "Está ligado à formação de novas memórias e à orientação no espaço.",
+          "atencao": "Esquecimento que atrapalha a rotina merece uma avaliação."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "ventriculos-laterais",
+          "corpo-caloso",
+          "talamo",
+          "nucleos-da-base",
+          "hipocampo",
+          "hipofise",
+          "tronco-encefalico",
+          "cerebelo",
+          "giro-pre-central",
+          "encefalo"
+        ],
+        "texto": "A montagem vai de dentro para fora: as cavidades com líquido, a ponte entre os hemisférios, os núcleos profundos, o tronco, o cerebelo e, por fim, o córtex que cobre tudo."
+      },
+      "problemas": [
+        {
+          "id": "avc",
+          "titulo": "AVC (acidente vascular cerebral)",
+          "origem": "giro-pre-central",
+          "afeta": [
+            "talamo",
+            "nucleos-da-base",
+            "tronco-encefalico"
+          ],
+          "mecanismo": "No AVC isquêmico, um bloqueio reduz o fluxo de sangue; no hemorrágico, há sangramento que lesa o tecido. Os mecanismos são diferentes.",
+          "cadeia": [
+            "Em minutos sem sangue, as células já começam a sofrer.",
+            "Se atinge o córtex motor, enfraquece ou paralisa o lado oposto do corpo.",
+            "Fala, visão e equilíbrio também podem ser afetados, dependendo da área."
+          ],
+          "sinais": [
+            "Rosto torto de um lado",
+            "Fraqueza em um braço ou perna",
+            "Fala enrolada ou difícil de entender"
+          ],
+          "ajuda": "Rosto torto, braço fraco ou fala enrolada: ligue 192 imediatamente. Cada minuto conta.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "avc_ms",
+            "neuro_nice"
+          ]
+        },
+        {
+          "id": "pressao",
+          "titulo": "Pressão alta dentro do crânio",
+          "origem": "ventriculos-laterais",
+          "afeta": [
+            "tronco-encefalico",
+            "cerebelo",
+            "encefalo"
+          ],
+          "mecanismo": "O crânio não se expande: líquido a mais, uma massa ou um sangramento ocupam espaço e comprimem o tecido.",
+          "cadeia": [
+            "Aparecem dor de cabeça que piora ao deitar, vômitos e sonolência.",
+            "A pressão empurra o cérebro para baixo, em direção ao tronco encefálico.",
+            "Se continua, afeta a respiração e a consciência."
+          ],
+          "sinais": [
+            "Dor de cabeça que piora de manhã",
+            "Vômitos em jato",
+            "Sonolência fora do comum"
+          ],
+          "ajuda": "Sonolência, confusão ou vômitos em jato após pancada na cabeça: urgência.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "avc_ms",
+            "neuro_nice"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "O encéfalo fica na cavidade craniana, protegido pelo crânio e pelas meninges; a cabeça também contém outras estruturas. Ele se conecta à medula espinhal, que desce pela coluna.",
+        "sistemas": [
+          "Nervoso",
+          "Cardiovascular (irrigação)",
+          "Endócrino (hipófise)"
+        ],
+        "ajuda": "Dor de cabeça súbita e muito forte, a pior da vida: ligue 192."
+      },
+      "queixas": [
+        "cefaleia",
+        "tontura",
+        "saude-mental"
+      ],
+      "fontes": [
+        {
+          "id": "avc_ms",
+          "titulo": "Ministério da Saúde — AVC",
+          "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/avc",
+          "instituicao": "Ministério da Saúde",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "neuro_nice",
+          "titulo": "NICE NG127 — Sudden-onset limb weakness",
+          "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa subitamente apresenta fala enrolada e fraqueza de um lado.",
+        "pergunta": "É preciso descobrir em casa se o AVC é isquêmico ou hemorrágico?",
+        "resposta": "Não. Acione o SAMU 192; essa distinção exige avaliação hospitalar."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    },
+    {
+      "id": "olho",
+      "titulo": "Olho",
+      "subtitulo": "A câmera do corpo",
+      "sistema": "Sensorial",
+      "regiao": "cabeca",
+      "cor": "#9bd1ff",
+      "resumo": "Uma lente na frente, um sensor no fundo e um cabo (nervo óptico) até o cérebro: cada camada tem um papel no foco e na imagem.",
+      "intro": "Materializando o olho. A malha revela o globo e as camadas internas antes de a superfície se completar.",
+      "foco": {
+        "comp": "olho",
+        "raio": 0.1
+      },
+      "componentes": [
+        {
+          "id": "olho",
+          "papel": "principal"
+        },
+        {
+          "id": "esclera",
+          "papel": "parte"
+        },
+        {
+          "id": "corpo-vitreo",
+          "papel": "parte"
+        },
+        {
+          "id": "retina",
+          "papel": "parte"
+        },
+        {
+          "id": "cristalino",
+          "papel": "parte"
+        },
+        {
+          "id": "iris",
+          "papel": "parte"
+        },
+        {
+          "id": "cornea",
+          "papel": "parte"
+        },
+        {
+          "id": "via-optica",
+          "papel": "parte"
+        },
+        {
+          "id": "cranio",
+          "papel": "contexto"
+        }
+      ],
+      "pontos": [
+        {
+          "comp": "cornea",
+          "a": [
+            0,
+            0,
+            0.9
+          ],
+          "titulo": "Córnea: a primeira lente",
+          "texto": "Janela transparente na frente do olho. É responsável pela maior parte do poder de foco.",
+          "atencao": "Olho vermelho com dor forte e luz incomodando pede avaliação."
+        },
+        {
+          "comp": "iris",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Íris e pupila",
+          "texto": "A íris é a parte colorida. Ela abre e fecha a pupila para regular a quantidade de luz que entra.",
+          "atencao": "Pupilas de tamanhos diferentes após uma pancada merecem atenção."
+        },
+        {
+          "comp": "cristalino",
+          "a": [
+            0,
+            0,
+            0
+          ],
+          "titulo": "Cristalino: o foco fino",
+          "texto": "Lente transparente atrás da íris. Muda de curvatura para focar de perto e de longe.",
+          "atencao": "Com a idade ele endurece: é por isso que surge a «vista cansada»."
+        },
+        {
+          "comp": "retina",
+          "a": [
+            0,
+            0,
+            -0.6
+          ],
+          "titulo": "Retina: onde a imagem vira sinal",
+          "texto": "Camada no fundo do olho que transforma a luz em sinais nervosos enviados ao cérebro pelo nervo óptico.",
+          "atencao": "Flashes de luz e sombras novas no campo visual são sinais de alerta."
+        }
+      ],
+      "montagem": {
+        "ordem": [
+          "esclera",
+          "corpo-vitreo",
+          "retina",
+          "cristalino",
+          "iris",
+          "cornea",
+          "via-optica",
+          "olho"
+        ],
+        "texto": "Da parede para dentro: a esclera dá a forma, o gel vítreo enche o centro, a retina reveste o fundo e, na frente, entram o cristalino, a íris e a córnea. O nervo óptico leva tudo ao cérebro."
+      },
+      "problemas": [
+        {
+          "id": "catarata",
+          "titulo": "Catarata",
+          "origem": "cristalino",
+          "afeta": [
+            "retina"
+          ],
+          "mecanismo": "O cristalino fica opaco com o tempo e a luz chega espalhada à retina.",
+          "cadeia": [
+            "A visão fica embaçada, como através de um vidro fosco.",
+            "Luzes à noite causam ofuscamento e halos.",
+            "Quando atrapalha a rotina, a cirurgia troca o cristalino por uma lente artificial."
+          ],
+          "sinais": [
+            "Visão embaçada",
+            "Ofuscamento com luzes",
+            "Cores desbotadas"
+          ],
+          "ajuda": "Perda súbita de visão ou dor forte no olho: urgência oftalmológica.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "retina_nei",
+            "retina_nhs"
+          ]
+        },
+        {
+          "id": "descolamento",
+          "titulo": "Descolamento de retina",
+          "origem": "retina",
+          "afeta": [
+            "corpo-vitreo",
+            "via-optica"
+          ],
+          "mecanismo": "No tipo mais comum, uma ruptura permite que líquido passe sob a retina. Também existem descolamentos por tração ou acúmulo de líquido sem ruptura.",
+          "cadeia": [
+            "Surgem moscas volantes novas e flashes de luz.",
+            "Uma sombra, como uma cortina, cresce no campo visual.",
+            "Sem tratamento rápido, a perda de visão pode ser permanente."
+          ],
+          "sinais": [
+            "Flashes de luz",
+            "Moscas volantes novas e numerosas",
+            "Sombra no campo visual"
+          ],
+          "ajuda": "Flashes, muitas moscas volantes novas ou sombra no campo visual: oftalmologista hoje.",
+          "contexto_educativo": "Exemplo de mecanismo possível; etapas e sintomas não ocorrem obrigatoriamente em toda pessoa.",
+          "fontes": [
+            "retina_nei",
+            "retina_nhs"
+          ]
+        }
+      ],
+      "corpo": {
+        "texto": "Os olhos ficam nas órbitas, cavidades ósseas do crânio que os protegem. Dois nervos ópticos levam a imagem ao lobo occipital, na parte de trás do cérebro.",
+        "sistemas": [
+          "Sensorial",
+          "Nervoso (via óptica)",
+          "Cardiovascular (irrigação da retina)"
+        ],
+        "ajuda": "Trauma no olho ou perda de visão súbita: urgência."
+      },
+      "queixas": [
+        "olho-ouvido"
+      ],
+      "fontes": [
+        {
+          "id": "retina_nei",
+          "titulo": "NEI — Retinal detachment",
+          "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+          "instituicao": "NIH/NEI",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "id": "retina_nhs",
+          "titulo": "NHS — Detached retina",
+          "url": "https://www.nhs.uk/conditions/detached-retina-retinal-detachment/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "exemplo": {
+        "tipo": "ficticio",
+        "relato": "Uma pessoa percebe flashes novos e uma sombra como cortina na visão.",
+        "pergunta": "É seguro esperar para ver se melhora?",
+        "resposta": "Não. É necessária avaliação oftalmológica imediata para investigar a retina."
+      },
+      "objetivo": "Relacionar as estruturas à função e distinguir explicação anatômica de diagnóstico individual.",
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "revisão editorial parcial com confronto de fontes públicas",
+        "escopo": "Correções registradas em revisao-conhecimento.json; demais afirmações ainda exigem conferência específica.",
+        "livros_integrais_consultados": false
+      }
+    }
+  ],
+  "fontes": {
+    "valvas_nice": {
+      "titulo": "NICE NG208 — Investigação de doença valvar",
+      "url": "https://www.nice.org.uk/guidance/ng208/chapter/Recommendations",
+      "instituicao": "NICE",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "valvas_nhs": {
+      "titulo": "NHS — Heart valve disease",
+      "url": "https://www.nhs.uk/conditions/heart-valve-disease/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "pulmoes_nih": {
+      "titulo": "NHLBI — Respiratory system",
+      "url": "https://www.nhlbi.nih.gov/health/lungs/respiratory-system",
+      "instituicao": "NIH/NHLBI",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "pneumonia_nhs": {
+      "titulo": "NHS — Pneumonia",
+      "url": "https://www.nhs.uk/conditions/pneumonia/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "vesicula_niddk": {
+      "titulo": "NIDDK — Gallstones: symptoms and causes",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gallstones/symptoms-causes",
+      "instituicao": "NIH/NIDDK",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "vesicula_nhs": {
+      "titulo": "NHS — Gallstones",
+      "url": "https://www.nhs.uk/conditions/Gallstones/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "ulcera_niddk": {
+      "titulo": "NIDDK — Peptic ulcers: symptoms and causes",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/symptoms-causes",
+      "instituicao": "NIH/NIDDK",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "ulcera_nhs": {
+      "titulo": "NHS — Stomach ulcer",
+      "url": "https://www.nhs.uk/conditions/stomach-ulcer/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "apendice_niddk": {
+      "titulo": "NIDDK — Appendicitis: symptoms and causes",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis/symptoms-causes",
+      "instituicao": "NIH/NIDDK",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "apendice_nhs": {
+      "titulo": "NHS — Appendicitis",
+      "url": "https://www.nhs.uk/conditions/appendicitis/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "rins_niddk": {
+      "titulo": "NIDDK — Kidney stones: symptoms and causes",
+      "url": "https://www.niddk.nih.gov/health-information/urologic-diseases/kidney-stones/symptoms-causes",
+      "instituicao": "NIH/NIDDK",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "rins_nhs": {
+      "titulo": "NHS — Kidney stones",
+      "url": "https://www.nhs.uk/conditions/kidney-stones/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "coluna_nice": {
+      "titulo": "NICE NG127 — Recomendação 1.7.3",
+      "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+      "instituicao": "NICE",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "coluna_nhs": {
+      "titulo": "NHS — Back pain",
+      "url": "https://www.nhs.uk/conditions/back-pain/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "lca_aaos": {
+      "titulo": "AAOS — Anterior cruciate ligament injuries",
+      "url": "https://www.orthoinfo.org/diseases--conditions/anterior-cruciate-ligament-acl-injuries/",
+      "instituicao": "AAOS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "entorse_nhs": {
+      "titulo": "NHS — Sprains and strains",
+      "url": "https://www.nhs.uk/conditions/sprains-and-strains/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "osteoporose_nih": {
+      "titulo": "NIAMS — Osteoporosis",
+      "url": "https://www.niams.nih.gov/health-topics/osteoporosis",
+      "instituicao": "NIH/NIAMS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "ombro_aaos": {
+      "titulo": "AAOS — Rotator cuff tears",
+      "url": "https://www.orthoinfo.org/diseases--conditions/rotator-cuff-tears",
+      "instituicao": "AAOS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "ombro_medline": {
+      "titulo": "MedlinePlus — Rotator cuff problems",
+      "url": "https://medlineplus.gov/ency/article/000438.htm",
+      "instituicao": "NLM/A.D.A.M.",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "avc_ms": {
+      "titulo": "Ministério da Saúde — AVC",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/avc",
+      "instituicao": "Ministério da Saúde",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "neuro_nice": {
+      "titulo": "NICE NG127 — Sudden-onset limb weakness",
+      "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+      "instituicao": "NICE",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "retina_nei": {
+      "titulo": "NEI — Retinal detachment",
+      "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+      "instituicao": "NIH/NEI",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "retina_nhs": {
+      "titulo": "NHS — Detached retina",
+      "url": "https://www.nhs.uk/conditions/detached-retina-retinal-detachment/",
+      "instituicao": "NHS",
+      "consultado_em": "2026-10-27",
+      "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+    },
+    "openstax_snc": {
+      "titulo": "OpenStax — Anatomy and Physiology 2e, seção 13.2",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/13-2-the-central-nervous-system",
+      "instituicao": "OpenStax/Rice University",
+      "consultado_em": "2026-10-27",
+      "escopo": "Organização do sistema nervoso central e raízes espinhais."
+    }
+  }
+}

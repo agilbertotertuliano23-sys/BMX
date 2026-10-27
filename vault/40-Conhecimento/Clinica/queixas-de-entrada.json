@@ -1,5 +1,5 @@
 {
-  "versao": "2026-10-22",
+  "versao": "2026-10-27",
   "sobre": "Queixas de entrada: o que a pessoa diz quando chega ao pronto-socorro, UPA ou UBS (o 'início de descoberta'). Para cada queixa: como ela é dita, o código CIAP-2 do motivo da consulta, as causas que mais aparecem, o que não pode passar despercebido, os sinais que sobem o nível de atendimento, as perguntas que mais ajudam a separar as causas e o sintoma anatômico ligado (catalogo-anatomico.json). Serve para orientar a conversa, não para diagnosticar. Os códigos CIAP-2 e CID-10 são de referência: conferir na tabela oficial (CIAP-2 SBMFC; CID-10 DATASUS) antes de qualquer uso clínico.",
   "fontes": [
     "CDC/NCHS, NHAMCS 2022: 10 principais motivos de visita e diagnósticos em emergências dos EUA — https://www.cdc.gov/nchs/dhcs/ed-visits/",
@@ -8,329 +8,1511 @@
     "Revista de Enfermagem UFG (Manchester, 364 fichas): mal-estar no adulto, problemas em extremidades, dor abdominal, cefaleia",
     "Revista Baiana de Enfermagem 2020 (homens, Nordeste): dor como principal queixa (35,2%)"
   ],
-
   "queixas": [
-    {"id": "dor-abdominal", "queixa": "Dor na barriga", "ciap2": "D01/D06",
-     "termos": ["dor na barriga", "dor abdominal", "colica", "barriga doendo", "dor no estomago", "dor de barriga"],
-     "frequencia": "1º motivo de ida à emergência nos EUA (NHAMCS 2022); entre as 4 queixas mais registradas em UPA brasileira (Manchester)",
-     "causas_frequentes": [
-       {"nome": "Gastroenterite (infecção intestinal)", "cid10": "A09"},
-       {"nome": "Gastrite / dispepsia", "cid10": "K29 / K30"},
-       {"nome": "Constipação", "cid10": "K59.0"},
-       {"nome": "Cólica menstrual", "cid10": "N94.6"},
-       {"nome": "Infecção urinária", "cid10": "N39.0"}],
-     "nao_perder": [
-       {"nome": "Apendicite", "cid10": "K35"},
-       {"nome": "Cólica biliar / colecistite", "cid10": "K80 / K81"},
-       {"nome": "Cálculo renal", "cid10": "N20"},
-       {"nome": "Gravidez ectópica", "cid10": "O00"},
-       {"nome": "Pancreatite", "cid10": "K85"},
-       {"nome": "Obstrução intestinal", "cid10": "K56"}],
-     "sinais_de_alerta": ["dor forte e contínua que piora", "barriga dura", "febre com dor localizada", "vômito com sangue ou fezes pretas", "atraso menstrual com dor", "desmaio"],
-     "perguntas_chave": ["Onde dói mais, e a dor mudou de lugar?", "Desde quando, e piora ou vem em ondas?", "Febre, vômito, diarreia ou dor ao urinar?", "Pode estar grávida?"],
-     "sintoma_anatomico": ["azia", "abdome-superior-direito", "abdome-inferior-direito", "abdome-inferior-esquerdo", "urinario"]},
-
-    {"id": "dor-toracica", "queixa": "Dor no peito", "ciap2": "A11/K01",
-     "termos": ["dor no peito", "aperto no peito", "pontada no peito", "peito doendo", "queimacao no peito"],
-     "frequencia": "2º motivo de ida à emergência nos EUA (NHAMCS 2022)",
-     "causas_frequentes": [
-       {"nome": "Dor muscular ou da parede do tórax", "cid10": "R07.4 / M94.0"},
-       {"nome": "Refluxo gastroesofágico", "cid10": "K21"},
-       {"nome": "Ansiedade / crise de pânico", "cid10": "F41"}],
-     "nao_perder": [
-       {"nome": "Infarto / síndrome coronariana aguda", "cid10": "I21 / I20"},
-       {"nome": "Embolia pulmonar", "cid10": "I26"},
-       {"nome": "Dissecção de aorta", "cid10": "I71.0"},
-       {"nome": "Pneumotórax", "cid10": "J93"},
-       {"nome": "Pneumonia", "cid10": "J18"}],
-     "sinais_de_alerta": ["aperto ou peso no peito", "dor que vai para braço, mandíbula ou costas", "falta de ar", "suor frio", "desmaio", "dor rasgante"],
-     "perguntas_chave": ["É aperto, pontada ou queimação?", "Começou no esforço ou em repouso?", "Vai para o braço, mandíbula ou costas?", "Tem pressão alta, diabetes, fuma, ou alguém da família infartou cedo?"],
-     "sintoma_anatomico": ["dor-no-peito"]},
-
-    {"id": "tosse", "queixa": "Tosse", "ciap2": "R05",
-     "termos": ["tosse", "tossindo", "catarro", "pigarro"],
-     "frequencia": "3º motivo nos EUA (NHAMCS 2022); quadro gripal é o sintoma mais citado em UPA brasileira (24%)",
-     "causas_frequentes": [
-       {"nome": "Resfriado / infecção das vias aéreas superiores", "cid10": "J06.9"},
-       {"nome": "Gripe (influenza) e COVID-19", "cid10": "J11 / U07.1"},
-       {"nome": "Bronquite aguda", "cid10": "J20"},
-       {"nome": "Asma", "cid10": "J45"}],
-     "nao_perder": [
-       {"nome": "Pneumonia", "cid10": "J18"},
-       {"nome": "Tuberculose (tosse > 3 semanas)", "cid10": "A15"},
-       {"nome": "Insuficiência cardíaca", "cid10": "I50"}],
-     "sinais_de_alerta": ["falta de ar", "febre alta por mais de três dias", "tosse com sangue", "lábios roxos", "dor no peito ao respirar"],
-     "perguntas_chave": ["Há quanto tempo?", "Tem catarro, de que cor, com sangue?", "Febre ou falta de ar?", "Chiado, asma ou fumo?"],
-     "sintoma_anatomico": ["falta-de-ar", "garganta"]},
-
-    {"id": "falta-de-ar", "queixa": "Falta de ar", "ciap2": "R02",
-     "termos": ["falta de ar", "cansaco para respirar", "dificuldade para respirar", "chiado no peito", "sem ar"],
-     "frequencia": "4º motivo nos EUA (NHAMCS 2022)",
-     "causas_frequentes": [
-       {"nome": "Crise de asma", "cid10": "J45"},
-       {"nome": "DPOC descompensada", "cid10": "J44"},
-       {"nome": "Infecção respiratória", "cid10": "J06 / J18"},
-       {"nome": "Ansiedade (hiperventilação)", "cid10": "F41"}],
-     "nao_perder": [
-       {"nome": "Insuficiência cardíaca", "cid10": "I50"},
-       {"nome": "Embolia pulmonar", "cid10": "I26"},
-       {"nome": "Infarto", "cid10": "I21"},
-       {"nome": "Anafilaxia", "cid10": "T78.2"}],
-     "sinais_de_alerta": ["não consegue falar frases inteiras", "lábios roxos", "confusão", "dor no peito", "inchaço de rosto ou garganta"],
-     "perguntas_chave": ["Começou de repente ou aos poucos?", "Piora deitado ou no esforço?", "Pernas inchadas?", "Tem asma, bronquite ou problema no coração?"],
-     "sintoma_anatomico": ["falta-de-ar"]},
-
-    {"id": "febre", "queixa": "Febre", "ciap2": "A03",
-     "termos": ["febre", "febril", "temperatura alta", "calafrio"],
-     "frequencia": "5º motivo nos EUA (NHAMCS 2022); principal queixa em UPA pediátrica brasileira",
-     "causas_frequentes": [
-       {"nome": "Infecção viral (resfriado, gripe)", "cid10": "J06.9 / J11"},
-       {"nome": "Dengue e outras arboviroses", "cid10": "A90 / A92"},
-       {"nome": "Infecção urinária", "cid10": "N39.0"},
-       {"nome": "Amigdalite / otite", "cid10": "J03 / H66"}],
-     "nao_perder": [
-       {"nome": "Dengue com sinais de alarme / grave", "cid10": "A91"},
-       {"nome": "Meningite", "cid10": "G03"},
-       {"nome": "Sepse", "cid10": "A41"},
-       {"nome": "Pneumonia", "cid10": "J18"},
-       {"nome": "Pielonefrite", "cid10": "N10"}],
-     "sinais_de_alerta": ["bebê com menos de três meses", "nuca dura", "manchas que não somem ao apertar", "dor abdominal intensa ou vômitos persistentes (dengue)", "sangramento de gengiva ou nariz", "confusão ou sonolência"],
-     "perguntas_chave": ["Quanto mediu e há quantos dias?", "Tem manchas no corpo, dor atrás dos olhos ou nas juntas?", "Tosse, dor de garganta, dor ao urinar?", "Alguém em casa ou no bairro com dengue?"],
-     "sintoma_anatomico": []},
-
-    {"id": "cefaleia", "queixa": "Dor de cabeça", "ciap2": "N01",
-     "termos": ["dor de cabeca", "cefaleia", "enxaqueca", "cabeca doendo"],
-     "frequencia": "6º motivo nos EUA (NHAMCS 2022); entre as 4 queixas mais registradas em UPA brasileira",
-     "causas_frequentes": [
-       {"nome": "Cefaleia tensional", "cid10": "G44.2"},
-       {"nome": "Enxaqueca", "cid10": "G43"},
-       {"nome": "Sinusite", "cid10": "J01"},
-       {"nome": "Febre de infecção viral (incluindo dengue)", "cid10": "R50 / A90"}],
-     "nao_perder": [
-       {"nome": "Hemorragia subaracnóidea", "cid10": "I60"},
-       {"nome": "Meningite", "cid10": "G03"},
-       {"nome": "AVC", "cid10": "I63 / I61"},
-       {"nome": "Crise hipertensiva", "cid10": "I16"}],
-     "sinais_de_alerta": ["a pior dor de cabeça da vida", "começo súbito, como uma explosão", "febre com nuca dura", "fraqueza, fala enrolada ou visão dupla", "depois de batida na cabeça"],
-     "perguntas_chave": ["Começou de repente ou foi crescendo?", "É parecida com dores que já teve?", "Febre, vômito, luz incomodando?", "Algum sintoma no corpo junto (fraqueza, fala)?"],
-     "sintoma_anatomico": ["dor-de-cabeca"]},
-
-    {"id": "dor-lombar", "queixa": "Dor nas costas", "ciap2": "L02/L03",
-     "termos": ["dor nas costas", "lombar", "lombalgia", "dor na coluna", "travou as costas", "parte de baixo das costas", "baixo das costas", "base das costas"],
-     "frequencia": "8º motivo nos EUA (NHAMCS 2022); doenças osteomusculares são a 1ª causa em UPA brasileira (24%)",
-     "causas_frequentes": [
-       {"nome": "Lombalgia mecânica (muscular)", "cid10": "M54.5"},
-       {"nome": "Ciatalgia / hérnia de disco", "cid10": "M54.3 / M51.1"}],
-     "nao_perder": [
-       {"nome": "Cálculo renal", "cid10": "N20"},
-       {"nome": "Pielonefrite", "cid10": "N10"},
-       {"nome": "Síndrome da cauda equina", "cid10": "G83.4"},
-       {"nome": "Aneurisma de aorta abdominal", "cid10": "I71.3 / I71.4"}],
-     "sinais_de_alerta": ["perda de força nas pernas", "dormência na região íntima", "perder controle da urina ou fezes", "febre", "dor que não melhora deitado, à noite", "mais de 50 anos com dor nova"],
-     "perguntas_chave": ["Começou depois de esforço ou movimento?", "Desce para a perna, abaixo do joelho?", "Febre ou dor ao urinar?", "Alguma dormência ou fraqueza?"],
-     "sintoma_anatomico": ["lombar", "ciatico", "colica-renal"]},
-
-    {"id": "vomito-diarreia", "queixa": "Vômito e diarreia", "ciap2": "D10/D11",
-     "termos": ["vomito", "vomitando", "diarreia", "enjoo", "nausea", "intestino solto"],
-     "frequencia": "Vômito é o 9º motivo nos EUA (NHAMCS 2022); diarreia e vômitos é queixa frequente na classificação de risco",
-     "causas_frequentes": [
-       {"nome": "Gastroenterite viral ou bacteriana", "cid10": "A08 / A09"},
-       {"nome": "Intoxicação alimentar", "cid10": "A05"}],
-     "nao_perder": [
-       {"nome": "Desidratação", "cid10": "E86"},
-       {"nome": "Apendicite (início)", "cid10": "K35"},
-       {"nome": "Obstrução intestinal", "cid10": "K56"},
-       {"nome": "Cetoacidose diabética", "cid10": "E10.1 / E11.1"}],
-     "sinais_de_alerta": ["não consegue beber nem segurar líquido", "urina muito pouca", "sangue no vômito ou nas fezes", "sonolência, confusão", "criança pequena ou idoso"],
-     "perguntas_chave": ["Quantas vezes por dia?", "Consegue beber líquido?", "Tem sangue?", "Febre ou dor forte na barriga?"],
-     "sintoma_anatomico": ["azia"]},
-
-    {"id": "saude-mental", "queixa": "Crise de ansiedade, tristeza, agitação", "ciap2": "P01/P03",
-     "termos": ["ansiedade", "crise de panico", "nervoso", "tristeza", "depressao", "agitado"],
-     "frequencia": "10º motivo nos EUA (NHAMCS 2022, sintomas psicológicos e mentais)",
-     "causas_frequentes": [
-       {"nome": "Transtorno de ansiedade / pânico", "cid10": "F41"},
-       {"nome": "Episódio depressivo", "cid10": "F32"},
-       {"nome": "Reação aguda ao estresse", "cid10": "F43.0"}],
-     "nao_perder": [
-       {"nome": "Risco de suicídio", "cid10": "R45.8"},
-       {"nome": "Causa física imitando ansiedade (arritmia, hipoglicemia, tireoide)", "cid10": "I49 / E16 / E05"},
-       {"nome": "Intoxicação ou abstinência", "cid10": "F10–F19"}],
-     "sinais_de_alerta": ["fala em morrer ou se machucar", "agitação com confusão", "uso de substância", "dor no peito junto"],
-     "perguntas_chave": ["Você está em segurança agora?", "Já aconteceu antes?", "Usou álcool, remédio ou outra substância?", "Tem dor no peito ou coração disparado?"],
-     "sintoma_anatomico": []},
-
-    {"id": "garganta-gripe", "queixa": "Dor de garganta, gripe, resfriado", "ciap2": "R21/R74/R80",
-     "termos": ["dor de garganta", "gripe", "resfriado", "nariz escorrendo", "coriza", "sintomas gripais"],
-     "frequencia": "Sintomas gripais: 24% dos atendimentos em UPA brasileira (2018-2022)",
-     "causas_frequentes": [
-       {"nome": "Resfriado comum", "cid10": "J00"},
-       {"nome": "Faringite / amigdalite", "cid10": "J02 / J03"},
-       {"nome": "Gripe e COVID-19", "cid10": "J11 / U07.1"},
-       {"nome": "Sinusite", "cid10": "J01"}],
-     "nao_perder": [
-       {"nome": "Abscesso periamigdaliano", "cid10": "J36"},
-       {"nome": "Epiglotite", "cid10": "J05.1"},
-       {"nome": "Síndrome respiratória aguda grave", "cid10": "U04 / J18"}],
-     "sinais_de_alerta": ["não consegue engolir a saliva", "voz abafada", "falta de ar", "febre alta por mais de três dias"],
-     "perguntas_chave": ["Febre? Quanto?", "Consegue engolir?", "Tosse ou falta de ar?", "Tem placas brancas na garganta?"],
-     "sintoma_anatomico": ["garganta"]},
-
-    {"id": "urinario", "queixa": "Ardência ou dor ao urinar", "ciap2": "U01/U02",
-     "termos": ["ardencia ao urinar", "dor ao urinar", "xixi ardendo", "urinando muito", "urina com sangue"],
-     "frequencia": "Doenças do aparelho geniturinário: 6º grupo de diagnóstico em emergências dos EUA (NHAMCS 2022)",
-     "causas_frequentes": [
-       {"nome": "Cistite (infecção da bexiga)", "cid10": "N30 / N39.0"},
-       {"nome": "Uretrite / IST", "cid10": "N34 / A56"}],
-     "nao_perder": [
-       {"nome": "Pielonefrite", "cid10": "N10"},
-       {"nome": "Cálculo renal", "cid10": "N20"},
-       {"nome": "Retenção urinária", "cid10": "R33"}],
-     "sinais_de_alerta": ["febre com dor nas costas", "vômitos", "não consegue urinar", "gestante"],
-     "perguntas_chave": ["Arde, aperta ou dói?", "Febre ou dor nas costas?", "Sangue na urina?", "Pode estar grávida?"],
-     "sintoma_anatomico": ["urinario", "colica-renal"]},
-
-    {"id": "dor-membros", "queixa": "Dor no braço, perna, ombro ou joelho", "ciap2": "L08/L15/L17",
-     "termos": ["dor no joelho", "dor no ombro", "dor no braco", "dor na perna", "dor no pe", "dor na junta"],
-     "frequencia": "Osteomusculares: 1º grupo em UPA brasileira (24%); 'problemas em extremidades' entre as queixas mais registradas no Manchester",
-     "causas_frequentes": [
-       {"nome": "Tendinite / bursite", "cid10": "M75 / M70"},
-       {"nome": "Artrose", "cid10": "M17 / M19"},
-       {"nome": "Distensão muscular", "cid10": "T14.3"}],
-     "nao_perder": [
-       {"nome": "Trombose venosa profunda", "cid10": "I80"},
-       {"nome": "Artrite séptica", "cid10": "M00"},
-       {"nome": "Fratura", "cid10": "S42 / S52 / S82"},
-       {"nome": "Dor no braço esquerdo de origem cardíaca", "cid10": "I20 / I21"}],
-     "sinais_de_alerta": ["perna de um lado só inchada, quente e vermelha", "junta quente com febre", "deformidade depois de queda", "dor no braço com aperto no peito"],
-     "perguntas_chave": ["Teve queda, batida ou esforço?", "Está inchado, quente ou vermelho?", "Consegue apoiar o peso ou mexer?", "Dói mais parado ou em movimento?"],
-     "sintoma_anatomico": ["ombro", "cotovelo", "punho-mao", "quadril", "joelho", "panturrilha"]},
-
-    {"id": "trauma-entorse", "queixa": "Queda, batida ou torção", "ciap2": "A80/L77",
-     "termos": ["cai", "caiu", "queda", "torci", "entorse", "bati", "machuquei", "pancada"],
-     "frequencia": "Lesões e envenenamentos: 2º grupo de diagnóstico nos EUA (NHAMCS 2022) e de internação no SUS (Centro-Oeste)",
-     "causas_frequentes": [
-       {"nome": "Entorse de tornozelo", "cid10": "S93.4"},
-       {"nome": "Contusão", "cid10": "T14.0"},
-       {"nome": "Corte (ferimento)", "cid10": "T14.1"}],
-     "nao_perder": [
-       {"nome": "Fratura", "cid10": "T14.2"},
-       {"nome": "Traumatismo craniano", "cid10": "S06"},
-       {"nome": "Lesão de órgão interno", "cid10": "S36"}],
-     "sinais_de_alerta": ["batida na cabeça com vômito, sonolência ou confusão", "deformidade", "não consegue apoiar", "sangramento que não para", "uso de anticoagulante"],
-     "perguntas_chave": ["Como foi a queda ou batida?", "Bateu a cabeça?", "Consegue apoiar ou mexer?", "Usa remédio para afinar o sangue?"],
-     "sintoma_anatomico": ["tornozelo", "joelho", "punho-mao"]},
-
-    {"id": "tontura", "queixa": "Tontura", "ciap2": "N17",
-     "termos": ["tontura", "tonto", "vertigem", "labirintite", "mundo girando"],
-     "frequencia": "Queixa comum em adultos e idosos; 'mal-estar no adulto' é das mais registradas no Manchester em UPA brasileira",
-     "causas_frequentes": [
-       {"nome": "Vertigem posicional (VPPB)", "cid10": "H81.1"},
-       {"nome": "Queda de pressão / desidratação", "cid10": "I95 / E86"},
-       {"nome": "Labirintite / neurite vestibular", "cid10": "H81.2"}],
-     "nao_perder": [
-       {"nome": "AVC de circulação posterior", "cid10": "I63"},
-       {"nome": "Arritmia", "cid10": "I49"},
-       {"nome": "Hipoglicemia", "cid10": "E16.2"}],
-     "sinais_de_alerta": ["fala enrolada, rosto torto, fraqueza ou visão dupla", "desmaio", "coração disparado", "dor de cabeça forte"],
-     "perguntas_chave": ["O mundo gira ou parece que vai desmaiar?", "Piora ao mexer a cabeça?", "Algum sintoma neurológico junto?", "Tem diabetes ou usa remédio de pressão?"],
-     "sintoma_anatomico": ["tontura"]},
-
-    {"id": "pressao-alta", "queixa": "Pressão alta", "ciap2": "K86/K87",
-     "termos": ["pressao alta", "pressao subiu", "hipertensao", "pressao 18", "pressao 20"],
-     "frequencia": "Motivo frequente de procura em UPA brasileira; doenças circulatórias são o 8º grupo de diagnóstico nos EUA",
-     "causas_frequentes": [
-       {"nome": "Hipertensão sem controle (pressão alta sem sintoma de órgão)", "cid10": "I10"},
-       {"nome": "Dor ou ansiedade elevando a pressão", "cid10": "R03.0"}],
-     "nao_perder": [
-       {"nome": "Emergência hipertensiva (AVC, infarto, edema de pulmão)", "cid10": "I16.1"},
-       {"nome": "Pré-eclâmpsia", "cid10": "O14"}],
-     "sinais_de_alerta": ["dor no peito", "falta de ar", "fraqueza ou fala enrolada", "dor de cabeça forte com visão turva", "gestante"],
-     "perguntas_chave": ["Quanto mediu e como mediu?", "Tem algum sintoma agora?", "Toma remédio de pressão, e tomou hoje?", "Pode estar grávida?"],
-     "sintoma_anatomico": []},
-
-    {"id": "pele-alergia", "queixa": "Manchas, coceira ou alergia na pele", "ciap2": "S06/S07/A92",
-     "termos": ["manchas na pele", "coceira", "alergia", "urticaria", "vermelhidao", "empolou"],
-     "frequencia": "Doenças da pele: 10º grupo de diagnóstico nos EUA (NHAMCS 2022)",
-     "causas_frequentes": [
-       {"nome": "Urticária", "cid10": "L50"},
-       {"nome": "Dermatite de contato", "cid10": "L25"},
-       {"nome": "Exantema viral (incluindo dengue)", "cid10": "B09 / A90"},
-       {"nome": "Celulite / abscesso", "cid10": "L03 / L02"}],
-     "nao_perder": [
-       {"nome": "Anafilaxia", "cid10": "T78.2"},
-       {"nome": "Meningococcemia (manchas roxas com febre)", "cid10": "A39"},
-       {"nome": "Reação grave a medicamento", "cid10": "L51"}],
-     "sinais_de_alerta": ["inchaço de lábio, língua ou garganta", "falta de ar", "manchas roxas que não somem ao apertar com febre", "bolhas e descamação com febre"],
-     "perguntas_chave": ["Começou depois de remédio, comida ou picada?", "Tem febre?", "Inchaço no rosto ou falta de ar?", "As manchas somem ao apertar?"],
-     "sintoma_anatomico": []},
-
-    {"id": "olho-ouvido", "queixa": "Olho vermelho ou dor de ouvido", "ciap2": "F02/H01",
-     "termos": ["olho vermelho", "dor no olho", "dor de ouvido", "ouvido doendo", "vista embacada"],
-     "frequencia": "Queixas com fluxo próprio na classificação de risco; frequentes em crianças (otite)",
-     "causas_frequentes": [
-       {"nome": "Conjuntivite", "cid10": "H10"},
-       {"nome": "Otite média / externa", "cid10": "H66 / H60"}],
-     "nao_perder": [
-       {"nome": "Glaucoma agudo", "cid10": "H40.2"},
-       {"nome": "Corpo estranho / lesão química no olho", "cid10": "T15 / T26"},
-       {"nome": "Mastoidite", "cid10": "H70"}],
-     "sinais_de_alerta": ["perda súbita da visão", "dor forte no olho com vômito", "produto químico no olho", "inchaço atrás da orelha"],
-     "perguntas_chave": ["A visão mudou?", "Entrou algo no olho?", "Tem secreção ou febre?", "Dor atrás da orelha?"],
-     "sintoma_anatomico": ["olho", "tontura"]},
-
-    {"id": "palpitacoes", "queixa": "Coração acelerado ou irregular", "ciap2": "",
-     "termos": ["palpitacao", "palpitacoes", "coracao acelerado", "coracao disparado", "coracao batendo forte", "batimento irregular"],
-     "grupos": ["coracao disparad", "coracao acelerad", "batimento irregular"],
-     "frequencia": "Queixa que requer avaliação conforme duração e sintomas associados",
-     "causas_frequentes": [{"nome": "Estresse, cafeína ou falta de sono", "cid10": ""}, {"nome": "Efeito de medicamento", "cid10": ""}],
-     "nao_perder": [{"nome": "Arritmia", "cid10": "I49"}, {"nome": "Problema cardíaco com dor no peito ou falta de ar", "cid10": ""}],
-     "sinais_de_alerta": ["dor no peito junto", "falta de ar junto", "desmaio ou quase desmaio", "palpitação que não passa"],
-     "perguntas_chave": ["Começou quando e quanto dura?", "É rápido ou irregular?", "Há dor no peito, falta de ar ou desmaio?", "Usou cafeína, estimulantes ou remédio novo?"],
-     "sintoma_anatomico": ["dor-no-peito"]},
-
-    {"id": "perna-inchada", "queixa": "Perna inchada", "ciap2": "",
-     "termos": ["perna inchada", "pernas inchadas", "panturrilha inchada", "inchaco na perna", "inchou a perna"],
-     "grupos": ["perna inchad", "panturrilha inchad"],
-     "frequencia": "Investigar início, lateralidade e sinais respiratórios",
-     "causas_frequentes": [{"nome": "Edema por imobilidade ou insuficiência venosa", "cid10": ""}, {"nome": "Lesão local", "cid10": ""}],
-     "nao_perder": [{"nome": "Trombose venosa profunda", "cid10": "I80.2"}, {"nome": "Embolia pulmonar", "cid10": "I26"}],
-     "sinais_de_alerta": ["uma perna só inchada e dolorida", "falta de ar", "dor no peito", "tosse com sangue"],
-     "perguntas_chave": ["É uma perna ou as duas?", "Dói ou está quente?", "Houve cirurgia, imobilização ou viagem longa?", "Há falta de ar ou dor no peito?"],
-     "sintoma_anatomico": ["panturrilha"]},
-
-    {"id": "dor-pelvica", "queixa": "Dor pélvica ou no baixo ventre", "ciap2": "",
-     "termos": ["dor pelvica", "dor no baixo ventre", "dor na pelve", "dor no pe da barriga", "colica fora da menstruacao"],
-     "frequencia": "Investigar gravidez possível, sangramento e início da dor",
-     "causas_frequentes": [{"nome": "Cólica menstrual", "cid10": "N94.6"}, {"nome": "Infecção urinária", "cid10": "N39.0"}],
-     "nao_perder": [{"nome": "Gravidez ectópica", "cid10": "O00"}, {"nome": "Torção ovariana", "cid10": "N83.5"}, {"nome": "Apendicite", "cid10": "K35"}],
-     "sinais_de_alerta": ["possível gravidez com dor ou sangramento", "dor súbita e forte de um lado", "desmaio", "sangramento intenso"],
-     "perguntas_chave": ["Pode estar grávida ou a menstruação atrasou?", "Há sangramento?", "A dor é de um lado e começou de repente?", "Há febre ou dor ao urinar?"],
-     "sintoma_anatomico": ["dor-pelvica", "abdome-inferior-direito", "abdome-inferior-esquerdo"]},
-
-    {"id": "reacao-medicamento", "queixa": "Possível reação a medicamento", "ciap2": "",
-     "termos": ["reacao a remedio", "reacao ao remedio", "alergia a remedio", "alergia ao remedio", "efeito colateral", "reacao a medicamento"],
-     "frequencia": "Investigar produto, dose relatada, tempo e sinais de gravidade",
-     "causas_frequentes": [{"nome": "Efeito adverso não alérgico", "cid10": ""}, {"nome": "Reação cutânea leve", "cid10": "L27.0"}],
-     "nao_perder": [{"nome": "Anafilaxia", "cid10": "T78.2"}, {"nome": "Reação cutânea grave", "cid10": "L51"}],
-     "sinais_de_alerta": ["inchaço de língua ou garganta", "dificuldade para respirar", "desmaio", "bolhas na pele ou mucosas"],
-     "perguntas_chave": ["Qual produto e quando começou?", "Quais sintomas apareceram e quanto tempo depois?", "Há falta de ar, inchaço ou tontura?", "Usa outros remédios ou suplementos?"],
-     "sintoma_anatomico": []},
-
-    {"id": "mal-estar", "queixa": "Mal-estar, fraqueza, cansaço", "ciap2": "A04/A05",
-     "termos": ["mal estar", "fraqueza", "cansaco", "indisposicao", "fraco", "sem forca"],
-     "frequencia": "'Mal-estar no adulto' é das queixas mais registradas no Manchester em UPA brasileira",
-     "causas_frequentes": [
-       {"nome": "Infecção viral", "cid10": "B34.9"},
-       {"nome": "Desidratação", "cid10": "E86"},
-       {"nome": "Anemia", "cid10": "D64.9"}],
-     "nao_perder": [
-       {"nome": "Diabetes descompensado / hipoglicemia", "cid10": "E11 / E16"},
-       {"nome": "Infarto sem dor típica (idosos, diabéticos)", "cid10": "I21"},
-       {"nome": "Sepse", "cid10": "A41"},
-       {"nome": "AVC", "cid10": "I63"}],
-     "sinais_de_alerta": ["confusão", "fraqueza de um lado", "falta de ar", "desmaio", "febre em idoso"],
-     "perguntas_chave": ["Desde quando?", "Febre, perda de peso, sangramento?", "Diabetes, pressão, coração?", "Fraqueza no corpo todo ou de um lado?"],
-     "sintoma_anatomico": []}
+    {
+      "id": "dor-abdominal",
+      "queixa": "Dor na barriga",
+      "ciap2": "D01/D06",
+      "termos": [
+        "dor na barriga",
+        "dor abdominal",
+        "colica",
+        "barriga doendo",
+        "dor no estomago",
+        "dor de barriga"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Gastroenterite (infecção intestinal)",
+          "cid10": "A09"
+        },
+        {
+          "nome": "Gastrite / dispepsia",
+          "cid10": "K29 / K30"
+        },
+        {
+          "nome": "Constipação",
+          "cid10": "K59.0"
+        },
+        {
+          "nome": "Cólica menstrual",
+          "cid10": "N94.6"
+        },
+        {
+          "nome": "Infecção urinária",
+          "cid10": "N39.0"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Apendicite",
+          "cid10": "K35"
+        },
+        {
+          "nome": "Cólica biliar / colecistite",
+          "cid10": "K80 / K81"
+        },
+        {
+          "nome": "Cálculo renal",
+          "cid10": "N20"
+        },
+        {
+          "nome": "Gravidez ectópica",
+          "cid10": "O00"
+        },
+        {
+          "nome": "Pancreatite",
+          "cid10": "K85"
+        },
+        {
+          "nome": "Obstrução intestinal",
+          "cid10": "K56"
+        }
+      ],
+      "sinais_de_alerta": [
+        "dor forte e contínua que piora",
+        "barriga dura",
+        "febre com dor localizada",
+        "vômito com sangue ou fezes pretas",
+        "atraso menstrual com dor",
+        "desmaio"
+      ],
+      "perguntas_chave": [
+        "Onde dói mais, e a dor mudou de lugar?",
+        "Desde quando, e piora ou vem em ondas?",
+        "Febre, vômito, diarreia ou dor ao urinar?",
+        "Pode estar grávida?"
+      ],
+      "sintoma_anatomico": [
+        "azia",
+        "abdome-superior-direito",
+        "abdome-inferior-direito",
+        "abdome-inferior-esquerdo",
+        "urinario"
+      ],
+      "frequencia_historica": "1º motivo de ida à emergência nos EUA (NHAMCS 2022); entre as 4 queixas mais registradas em UPA brasileira (Manchester)",
+      "fontes": [
+        "abdome",
+        "gravidez",
+        "apendicite_niddk",
+        "apendicite_nhs"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "dor-toracica",
+      "queixa": "Dor no peito",
+      "ciap2": "A11/K01",
+      "termos": [
+        "dor no peito",
+        "aperto no peito",
+        "pontada no peito",
+        "peito doendo",
+        "queimacao no peito"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Dor muscular ou da parede do tórax",
+          "cid10": "R07.4 / M94.0"
+        },
+        {
+          "nome": "Refluxo gastroesofágico",
+          "cid10": "K21"
+        },
+        {
+          "nome": "Ansiedade / crise de pânico",
+          "cid10": "F41"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Infarto / síndrome coronariana aguda",
+          "cid10": "I21 / I20"
+        },
+        {
+          "nome": "Embolia pulmonar",
+          "cid10": "I26"
+        },
+        {
+          "nome": "Dissecção de aorta",
+          "cid10": "I71.0"
+        },
+        {
+          "nome": "Pneumotórax",
+          "cid10": "J93"
+        },
+        {
+          "nome": "Pneumonia",
+          "cid10": "J18"
+        }
+      ],
+      "sinais_de_alerta": [
+        "aperto ou peso no peito",
+        "dor que vai para braço, mandíbula ou costas",
+        "falta de ar",
+        "suor frio",
+        "desmaio",
+        "dor rasgante"
+      ],
+      "perguntas_chave": [
+        "É aperto, pontada ou queimação?",
+        "Começou no esforço ou em repouso?",
+        "Vai para o braço, mandíbula ou costas?",
+        "Tem pressão alta, diabetes, fuma, ou alguém da família infartou cedo?"
+      ],
+      "sintoma_anatomico": [
+        "dor-no-peito"
+      ],
+      "frequencia_historica": "2º motivo de ida à emergência nos EUA (NHAMCS 2022)",
+      "fontes": [
+        "peito",
+        "samu"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "tosse",
+      "queixa": "Tosse",
+      "ciap2": "R05",
+      "termos": [
+        "tosse",
+        "tossindo",
+        "catarro",
+        "pigarro"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Resfriado / infecção das vias aéreas superiores",
+          "cid10": "J06.9"
+        },
+        {
+          "nome": "Gripe (influenza) e COVID-19",
+          "cid10": "J11 / U07.1"
+        },
+        {
+          "nome": "Bronquite aguda",
+          "cid10": "J20"
+        },
+        {
+          "nome": "Asma",
+          "cid10": "J45"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Pneumonia",
+          "cid10": "J18"
+        },
+        {
+          "nome": "Tuberculose (tosse > 3 semanas)",
+          "cid10": "A15"
+        },
+        {
+          "nome": "Insuficiência cardíaca",
+          "cid10": "I50"
+        }
+      ],
+      "sinais_de_alerta": [
+        "falta de ar",
+        "febre alta por mais de três dias",
+        "tosse com sangue",
+        "lábios roxos",
+        "dor no peito ao respirar"
+      ],
+      "perguntas_chave": [
+        "Há quanto tempo?",
+        "Tem catarro, de que cor, com sangue?",
+        "Febre ou falta de ar?",
+        "Chiado, asma ou fumo?"
+      ],
+      "sintoma_anatomico": [
+        "falta-de-ar",
+        "garganta"
+      ],
+      "frequencia_historica": "3º motivo nos EUA (NHAMCS 2022); quadro gripal é o sintoma mais citado em UPA brasileira (24%)",
+      "fontes": [
+        "tosse"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "falta-de-ar",
+      "queixa": "Falta de ar",
+      "ciap2": "R02",
+      "termos": [
+        "falta de ar",
+        "cansaco para respirar",
+        "dificuldade para respirar",
+        "chiado no peito",
+        "sem ar"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Crise de asma",
+          "cid10": "J45"
+        },
+        {
+          "nome": "DPOC descompensada",
+          "cid10": "J44"
+        },
+        {
+          "nome": "Infecção respiratória",
+          "cid10": "J06 / J18"
+        },
+        {
+          "nome": "Ansiedade (hiperventilação)",
+          "cid10": "F41"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Insuficiência cardíaca",
+          "cid10": "I50"
+        },
+        {
+          "nome": "Embolia pulmonar",
+          "cid10": "I26"
+        },
+        {
+          "nome": "Infarto",
+          "cid10": "I21"
+        },
+        {
+          "nome": "Anafilaxia",
+          "cid10": "T78.2"
+        }
+      ],
+      "sinais_de_alerta": [
+        "não consegue falar frases inteiras",
+        "lábios roxos",
+        "confusão",
+        "dor no peito",
+        "inchaço de rosto ou garganta"
+      ],
+      "perguntas_chave": [
+        "Começou de repente ou aos poucos?",
+        "Piora deitado ou no esforço?",
+        "Pernas inchadas?",
+        "Tem asma, bronquite ou problema no coração?"
+      ],
+      "sintoma_anatomico": [
+        "falta-de-ar"
+      ],
+      "frequencia_historica": "4º motivo nos EUA (NHAMCS 2022)",
+      "fontes": [
+        "dispneia",
+        "samu"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "febre",
+      "queixa": "Febre",
+      "ciap2": "A03",
+      "termos": [
+        "febre",
+        "febril",
+        "temperatura alta",
+        "calafrio"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Infecção viral (resfriado, gripe)",
+          "cid10": "J06.9 / J11"
+        },
+        {
+          "nome": "Dengue e outras arboviroses",
+          "cid10": "A90 / A92"
+        },
+        {
+          "nome": "Infecção urinária",
+          "cid10": "N39.0"
+        },
+        {
+          "nome": "Amigdalite / otite",
+          "cid10": "J03 / H66"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Dengue com sinais de alarme / grave",
+          "cid10": "A91"
+        },
+        {
+          "nome": "Meningite",
+          "cid10": "G03"
+        },
+        {
+          "nome": "Sepse",
+          "cid10": "A41"
+        },
+        {
+          "nome": "Pneumonia",
+          "cid10": "J18"
+        },
+        {
+          "nome": "Pielonefrite",
+          "cid10": "N10"
+        }
+      ],
+      "sinais_de_alerta": [
+        "bebê com menos de três meses",
+        "nuca dura",
+        "manchas que não somem ao apertar",
+        "dor abdominal intensa ou vômitos persistentes (dengue)",
+        "sangramento de gengiva ou nariz",
+        "confusão ou sonolência"
+      ],
+      "perguntas_chave": [
+        "Quanto mediu e há quantos dias?",
+        "Tem manchas no corpo, dor atrás dos olhos ou nas juntas?",
+        "Tosse, dor de garganta, dor ao urinar?",
+        "Alguém em casa ou no bairro com dengue?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "5º motivo nos EUA (NHAMCS 2022); principal queixa em UPA pediátrica brasileira",
+      "fontes": [
+        "dengue",
+        "samu",
+        "dengue_manual"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "cefaleia",
+      "queixa": "Dor de cabeça",
+      "ciap2": "N01",
+      "termos": [
+        "dor de cabeca",
+        "cefaleia",
+        "enxaqueca",
+        "cabeca doendo"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Cefaleia tensional",
+          "cid10": "G44.2"
+        },
+        {
+          "nome": "Enxaqueca",
+          "cid10": "G43"
+        },
+        {
+          "nome": "Sinusite",
+          "cid10": "J01"
+        },
+        {
+          "nome": "Febre de infecção viral (incluindo dengue)",
+          "cid10": "R50 / A90"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Hemorragia subaracnóidea",
+          "cid10": "I60"
+        },
+        {
+          "nome": "Meningite",
+          "cid10": "G03"
+        },
+        {
+          "nome": "AVC",
+          "cid10": "I63 / I61"
+        },
+        {
+          "nome": "Crise hipertensiva",
+          "cid10": "I16"
+        }
+      ],
+      "sinais_de_alerta": [
+        "a pior dor de cabeça da vida",
+        "começo súbito, como uma explosão",
+        "febre com nuca dura",
+        "fraqueza, fala enrolada ou visão dupla",
+        "depois de batida na cabeça"
+      ],
+      "perguntas_chave": [
+        "Começou de repente ou foi crescendo?",
+        "É parecida com dores que já teve?",
+        "Febre, vômito, luz incomodando?",
+        "Algum sintoma no corpo junto (fraqueza, fala)à"
+      ],
+      "sintoma_anatomico": [
+        "dor-de-cabeca"
+      ],
+      "frequencia_historica": "6º motivo nos EUA (NHAMCS 2022); entre as 4 queixas mais registradas em UPA brasileira",
+      "fontes": [
+        "cabeca"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "dor-lombar",
+      "queixa": "Dor nas costas",
+      "ciap2": "L02/L03",
+      "termos": [
+        "dor nas costas",
+        "lombar",
+        "lombalgia",
+        "dor na coluna",
+        "travou as costas",
+        "parte de baixo das costas",
+        "baixo das costas",
+        "base das costas"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Lombalgia mecânica (muscular)",
+          "cid10": "M54.5"
+        },
+        {
+          "nome": "Ciatalgia / hérnia de disco",
+          "cid10": "M54.3 / M51.1"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Cálculo renal",
+          "cid10": "N20"
+        },
+        {
+          "nome": "Pielonefrite",
+          "cid10": "N10"
+        },
+        {
+          "nome": "Síndrome da cauda equina",
+          "cid10": "G83.4"
+        },
+        {
+          "nome": "Aneurisma de aorta abdominal",
+          "cid10": "I71.3 / I71.4"
+        }
+      ],
+      "sinais_de_alerta": [
+        "perda de força nas pernas",
+        "dormência na região íntima",
+        "perder controle da urina ou fezes",
+        "febre",
+        "dor que não melhora deitado, à noite",
+        "mais de 50 anos com dor nova"
+      ],
+      "perguntas_chave": [
+        "Começou depois de esforço ou movimento?",
+        "Desce para a perna, abaixo do joelho?",
+        "Febre ou dor ao urinar?",
+        "Alguma dormência ou fraqueza?"
+      ],
+      "sintoma_anatomico": [
+        "lombar",
+        "ciatico",
+        "colica-renal"
+      ],
+      "frequencia_historica": "8º motivo nos EUA (NHAMCS 2022); doenças osteomusculares são a 1ª causa em UPA brasileira (24%)",
+      "fontes": [
+        "lombar",
+        "lombar_nhs"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "vomito-diarreia",
+      "queixa": "Vômito e diarreia",
+      "ciap2": "D10/D11",
+      "termos": [
+        "vomito",
+        "vomitando",
+        "diarreia",
+        "enjoo",
+        "nausea",
+        "intestino solto"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Gastroenterite viral ou bacteriana",
+          "cid10": "A08 / A09"
+        },
+        {
+          "nome": "Intoxicação alimentar",
+          "cid10": "A05"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Desidratação",
+          "cid10": "E86"
+        },
+        {
+          "nome": "Apendicite (início)",
+          "cid10": "K35"
+        },
+        {
+          "nome": "Obstrução intestinal",
+          "cid10": "K56"
+        },
+        {
+          "nome": "Cetoacidose diabética",
+          "cid10": "E10.1 / E11.1"
+        }
+      ],
+      "sinais_de_alerta": [
+        "não consegue beber nem segurar líquido",
+        "urina muito pouca",
+        "sangue no vômito ou nas fezes",
+        "sonolência, confusão",
+        "criança pequena ou idoso"
+      ],
+      "perguntas_chave": [
+        "Quantas vezes por dia?",
+        "Consegue beber líquido?",
+        "Tem sangue?",
+        "Febre ou dor forte na barriga?"
+      ],
+      "sintoma_anatomico": [
+        "azia"
+      ],
+      "frequencia_historica": "Vômito é o 9º motivo nos EUA (NHAMCS 2022); diarreia e vômitos é queixa frequente na classificação de risco",
+      "fontes": [
+        "diarreia"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "saude-mental",
+      "queixa": "Crise de ansiedade, tristeza, agitação",
+      "ciap2": "P01/P03",
+      "termos": [
+        "ansiedade",
+        "crise de panico",
+        "nervoso",
+        "tristeza",
+        "depressao",
+        "agitado"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Transtorno de ansiedade / pânico",
+          "cid10": "F41"
+        },
+        {
+          "nome": "Episódio depressivo",
+          "cid10": "F32"
+        },
+        {
+          "nome": "Reação aguda ao estresse",
+          "cid10": "F43.0"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Risco de suicídio",
+          "cid10": "R45.8"
+        },
+        {
+          "nome": "Causa física imitando ansiedade (arritmia, hipoglicemia, tireoide)",
+          "cid10": "I49 / E16 / E05"
+        },
+        {
+          "nome": "Intoxicação ou abstinência",
+          "cid10": "F10–F19"
+        }
+      ],
+      "sinais_de_alerta": [
+        "fala em morrer ou se machucar",
+        "agitação com confusão",
+        "uso de substância",
+        "dor no peito junto"
+      ],
+      "perguntas_chave": [
+        "Você está em segurança agora?",
+        "Já aconteceu antes?",
+        "Usou álcool, remédio ou outra substância?",
+        "Tem dor no peito ou coração disparado?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "10º motivo nos EUA (NHAMCS 2022, sintomas psicológicos e mentais)",
+      "fontes": [
+        "ansiedade",
+        "cvv"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "garganta-gripe",
+      "queixa": "Dor de garganta, gripe, resfriado",
+      "ciap2": "R21/R74/R80",
+      "termos": [
+        "dor de garganta",
+        "gripe",
+        "resfriado",
+        "nariz escorrendo",
+        "coriza",
+        "sintomas gripais"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Resfriado comum",
+          "cid10": "J00"
+        },
+        {
+          "nome": "Faringite / amigdalite",
+          "cid10": "J02 / J03"
+        },
+        {
+          "nome": "Gripe e COVID-19",
+          "cid10": "J11 / U07.1"
+        },
+        {
+          "nome": "Sinusite",
+          "cid10": "J01"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Abscesso periamigdaliano",
+          "cid10": "J36"
+        },
+        {
+          "nome": "Epiglotite",
+          "cid10": "J05.1"
+        },
+        {
+          "nome": "Síndrome respiratória aguda grave",
+          "cid10": "U04 / J18"
+        }
+      ],
+      "sinais_de_alerta": [
+        "não consegue engolir a saliva",
+        "voz abafada",
+        "falta de ar",
+        "febre alta por mais de três dias"
+      ],
+      "perguntas_chave": [
+        "Febre? Quanto?",
+        "Consegue engolir?",
+        "Tosse ou falta de ar?",
+        "Tem placas brancas na garganta?"
+      ],
+      "sintoma_anatomico": [
+        "garganta"
+      ],
+      "frequencia_historica": "Sintomas gripais: 24% dos atendimentos em UPA brasileira (2018-2022)",
+      "fontes": [
+        "garganta"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "urinario",
+      "queixa": "Ardência ou dor ao urinar",
+      "ciap2": "U01/U02",
+      "termos": [
+        "ardencia ao urinar",
+        "dor ao urinar",
+        "xixi ardendo",
+        "urinando muito",
+        "urina com sangue"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Cistite (infecção da bexiga)",
+          "cid10": "N30 / N39.0"
+        },
+        {
+          "nome": "Uretrite / IST",
+          "cid10": "N34 / A56"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Pielonefrite",
+          "cid10": "N10"
+        },
+        {
+          "nome": "Cálculo renal",
+          "cid10": "N20"
+        },
+        {
+          "nome": "Retenção urinária",
+          "cid10": "R33"
+        }
+      ],
+      "sinais_de_alerta": [
+        "febre com dor nas costas",
+        "vômitos",
+        "não consegue urinar",
+        "gestante"
+      ],
+      "perguntas_chave": [
+        "Arde, aperta ou dói?",
+        "Febre ou dor nas costas?",
+        "Sangue na urina?",
+        "Pode estar grávida?"
+      ],
+      "sintoma_anatomico": [
+        "urinario",
+        "colica-renal"
+      ],
+      "frequencia_historica": "Doenças do aparelho geniturinário: 6º grupo de diagnóstico em emergências dos EUA (NHAMCS 2022)",
+      "fontes": [
+        "urinario",
+        "itu_nhs"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "dor-membros",
+      "queixa": "Dor no braço, perna, ombro ou joelho",
+      "ciap2": "L08/L15/L17",
+      "termos": [
+        "dor no joelho",
+        "dor no ombro",
+        "dor no braco",
+        "dor na perna",
+        "dor no pe",
+        "dor na junta"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Tendinite / bursite",
+          "cid10": "M75 / M70"
+        },
+        {
+          "nome": "Artrose",
+          "cid10": "M17 / M19"
+        },
+        {
+          "nome": "Distensão muscular",
+          "cid10": "T14.3"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Trombose venosa profunda",
+          "cid10": "I80"
+        },
+        {
+          "nome": "Artrite séptica",
+          "cid10": "M00"
+        },
+        {
+          "nome": "Fratura",
+          "cid10": "S42 / S52 / S82"
+        },
+        {
+          "nome": "Dor no braço esquerdo de origem cardíaca",
+          "cid10": "I20 / I21"
+        }
+      ],
+      "sinais_de_alerta": [
+        "perna de um lado só inchada, quente e vermelha",
+        "junta quente com febre",
+        "deformidade depois de queda",
+        "dor no braço com aperto no peito"
+      ],
+      "perguntas_chave": [
+        "Teve queda, batida ou esforço?",
+        "Está inchado, quente ou vermelho?",
+        "Consegue apoiar o peso ou mexer?",
+        "Dói mais parado ou em movimento?"
+      ],
+      "sintoma_anatomico": [
+        "ombro",
+        "cotovelo",
+        "punho-mao",
+        "quadril",
+        "joelho",
+        "panturrilha"
+      ],
+      "frequencia_historica": "Osteomusculares: 1º grupo em UPA brasileira (24%); 'problemas em extremidades' entre as queixas mais registradas no Manchester",
+      "fontes": [
+        "entorse",
+        "trombose"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "trauma-entorse",
+      "queixa": "Queda, batida ou torção",
+      "ciap2": "A80/L77",
+      "termos": [
+        "cai",
+        "caiu",
+        "queda",
+        "torci",
+        "entorse",
+        "bati",
+        "machuquei",
+        "pancada"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Entorse de tornozelo",
+          "cid10": "S93.4"
+        },
+        {
+          "nome": "Contusão",
+          "cid10": "T14.0"
+        },
+        {
+          "nome": "Corte (ferimento)",
+          "cid10": "T14.1"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Fratura",
+          "cid10": "T14.2"
+        },
+        {
+          "nome": "Traumatismo craniano",
+          "cid10": "S06"
+        },
+        {
+          "nome": "Lesão de órgão interno",
+          "cid10": "S36"
+        }
+      ],
+      "sinais_de_alerta": [
+        "batida na cabeça com vômito, sonolência ou confusão",
+        "deformidade",
+        "não consegue apoiar",
+        "sangramento que não para",
+        "uso de anticoagulante"
+      ],
+      "perguntas_chave": [
+        "Como foi a queda ou batida?",
+        "Bateu a cabeça?",
+        "Consegue apoiar ou mexer?",
+        "Usa remédio para afinar o sangue?"
+      ],
+      "sintoma_anatomico": [
+        "tornozelo",
+        "joelho",
+        "punho-mao"
+      ],
+      "frequencia_historica": "Lesões e envenenamentos: 2º grupo de diagnóstico nos EUA (NHAMCS 2022) e de internação no SUS (Centro-Oeste)",
+      "fontes": [
+        "entorse",
+        "samu"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "tontura",
+      "queixa": "Tontura",
+      "ciap2": "N17",
+      "termos": [
+        "tontura",
+        "tonto",
+        "vertigem",
+        "labirintite",
+        "mundo girando"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Vertigem posicional (VPPB)",
+          "cid10": "H81.1"
+        },
+        {
+          "nome": "Queda de pressão / desidratação",
+          "cid10": "I95 / E86"
+        },
+        {
+          "nome": "Labirintite / neurite vestibular",
+          "cid10": "H81.2"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "AVC de circulação posterior",
+          "cid10": "I63"
+        },
+        {
+          "nome": "Arritmia",
+          "cid10": "I49"
+        },
+        {
+          "nome": "Hipoglicemia",
+          "cid10": "E16.2"
+        }
+      ],
+      "sinais_de_alerta": [
+        "fala enrolada, rosto torto, fraqueza ou visão dupla",
+        "desmaio",
+        "coração disparado",
+        "dor de cabeça forte"
+      ],
+      "perguntas_chave": [
+        "O mundo gira ou parece que vai desmaiar?",
+        "Piora ao mexer a cabeça?",
+        "Algum sintoma neurológico junto?",
+        "Tem diabetes ou usa remédio de pressão?"
+      ],
+      "sintoma_anatomico": [
+        "tontura"
+      ],
+      "frequencia_historica": "Queixa comum em adultos e idosos; 'mal-estar no adulto' é das mais registradas no Manchester em UPA brasileira",
+      "fontes": [
+        "samu",
+        "diferencial",
+        "avc_ms"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "pressao-alta",
+      "queixa": "Pressão alta",
+      "ciap2": "K86/K87",
+      "termos": [
+        "pressao alta",
+        "pressao subiu",
+        "hipertensao",
+        "pressao 18",
+        "pressao 20"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Hipertensão sem controle (pressão alta sem sintoma de órgão)",
+          "cid10": "I10"
+        },
+        {
+          "nome": "Dor ou ansiedade elevando a pressão",
+          "cid10": "R03.0"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Emergência hipertensiva (AVC, infarto, edema de pulmão)",
+          "cid10": "I16.1"
+        },
+        {
+          "nome": "Pré-eclâmpsia",
+          "cid10": "O14"
+        }
+      ],
+      "sinais_de_alerta": [
+        "dor no peito",
+        "falta de ar",
+        "fraqueza ou fala enrolada",
+        "dor de cabeça forte com visão turva",
+        "gestante"
+      ],
+      "perguntas_chave": [
+        "Quanto mediu e como mediu?",
+        "Tem algum sintoma agora?",
+        "Toma remédio de pressão, e tomou hoje?",
+        "Pode estar grávida?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "Motivo frequente de procura em UPA brasileira; doenças circulatórias são o 8º grupo de diagnóstico nos EUA",
+      "fontes": [
+        "pressao",
+        "samu",
+        "anvisa"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "pele-alergia",
+      "queixa": "Manchas, coceira ou alergia na pele",
+      "ciap2": "S06/S07/A92",
+      "termos": [
+        "manchas na pele",
+        "coceira",
+        "alergia",
+        "urticaria",
+        "vermelhidao",
+        "empolou"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Urticária",
+          "cid10": "L50"
+        },
+        {
+          "nome": "Dermatite de contato",
+          "cid10": "L25"
+        },
+        {
+          "nome": "Exantema viral (incluindo dengue)",
+          "cid10": "B09 / A90"
+        },
+        {
+          "nome": "Celulite / abscesso",
+          "cid10": "L03 / L02"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Anafilaxia",
+          "cid10": "T78.2"
+        },
+        {
+          "nome": "Meningococcemia (manchas roxas com febre)",
+          "cid10": "A39"
+        },
+        {
+          "nome": "Reação grave a medicamento",
+          "cid10": "L51"
+        }
+      ],
+      "sinais_de_alerta": [
+        "inchaço de lábio, língua ou garganta",
+        "falta de ar",
+        "manchas roxas que não somem ao apertar com febre",
+        "bolhas e descamação com febre"
+      ],
+      "perguntas_chave": [
+        "Começou depois de remédio, comida ou picada?",
+        "Tem febre?",
+        "Inchaço no rosto ou falta de ar?",
+        "As manchas somem ao apertar?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "Doenças da pele: 10º grupo de diagnóstico nos EUA (NHAMCS 2022)",
+      "fontes": [
+        "urticaria",
+        "anafilaxia"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "olho-ouvido",
+      "queixa": "Olho vermelho ou dor de ouvido",
+      "ciap2": "F02/H01",
+      "termos": [
+        "olho vermelho",
+        "dor no olho",
+        "dor de ouvido",
+        "ouvido doendo",
+        "vista embacada"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Conjuntivite",
+          "cid10": "H10"
+        },
+        {
+          "nome": "Otite média / externa",
+          "cid10": "H66 / H60"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Glaucoma agudo",
+          "cid10": "H40.2"
+        },
+        {
+          "nome": "Corpo estranho / lesão química no olho",
+          "cid10": "T15 / T26"
+        },
+        {
+          "nome": "Mastoidite",
+          "cid10": "H70"
+        }
+      ],
+      "sinais_de_alerta": [
+        "perda súbita da visão",
+        "dor forte no olho com vômito",
+        "produto químico no olho",
+        "inchaço atrás da orelha"
+      ],
+      "perguntas_chave": [
+        "A visão mudou?",
+        "Entrou algo no olho?",
+        "Tem secreção ou febre?",
+        "Dor atrás da orelha?"
+      ],
+      "sintoma_anatomico": [
+        "olho",
+        "tontura"
+      ],
+      "frequencia_historica": "Queixas com fluxo próprio na classificação de risco; frequentes em crianças (otite)",
+      "fontes": [
+        "olho",
+        "ouvido",
+        "audicao_nice",
+        "retina_nei"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "palpitacoes",
+      "queixa": "Coração acelerado ou irregular",
+      "ciap2": "",
+      "termos": [
+        "palpitacao",
+        "palpitacoes",
+        "coracao acelerado",
+        "coracao disparado",
+        "coracao batendo forte",
+        "batimento irregular"
+      ],
+      "grupos": [
+        "coracao disparad",
+        "coracao acelerad",
+        "batimento irregular"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Estresse, cafeína ou falta de sono",
+          "cid10": ""
+        },
+        {
+          "nome": "Efeito de medicamento",
+          "cid10": ""
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Arritmia",
+          "cid10": "I49"
+        },
+        {
+          "nome": "Problema cardíaco com dor no peito ou falta de ar",
+          "cid10": ""
+        }
+      ],
+      "sinais_de_alerta": [
+        "dor no peito junto",
+        "falta de ar junto",
+        "desmaio ou quase desmaio",
+        "palpitação que não passa"
+      ],
+      "perguntas_chave": [
+        "Começou quando e quanto dura?",
+        "É rápido ou irregular?",
+        "Há dor no peito, falta de ar ou desmaio?",
+        "Usou cafeína, estimulantes ou remédio novo?"
+      ],
+      "sintoma_anatomico": [
+        "dor-no-peito"
+      ],
+      "frequencia_historica": "Queixa que requer avaliação conforme duração e sintomas associados",
+      "fontes": [
+        "palpitacoes"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "perna-inchada",
+      "queixa": "Perna inchada",
+      "ciap2": "",
+      "termos": [
+        "perna inchada",
+        "pernas inchadas",
+        "panturrilha inchada",
+        "inchaco na perna",
+        "inchou a perna"
+      ],
+      "grupos": [
+        "perna inchad",
+        "panturrilha inchad"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Edema por imobilidade ou insuficiência venosa",
+          "cid10": ""
+        },
+        {
+          "nome": "Lesão local",
+          "cid10": ""
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Trombose venosa profunda",
+          "cid10": "I80.2"
+        },
+        {
+          "nome": "Embolia pulmonar",
+          "cid10": "I26"
+        }
+      ],
+      "sinais_de_alerta": [
+        "uma perna só inchada e dolorida",
+        "falta de ar",
+        "dor no peito",
+        "tosse com sangue"
+      ],
+      "perguntas_chave": [
+        "É uma perna ou as duas?",
+        "Dói ou está quente?",
+        "Houve cirurgia, imobilização ou viagem longa?",
+        "Há falta de ar ou dor no peito?"
+      ],
+      "sintoma_anatomico": [
+        "panturrilha"
+      ],
+      "frequencia_historica": "Investigar início, lateralidade e sinais respiratórios",
+      "fontes": [
+        "trombose",
+        "samu"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "dor-pelvica",
+      "queixa": "Dor pélvica ou no baixo ventre",
+      "ciap2": "",
+      "termos": [
+        "dor pelvica",
+        "dor no baixo ventre",
+        "dor na pelve",
+        "dor no pe da barriga",
+        "colica fora da menstruacao"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Cólica menstrual",
+          "cid10": "N94.6"
+        },
+        {
+          "nome": "Infecção urinária",
+          "cid10": "N39.0"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Gravidez ectópica",
+          "cid10": "O00"
+        },
+        {
+          "nome": "Torção ovariana",
+          "cid10": "N83.5"
+        },
+        {
+          "nome": "Apendicite",
+          "cid10": "K35"
+        }
+      ],
+      "sinais_de_alerta": [
+        "possível gravidez com dor ou sangramento",
+        "dor súbita e forte de um lado",
+        "desmaio",
+        "sangramento intenso"
+      ],
+      "perguntas_chave": [
+        "Pode estar grávida ou a menstruação atrasou?",
+        "Há sangramento?",
+        "A dor é de um lado e começou de repente?",
+        "Há febre ou dor ao urinar?"
+      ],
+      "sintoma_anatomico": [
+        "dor-pelvica",
+        "abdome-inferior-direito",
+        "abdome-inferior-esquerdo"
+      ],
+      "frequencia_historica": "Investigar gravidez possível, sangramento e início da dor",
+      "fontes": [
+        "gravidez",
+        "ectopica"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "reacao-medicamento",
+      "queixa": "Possível reação a medicamento",
+      "ciap2": "",
+      "termos": [
+        "reacao a remedio",
+        "reacao ao remedio",
+        "alergia a remedio",
+        "alergia ao remedio",
+        "efeito colateral",
+        "reacao a medicamento"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Efeito adverso não alérgico",
+          "cid10": ""
+        },
+        {
+          "nome": "Reação cutânea leve",
+          "cid10": "L27.0"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Anafilaxia",
+          "cid10": "T78.2"
+        },
+        {
+          "nome": "Reação cutânea grave",
+          "cid10": "L51"
+        }
+      ],
+      "sinais_de_alerta": [
+        "inchaço de língua ou garganta",
+        "dificuldade para respirar",
+        "desmaio",
+        "bolhas na pele ou mucosas"
+      ],
+      "perguntas_chave": [
+        "Qual produto e quando começou?",
+        "Quais sintomas apareceram e quanto tempo depois?",
+        "Há falta de ar, inchaço ou tontura?",
+        "Usa outros remédios ou suplementos?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "Investigar produto, dose relatada, tempo e sinais de gravidade",
+      "fontes": [
+        "anafilaxia"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    },
+    {
+      "id": "mal-estar",
+      "queixa": "Mal-estar, fraqueza, cansaço",
+      "ciap2": "A04/A05",
+      "termos": [
+        "mal estar",
+        "fraqueza",
+        "cansaco",
+        "indisposicao",
+        "fraco",
+        "sem forca"
+      ],
+      "frequencia": "Não estimada para a população do BMX; a lista não expressa probabilidade individual.",
+      "causas_frequentes": [
+        {
+          "nome": "Infecção viral",
+          "cid10": "B34.9"
+        },
+        {
+          "nome": "Desidratação",
+          "cid10": "E86"
+        },
+        {
+          "nome": "Anemia",
+          "cid10": "D64.9"
+        }
+      ],
+      "nao_perder": [
+        {
+          "nome": "Diabetes descompensado / hipoglicemia",
+          "cid10": "E11 / E16"
+        },
+        {
+          "nome": "Infarto sem dor típica (idosos, diabéticos)",
+          "cid10": "I21"
+        },
+        {
+          "nome": "Sepse",
+          "cid10": "A41"
+        },
+        {
+          "nome": "AVC",
+          "cid10": "I63"
+        }
+      ],
+      "sinais_de_alerta": [
+        "confusão",
+        "fraqueza de um lado",
+        "falta de ar",
+        "desmaio",
+        "febre em idoso"
+      ],
+      "perguntas_chave": [
+        "Desde quando?",
+        "Febre, perda de peso, sangramento?",
+        "Diabetes, pressão, coração?",
+        "Fraqueza no corpo todo ou de um lado?"
+      ],
+      "sintoma_anatomico": [],
+      "frequencia_historica": "'Mal-estar no adulto' é das queixas mais registradas no Manchester em UPA brasileira",
+      "fontes": [
+        "fadiga",
+        "samu"
+      ],
+      "revisao": {
+        "data": "2026-10-27",
+        "status": "perguntas e exemplos revisados editorialmente; códigos e lista diferencial pendentes de revisão profissional"
+      }
+    }
   ]
 }

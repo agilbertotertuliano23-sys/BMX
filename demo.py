@@ -128,7 +128,15 @@ def _montar_queixa(qid):
                            padrao="Em conjunto, esta queixa envolve os sistemas: " + ", ".join(sistemas) + "."))
     passos.append(dict(id="fim", titulo="Levar para a conversa", acao={"tipo": "fim"},
                        padrao="Para fechar: anote o que você observou e leve para a conversa com o BMX e com um profissional."))
-    return dict(queixa=qid, titulo=nome, aviso=AVISO, passos=passos)
+    exemplo = g.get("exemplo")
+    if exemplo and exemplo.get("tipo") == "ficticio":
+        passos.insert(len(passos) - 1, dict(id="exemplo", titulo="Exemplo fictício", acao={
+            "tipo": "observar", "pistas": [{"rotulo": "Situação inventada para aprender",
+                "pergunta": exemplo["pergunta"], "por_que": exemplo["analise"]}]},
+            padrao="Exemplo fictício, sem relação com seu prontuário. " + exemplo["relato"] + " "
+                   + exemplo["analise"] + " " + exemplo["nao_concluir"]))
+    return dict(queixa=qid, titulo=nome, aviso=AVISO, passos=passos, fontes=g["fontes"],
+                compreensao=g.get("compreensao", ""))
 
 
 def _abertura(assunto):
@@ -150,7 +158,8 @@ def _passos_estruturas(estruturas, r):
 
 
 _FIM = dict(id="fim", titulo="Levar para a conversa", acao={"tipo": "fim"},
-            padrao="Para fechar: anote o que chamou a sua atenção e leve para a conversa com o BMX e com um profissional.")
+            padrao="Explique com suas palavras o que aprendeu e anote o que ainda ficou em dúvida. "
+                   "Leve essas perguntas à conversa com um profissional.")
 
 
 def _queixas_da_regiao(r):
@@ -193,11 +202,12 @@ def _montar_remedio(tema):
     passos = [_abertura(f"o tema: {m['titulo'].lower()}"),
               dict(id="remedio", titulo=m["titulo"], acao={"tipo": "remedio", "titulo": m["titulo"], "texto": m["texto"],
                                                            "cautelas": m["cautelas"], "fotos": _fotos(tema)},
-                   padrao="Este é um tema para conversar com um farmacêutico ou com o seu médico, nunca uma indicação. "
-                          "As fotos são só ilustrações: não dizem o que usar.")]
+                   padrao="Este é um tema para conversar com um farmacêutico ou com o seu médico. "
+                          + m["texto"] + " " + m["cautelas"] + " As fotos não dizem o que usar.")]
     if guia:
         passos.append(dict(id="alerta", titulo="Quando procurar ajuda", acao={"tipo": "alerta", "texto": guia["cuidado"],
                            "nao_perder": []}, padrao="Antes de pensar em qualquer remédio, os sinais que pedem ajuda. " + guia["cuidado"]))
+        passos.insert(1, passos.pop())
     passos.append(dict(id="queixas", titulo="Queixas ligadas", acao={"tipo": "queixas", "lista": [
         dict(id=q, queixa=nomes[q]) for q in ligadas if q in nomes]},
         padrao="Este tema aparece em queixas como: " + ", ".join(nomes[q].lower() for q in ligadas if q in nomes) + "."))
@@ -289,6 +299,7 @@ _SISTEMA_LLM = (
     "Regras: use 'costuma', 'pode estar relacionado'; NUNCA diga o que a pessoa tem; nunca dê dose, nome de remédio para "
     "tomar nem prescrição (remédio só como tema para conversar com farmacêutico ou médico); mantenha todo sinal de alerta "
     "do texto base; só anatomia básica correta, sem inventar fatos. "
+    "Se o passo for um exemplo fictício, mantenha esse rótulo e nunca atribua o exemplo à pessoa. "
     "Responda SOMENTE com um array JSON, um objeto por passo, na mesma ordem e quantidade.")
 
 
@@ -338,6 +349,10 @@ def compor(p, nivel):
         partes.append(p["explicacao"])
     if nivel == "aprofundado" and p.get("aprofundar"):
         partes.append(p["aprofundar"])
+    if p.get("acao", {}).get("tipo") == "alerta":
+        cuidado = p["acao"].get("texto", "")
+        if cuidado and cuidado not in " ".join(partes):
+            partes.append(cuidado)
     return " ".join(x.strip() for x in partes if x)
 
 
@@ -358,7 +373,7 @@ def roteiro(rid, llm=None):
     for i, p in enumerate(r["passos"]):
         d = itens[i] if itens and isinstance(itens[i], dict) else {}
         resumo, expl, apro = d.get("resumo"), d.get("explicacao"), d.get("aprofundar")
-        usar = _valida(resumo) and _valida(expl)
+        usar = p["id"] != "exemplo" and _valida(resumo) and _valida(expl)
         if usar:
             p["resumo"], p["explicacao"] = resumo.strip(), expl.strip()
             p["aprofundar"] = apro.strip() if _valida(apro) else ""
@@ -370,6 +385,10 @@ def roteiro(rid, llm=None):
             p["aprofundar"], p["termos"] = "", []
         p["origem_texto"] = "llm" if usar else "padrao"
         del p["padrao"]
+    # Casos inventados nunca podem perder a separação explícita do prontuário na narração.
+    for p in r["passos"]:
+        if p["id"] == "exemplo":
+            p["resumo"] = "Exemplo fictício, sem relação com seu prontuário."
     # o alerta nunca perde o cuidado pesquisado: se a LLM o encurtou, a explicação leva o texto original
     for p in r["passos"]:
         if p["acao"]["tipo"] == "alerta" and p["acao"]["texto"][:25].lower() not in (p["resumo"] + p["explicacao"]).lower():

@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: lombar
 ---
 
@@ -21,12 +21,18 @@ Parte da [[Anatomia — Índice]].
 - Sacro · sacrum · [[Sistema esquelético]] · `FMA16202`
 - Músculos eretores da espinha · erector spinae · [[Sistema muscular]]
 - Quadrado lombar · quadratus lumborum · [[Sistema muscular]]
+- Glândulas suprarrenais · adrenal glands · [[Sistema endócrino]]
+- Veia cava inferior · inferior vena cava · [[Sistema cardiovascular]]
+- Vértebras lombares (L1–L5) · lumbar vertebrae · [[Sistema esquelético]]
+- Quarta vértebra lombar (L4) · fourth lumbar vertebra · [[Sistema esquelético]]
+- Quinta vértebra lombar (L5) · fifth lumbar vertebra · [[Sistema esquelético]]
+- Discos intervertebrais lombares · lumbar intervertebral discs · [[Articulações e ligamentos]]
 
 ## Vizinhas
 [[Região — Quadril e glúteo]], [[Região — Abdome superior direito]], [[Região — Abdome superior esquerdo]]
 
 ## Relatos que apontam aqui
-- **urinario**: O caminho da urina vai dos rins pelos ureteres até a bexiga; ardência costuma vir de baixo, dor nas costas com febre sugere que subiu.
-- **colica-renal**: A dor do cálculo acompanha o trajeto do ureter: começa nas costas e desce para a virilha.
+- **urinario**: A urina vai dos rins pelos ureteres até a bexiga e sai pela uretra. Ardor, frequência, febre e dor nas costas ajudam a orientar a avaliação, mas não confirmam infecção.
+- **colica-renal**: Um cálculo pode causar dor no flanco com irradiação para a virilha; localização e padrão não confirmam a causa.
 - **lombar**: A maioria das dores lombares é muscular ou das articulações da coluna; os rins ficam logo à frente dessa musculatura.
 - **ciatico**: O nervo isquiático nasce das raízes lombares e sacrais, passa sob o glúteo (junto ao piriforme) e desce pela parte de trás da coxa.

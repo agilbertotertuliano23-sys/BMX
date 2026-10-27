@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: esqueletico
 camada: ossos
 ---
@@ -36,3 +36,8 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Ossos e articulações**.
 - Tálus · talus · [[Região — Perna, tornozelo e pé]] · `FMA9708`
 - Calcâneo · calcaneus · [[Região — Perna, tornozelo e pé]] · `FMA24496`
 - Metatarsos · metatarsal bone · [[Região — Perna, tornozelo e pé]] · `FMA24492`
+- Vértebras cervicais (C1–C7) · cervical vertebrae · [[Região — Pescoço]]
+- Vértebras torácicas (T1–T12) · thoracic vertebrae · [[Região — Tórax]]
+- Vértebras lombares (L1–L5) · lumbar vertebrae · [[Região — Lombar (costas baixas)]]
+- Quarta vértebra lombar (L4) · fourth lumbar vertebra · [[Região — Lombar (costas baixas)]]
+- Quinta vértebra lombar (L5) · fifth lumbar vertebra · [[Região — Lombar (costas baixas)]]

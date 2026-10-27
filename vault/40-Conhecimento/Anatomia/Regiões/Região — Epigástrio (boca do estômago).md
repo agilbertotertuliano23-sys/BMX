@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: epigastrio
 ---
 
@@ -21,9 +21,12 @@ Parte da [[Anatomia — Índice]].
 - Pâncreas · pancreas · [[Sistema digestório]] · `FMA7198`
 - Cólon transverso · transverse colon · [[Sistema digestório]] · `FMA14546`
 - Músculo reto do abdome · rectus abdominis · [[Sistema muscular]]
+- Vias biliares · biliary tract · [[Sistema digestório]]
+- Ducto pancreático · pancreatic duct · [[Sistema digestório]]
+- Aorta abdominal · abdominal aorta · [[Sistema cardiovascular]]
 
 ## Vizinhas
 [[Região — Tórax]], [[Região — Abdome superior direito]], [[Região — Abdome superior esquerdo]], [[Região — Umbigo (periumbilical)]]
 
 ## Relatos que apontam aqui
-- **azia**: A queimação na boca do estômago envolve a junção do esôfago com o estômago, o próprio estômago e o início do intestino (duodeno).
+- **azia**: Queimação no alto do abdome pode envolver estruturas digestivas ou outras causas. A localização não confirma gastrite nem afasta problema cardíaco.

@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: suprapubica
 ---
 
@@ -23,4 +23,5 @@ Parte da [[Anatomia — Índice]].
 [[Região — Umbigo (periumbilical)]], [[Região — Quadril e glúteo]]
 
 ## Relatos que apontam aqui
-- **urinario**: O caminho da urina vai dos rins pelos ureteres até a bexiga; ardência costuma vir de baixo, dor nas costas com febre sugere que subiu.
+- **dor-pelvica**: No baixo ventre, no meio, ficam a bexiga e, em mulheres, o útero; de cada lado ficam os ovários, e por trás o intestino grosso.
+- **urinario**: A urina vai dos rins pelos ureteres até a bexiga e sai pela uretra. Ardor, frequência, febre e dor nas costas ajudam a orientar a avaliação, mas não confirmam infecção.

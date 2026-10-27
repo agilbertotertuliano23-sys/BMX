@@ -31,6 +31,7 @@ import safety
 PASTA = memory.VAULT / memory.ZONAS["conhecimento"] / "Anatomia"
 CATALOGO = PASTA / "catalogo-anatomico.json"
 MALHAS = PASTA / "malhas.json"
+AMPLIACAO = PASTA / "ampliacao.json"   # estruturas extras geradas por tools/ampliar_biblioteca.py
 MALHA_EXT = {".obj", ".glb", ".gltf", ".stl", ".fbx"}
 
 _CACHE = {"sig": None, "cat": None, "malhas": {}}
@@ -47,7 +48,7 @@ def _mtime(p):
 def carregar():
     """Catálogo + índice de malhas, recarregados quando o arquivo muda."""
     with _LOCK:
-        sig = (_mtime(CATALOGO), _mtime(MALHAS))
+        sig = (_mtime(CATALOGO), _mtime(MALHAS), _mtime(AMPLIACAO))
         if _CACHE["cat"] is not None and sig == _CACHE["sig"]:
             return _CACHE["cat"], _CACHE["malhas"]
         try:
@@ -59,6 +60,14 @@ def carregar():
             for bib, dados in json.loads(MALHAS.read_text(encoding="utf-8")).get("bibliotecas", {}).items():
                 for slug, m in dados.get("estruturas", {}).items():
                     malhas.setdefault(slug, {})[bib] = m
+        except (OSError, json.JSONDecodeError):
+            pass
+        try:   # o catálogo escrito à mão vence: a ampliação só acrescenta o que ele não tem
+            amp = json.loads(AMPLIACAO.read_text(encoding="utf-8"))
+            for slug, e in amp.get("estruturas", {}).items():
+                cat["estruturas"].setdefault(slug, e)
+                if slug in amp.get("malhas", {}):
+                    malhas.setdefault(slug, {}).setdefault("human-atlas", amp["malhas"][slug])
         except (OSError, json.JSONDecodeError):
             pass
         _CACHE.update(sig=sig, cat=cat, malhas=malhas)
@@ -96,6 +105,14 @@ def relacionar(message, limite=8):
         termos = [t for t in s["termos"] if _tem(norm, t)]
         if termos:
             achados.append((max(len(t) for t in termos), s))
+    # a localização dita em palavras soltas ("dor na barriga, na parte de baixo do lado direito") não cai nos termos
+    # fixos do catálogo ("dor na barriga do lado direito"): junta barriga + baixo/cima + lado e vence sintomas genéricos
+    if re.search(r"\b(barriga|abdome|abdomen|ventre)\b", norm):
+        lado_ = "direito" if re.search(r"\bdireit", norm) else "esquerdo" if re.search(r"\besquerd", norm) else ""
+        pos = "inferior" if re.search(r"\b(baixo|embaixo|inferior)\b", norm) else "superior" if re.search(r"\b(cima|superior|costela)", norm) else ""
+        alvo = next((x for x in cat.get("sintomas", []) if x["id"] == f"abdome-{pos}-{lado_}"), None) if pos and lado_ else None
+        if alvo and all(alvo is not x for _, x in achados):
+            achados.append((99, alvo))
     sintomas = [s for _, s in sorted(achados, key=lambda par: -par[0])]
     citadas = [k for k, e in cat.get("estruturas", {}).items()
                if len(e["nome"]) > 4 and _tem(norm, e["nome"].split(" (")[0])]
@@ -130,6 +147,8 @@ def detalhar(ids):
             regioes=e["regioes"], cor=camadas.get(e["camada"], {}).get("cor", "#8a9bb0"),
             fma=next((v.get("fma") for v in m.values() if v.get("fma")), ""),
             malhas={bib: v.get("arquivos", [])[:4] for bib, v in m.items()},
+            raio=next((v["raio"] for v in m.values() if v.get("raio")), 0),
+            descricao=e.get("descricao", ""),
             centro=next((v["centro"] for v in m.values() if v.get("centro")), None),
             lados=next((v["lados"] for v in m.values() if v.get("lados")), {})))
     return out

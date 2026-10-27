@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: muscular
 camada: musculos
 ---

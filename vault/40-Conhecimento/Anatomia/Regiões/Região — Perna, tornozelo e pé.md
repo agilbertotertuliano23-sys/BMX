@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: perna-pe
 ---
 
@@ -23,6 +23,7 @@ Parte da [[Anatomia — Índice]].
 - Ligamento talofibular anterior · anterior talofibular ligament · [[Articulações e ligamentos]]
 - Fáscia plantar · plantar aponeurosis · [[Articulações e ligamentos]]
 - Metatarsos · metatarsal bone · [[Sistema esquelético]] · `FMA24492`
+- Ligamento plantar longo · long plantar ligament · [[Articulações e ligamentos]]
 
 ## Vizinhas
 [[Região — Coxa e joelho]]

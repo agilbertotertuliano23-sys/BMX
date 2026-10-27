@@ -1,0 +1,414 @@
+{
+  "data": "2026-10-27",
+  "metodo": "Confronto do texto local com fontes públicas institucionais. Catálogos editoriais verificam identidade/edição, não o conteúdo integral.",
+  "livros_integrais_disponiveis": 0,
+  "correcoes_atlas": [
+    {
+      "campo": "/estudos/0/pontos/1/atencao",
+      "antes": "Pressão alta mantida por anos faz esta parede engrossar e cansar.",
+      "depois": "Pressão alta persistente pode sobrecarregar o coração; isso não determina a evolução de uma pessoa."
+    },
+    {
+      "campo": "/estudos/0/pontos/2/atencao",
+      "antes": "Um sopro ouvido pelo médico é um bom motivo para pedir um ecocardiograma.",
+      "depois": "Um sopro precisa ser interpretado junto da história e do exame; o profissional decide se é necessário ecocardiograma."
+    },
+    {
+      "campo": "/estudos/0/montagem/texto",
+      "antes": "Cada porta de mão única se encaixa entre duas câmaras.",
+      "depois": "As valvas atrioventriculares ficam entre câmaras; as semilunares ficam nas saídas dos ventrículos."
+    },
+    {
+      "campo": "/estudos/0/problemas/0/cadeia/0",
+      "antes": "O átrio esquerdo recebe mais sangue do que deveria e vai se dilatando.",
+      "depois": "Dependendo da intensidade e duração, o retorno de sangue pode aumentar a pressão ou dilatar o átrio esquerdo."
+    },
+    {
+      "campo": "/estudos/0/problemas/0/cadeia/2",
+      "antes": "Com o tempo surgem cansaço ao esforço, falta de ar e palpitações.",
+      "depois": "Podem surgir cansaço, falta de ar ou palpitações; algumas pessoas permanecem sem sintomas."
+    },
+    {
+      "campo": "/estudos/0/problemas/1/cadeia/2",
+      "antes": "Nos esforços chega menos sangue ao cérebro e ao corpo: tontura, desmaio e dor no peito.",
+      "depois": "Em doença importante, o aumento do fluxo no esforço pode ficar limitado, com falta de ar, dor torácica ou desmaio."
+    },
+    {
+      "campo": "/estudos/1/problemas/1/ajuda",
+      "antes": "Febre com falta de ar, confusão ou respiração muito rápida pedem atendimento no mesmo dia.",
+      "depois": "Confusão súbita ou dificuldade respiratória importante: ligue 192. Febre com falta de ar também exige avaliação sem demora."
+    },
+    {
+      "campo": "/estudos/2/pontos/1/atencao",
+      "antes": "Dor forte após refeição gordurosa é um sinal clássico de problema na vesícula.",
+      "depois": "Dor após refeições pode ocorrer em problemas biliares, mas o padrão não confirma a causa."
+    },
+    {
+      "campo": "/estudos/2/pontos/2/texto",
+      "antes": "Qualquer bloqueio faz a bile voltar.",
+      "depois": "Um bloqueio pode impedir o fluxo; as consequências dependem do local e da duração."
+    },
+    {
+      "campo": "/estudos/2/pontos/3/texto",
+      "antes": "O ducto do pâncreas e o ducto da bile desembocam juntos no duodeno.",
+      "depois": "Em muitas pessoas, os ductos pancreático e biliar se unem perto da entrada no duodeno; há variações anatômicas."
+    },
+    {
+      "campo": "/estudos/2/problemas/0/cadeia/1",
+      "antes": "Se o canal fica bloqueado, a bile volta para o fígado: pele e olhos amarelados.",
+      "depois": "Se a pedra obstrui a via biliar principal, pode surgir icterícia; um bloqueio apenas da saída da vesícula tem consequências diferentes."
+    },
+    {
+      "campo": "/estudos/3/pontos/0/atencao",
+      "antes": "A «boca do estômago» (epigástrio) é onde se sente a dor de origem gástrica.",
+      "depois": "O epigástrio é uma região; dor ali pode ter origem digestiva, cardíaca ou outras causas."
+    },
+    {
+      "campo": "/estudos/3/pontos/1/atencao",
+      "antes": "Azia frequente indica que esse anel relaxa fora de hora.",
+      "depois": "Azia pode estar ligada a refluxo; frequência e sintomas associados orientam a avaliação."
+    },
+    {
+      "campo": "/estudos/3/pontos/2/atencao",
+      "antes": "A dor da úlcera no duodeno costuma melhorar logo depois de comer.",
+      "depois": "A relação entre dor e refeições varia e não confirma nem exclui úlcera."
+    },
+    {
+      "campo": "/estudos/3/problemas/0/cadeia/2",
+      "antes": "Sem tratamento, a úlcera pode sangrar ou perfurar a parede.",
+      "depois": "Úlcera é uma lesão diferente de gastrite; quando presente, pode sangrar ou perfurar. A evolução não é obrigatória."
+    },
+    {
+      "campo": "/estudos/4/resumo",
+      "antes": "Quando inflama, a dor muda de lugar.",
+      "depois": "Na apendicite, a dor pode mudar de lugar, mas esse padrão não ocorre sempre."
+    },
+    {
+      "campo": "/estudos/4/pontos/1/atencao",
+      "antes": "É no ceco que a dor da fossa ilíaca direita muitas vezes se origina.",
+      "depois": "A dor nessa região pode envolver intestino, vias urinárias, órgãos pélvicos ou outras estruturas."
+    },
+    {
+      "campo": "/estudos/4/problemas/0/cadeia/0",
+      "antes": "A dor começa perto do umbigo e depois «desce» para a parte baixa direita.",
+      "depois": "A dor pode começar perto do umbigo e migrar para a direita; apresentações diferentes também ocorrem."
+    },
+    {
+      "campo": "/estudos/4/problemas/0/cadeia/1",
+      "antes": "Aparecem enjoo, perda de apetite e febre baixa.",
+      "depois": "Podem ocorrer enjoo, perda de apetite e febre, mas a ausência deles não exclui apendicite."
+    },
+    {
+      "campo": "/estudos/4/corpo/texto",
+      "antes": "O apêndice fica no baixo ventre direito, a cerca de um terço da distância entre o osso do quadril e o umbigo, logo abaixo da pele e da parede muscular.",
+      "depois": "O apêndice se liga ao ceco e geralmente fica no abdome inferior direito; sua posição varia. Um ponto na pele não representa sua posição exata."
+    },
+    {
+      "campo": "/estudos/5/pontos/3/texto",
+      "antes": "Sente vontade de urinar quando está cerca da metade.",
+      "depois": "A sensação de vontade varia com o enchimento, a sensibilidade e o contexto."
+    },
+    {
+      "campo": "/estudos/6/resumo",
+      "antes": "Protegem a medula e os nervos que seguem para as pernas.",
+      "depois": "Protegem estruturas nervosas; abaixo do término da medula passam principalmente raízes da cauda equina."
+    },
+    {
+      "campo": "/estudos/7/pontos/1/atencao",
+      "antes": "É um osso muito forte: quebrá-lo exige uma força grande.",
+      "depois": "Apesar da resistência do fêmur, ossos fragilizados podem fraturar após uma queda de baixa energia."
+    },
+    {
+      "campo": "/estudos/7/pontos/2/atencao",
+      "antes": "Dor localizada na linha do joelho (lateral ou medial) sugere menisco.",
+      "depois": "Dor na linha articular pode ocorrer em lesões meniscais e outras condições; o exame ajuda a diferenciá-las."
+    },
+    {
+      "campo": "/estudos/8/pontos/2/atencao",
+      "antes": "Queda sobre o ombro com caroço na clavícula merece radiografia.",
+      "depois": "Dor e deformidade após queda precisam de exame; o profissional decide se há indicação de radiografia."
+    },
+    {
+      "campo": "/estudos/8/pontos/3/atencao",
+      "antes": "Dor à noite ao deitar sobre o ombro é muito típica deste tendão.",
+      "depois": "Dor noturna pode ocorrer em problemas do manguito, mas não identifica sozinha um tendão."
+    },
+    {
+      "campo": "/estudos/8/problemas/0/mecanismo",
+      "antes": "O tendão se irrita ao passar sob o osso em movimentos repetidos acima da cabeça e pode se desgastar ou romper.",
+      "depois": "Alterações do manguito podem envolver degeneração, trauma e sobrecarga; não existe um único mecanismo para toda dor no ombro."
+    },
+    {
+      "campo": "/estudos/9/problemas/0/mecanismo",
+      "antes": "Um vaso entope ou se rompe e a região que ele alimenta fica sem oxigênio.",
+      "depois": "No AVC isquêmico, um bloqueio reduz o fluxo de sangue; no hemorrágico, há sangramento que lesa o tecido. Os mecanismos são diferentes."
+    },
+    {
+      "campo": "/estudos/9/corpo/texto",
+      "antes": "O encéfalo ocupa a cabeça inteira, protegido pelo crânio e por três membranas.",
+      "depois": "O encéfalo fica na cavidade craniana, protegido pelo crânio e pelas meninges; a cabeça também contém outras estruturas."
+    },
+    {
+      "campo": "/estudos/10/problemas/1/mecanismo",
+      "antes": "O gel vítreo puxa a retina e ela se solta da parede do olho.",
+      "depois": "No tipo mais comum, uma ruptura permite que líquido passe sob a retina. Também existem descolamentos por tração ou acúmulo de líquido sem ruptura."
+    }
+  ],
+  "escopo_pendente": [
+    "Leitura e extração dos exemplares integrais licenciados",
+    "Revisão profissional de diagnósticos diferenciais, CID-10 e CIAP-2",
+    "Validação clínica de regras de triagem e de populações especiais",
+    "Conferência individual de todas as descrições anatômicas e geometria das malhas",
+    "Bulas específicas por fabricante, apresentação e registro; interações completas"
+  ],
+  "triangulacoes": [
+    {
+      "id": "sopro",
+      "afirmacao": "A indicação de ecocardiograma depende da suspeita e do contexto; não decorre automaticamente de qualquer sopro.",
+      "fontes": [
+        {
+          "titulo": "NICE NG208 — Investigação de doença valvar",
+          "url": "https://www.nice.org.uk/guidance/ng208/chapter/Recommendations",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Heart valve disease",
+          "url": "https://www.nhs.uk/conditions/heart-valve-disease/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#coracao",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "biliar",
+      "afirmacao": "Cálculo pode ser assintomático; o local da obstrução muda as consequências.",
+      "fontes": [
+        {
+          "titulo": "NIDDK — Gallstones: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/gallstones/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Gallstones",
+          "url": "https://www.nhs.uk/conditions/Gallstones/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#figado",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "ulcera",
+      "afirmacao": "A relação com a refeição varia; sintomas isolados não confirmam úlcera.",
+      "fontes": [
+        {
+          "titulo": "NIDDK — Peptic ulcers: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/peptic-ulcers-stomach-ulcers/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Stomach ulcer",
+          "url": "https://www.nhs.uk/conditions/stomach-ulcer/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#estomago",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "apendicite",
+      "afirmacao": "O padrão migratório e a febre podem faltar.",
+      "fontes": [
+        {
+          "titulo": "NIDDK — Appendicitis: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/appendicitis/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Appendicitis",
+          "url": "https://www.nhs.uk/conditions/appendicitis/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#apendice",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "calculo",
+      "afirmacao": "Dor no flanco com febre exige avaliação; o relato não confirma cálculo.",
+      "fontes": [
+        {
+          "titulo": "NIDDK — Kidney stones: symptoms and causes",
+          "url": "https://www.niddk.nih.gov/health-information/urologic-diseases/kidney-stones/symptoms-causes",
+          "instituicao": "NIH/NIDDK",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Kidney stones",
+          "url": "https://www.nhs.uk/conditions/kidney-stones/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#rins",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "cauda_equina",
+      "afirmacao": "Alterações novas de função urinária ou sensibilidade perineal com dor lombar exigem avaliação imediata.",
+      "fontes": [
+        {
+          "titulo": "NICE NG127 — Recomendação 1.7.3",
+          "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Back pain",
+          "url": "https://www.nhs.uk/conditions/back-pain/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#coluna-lombar",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "retina",
+      "afirmacao": "Flashes novos, muitas moscas volantes ou sombra na visão exigem avaliação rápida.",
+      "fontes": [
+        {
+          "titulo": "NEI — Retinal detachment",
+          "url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+          "instituicao": "NIH/NEI",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Detached retina",
+          "url": "https://www.nhs.uk/conditions/detached-retina-retinal-detachment/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#olho",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "avc",
+      "afirmacao": "Déficit neurológico súbito exige emergência; a pessoa não distingue o tipo de AVC em casa.",
+      "fontes": [
+        {
+          "titulo": "Ministério da Saúde — AVC",
+          "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/avc",
+          "instituicao": "Ministério da Saúde",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NICE NG127 — Sudden-onset limb weakness",
+          "url": "https://www.nice.org.uk/guidance/ng127/chapter/Recommendations-for-adults-aged-over-16",
+          "instituicao": "NICE",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#encefalo",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "ombro",
+      "afirmacao": "Dor noturna pode ocorrer no manguito, mas não identifica sozinha a estrutura lesionada.",
+      "fontes": [
+        {
+          "titulo": "AAOS — Rotator cuff tears",
+          "url": "https://www.orthoinfo.org/diseases--conditions/rotator-cuff-tears",
+          "instituicao": "AAOS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "MedlinePlus — Rotator cuff problems",
+          "url": "https://medlineplus.gov/ency/article/000438.htm",
+          "instituicao": "NLM/A.D.A.M.",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#ombro",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    },
+    {
+      "id": "joelho",
+      "afirmacao": "Estalo ou incapacidade de apoio não basta para confirmar uma lesão ligamentar; é necessária avaliação.",
+      "fontes": [
+        {
+          "titulo": "AAOS — Anterior cruciate ligament injuries",
+          "url": "https://www.orthoinfo.org/diseases--conditions/anterior-cruciate-ligament-acl-injuries/",
+          "instituicao": "AAOS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        },
+        {
+          "titulo": "NHS — Sprains and strains",
+          "url": "https://www.nhs.uk/conditions/sprains-and-strains/",
+          "instituicao": "NHS",
+          "consultado_em": "2026-10-27",
+          "escopo": "Pontos explicitados na revisão; não representa conferência integral de toda a aula."
+        }
+      ],
+      "destino": "ui/atlas/estudos.json#joelho",
+      "resultado": "convergência para a afirmação delimitada",
+      "limite": "Comparação de orientações institucionais; não são estudos independentes nem validação da aula inteira."
+    }
+  ],
+  "cobertura": {
+    "queixas_com_exemplo": 22,
+    "temas_medicamentos": 5,
+    "aulas_atlas_com_exemplo": 11,
+    "estruturas_com_integridade_testada": 151,
+    "sintomas_anatomicos": 25,
+    "roteiros_testados": 50,
+    "imagens_com_atribuicao_testada": 25,
+    "guias_gerais_revistos": 4,
+    "afirmacoes_confrontadas_entre_fontes": 10
+  },
+  "datas_fontes": {
+    "ectopica_nhs": "revisão declarada 2022-08-23; próxima prevista 2025-08-23 já ultrapassada na consulta. Não tratar como atualização de 2026.",
+    "vesicula_niddk": "revisão declarada 2017-11; usado para conceito estável, confrontado com NHS.",
+    "calculo_niddk": "revisão declarada 2017-05; usado para sintomas e contraposto ao NHS.",
+    "apendicite_niddk": "revisão declarada 2021-07; confrontada com NHS.",
+    "dengue_manual": "edição 2024; data de atualização da página em 2026 não significa nova edição do PDF."
+  }
+}

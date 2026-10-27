@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="intro.css">
+<link rel="stylesheet" href="atlas.css">
 <script type="importmap">
   { "imports": { "three": "./vendor/three/three.module.min.js" } }
 </script>
@@ -92,8 +93,8 @@
     <section class="painel cresce conversa" id="conversa">
       <div class="conversa-topo"><h2>Atendimento <em id="contaTurnos"></em></h2>
         <span class="tom" id="tomAgora"></span></div>
-      <label class="seguir" title="Quando o BMX explicar algo do caso, o painel abre e destaca a parte certa; depois volta ao Baymax">
-        <input type="checkbox" id="chkSeguir" checked> mostrar o painel enquanto ele explica</label>
+      <label class="seguir" title="Depois da resposta, o atlas 3D explica no corpo o que você contou e, em seguida, o painel do caso abre">
+        <input type="checkbox" id="chkSeguir" checked> explicar no atlas 3D e abrir o painel</label>
       <div class="transcricao" id="transcricao">
         <div class="vazio">Conte o que está sentindo, toque na escala de dor ou use <b>Triagem</b>.</div>
       </div>
@@ -184,5 +185,6 @@
 <script src="holograma.js"></script>
 <script src="intro.js"></script>
 <script type="module" src="bmx3d.js"></script>
+<script type="module" src="atlas.js"></script>
 </body>
 </html>

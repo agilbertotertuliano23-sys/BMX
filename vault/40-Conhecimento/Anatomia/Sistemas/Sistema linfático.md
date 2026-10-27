@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: linfatico
 camada: orgaos
 ---
@@ -15,3 +15,4 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Órgãos**.
 ## Estruturas
 - Linfonodos do pescoço · cervical lymph node · [[Região — Pescoço]]
 - Baço · spleen · [[Região — Abdome superior esquerdo]] · `FMA7196`
+- Timo · thymus · [[Região — Tórax]]

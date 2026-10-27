@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: sensorial
 camada: orgaos
 ---
@@ -15,3 +15,9 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Órgãos**.
 ## Estruturas
 - Globo ocular · eyeball · [[Região — Cabeça]] · `FMA58082`
 - Orelha interna (labirinto) · internal ear · [[Região — Cabeça]]
+- Cristalino · lens · [[Região — Cabeça]]
+- Córnea · cornea · [[Região — Cabeça]]
+- Íris · iris · [[Região — Cabeça]]
+- Retina · retina · [[Região — Cabeça]]
+- Esclera · sclera · [[Região — Cabeça]]
+- Corpo vítreo · vitreous body · [[Região — Cabeça]]

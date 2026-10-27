@@ -285,7 +285,6 @@ function fecharAlerta() {
    só fecha à mão (botão, Esc ou o próprio botão do topo). */
 var visaoCaso = $('#visaoCaso'), casoFrame = $('#casoFrame'), btnCaso = $('#btnCaso'), chkSeguir = $('#chkSeguir');
 var casoIdAtual = null, abertoAuto = false, voltaTimer = null, casoFramePronto = false, focoPendente = null;
-var explicando = false;
 var SEGUIR_CHAVE = 'bmx-seguir';
 
 /* Trava da entrada: enquanto o BMX pensa ou fala, a tela não aceita outra mensagem (campo, botões,
@@ -317,7 +316,7 @@ function descobrirCaso() {
 }
 descobrirCaso();
 
-function podeIncorporar() { return !window.matchMedia('(max-width: 960px)').matches; }
+function podeIncorporar() { return true; }   // em tela estreita o painel abre por cima, em tela cheia (styles.css)
 function casoAberto() { return document.body.classList.contains('modo-caso'); }
 function enviarAoCaso(msg) {
   try { if (casoFrame.contentWindow) casoFrame.contentWindow.postMessage(msg, location.origin); } catch (e) { /* iframe ainda não existe */ }
@@ -371,35 +370,30 @@ chkSeguir.addEventListener('change', function () {
   try { localStorage.setItem(SEGUIR_CHAVE, chkSeguir.checked ? 'on' : 'off'); } catch (e) { /* sem armazenamento */ }
 });
 
-// a primeira regra que casar vence: do mais específico (nível, sinais) ao mais comum (dor)
-var SECAO_REGRAS = [
-  ['nivel', /\b(emergencia|urgente|urgencia|autocuidado|192|samu|upa|pronto socorro|pronto atendimento)\b/],
-  ['sinais', /\b(sinais?|alerta|risco|rigidez|fraqueza|fala enrolada|visao|desmai\w*|convuls\w*|falta de ar)\b/],
-  ['fixa', /\b(alergi\w*|remedio\w*|medicamento\w*|losartana|dipirona|prontuario|ficha|pressao alta|condic\w*)\b/],
-  ['tempo', /\b(ontem|hoje cedo|desde|horas|dias|comecou|comeco|melhor|pior|igual|retom\w*|linha do tempo)\b/],
-  ['plano', /\b(leve|procure|ligue|beba|descanse|evite|nao tome|nao dirija|oriento|orientacao)\b/],
-  ['corpo', /\b(regiao|cabeca|nuca|pescoco|peito|barriga|estrutura\w*|anatomia|musculo\w*|osso\w*|vaso\w*|nervo\w*|destac\w*)\b/],
-  ['dor', /\b(dor|escala|zero a dez|intensidade)\b/]
-];
-function secaoDaFrase(texto) {
-  var t = String(texto || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\[[^\]]*\]/g, ' ');
-  for (var i = 0; i < SECAO_REGRAS.length; i++) if (SECAO_REGRAS[i][1].test(t)) return SECAO_REGRAS[i][0];
-  return null;
+/* Conversa → atlas → painel: depois que o BMX termina de falar a resposta, e se a conversa mexeu no caso (queixa nova,
+   sinal confirmado ou descartado, lado, nível), o atlas explica no corpo o que a pessoa contou; ao fim, o painel do
+   caso abre e fica aberto até a pessoa voltar ao Baymax. A mesma situação do caso não repete a aula. */
+var casoMudou = false, aulasVistas = {};
+function explicarNoAtlas() {
+  if (!casoMudou) return;
+  casoMudou = false;
+  if (!chkSeguir.checked || !casoIdAtual || !window.BMXAtlas || window.BMXAtlas.aberto()) return;
+  var cid = casoIdAtual;
+  fetch('/api/atlas?caso=' + encodeURIComponent(cid), { headers: headers() })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (aula) {
+      if (!aula || !aula.assinatura) return;
+      if (aulasVistas[cid] === aula.assinatura) return;           // nada novo para explicar
+      aulasVistas[cid] = aula.assinatura;
+      return window.BMXAtlas.abrirCaso(cid, function (motivo) {
+        if (motivo === 'fechar') return;
+        abrirCaso(false);
+        if (motivo === 'demo') setTimeout(function () { enviarAoCaso({ t: 'demo' }); }, casoFramePronto ? 900 : 3500);   // o painel começa a demonstração do contexto
+      })
+        .then(function (ok) { if (!ok) abrirCaso(false); });       // sem aula possível, vai direto ao painel
+    })
+    .catch(function () { /* sem atlas: a conversa segue normalmente */ });
 }
-window.addEventListener('bmx:fala', function (e) {
-  if (!explicando || !chkSeguir.checked || !casoIdAtual || !podeIncorporar()) return;
-  var secao = secaoDaFrase(e.detail && e.detail.texto);
-  if (!secao) return;
-  clearTimeout(voltaTimer);
-  var recemAberto = !casoAberto();
-  if (recemAberto) abrirCaso(true);
-  setTimeout(function () { focarNoCaso(secao); }, recemAberto ? 650 : 0);   // espera a transição terminar
-});
-window.addEventListener('bmx:fala-fim', function () {
-  if (!abertoAuto || !casoAberto()) return;
-  clearTimeout(voltaTimer);
-  voltaTimer = setTimeout(voltarCaso, 3500);
-});
 
 /* ── o atendimento ────────────────────── */
 async function enviar(mensagem) {
@@ -470,8 +464,8 @@ async function enviar(mensagem) {
   if (/de zero a dez|de 0 a 10|escala de dor/i.test(resposta) && window.BMXHolo) window.BMXHolo.abrir();
   if (resposta.trim()) {
     await descobrirCaso();
-    explicando = true;                       // só uma resposta do BMX abre o painel; a introdução não
-    try { await window.BMXVoz.falar(resposta.trim()); } finally { explicando = false; emFala = false; atualizarEntrada(); }
+    try { await window.BMXVoz.falar(resposta.trim()); } finally { emFala = false; atualizarEntrada(); }
+    explicarNoAtlas();                       // só uma resposta do BMX leva ao atlas; a introdução não
   }
   else window.BMXVoz.retomarEscuta();
 }
@@ -516,6 +510,7 @@ function evento(ev) {
     case 'caso':
       if (ev.como !== 'atualizado') log('mem', 'CASO', (ev.como || '') + ' → ' + ev.id + ' · ' + (ev.titulo || ''));
       casoIdAtual = ev.id;
+      casoMudou = true;
       if (casoAberto()) atualizarCaso();
       break;
     case 'ficha':

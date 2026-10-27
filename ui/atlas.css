@@ -1,0 +1,185 @@
+/* Atlas 3D de materialização (ui/atlas.js + atlas3d.js).
+   Tema: holograma sobre azul-noite. A tela é o modelo; o texto de cada passo fica preso ao ponto por uma seta. */
+
+body.atl-aberto { overflow: hidden; }
+
+/* ── entrada na página do caso ─────────────────────────────────────────────────────────────── */
+.atlas-secao .atlas-topo { display: flex; justify-content: space-between; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 10px; }
+.atlas-secao .atlas-topo h2 { margin: 2px 0 4px; }
+.atlas-secao .atlas-topo p { margin: 0; max-width: 62ch; }
+.atlas-secao .atlas-conta { font: 700 12px/1.2 ui-monospace, Consolas, monospace; color: #1d6f96; letter-spacing: .04em; }
+.atlas-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.vista .vista-atlas { background: #06223a; color: #8fe3ff; border-color: #1c6a94; }
+.vista .vista-atlas:hover { background: #0a3355; }
+
+.atl-card {
+  --cor: #35c8ff; position: relative; text-align: left; cursor: pointer; border: 1px solid rgba(53, 200, 255, .28); border-radius: 14px;
+  padding: 14px 14px 12px; color: #dbeafe; font-family: inherit; display: flex; flex-direction: column; gap: 5px; overflow: hidden;
+  background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--cor) 24%, transparent) 0%, transparent 60%), linear-gradient(160deg, #0a1d33, #050d19);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.atl-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 0 48%, rgba(53, 200, 255, .12) 50%, transparent 52% 100%); background-size: 100% 220%; animation: atlVarre 4.5s linear infinite; pointer-events: none; opacity: .6; }
+.atl-card:hover, .atl-card:focus-visible { transform: translateY(-3px); border-color: var(--cor); box-shadow: 0 10px 30px -10px var(--cor); outline: none; }
+.atl-card-sis { font: 700 10.5px/1 ui-monospace, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--cor); }
+.atl-card b { font-size: 18px; font-weight: 900; color: #fff; }
+.atl-card em { font-style: normal; font-size: 12.5px; color: #8fb0cf; }
+.atl-card p { margin: 3px 0 2px; font-size: 12.5px; line-height: 1.45; color: #b7cde3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.atl-card-go { margin-top: auto; padding-top: 6px; font-size: 12px; font-weight: 800; color: var(--cor); }
+.atl-card-go::after { content: ' →'; }
+@keyframes atlVarre { from { background-position: 0 0; } to { background-position: 0 -220%; } }
+
+/* ── casca: o palco ocupa a tela toda ──────────────────────────────────────────────────────── */
+.atl {
+  --azul: #35c8ff; --azul2: #8fe3ff; --ambar: #ffb703; --verm: #ff4d5e; --txt: #dbeafe; --mudo: #7f9bb8; --cor: #35c8ff; --seta: #ffb703;
+  --linha: rgba(53, 200, 255, .22);
+  position: fixed; inset: 0; z-index: 2000; color: var(--txt); background: #040913;
+  font-family: Nunito, system-ui, sans-serif; font-size: 14px; transition: opacity .45s ease;
+}
+.atl.saindo { opacity: 0; }
+.atl[hidden], .atl [hidden] { display: none !important; }
+.atl button { font-family: inherit; }
+.atl * { box-sizing: border-box; }
+.atl[data-tipo="impacto"] { --seta: #ff8a4d; }
+.atl[data-tipo="corpo"] { --seta: #ffc857; }
+.atl-sobre { font: 700 10.5px/1.2 ui-monospace, Consolas, monospace; letter-spacing: .14em; color: var(--azul); text-transform: uppercase; }
+
+.atl-palco { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(110% 85% at 50% 42%, #0d2c48 0%, #071a2e 46%, #040913 100%); }
+.atl-palco::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(53, 200, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(53, 200, 255, .06) 1px, transparent 1px); background-size: 52px 52px; -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 12%, transparent 72%); mask-image: radial-gradient(circle at 50% 50%, #000 12%, transparent 72%); }
+.atl-palco canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+.atl-palco canvas:active { cursor: grabbing; }
+.atl-marcas { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+/* topo: só o essencial */
+.atl-topo { position: absolute; left: 0; right: 0; top: 0; z-index: 3; display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: linear-gradient(rgba(4, 9, 19, .88), rgba(4, 9, 19, 0)); pointer-events: none; }
+.atl-topo > * { pointer-events: auto; }
+.atl-marca-bmx { display: flex; align-items: center; gap: 8px; color: var(--azul2); }
+.atl-marca-bmx svg { width: 34px; }
+.atl-marca-bmx b { font-weight: 900; letter-spacing: .08em; color: #fff; }
+.atl-etapa { flex: 1; margin: 0; min-width: 0; text-align: center; font: 700 11.5px/1.2 ui-monospace, Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--azul2); pointer-events: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.atl-topo-dir { display: flex; gap: 8px; align-items: center; }
+.atl-btn { background: rgba(8, 24, 42, .82); color: var(--txt); border: 1px solid var(--linha); border-radius: 10px; padding: 8px 14px; min-height: 38px; cursor: pointer; font-weight: 800; font-size: 13px; backdrop-filter: blur(6px); }
+.atl-btn:hover { border-color: var(--azul); color: #fff; }
+.atl-btn.on { background: rgba(53, 200, 255, .2); border-color: var(--azul); color: #fff; }
+.atl-pular { background: rgba(53, 200, 255, .18); border-color: var(--azul); color: #fff; }
+.atl-x { font-size: 20px; line-height: 1; padding: 4px 13px; }
+
+/* texto preso ao ponto observado + seta */
+.atl-linha { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 2; }
+.atl-linha > path { fill: none; stroke: var(--seta); stroke-width: 1.6; marker-end: url(#atlSeta); filter: drop-shadow(0 0 4px var(--seta)); }
+.atl-linha marker path { fill: var(--seta); }
+.atl-call { position: absolute; left: 0; top: 0; z-index: 2; display: flex; align-items: flex-start; gap: 9px; padding: 10px 13px; border-radius: 10px; width: max-content; max-width: min(300px, calc(100% - 20px)); pointer-events: none;
+  background: rgba(34, 22, 4, .9); border: 1px solid rgba(255, 183, 3, .6); box-shadow: 0 0 24px -8px var(--ambar); backdrop-filter: blur(6px); }
+.atl-call i { font: 800 12px/1.5 ui-monospace, Consolas, monospace; color: var(--ambar); font-style: normal; }
+.atl-call div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.atl-call b { font-size: 14px; font-weight: 800; color: #fff4d6; line-height: 1.25; }
+.atl-call p { margin: 0; font-size: 12.5px; line-height: 1.4; color: #f0dfb8; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.atl-call small { font-size: 12px; line-height: 1.35; color: var(--azul2); font-weight: 700; }
+.atl-call em { font-style: normal; font-size: 12px; line-height: 1.35; color: var(--ambar); font-weight: 800; }
+.atl-call.t-impacto { background: rgba(40, 10, 8, .9); border-color: rgba(255, 138, 77, .6); box-shadow: 0 0 24px -8px #ff8a4d; }
+.atl-call.t-impacto i { color: #ff8a4d; } .atl-call.t-impacto b { color: #ffe4d6; } .atl-call.t-impacto p { color: #f6d5c4; }
+.atl-call.t-corpo { background: rgba(38, 25, 4, .9); border-color: rgba(255, 200, 87, .6); }
+
+/* fala (legenda) e controles */
+.atl-legenda { position: absolute; left: 50%; bottom: 74px; z-index: 3; transform: translateX(-50%); margin: 0; width: max-content; max-width: min(720px, calc(100% - 28px)); text-align: center; padding: 10px 18px; border-radius: 12px; background: rgba(4, 12, 22, .8); border: 1px solid var(--linha); font-size: 15px; line-height: 1.45; font-weight: 700; color: #f2faff; backdrop-filter: blur(6px); pointer-events: none; }
+@media (min-width: 641px) {   /* com o texto junto ao ponto, a legenda repetiria o mesmo; no celular ela leva o detalhe */
+  .atl[data-call="1"][data-tipo="ponto"] .atl-legenda, .atl[data-call="1"][data-tipo="impacto"] .atl-legenda { display: none; }
+}
+.atl[data-tipo="fecho"] .atl-legenda, .atl[data-tipo="contexto"] .atl-legenda { display: none; }   /* o cartão já traz o essencial */
+.atl-base { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; align-items: center; gap: 16px; padding: 12px 16px 14px; background: linear-gradient(rgba(4, 9, 19, 0), rgba(4, 9, 19, .9) 45%); }
+.atl-ctrl { display: flex; gap: 8px; align-items: center; }
+.atl-ctrl .atl-btn { min-width: 44px; font-size: 16px; }
+.atl-play { min-width: 104px !important; font-size: 13px !important; background: rgba(53, 200, 255, .16); border-color: var(--azul); color: #fff; }
+.atl-trilha { flex: 1; display: flex; gap: 4px; min-width: 0; }
+.atl-trilha button { flex: 1; height: 8px; min-width: 4px; border-radius: 4px; border: 0; padding: 0; cursor: pointer; background: #14304a; transition: background .3s, box-shadow .3s; }
+.atl-trilha button[data-est="1"] { background: #1b3b3f; }
+.atl-trilha button:hover { background: #2a5d85; }
+.atl-trilha button.feito { background: #2b86b3; }
+.atl-trilha button.atual { background: var(--azul2); box-shadow: 0 0 12px var(--azul); }
+
+/* resumo do que a pessoa contou (último passo da aula do caso) */
+.atl-fecho { position: absolute; left: 16px; bottom: 82px; z-index: 3; width: min(380px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 8px; padding: 14px 15px; border-radius: 12px; background: rgba(6, 18, 33, .92); border: 1px solid var(--linha); backdrop-filter: blur(6px); animation: atlEntra .4s ease-out both; }
+.atl-fecho b { font-size: 15px; color: #fff; font-weight: 900; }
+.atl-fecho p { margin: 0; font-size: 13px; color: #b7cde3; font-weight: 700; }
+.atl-fecho .atl-relato { font-style: italic; font-weight: 600; color: #dbeafe; }
+.atl-fecho small { font-size: 11.5px; color: var(--mudo); line-height: 1.4; }
+.atl-fecho-linha { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+.atl-fecho-linha span { font: 700 10.5px/1 ui-monospace, Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--mudo); width: 100%; }
+.atl-fecho-linha i { font-style: normal; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 99px; border: 1px solid var(--linha); background: rgba(53, 200, 255, .08); color: #d5ecfb; }
+.atl-fecho-linha.sim i { background: rgba(255, 77, 94, .12); border-color: rgba(255, 77, 94, .5); color: #ffc9ce; }
+.atl-fecho-linha.nao i { background: rgba(80, 200, 140, .1); border-color: rgba(80, 200, 140, .4); color: #c6f0da; }
+.atl-fecho-linha.falta i { background: rgba(255, 183, 3, .1); border-color: rgba(255, 183, 3, .45); color: #ffe6a8; }
+
+/* cortina entre estágios */
+.atl-trans { position: absolute; inset: 0; z-index: 6; display: grid; place-content: center; justify-items: center; gap: 10px; pointer-events: none; visibility: hidden;
+  background: linear-gradient(100deg, #040913 0%, #0b2a47 50%, #040913 100%); clip-path: inset(0 100% 0 0); transition: clip-path .42s cubic-bezier(.7, 0, .2, 1); }
+.atl-trans.on { visibility: visible; clip-path: inset(0 0 0 0); }
+.atl-trans.on.sai { clip-path: inset(0 0 0 100%); transition-duration: .5s; }
+.atl-trans-n { font: 800 13px ui-monospace, Consolas, monospace; letter-spacing: .3em; color: var(--azul); opacity: 0; transform: translateY(8px); transition: opacity .3s .15s, transform .3s .15s; }
+.atl-trans b { font-size: clamp(24px, 5vw, 40px); font-weight: 900; color: #fff; letter-spacing: .02em; text-align: center; padding: 0 20px; opacity: 0; transform: translateY(10px); transition: opacity .3s .2s, transform .3s .2s; text-shadow: 0 0 26px rgba(53, 200, 255, .5); }
+.atl-trans i { display: block; height: 2px; width: 0; background: linear-gradient(90deg, transparent, var(--azul2), transparent); box-shadow: 0 0 14px var(--azul); transition: width .5s .2s; }
+.atl-trans.on:not(.sai) .atl-trans-n, .atl-trans.on:not(.sai) b { opacity: 1; transform: none; }
+.atl-trans.on:not(.sai) i { width: min(260px, 60vw); }
+
+.atl-carregando { position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 14px; background: rgba(4, 9, 19, .72); font: 700 12px ui-monospace, Consolas, monospace; letter-spacing: .12em; color: var(--azul2); text-transform: uppercase; }
+.atl-carregando i { width: 46px; height: 46px; border-radius: 50%; border: 2px solid rgba(53, 200, 255, .2); border-top-color: var(--azul); animation: atlGira 1s linear infinite; }
+@keyframes atlGira { to { transform: rotate(360deg); } }
+
+/* marcadores presos ao modelo */
+.atl-marca { position: absolute; left: 0; top: 0; will-change: transform; pointer-events: none; }
+.atl-marca i { position: absolute; left: -15px; top: -15px; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--azul2); box-shadow: 0 0 14px var(--azul), inset 0 0 8px rgba(53, 200, 255, .5); animation: atlPulso 1.8s ease-out infinite; }
+.atl-marca b { position: absolute; left: -15px; top: -15px; width: 30px; height: 30px; display: grid; place-items: center; font: 800 13px ui-monospace, Consolas, monospace; color: #fff; text-shadow: 0 0 6px #000; }
+.atl-marca span { position: absolute; left: 22px; top: -11px; white-space: nowrap; padding: 4px 9px; border-radius: 6px; font-size: 12px; font-weight: 800; background: rgba(4, 12, 22, .82); border: 1px solid var(--linha); color: #eaf7ff; }
+.atl-marca span:empty { display: none; }
+.atl-marca.m-sel i { border-color: var(--ambar); box-shadow: 0 0 16px var(--ambar), inset 0 0 8px rgba(255, 183, 3, .5); }
+.atl-marca.m-sel span { display: none; }                 /* o título do ponto já está no texto preso a ele */
+.atl-marca.m-chip i { left: -5px; top: -5px; width: 10px; height: 10px; border-width: 0; background: var(--azul2); animation: none; box-shadow: 0 0 10px var(--azul); }
+.atl-marca.m-chip span { left: 12px; top: -12px; animation: atlEntra .35s ease-out both; }
+.atl-marca.m-alerta i { border-color: var(--verm); box-shadow: 0 0 18px var(--verm), inset 0 0 8px rgba(255, 77, 94, .5); }
+.atl-marca.m-alerta span, .atl-marca.m-afetada span, .atl-marca.m-corpo span { display: none; }   /* idem: o texto preso ao marcador faz esse papel */
+.atl-marca.m-afetada i { border-color: var(--ambar); box-shadow: 0 0 16px var(--ambar); }
+.atl-marca.m-corpo i { border-color: #ffc857; box-shadow: 0 0 22px #ffc857; width: 40px; height: 40px; left: -20px; top: -20px; }
+@keyframes atlPulso { 0% { transform: scale(.7); opacity: 1; } 80%, 100% { transform: scale(1.35); opacity: .15; } }
+@keyframes atlEntra { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+
+/* biblioteca */
+.atl-lib { position: absolute; inset: 0; z-index: 5; overflow: auto; background: radial-gradient(100% 80% at 50% 0%, #0d2c48 0%, #050e1b 70%); }
+.atl-lib-int { position: relative; max-width: 1080px; margin: 0 auto; padding: 30px 20px 40px; }
+.atl-lib-x { position: absolute; right: 16px; top: 16px; }
+.atl-lib h2 { margin: 6px 0 8px; font-size: 30px; font-weight: 900; color: #fff; }
+.atl-lib-txt { max-width: 66ch; color: #a9c2da; line-height: 1.55; margin: 0 0 20px; }
+.atl-lib-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+/* ── telas estreitas: tudo em coluna, texto junto ao ponto só com o título, a fala embaixo ──── */
+@media (max-width: 640px) {
+  .atl-topo { padding: 8px 10px; gap: 8px; }
+  .atl-marca-bmx { display: none; }
+  .atl-etapa { font-size: 9.5px; text-align: left; letter-spacing: .02em; }
+  .atl-btn { min-height: 42px; padding: 8px 12px; }
+  .atl-pular { padding: 8px 10px; font-size: 12px; }
+  .atl-call { max-width: calc(100% - 20px); padding: 8px 11px; }
+  .atl-call p, .atl-call small, .atl-call em { display: none; }   /* o detalhe vai na fala, embaixo */
+  .atl-legenda { left: 10px; right: 10px; bottom: 98px; transform: none; width: auto; max-width: none; text-align: left; font-size: 13.5px; padding: 10px 13px; max-height: 26vh; overflow: auto; }
+  .atl-base { flex-wrap: wrap; gap: 8px; padding: 10px 10px 12px; }
+  .atl-ctrl { width: 100%; justify-content: space-between; }
+  .atl-ctrl .atl-btn { flex: none; }
+  .atl-play { flex: 1; }
+  .atl-trilha { width: 100%; flex: none; order: 3; }
+  .atl-fecho { left: 10px; right: 10px; width: auto; bottom: 98px; max-height: 44vh; overflow: auto; }
+  .atl-lib h2 { font-size: 24px; }
+}
+@media (max-height: 520px) and (min-width: 641px) { .atl-legenda { bottom: 62px; font-size: 14px; padding: 8px 14px; } }
+.atl-referencias {
+  position: absolute; top: 80px; left: 16px; z-index: 12;
+  max-width: min(320px, calc(100vw - 32px)); max-height: 52vh; overflow: auto;
+  padding: 10px 14px; border-radius: 12px; background: rgba(10, 23, 35, .95);
+  color: #eef6ff; font-size: 13px; line-height: 1.5;
+}
+.atl-referencias summary { cursor: pointer; min-height: 28px; }
+.atl-referencias a { display: block; color: #b4e6ff; margin: 8px 0; }
+.atl-referencias b { display: block; margin-top: 12px; }
+.atl-referencias p { margin: 8px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .atl-marca i, .atl-card::after, .atl-carregando i { animation: none; }
+  .atl-fecho, .atl-marca span { animation: none; }
+  .atl-trans, .atl-trans b, .atl-trans-n, .atl-trans i, .atl { transition-duration: .01s; transition-delay: 0s; }
+}

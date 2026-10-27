@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: hipocondrio-direito
 ---
 
@@ -17,6 +17,8 @@ Parte da [[Anatomia — Índice]].
 - Vesícula biliar · gallbladder · [[Sistema digestório]] · `FMA7202`
 - Cólon ascendente · ascending colon · [[Sistema digestório]] · `FMA14545`
 - Rim direito · right kidney · [[Sistema urinário]] · `FMA7204`
+- Vias biliares · biliary tract · [[Sistema digestório]]
+- Glândulas suprarrenais · adrenal glands · [[Sistema endócrino]]
 
 ## Vizinhas
 [[Região — Epigástrio (boca do estômago)]], [[Região — Lombar (costas baixas)]]

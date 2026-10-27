@@ -201,7 +201,8 @@ def resolver(relato, queixas=(), rel=None):
             return None, None
         limite = (_agora() - datetime.timedelta(days=RETOMAR_DIAS)).date().isoformat()
         for c in listar():
-            mesma_queixa = qid and c.get("queixa_id") == qid
+            # a mesma queixa em OUTRA região do corpo (dor na barriga: epigástrio × fossa ilíaca) é outro caso
+            mesma_queixa = qid and c.get("queixa_id") == qid and (not reg or not c.get("regiao") or c.get("regiao") == reg)
             # mesma região só retoma se as queixas não se contradizem (tontura ≠ dor de cabeça)
             mesma_regiao = reg and c.get("regiao") == reg and not (qid and c.get("queixa_id") and c.get("queixa_id") != qid)
             if c.get("updated", "") >= limite and (mesma_queixa or mesma_regiao):

@@ -6,6 +6,18 @@ status: revisão clínica formal pendente
 
 # Investigação de sintomas e remédios
 
+## Atualização de 27/10/2026
+
+As tabelas receberam exemplos fictícios para as 22 queixas, preparação de consulta, perguntas de compreensão e
+metadados sobre o alcance da revisão. Foram ajustados os textos de palpitações, segurança emocional, perda
+sensorial súbita e cautelas com medicamentos. As frequências sem rastreabilidade por item foram retiradas da
+apresentação e conservadas apenas como histórico. Os códigos e diagnósticos diferenciais continuam pendentes
+de revisão profissional.
+
+Ver [[Revisao bibliografica e aplicacao pratica — BMX]] e `revisao-conhecimento.json` para as fontes, divergências
+e limites. A revisão de 27/10 usou fontes públicas; não corresponde à extração integral dos dez livros.
+As seções seguintes documentam o trabalho original de 23/10.
+
 ## Objetivo e método
 
 Em 23/10/2026, os roteiros de investigação das 18 queixas existentes foram ampliados e quatro entradas foram acrescentadas: palpitações, perna inchada, dor pélvica e possível reação a medicamento. As 22 entradas agora têm um guia com duas perguntas que discriminam padrões, uma explicação de por que perguntar, sinais para procurar atendimento e links diretos para fontes institucionais. Os textos e URLs usados pela interface estão em `investigacao.json`; a identificação das queixas e as possibilidades estão em `queixas-de-entrada.json`. As listas antigas de condições possíveis ainda precisam de revisão diagnóstica formal.

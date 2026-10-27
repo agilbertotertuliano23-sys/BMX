@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: cardiovascular
 camada: arterias
 ---
@@ -18,3 +18,15 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Artérias**.
 - Coração · heart · [[Região — Tórax]] · `FMA7088`
 - Aorta · aorta · [[Região — Tórax]], [[Região — Epigástrio (boca do estômago)]], [[Região — Umbigo (periumbilical)]] · `FMA3734`
 - Veia poplítea (veia profunda da perna) · popliteal vein · [[Região — Coxa e joelho]], [[Região — Perna, tornozelo e pé]] · `FMA44327`
+- Valva mitral · mitral valve · [[Região — Tórax]]
+- Valva tricúspide · tricuspid valve · [[Região — Tórax]]
+- Valva aórtica · aortic valve · [[Região — Tórax]]
+- Valva pulmonar · pulmonary valve · [[Região — Tórax]]
+- Átrio direito · right atrium · [[Região — Tórax]]
+- Átrio esquerdo · left atrium · [[Região — Tórax]]
+- Ventrículo direito · right ventricle · [[Região — Tórax]]
+- Ventrículo esquerdo · left ventricle · [[Região — Tórax]]
+- Arco da aorta · arch of aorta · [[Região — Tórax]], [[Região — Pescoço]]
+- Aorta abdominal · abdominal aorta · [[Região — Epigástrio (boca do estômago)]], [[Região — Umbigo (periumbilical)]]
+- Veia cava superior · superior vena cava · [[Região — Tórax]]
+- Veia cava inferior · inferior vena cava · [[Região — Tórax]], [[Região — Lombar (costas baixas)]]

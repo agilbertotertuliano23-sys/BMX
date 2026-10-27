@@ -1,7 +1,7 @@
 ---
 type: anatomia
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 ---
 
 # Mapa sintoma → região
@@ -10,11 +10,18 @@ updated: 2026-10-22
 
 Como o BMX liga um relato às estruturas que a interface destaca. Os termos são procurados no texto sem acento; todos os sintomas que batem somam regiões e estruturas. Parte da [[Anatomia — Índice]].
 
+### dor-pelvica
+- termos: dor pelvica, dor no baixo ventre, dor na pelve, dor embaixo da barriga
+- regiões: [[Região — Baixo ventre (pelve)]], [[Região — Abdome inferior direito]], [[Região — Abdome inferior esquerdo]]
+- estruturas: Útero, Ovário direito, Ovário esquerdo, Bexiga, Cólon sigmoide
+- anatomia: No baixo ventre, no meio, ficam a bexiga e, em mulheres, o útero; de cada lado ficam os ovários, e por trás o intestino grosso.
+- atenção: Dor intensa ou desmaio, especialmente com possível gravidez ou sangramento: emergência. Dor pélvica com febre ou possível gravidez: avaliação sem demora.
+
 ### dor-de-cabeca
 - termos: dor de cabeca, cefaleia, enxaqueca, cabeca doendo, dor na cabeca
 - regiões: [[Região — Cabeça]], [[Região — Pescoço]]
 - estruturas: Músculo temporal, Músculo trapézio, Coluna cervical, Seios maxilares, Globo ocular
-- anatomia: A maior parte das dores de cabeça vem de estruturas ao redor do crânio (músculos da cabeça e do pescoço, seios da face), não do encéfalo.
+- anatomia: Dor de cabeça envolve estruturas sensíveis à dor dentro ou fora do crânio. A localização sozinha não identifica a causa.
 - atenção: Pior dor de cabeça da vida, febre com nuca dura, fraqueza, fala enrolada ou confusão: 192.
 
 ### dor-no-peito
@@ -42,8 +49,8 @@ Como o BMX liga um relato às estruturas que a interface destaca. Os termos são
 - termos: azia, queimacao, refluxo, boca do estomago, estomago, ma digestao, enjoo
 - regiões: [[Região — Epigástrio (boca do estômago)]], [[Região — Tórax]]
 - estruturas: Esôfago, Estômago, Duodeno, Pâncreas, Diafragma
-- anatomia: A queimação na boca do estômago envolve a junção do esôfago com o estômago, o próprio estômago e o início do intestino (duodeno).
-- atenção: Vômito com sangue, fezes pretas ou dor que vai para as costas e não passa: atendimento urgente.
+- anatomia: Queimação no alto do abdome pode envolver estruturas digestivas ou outras causas. A localização não confirma gastrite nem afasta problema cardíaco.
+- atenção: Vômito com sangue, fezes pretas ou dor súbita intensa: emergência. Dor com suor frio ou falta de ar: ligue 192.
 
 ### abdome-superior-direito
 - termos: dor do lado direito em cima, embaixo das costelas do lado direito, figado, vesicula
@@ -70,18 +77,18 @@ Como o BMX liga um relato às estruturas que a interface destaca. Os termos são
 - termos: dor ao urinar, ardencia ao urinar, xixi, urina, bexiga, pe da barriga, baixo ventre
 - regiões: [[Região — Baixo ventre (pelve)]], [[Região — Lombar (costas baixas)]]
 - estruturas: Bexiga, Ureter direito, Ureter esquerdo, Rim direito, Rim esquerdo, Próstata, Útero
-- anatomia: O caminho da urina vai dos rins pelos ureteres até a bexiga; ardência costuma vir de baixo, dor nas costas com febre sugere que subiu.
+- anatomia: A urina vai dos rins pelos ureteres até a bexiga e sai pela uretra. Ardor, frequência, febre e dor nas costas ajudam a orientar a avaliação, mas não confirmam infecção.
 - atenção: Febre com dor nas costas, sangue na urina ou não conseguir urinar: atendimento urgente.
 
 ### colica-renal
 - termos: pedra no rim, calculo renal, colica renal, dor no rim
 - regiões: [[Região — Lombar (costas baixas)]], [[Região — Abdome inferior direito]], [[Região — Abdome inferior esquerdo]]
 - estruturas: Rim direito, Rim esquerdo, Ureter direito, Ureter esquerdo, Bexiga
-- anatomia: A dor do cálculo acompanha o trajeto do ureter: começa nas costas e desce para a virilha.
+- anatomia: Um cálculo pode causar dor no flanco com irradiação para a virilha; localização e padrão não confirmam a causa.
 - atenção: Dor muito forte, febre ou vômitos que não param: pronto atendimento.
 
 ### lombar
-- termos: dor nas costas, lombar, lombalgia, dor na coluna, costas baixas
+- termos: dor nas costas, lombar, lombalgia, dor na coluna, costas baixas, parte de baixo das costas, baixo das costas, base das costas
 - regiões: [[Região — Lombar (costas baixas)]]
 - estruturas: Coluna lombar, Discos intervertebrais, Músculos eretores da espinha, Quadrado lombar, Rim direito, Rim esquerdo
 - anatomia: A maioria das dores lombares é muscular ou das articulações da coluna; os rins ficam logo à frente dessa musculatura.

@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: digestorio
 camada: orgaos
 ---
@@ -28,3 +28,10 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Órgãos**.
 - Cólon descendente · descending colon · [[Região — Abdome superior esquerdo]], [[Região — Abdome inferior esquerdo]] · `FMA14547`
 - Cólon sigmoide · sigmoid colon · [[Região — Abdome inferior esquerdo]], [[Região — Baixo ventre (pelve)]]
 - Reto · rectum · [[Região — Baixo ventre (pelve)]] · `FMA14544`
+- Língua · tongue · [[Região — Cabeça]]
+- Glândulas salivares · salivary glands · [[Região — Cabeça]], [[Região — Pescoço]]
+- Vias biliares · biliary tract · [[Região — Abdome superior direito]], [[Região — Epigástrio (boca do estômago)]]
+- Ducto pancreático · pancreatic duct · [[Região — Epigástrio (boca do estômago)]]
+- Jejuno · jejunum · [[Região — Umbigo (periumbilical)]], [[Região — Abdome superior esquerdo]]
+- Íleo · ileum · [[Região — Umbigo (periumbilical)]], [[Região — Abdome inferior direito]]
+- Mesentério · mesentery · [[Região — Umbigo (periumbilical)]]

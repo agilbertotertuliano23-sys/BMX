@@ -1,0 +1,1754 @@
+{
+ "versao": "2026-10-27",
+ "sobre": "Gerado por tools/ampliar_biblioteca.py a partir dos GLBs de camada (BodyParts3D 4.0 via Human Atlas, CC BY 4.0). anatomia.carregar() junta estas estruturas ao catálogo. Não edite: ajuste as regras do script.",
+ "estruturas": {
+  "valva-mitral": {
+   "nome": "Valva mitral",
+   "nome_en": "mitral valve",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Valva entre o átrio e o ventrículo esquerdos: abre para o sangue oxigenado descer e fecha para ele não voltar."
+  },
+  "valva-tricuspide": {
+   "nome": "Valva tricúspide",
+   "nome_en": "tricuspid valve",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Valva entre o átrio e o ventrículo direitos: impede que o sangue volte ao átrio quando o ventrículo se contrai."
+  },
+  "valva-aortica": {
+   "nome": "Valva aórtica",
+   "nome_en": "aortic valve",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Valva na saída do ventrículo esquerdo para a aorta: abre a cada batimento e fecha para o sangue não retornar."
+  },
+  "valva-pulmonar": {
+   "nome": "Valva pulmonar",
+   "nome_en": "pulmonary valve",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Valva na saída do ventrículo direito para a artéria pulmonar, rumo aos pulmões."
+  },
+  "atrio-direito": {
+   "nome": "Átrio direito",
+   "nome_en": "right atrium",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Câmara que recebe o sangue pobre em oxigênio que volta do corpo pelas veias cavas."
+  },
+  "atrio-esquerdo": {
+   "nome": "Átrio esquerdo",
+   "nome_en": "left atrium",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Câmara que recebe o sangue oxigenado que volta dos pulmões."
+  },
+  "ventriculo-direito": {
+   "nome": "Ventrículo direito",
+   "nome_en": "right ventricle",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Câmara que bombeia o sangue para os pulmões, onde ele recebe oxigênio."
+  },
+  "ventriculo-esquerdo": {
+   "nome": "Ventrículo esquerdo",
+   "nome_en": "left ventricle",
+   "sistema": "cardiovascular",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Câmara de parede mais grossa: bombeia o sangue oxigenado para o corpo inteiro pela aorta."
+  },
+  "hipofise": {
+   "nome": "Hipófise",
+   "nome_en": "pituitary gland",
+   "sistema": "endocrino",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Glândula do tamanho de uma ervilha, na base do cérebro: comanda outras glândulas hormonais."
+  },
+  "glandula-pineal": {
+   "nome": "Glândula pineal",
+   "nome_en": "pineal body",
+   "sistema": "endocrino",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Pequena glândula que participa do ritmo de sono e vigília por meio da melatonina."
+  },
+  "ventriculos-laterais": {
+   "nome": "Ventrículos laterais",
+   "nome_en": "lateral ventricle",
+   "sistema": "nervoso",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Cavidades dentro do cérebro onde o líquido cefalorraquidiano é produzido e circula."
+  },
+  "cristalino": {
+   "nome": "Cristalino",
+   "nome_en": "lens",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Lente transparente atrás da íris: muda de curvatura para focar de perto e de longe."
+  },
+  "cornea": {
+   "nome": "Córnea",
+   "nome_en": "cornea",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Janela transparente na frente do olho, responsável pela maior parte do poder de foco."
+  },
+  "iris": {
+   "nome": "Íris",
+   "nome_en": "iris",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Parte colorida do olho: abre e fecha a pupila para regular a entrada de luz."
+  },
+  "retina": {
+   "nome": "Retina",
+   "nome_en": "retina",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Camada no fundo do olho que transforma a luz em sinais nervosos."
+  },
+  "esclera": {
+   "nome": "Esclera",
+   "nome_en": "sclera",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "O \"branco do olho\": camada firme que dá forma e protege o globo ocular."
+  },
+  "corpo-vitreo": {
+   "nome": "Corpo vítreo",
+   "nome_en": "vitreous body",
+   "sistema": "sensorial",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Gel transparente que preenche o interior do olho."
+  },
+  "lingua": {
+   "nome": "Língua",
+   "nome_en": "tongue",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Músculo coberto de papilas: participa da mastigação, da fala e do paladar."
+  },
+  "glandulas-salivares": {
+   "nome": "Glândulas salivares",
+   "nome_en": "salivary glands",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "cabeca",
+    "pescoco"
+   ],
+   "descricao": "Produzem a saliva, que umedece o alimento e começa a digestão."
+  },
+  "epiglote": {
+   "nome": "Epiglote",
+   "nome_en": "epiglottis",
+   "sistema": "respiratorio",
+   "camada": "orgaos",
+   "regioes": [
+    "pescoco"
+   ],
+   "descricao": "Tampa de cartilagem que fecha a laringe ao engolir, protegendo as vias aéreas."
+  },
+  "vias-biliares": {
+   "nome": "Vias biliares",
+   "nome_en": "biliary tract",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "hipocondrio-direito",
+    "epigastrio"
+   ],
+   "descricao": "Canais que levam a bile do fígado até a vesícula biliar e o duodeno."
+  },
+  "ducto-pancreatico": {
+   "nome": "Ducto pancreático",
+   "nome_en": "pancreatic duct",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "epigastrio"
+   ],
+   "descricao": "Canal que leva o suco digestivo do pâncreas até o duodeno."
+  },
+  "jejuno": {
+   "nome": "Jejuno",
+   "nome_en": "jejunum",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "periumbilical",
+    "hipocondrio-esquerdo"
+   ],
+   "descricao": "Trecho do intestino delgado depois do duodeno, onde ocorre grande parte da absorção de nutrientes."
+  },
+  "ileo": {
+   "nome": "Íleo",
+   "nome_en": "ileum",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "periumbilical",
+    "fossa-iliaca-direita"
+   ],
+   "descricao": "Último trecho do intestino delgado: absorve vitamina B12 e sais biliares e desemboca no ceco."
+  },
+  "mesenterio": {
+   "nome": "Mesentério",
+   "nome_en": "mesentery",
+   "sistema": "digestorio",
+   "camada": "orgaos",
+   "regioes": [
+    "periumbilical"
+   ],
+   "descricao": "Membrana que prende o intestino delgado à parede do abdome e leva seus vasos e nervos."
+  },
+  "suprarrenais": {
+   "nome": "Glândulas suprarrenais",
+   "nome_en": "adrenal glands",
+   "sistema": "endocrino",
+   "camada": "orgaos",
+   "regioes": [
+    "lombar",
+    "hipocondrio-direito",
+    "hipocondrio-esquerdo"
+   ],
+   "descricao": "Ficam sobre os rins: produzem cortisol, adrenalina e outros hormônios."
+  },
+  "timo": {
+   "nome": "Timo",
+   "nome_en": "thymus",
+   "sistema": "linfatico",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Órgão atrás do esterno que \"treina\" os linfócitos T; é maior na infância."
+  },
+  "arvore-bronquica": {
+   "nome": "Árvore brônquica segmentar",
+   "nome_en": "segmental bronchi",
+   "sistema": "respiratorio",
+   "camada": "orgaos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Ramificações dos brônquios que levam o ar a cada segmento do pulmão."
+  },
+  "arco-da-aorta": {
+   "nome": "Arco da aorta",
+   "nome_en": "arch of aorta",
+   "sistema": "cardiovascular",
+   "camada": "arterias",
+   "regioes": [
+    "torax",
+    "pescoco"
+   ],
+   "descricao": "Curva da aorta no alto do tórax, de onde saem as artérias que levam sangue à cabeça e aos braços."
+  },
+  "aorta-abdominal": {
+   "nome": "Aorta abdominal",
+   "nome_en": "abdominal aorta",
+   "sistema": "cardiovascular",
+   "camada": "arterias",
+   "regioes": [
+    "epigastrio",
+    "periumbilical"
+   ],
+   "descricao": "Trecho da aorta dentro do abdome: dá ramos para o sistema digestório e para os rins e continua até as pernas."
+  },
+  "veia-cava-superior": {
+   "nome": "Veia cava superior",
+   "nome_en": "superior vena cava",
+   "sistema": "cardiovascular",
+   "camada": "veias",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Traz o sangue da cabeça, do pescoço e dos braços para o átrio direito."
+  },
+  "veia-cava-inferior": {
+   "nome": "Veia cava inferior",
+   "nome_en": "inferior vena cava",
+   "sistema": "cardiovascular",
+   "camada": "veias",
+   "regioes": [
+    "torax",
+    "lombar"
+   ],
+   "descricao": "Traz o sangue da metade inferior do corpo para o átrio direito."
+  },
+  "cerebelo": {
+   "nome": "Cerebelo",
+   "nome_en": "cerebellum",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Fica atrás e embaixo do cérebro: coordena o movimento, o equilíbrio e a postura."
+  },
+  "tronco-encefalico": {
+   "nome": "Tronco encefálico",
+   "nome_en": "brainstem",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca",
+    "pescoco"
+   ],
+   "descricao": "Liga o cérebro à medula espinhal: controla respiração e batimentos e por ele passam quase todas as vias nervosas."
+  },
+  "talamo": {
+   "nome": "Tálamo",
+   "nome_en": "thalamus",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Estação de retransmissão: leva ao córtex as informações dos sentidos."
+  },
+  "hipocampo": {
+   "nome": "Hipocampo",
+   "nome_en": "hippocampus",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Região ligada à formação de novas memórias e à orientação no espaço."
+  },
+  "amigdala": {
+   "nome": "Amígdala cerebral",
+   "nome_en": "amygdala",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Núcleo ligado às emoções, em especial ao medo e à resposta de alerta."
+  },
+  "corpo-caloso": {
+   "nome": "Corpo caloso",
+   "nome_en": "corpus callosum",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Faixa de fibras que conecta os dois hemisférios do cérebro."
+  },
+  "nucleos-da-base": {
+   "nome": "Núcleos da base",
+   "nome_en": "basal ganglia",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Grupo de núcleos profundos que ajuda a iniciar e a regular os movimentos."
+  },
+  "hipotalamo": {
+   "nome": "Hipotálamo",
+   "nome_en": "hypothalamus",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Pequena região que regula temperatura, fome, sede e sono e comanda a hipófise."
+  },
+  "via-optica": {
+   "nome": "Via óptica",
+   "nome_en": "optic pathway",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Nervo óptico, quiasma e tratos: levam a imagem do olho até o cérebro."
+  },
+  "giro-pre-central": {
+   "nome": "Giro pré-central (córtex motor)",
+   "nome_en": "precentral gyrus",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Faixa do córtex que comanda os movimentos voluntários do lado oposto do corpo."
+  },
+  "giro-pos-central": {
+   "nome": "Giro pós-central (córtex sensitivo)",
+   "nome_en": "postcentral gyrus",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Recebe o tato, a dor e a posição do corpo do lado oposto."
+  },
+  "lobo-occipital": {
+   "nome": "Lobo occipital",
+   "nome_en": "occipital lobe",
+   "sistema": "nervoso",
+   "camada": "nervos",
+   "regioes": [
+    "cabeca"
+   ],
+   "descricao": "Parte de trás do cérebro, responsável principalmente pela visão."
+  },
+  "cartilagem-tireoide": {
+   "nome": "Cartilagem tireóidea",
+   "nome_en": "thyroid cartilage",
+   "sistema": "respiratorio",
+   "camada": "ossos",
+   "regioes": [
+    "pescoco"
+   ],
+   "descricao": "A maior cartilagem da laringe: forma o \"pomo de Adão\"."
+  },
+  "vertebras-cervicais": {
+   "nome": "Vértebras cervicais (C1–C7)",
+   "nome_en": "cervical vertebrae",
+   "sistema": "esqueletico",
+   "camada": "ossos",
+   "regioes": [
+    "pescoco"
+   ],
+   "descricao": "As sete vértebras do pescoço: sustentam a cabeça e protegem a medula."
+  },
+  "discos-cervicais": {
+   "nome": "Discos intervertebrais cervicais",
+   "nome_en": "cervical intervertebral discs",
+   "sistema": "articular",
+   "camada": "ossos",
+   "regioes": [
+    "pescoco"
+   ],
+   "descricao": "Almofadas entre as vértebras do pescoço: amortecem e dão mobilidade."
+  },
+  "vertebras-toracicas": {
+   "nome": "Vértebras torácicas (T1–T12)",
+   "nome_en": "thoracic vertebrae",
+   "sistema": "esqueletico",
+   "camada": "ossos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "As doze vértebras do meio das costas, onde as costelas se articulam."
+  },
+  "discos-toracicos": {
+   "nome": "Discos intervertebrais torácicos",
+   "nome_en": "thoracic intervertebral discs",
+   "sistema": "articular",
+   "camada": "ossos",
+   "regioes": [
+    "torax"
+   ],
+   "descricao": "Almofadas entre as vértebras torácicas."
+  },
+  "vertebras-lombares": {
+   "nome": "Vértebras lombares (L1–L5)",
+   "nome_en": "lumbar vertebrae",
+   "sistema": "esqueletico",
+   "camada": "ossos",
+   "regioes": [
+    "lombar"
+   ],
+   "descricao": "As cinco vértebras grandes da parte baixa das costas: sustentam o peso do tronco."
+  },
+  "vertebra-l4": {
+   "nome": "Quarta vértebra lombar (L4)",
+   "nome_en": "fourth lumbar vertebra",
+   "sistema": "esqueletico",
+   "camada": "ossos",
+   "regioes": [
+    "lombar"
+   ],
+   "descricao": "Vértebra lombar que, junto com L5, concentra grande parte da carga e do movimento da região."
+  },
+  "vertebra-l5": {
+   "nome": "Quinta vértebra lombar (L5)",
+   "nome_en": "fifth lumbar vertebra",
+   "sistema": "esqueletico",
+   "camada": "ossos",
+   "regioes": [
+    "lombar"
+   ],
+   "descricao": "Última vértebra lombar: apoia-se no sacro e transmite o peso do tronco à pelve."
+  },
+  "discos-lombares": {
+   "nome": "Discos intervertebrais lombares",
+   "nome_en": "lumbar intervertebral discs",
+   "sistema": "articular",
+   "camada": "ossos",
+   "regioes": [
+    "lombar"
+   ],
+   "descricao": "Almofadas de cartilagem entre as vértebras lombares: amortecem o impacto e permitem o movimento."
+  },
+  "ligamento-plantar-longo": {
+   "nome": "Ligamento plantar longo",
+   "nome_en": "long plantar ligament",
+   "sistema": "articular",
+   "camada": "ossos",
+   "regioes": [
+    "perna-pe"
+   ],
+   "descricao": "Ligamento na planta do pé que ajuda a sustentar o arco."
+  }
+ },
+ "malhas": {
+  "valva-mitral": {
+   "fma": "",
+   "nome": "mitral valve",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/valva-mitral.glb"
+   ],
+   "centro": [
+    0.0373,
+    1.2959,
+    0.0135
+   ],
+   "raio": 0.0421,
+   "lados": {},
+   "malhas": 2,
+   "kb": 131
+  },
+  "valva-tricuspide": {
+   "fma": "",
+   "nome": "tricuspid valve",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/valva-tricuspide.glb"
+   ],
+   "centro": [
+    0.0042,
+    1.2907,
+    0.0349
+   ],
+   "raio": 0.0408,
+   "lados": {},
+   "malhas": 3,
+   "kb": 174
+  },
+  "valva-aortica": {
+   "fma": "",
+   "nome": "aortic valve",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/valva-aortica.glb"
+   ],
+   "centro": [
+    0.019,
+    1.3224,
+    0.0186
+   ],
+   "raio": 0.0221,
+   "lados": {
+    "direito": [
+     0.014499999582767487,
+     1.320099949836731,
+     0.014299999922513962
+    ],
+    "esquerdo": [
+     0.02449999935925007,
+     1.3259999752044678,
+     0.016499999910593033
+    ]
+   },
+   "malhas": 3,
+   "kb": 56
+  },
+  "valva-pulmonar": {
+   "fma": "",
+   "nome": "pulmonary valve",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/valva-pulmonar.glb"
+   ],
+   "centro": [
+    0.0248,
+    1.3332,
+    0.0436
+   ],
+   "raio": 0.0249,
+   "lados": {
+    "direito": [
+     0.01810000091791153,
+     1.3348000049591064,
+     0.04490000009536743
+    ],
+    "esquerdo": [
+     0.03200000151991844,
+     1.3313000202178955,
+     0.04960000142455101
+    ]
+   },
+   "malhas": 3,
+   "kb": 92
+  },
+  "atrio-direito": {
+   "fma": "",
+   "nome": "right atrium",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/atrio-direito.glb"
+   ],
+   "centro": [
+    -0.0148,
+    1.3094,
+    0.0275
+   ],
+   "raio": 0.0633,
+   "lados": {
+    "direito": [
+     -0.014800000004470348,
+     1.309399962425232,
+     0.027499999850988388
+    ]
+   },
+   "malhas": 2,
+   "kb": 139
+  },
+  "atrio-esquerdo": {
+   "fma": "",
+   "nome": "left atrium",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/atrio-esquerdo.glb"
+   ],
+   "centro": [
+    0.0202,
+    1.314,
+    0.0106
+   ],
+   "raio": 0.0693,
+   "lados": {
+    "esquerdo": [
+     0.02019999921321869,
+     1.3140000104904175,
+     0.010599999688565731
+    ]
+   },
+   "malhas": 2,
+   "kb": 131
+  },
+  "ventriculo-direito": {
+   "fma": "",
+   "nome": "right ventricle",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/ventriculo-direito.glb"
+   ],
+   "centro": [
+    0.0169,
+    1.2979,
+    0.0443
+   ],
+   "raio": 0.0612,
+   "lados": {
+    "direito": [
+     0.016899999231100082,
+     1.2978999614715576,
+     0.04430000111460686
+    ]
+   },
+   "malhas": 1,
+   "kb": 40
+  },
+  "ventriculo-esquerdo": {
+   "fma": "",
+   "nome": "left ventricle",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/ventriculo-esquerdo.glb"
+   ],
+   "centro": [
+    0.0384,
+    1.2959,
+    0.0225
+   ],
+   "raio": 0.0588,
+   "lados": {
+    "esquerdo": [
+     0.03840000182390213,
+     1.2958999872207642,
+     0.02250000089406967
+    ]
+   },
+   "malhas": 1,
+   "kb": 37
+  },
+  "hipofise": {
+   "fma": "",
+   "nome": "pituitary gland",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/hipofise.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6072,
+    0.0058
+   ],
+   "raio": 0.0101,
+   "lados": {},
+   "malhas": 1,
+   "kb": 29
+  },
+  "glandula-pineal": {
+   "fma": "",
+   "nome": "pineal body",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/glandula-pineal.glb"
+   ],
+   "centro": [
+    -0.0005,
+    1.6221,
+    -0.0351
+   ],
+   "raio": 0.0076,
+   "lados": {},
+   "malhas": 1,
+   "kb": 16
+  },
+  "ventriculos-laterais": {
+   "fma": "",
+   "nome": "lateral ventricle",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/ventriculos-laterais.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.6329,
+    -0.0277
+   ],
+   "raio": 0.0713,
+   "lados": {
+    "direito": [
+     -0.020099999383091927,
+     1.6328999996185303,
+     -0.027699999511241913
+    ],
+    "esquerdo": [
+     0.018799999728798866,
+     1.6328999996185303,
+     -0.027699999511241913
+    ]
+   },
+   "malhas": 2,
+   "kb": 188
+  },
+  "cristalino": {
+   "fma": "",
+   "nome": "lens",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/cristalino.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.596,
+    0.0592
+   ],
+   "raio": 0.0359,
+   "lados": {
+    "direito": [
+     -0.030899999663233757,
+     1.5959999561309814,
+     0.05920000001788139
+    ],
+    "esquerdo": [
+     0.029600000008940697,
+     1.5959999561309814,
+     0.05920000001788139
+    ]
+   },
+   "malhas": 2,
+   "kb": 73
+  },
+  "cornea": {
+   "fma": "",
+   "nome": "cornea",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/cornea.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.5959,
+    0.0636
+   ],
+   "raio": 0.0382,
+   "lados": {
+    "direito": [
+     -0.003599999938160181,
+     1.595900058746338,
+     0.06360000371932983
+    ],
+    "esquerdo": [
+     0.02979999966919422,
+     1.595900058746338,
+     0.06360000371932983
+    ]
+   },
+   "malhas": 2,
+   "kb": 85
+  },
+  "iris": {
+   "fma": "",
+   "nome": "iris",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/iris.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5958,
+    0.0612
+   ],
+   "raio": 0.0374,
+   "lados": {
+    "direito": [
+     -0.031099999323487282,
+     1.5958000421524048,
+     0.06120000034570694
+    ],
+    "esquerdo": [
+     0.02979999966919422,
+     1.595900058746338,
+     0.06120000034570694
+    ]
+   },
+   "malhas": 2,
+   "kb": 89
+  },
+  "retina": {
+   "fma": "",
+   "nome": "retina",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/retina.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5962,
+    0.0498
+   ],
+   "raio": 0.0431,
+   "lados": {
+    "direito": [
+     -0.030500000342726707,
+     1.5961999893188477,
+     0.049800001084804535
+    ],
+    "esquerdo": [
+     0.029200000688433647,
+     1.5961999893188477,
+     0.049800001084804535
+    ]
+   },
+   "malhas": 2,
+   "kb": 244
+  },
+  "esclera": {
+   "fma": "",
+   "nome": "sclera",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/esclera.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5962,
+    0.0511
+   ],
+   "raio": 0.0466,
+   "lados": {
+    "direito": [
+     -0.030500000342726707,
+     1.5961999893188477,
+     0.051100000739097595
+    ],
+    "esquerdo": [
+     0.029100000858306885,
+     1.5961999893188477,
+     0.051100000739097595
+    ]
+   },
+   "malhas": 2,
+   "kb": 435
+  },
+  "corpo-vitreo": {
+   "fma": "",
+   "nome": "vitreous body",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/corpo-vitreo.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5962,
+    0.0507
+   ],
+   "raio": 0.0422,
+   "lados": {
+    "direito": [
+     -0.030500000342726707,
+     1.5961999893188477,
+     0.050599999725818634
+    ],
+    "esquerdo": [
+     0.029200000688433647,
+     1.5961999893188477,
+     0.050700001418590546
+    ]
+   },
+   "malhas": 2,
+   "kb": 125
+  },
+  "lingua": {
+   "fma": "",
+   "nome": "tongue",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/lingua.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.5273,
+    0.0402
+   ],
+   "raio": 0.0399,
+   "lados": {},
+   "malhas": 1,
+   "kb": 14
+  },
+  "glandulas-salivares": {
+   "fma": "",
+   "nome": "salivary glands",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/glandulas-salivares.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.5277,
+    0.0411
+   ],
+   "raio": 0.0398,
+   "lados": {
+    "direito": [
+     -0.020099999383091927,
+     1.5276999473571777,
+     0.041099999099969864
+    ],
+    "esquerdo": [
+     0.018799999728798866,
+     1.5276999473571777,
+     0.041099999099969864
+    ]
+   },
+   "malhas": 4,
+   "kb": 25
+  },
+  "epiglote": {
+   "fma": "",
+   "nome": "epiglottis",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/epiglote.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5016,
+    0.0121
+   ],
+   "raio": 0.0172,
+   "lados": {},
+   "malhas": 1,
+   "kb": 66
+  },
+  "vias-biliares": {
+   "fma": "",
+   "nome": "biliary tract",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/vias-biliares.glb"
+   ],
+   "centro": [
+    -0.0171,
+    1.1692,
+    0.0268
+   ],
+   "raio": 0.1257,
+   "lados": {
+    "direito": [
+     -0.0568000003695488,
+     1.188599944114685,
+     0.014999999664723873
+    ],
+    "esquerdo": [
+     0.012900000438094139,
+     1.2089999914169312,
+     0.0575999990105629
+    ]
+   },
+   "malhas": 17,
+   "kb": 226
+  },
+  "ducto-pancreatico": {
+   "fma": "",
+   "nome": "pancreatic duct",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/ducto-pancreatico.glb"
+   ],
+   "centro": [
+    0.0024,
+    1.1224,
+    0.0202
+   ],
+   "raio": 0.0664,
+   "lados": {},
+   "malhas": 2,
+   "kb": 170
+  },
+  "jejuno": {
+   "fma": "",
+   "nome": "jejunum",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/jejuno.glb"
+   ],
+   "centro": [
+    0.0098,
+    1.0445,
+    0.0505
+   ],
+   "raio": 0.1172,
+   "lados": {},
+   "malhas": 23,
+   "kb": 149
+  },
+  "ileo": {
+   "fma": "",
+   "nome": "ileum",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/ileo.glb"
+   ],
+   "centro": [
+    0.011,
+    0.9571,
+    0.0435
+   ],
+   "raio": 0.1225,
+   "lados": {},
+   "malhas": 32,
+   "kb": 200
+  },
+  "mesenterio": {
+   "fma": "",
+   "nome": "mesentery",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/mesenterio.glb"
+   ],
+   "centro": [
+    0.0064,
+    1.0032,
+    0.0445
+   ],
+   "raio": 0.1382,
+   "lados": {},
+   "malhas": 1,
+   "kb": 1355
+  },
+  "suprarrenais": {
+   "fma": "",
+   "nome": "adrenal glands",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/suprarrenais.glb"
+   ],
+   "centro": [
+    0.0065,
+    1.155,
+    -0.0173
+   ],
+   "raio": 0.0783,
+   "lados": {
+    "direito": [
+     -0.04659999907016754,
+     1.1447999477386475,
+     -0.011300000362098217
+    ],
+    "esquerdo": [
+     0.05139999836683273,
+     1.1639000177383423,
+     -0.026799999177455902
+    ]
+   },
+   "malhas": 2,
+   "kb": 74
+  },
+  "timo": {
+   "fma": "",
+   "nome": "thymus",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/timo.glb"
+   ],
+   "centro": [
+    -0.0015,
+    1.3718,
+    0.0395
+   ],
+   "raio": 0.0473,
+   "lados": {
+    "direito": [
+     -0.01119999960064888,
+     1.3736000061035156,
+     0.03319999948143959
+    ],
+    "esquerdo": [
+     0.009200000204145908,
+     1.3652000427246094,
+     0.039500001817941666
+    ]
+   },
+   "malhas": 2,
+   "kb": 43
+  },
+  "arvore-bronquica": {
+   "fma": "",
+   "nome": "segmental bronchi",
+   "camada": "orgaos",
+   "arquivos": [
+    "estruturas/arvore-bronquica.glb"
+   ],
+   "centro": [
+    0.0032,
+    1.3171,
+    -0.0009
+   ],
+   "raio": 0.1832,
+   "lados": {
+    "direito": [
+     -0.06260000169277191,
+     1.3199000358581543,
+     -0.013799999840557575
+    ],
+    "esquerdo": [
+     0.0729999989271164,
+     1.3171000480651855,
+     -0.009700000286102295
+    ]
+   },
+   "malhas": 98,
+   "kb": 712
+  },
+  "arco-da-aorta": {
+   "fma": "",
+   "nome": "arch of aorta",
+   "camada": "arterias",
+   "arquivos": [
+    "estruturas/arco-da-aorta.glb"
+   ],
+   "centro": [
+    0.014,
+    1.3537,
+    -0.0064
+   ],
+   "raio": 0.0638,
+   "lados": {},
+   "malhas": 2,
+   "kb": 27
+  },
+  "aorta-abdominal": {
+   "fma": "",
+   "nome": "abdominal aorta",
+   "camada": "arterias",
+   "arquivos": [
+    "estruturas/aorta-abdominal.glb"
+   ],
+   "centro": [
+    0.0095,
+    1.1204,
+    0.0076
+   ],
+   "raio": 0.0975,
+   "lados": {},
+   "malhas": 1,
+   "kb": 15
+  },
+  "veia-cava-superior": {
+   "fma": "",
+   "nome": "superior vena cava",
+   "camada": "veias",
+   "arquivos": [
+    "estruturas/veia-cava-superior.glb"
+   ],
+   "centro": [
+    -0.0154,
+    1.3704,
+    0.0154
+   ],
+   "raio": 0.0239,
+   "lados": {},
+   "malhas": 1,
+   "kb": 16
+  },
+  "veia-cava-inferior": {
+   "fma": "",
+   "nome": "inferior vena cava",
+   "camada": "veias",
+   "arquivos": [
+    "estruturas/veia-cava-inferior.glb"
+   ],
+   "centro": [
+    -0.0144,
+    1.1489,
+    0.0161
+   ],
+   "raio": 0.121,
+   "lados": {},
+   "malhas": 2,
+   "kb": 23
+  },
+  "cerebelo": {
+   "fma": "",
+   "nome": "cerebellum",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/cerebelo.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.592,
+    -0.0597
+   ],
+   "raio": 0.0658,
+   "lados": {},
+   "malhas": 2,
+   "kb": 254
+  },
+  "tronco-encefalico": {
+   "fma": "",
+   "nome": "brainstem",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/tronco-encefalico.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.5831,
+    -0.0259
+   ],
+   "raio": 0.0511,
+   "lados": {},
+   "malhas": 6,
+   "kb": 326
+  },
+  "talamo": {
+   "fma": "",
+   "nome": "thalamus",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/talamo.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.632,
+    -0.0199
+   ],
+   "raio": 0.0324,
+   "lados": {
+    "direito": [
+     -0.012900000438094139,
+     1.6319999694824219,
+     -0.019899999722838402
+    ],
+    "esquerdo": [
+     0.011599999852478504,
+     1.6319999694824219,
+     -0.019899999722838402
+    ]
+   },
+   "malhas": 2,
+   "kb": 53
+  },
+  "hipocampo": {
+   "fma": "",
+   "nome": "hippocampus",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/hipocampo.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.6184,
+    -0.0191
+   ],
+   "raio": 0.0444,
+   "lados": {
+    "direito": [
+     -0.027899999171495438,
+     1.618399977684021,
+     -0.019099999219179153
+    ],
+    "esquerdo": [
+     0.026599999517202377,
+     1.618299961090088,
+     -0.019099999219179153
+    ]
+   },
+   "malhas": 2,
+   "kb": 40
+  },
+  "amigdala": {
+   "fma": "",
+   "nome": "amygdala",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/amigdala.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6165,
+    -0.0016
+   ],
+   "raio": 0.0358,
+   "lados": {
+    "direito": [
+     -0.026100000366568565,
+     1.6164000034332275,
+     -0.0017000000225380063
+    ],
+    "esquerdo": [
+     0.024800000712275505,
+     1.6165000200271606,
+     -0.0015999999595806003
+    ]
+   },
+   "malhas": 2,
+   "kb": 20
+  },
+  "corpo-caloso": {
+   "fma": "",
+   "nome": "corpus callosum",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/corpo-caloso.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.6419,
+    -0.0148
+   ],
+   "raio": 0.0561,
+   "lados": {},
+   "malhas": 1,
+   "kb": 178
+  },
+  "nucleos-da-base": {
+   "fma": "",
+   "nome": "basal ganglia",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/nucleos-da-base.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.6369,
+    -0.0078
+   ],
+   "raio": 0.0508,
+   "lados": {
+    "direito": [
+     -0.019500000402331352,
+     1.6368999481201172,
+     -0.007899999618530273
+    ],
+    "esquerdo": [
+     0.018200000748038292,
+     1.6368999481201172,
+     -0.007799999788403511
+    ]
+   },
+   "malhas": 6,
+   "kb": 205
+  },
+  "hipotalamo": {
+   "fma": "",
+   "nome": "hypothalamus",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/hipotalamo.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.6203,
+    0.0012
+   ],
+   "raio": 0.0154,
+   "lados": {},
+   "malhas": 2,
+   "kb": 69
+  },
+  "via-optica": {
+   "fma": "",
+   "nome": "optic pathway",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/via-optica.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6093,
+    0.0107
+   ],
+   "raio": 0.054,
+   "lados": {
+    "direito": [
+     -0.01730000041425228,
+     1.6093000173568726,
+     0.010700000450015068
+    ],
+    "esquerdo": [
+     0.01600000075995922,
+     1.6093000173568726,
+     0.010700000450015068
+    ]
+   },
+   "malhas": 8,
+   "kb": 144
+  },
+  "giro-pre-central": {
+   "fma": "",
+   "nome": "precentral gyrus",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/giro-pre-central.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6717,
+    -0.0279
+   ],
+   "raio": 0.0788,
+   "lados": {
+    "direito": [
+     -0.03290000185370445,
+     1.6717000007629395,
+     -0.02800000086426735
+    ],
+    "esquerdo": [
+     0.031700000166893005,
+     1.6718000173568726,
+     -0.027899999171495438
+    ]
+   },
+   "malhas": 2,
+   "kb": 175
+  },
+  "giro-pos-central": {
+   "fma": "",
+   "nome": "postcentral gyrus",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/giro-pos-central.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6719,
+    -0.0439
+   ],
+   "raio": 0.0806,
+   "lados": {
+    "direito": [
+     -0.035100001841783524,
+     1.6720000505447388,
+     -0.04399999976158142
+    ],
+    "esquerdo": [
+     0.033900000154972076,
+     1.6719000339508057,
+     -0.04390000179409981
+    ]
+   },
+   "malhas": 2,
+   "kb": 153
+  },
+  "lobo-occipital": {
+   "fma": "",
+   "nome": "occipital lobe",
+   "camada": "nervos",
+   "arquivos": [
+    "estruturas/lobo-occipital.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.6228,
+    -0.0787
+   ],
+   "raio": 0.0606,
+   "lados": {
+    "direito": [
+     -0.02319999970495701,
+     1.6227999925613403,
+     -0.0786999985575676
+    ],
+    "esquerdo": [
+     0.021800000220537186,
+     1.6227999925613403,
+     -0.0786999985575676
+    ]
+   },
+   "malhas": 2,
+   "kb": 182
+  },
+  "cartilagem-tireoide": {
+   "fma": "",
+   "nome": "thyroid cartilage",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/cartilagem-tireoide.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.4893,
+    0.007
+   ],
+   "raio": 0.0317,
+   "lados": {},
+   "malhas": 1,
+   "kb": 52
+  },
+  "vertebras-cervicais": {
+   "fma": "",
+   "nome": "cervical vertebrae",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/vertebras-cervicais.glb"
+   ],
+   "centro": [
+    -0.0006,
+    1.5012,
+    -0.0435
+   ],
+   "raio": 0.0794,
+   "lados": {},
+   "malhas": 7,
+   "kb": 358
+  },
+  "discos-cervicais": {
+   "fma": "",
+   "nome": "cervical intervertebral discs",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/discos-cervicais.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.4747,
+    -0.0191
+   ],
+   "raio": 0.0412,
+   "lados": {},
+   "malhas": 5,
+   "kb": 134
+  },
+  "vertebras-toracicas": {
+   "fma": "",
+   "nome": "thoracic vertebrae",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/vertebras-toracicas.glb"
+   ],
+   "centro": [
+    -0.0005,
+    1.2915,
+    -0.0493
+   ],
+   "raio": 0.1751,
+   "lados": {},
+   "malhas": 12,
+   "kb": 579
+  },
+  "discos-toracicos": {
+   "fma": "",
+   "nome": "thoracic intervertebral discs",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/discos-toracicos.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.3013,
+    -0.0362
+   ],
+   "raio": 0.1372,
+   "lados": {},
+   "malhas": 11,
+   "kb": 717
+  },
+  "vertebras-lombares": {
+   "fma": "",
+   "nome": "lumbar vertebrae",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/vertebras-lombares.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.0664,
+    -0.0332
+   ],
+   "raio": 0.109,
+   "lados": {},
+   "malhas": 5,
+   "kb": 321
+  },
+  "vertebra-l4": {
+   "fma": "",
+   "nome": "fourth lumbar vertebra",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/vertebra-l4.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.0391,
+    -0.0317
+   ],
+   "raio": 0.0636,
+   "lados": {},
+   "malhas": 1,
+   "kb": 68
+  },
+  "vertebra-l5": {
+   "fma": "",
+   "nome": "fifth lumbar vertebra",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/vertebra-l5.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.0078,
+    -0.0413
+   ],
+   "raio": 0.0692,
+   "lados": {},
+   "malhas": 1,
+   "kb": 68
+  },
+  "discos-lombares": {
+   "fma": "",
+   "nome": "lumbar intervertebral discs",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/discos-lombares.glb"
+   ],
+   "centro": [
+    -0.0007,
+    1.0498,
+    -0.015
+   ],
+   "raio": 0.0865,
+   "lados": {},
+   "malhas": 5,
+   "kb": 508
+  },
+  "ligamento-plantar-longo": {
+   "fma": "",
+   "nome": "long plantar ligament",
+   "camada": "ossos",
+   "arquivos": [
+    "estruturas/ligamento-plantar-longo.glb"
+   ],
+   "centro": [
+    0.0,
+    0.0293,
+    -0.0059
+   ],
+   "raio": 0.128,
+   "lados": {
+    "direito": [
+     -0.08860000222921371,
+     0.02930000051856041,
+     -0.005900000222027302
+    ],
+    "esquerdo": [
+     0.08860000222921371,
+     0.02930000051856041,
+     -0.005900000222027302
+    ]
+   },
+   "malhas": 2,
+   "kb": 98
+  }
+ },
+ "sem_malha": []
+}

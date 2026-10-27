@@ -9,7 +9,6 @@
   var NIVEIS = [['simples', 'Simples'], ['intermediario', 'Intermediário'], ['aprofundado', 'Aprofundado']];
   var CAMADAS_PARA_LIGAR = ['musculos', 'orgaos', 'arterias', 'veias', 'nervos', 'ossos'];
   var st = { r: null, i: 0, nivel: lerNivel(), rodada: 0, tocando: false, isolado: null, audio: null, soltaFala: null };
-  var catalogo = [], filtroTipo = 'todos', busca = '';
 
   function lerNivel() {
     try { var n = localStorage.getItem('bmx-demo-nivel'); if (NIVEIS.some(function (x) { return x[0] === n; })) return n; } catch (e) { /* sem storage */ }
@@ -29,32 +28,6 @@
       if (!r.ok) throw new Error(j.error || ('erro ' + r.status));
       return j;
     } finally { clearTimeout(t); }
-  }
-
-  /* ── catálogo ─────────────────────────────────────────────────────── */
-  function desenharCatalogo() {
-    var tipos = [['todos', 'Todos']].concat(catalogo.reduce(function (a, c) {
-      if (!a.some(function (x) { return x[0] === c.tipo; })) a.push([c.tipo, c.rotulo]); return a; }, []));
-    var barra = limpar($('#demosFiltros'));
-    tipos.forEach(function (t) {
-      var b = el('button', 'demo-filtro' + (filtroTipo === t[0] ? ' on' : ''), t[1]);
-      b.type = 'button'; b.onclick = function () { filtroTipo = t[0]; desenharCatalogo(); };
-      barra.appendChild(b);
-    });
-    var q = busca.toLowerCase();
-    var itens = catalogo.filter(function (c) {
-      return (filtroTipo === 'todos' || c.tipo === filtroTipo) && (!q || (c.titulo + ' ' + c.rotulo).toLowerCase().indexOf(q) >= 0); });
-    $('#demosConta').textContent = itens.length + ' de ' + catalogo.length;
-    var grade = limpar($('#demosGrade'));
-    itens.forEach(function (c) {
-      var card = el('article', 'demo-card');
-      card.appendChild(el('span', 'demo-tag t-' + c.tipo, c.rotulo));
-      card.appendChild(el('h3', null, c.titulo));
-      card.appendChild(el('p', null, c.passos + ' passos · cerca de ' + Math.max(1, Math.round(c.segundos / 60)) + ' min'));
-      var b = el('button', 'demo-btn', '▶ Assistir'); b.type = 'button'; b.dataset.demo = c.id;
-      card.appendChild(b); grade.appendChild(card);
-    });
-    if (!itens.length) grade.appendChild(el('p', 'vazio-txt', 'Nenhuma demonstração com esse filtro.'));
   }
 
   /* ── fala ─────────────────────────────────────────────────────────── */
@@ -113,6 +86,9 @@
     var t = [p.resumo];
     if (st.nivel !== 'simples' && p.explicacao) t.push(p.explicacao);
     if (st.nivel === 'aprofundado' && p.aprofundar) t.push(p.aprofundar);
+    if (p.acao && p.acao.tipo === 'alerta' && p.acao.texto && t.join(' ').indexOf(p.acao.texto) < 0) {
+      t.push(p.acao.texto);
+    }
     return t.join(' ');
   }
   function cartao(a) {
@@ -211,38 +187,13 @@
     st.r = r; montarPalco(r); irPara(0);
   }
 
-  /* ── abas: Investigar sintoma | Demonstrações (uma de cada vez) ─────── */
-  function criarAbas() {
-    var itens = [['investigar', 'Investigar sintoma', '.explorar'], ['demos', 'Demonstrações guiadas', '.demos-secao']];
-    document.body.dataset.aba = document.body.dataset.aba || 'investigar';
-    itens.forEach(function (alvo) {
-      var card = $(alvo[2]); if (!card) return;
-      var nav = el('div', 'abas'); nav.setAttribute('role', 'tablist');
-      itens.forEach(function (it) {
-        var b = el('button', document.body.dataset.aba === it[0] ? 'on' : '', it[1]); b.type = 'button';
-        b.setAttribute('role', 'tab'); b.dataset.aba = it[0];
-        b.onclick = function () {
-          document.body.dataset.aba = it[0];
-          Array.prototype.forEach.call(document.querySelectorAll('.abas button'), function (x) { x.className = x.dataset.aba === it[0] ? 'on' : ''; });
-          var destino = $(it[0] === 'demos' ? '.demos-secao' : '.explorar'); if (destino && destino.scrollIntoView) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        };
-        nav.appendChild(b);
-      });
-      card.insertBefore(nav, card.firstChild);
-    });
-  }
-
   /* ── ligação ──────────────────────────────────────────────────────── */
   function ligar() {
-    criarAbas();
     document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('[data-demo]'); if (b) assistir(b.dataset.demo); });
     $('#demoFechar').onclick = fechar;
     $('#demoPlay').onclick = function () { if (st.tocando) { st.rodada++; st.tocando = false; pararFala(); botaoPlay(); } else irPara(st.i); };
     $('#demoAnt').onclick = function () { irPara(st.i - 1); };
     $('#demoProx').onclick = function () { irPara(st.i + 1); };
-    $('#demosBusca').addEventListener('input', function () { busca = this.value.trim(); desenharCatalogo(); });
-    api('/api/demos').then(function (c) { catalogo = c; desenharCatalogo(); })
-      .catch(function () { limpar($('#demosGrade')).appendChild(el('p', 'vazio-txt', 'Não consegui carregar as demonstrações.')); });
   }
-  if ($('#demos')) ligar();
+  if ($('#demo')) ligar();     // os botões [data-demo] ficam no cartão "Para este caso" (caso.js) e no atlas
 })();

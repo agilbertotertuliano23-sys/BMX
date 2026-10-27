@@ -1,7 +1,7 @@
 ---
 type: sistema
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 sistema: respiratorio
 camada: orgaos
 ---
@@ -19,3 +19,6 @@ Parte da [[Anatomia — Índice]]. Camada 3D: **Órgãos**.
 - Pulmão direito · right lung · [[Região — Tórax]] · `FMA7309`
 - Pulmão esquerdo · left lung · [[Região — Tórax]] · `FMA7310`
 - Brônquios principais · main bronchus · [[Região — Tórax]] · `FMA7405`
+- Epiglote · epiglottis · [[Região — Pescoço]]
+- Árvore brônquica segmentar · segmental bronchi · [[Região — Tórax]]
+- Cartilagem tireóidea · thyroid cartilage · [[Região — Pescoço]]

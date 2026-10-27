@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: periumbilical
 ---
 
@@ -16,6 +16,10 @@ Parte da [[Anatomia — Índice]].
 - Intestino delgado · small intestine · [[Sistema digestório]] · `FMA7200`
 - Cólon transverso · transverse colon · [[Sistema digestório]] · `FMA14546`
 - Músculo reto do abdome · rectus abdominis · [[Sistema muscular]]
+- Jejuno · jejunum · [[Sistema digestório]]
+- Íleo · ileum · [[Sistema digestório]]
+- Mesentério · mesentery · [[Sistema digestório]]
+- Aorta abdominal · abdominal aorta · [[Sistema cardiovascular]]
 
 ## Vizinhas
 [[Região — Epigástrio (boca do estômago)]], [[Região — Abdome inferior direito]], [[Região — Abdome inferior esquerdo]], [[Região — Baixo ventre (pelve)]]

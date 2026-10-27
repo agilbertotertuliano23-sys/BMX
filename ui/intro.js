@@ -25,7 +25,16 @@
 
   // bmx3d.js é módulo (carrega depois): a flag cobre o caso de ele chegar tarde
   function revelar() { window.__bmxRevelado = true; window.dispatchEvent(new Event('bmx:revelar')); }
-  function falar() { if (window.BMXVoz) window.BMXVoz.falarIntro(TEXTO); }
+  function dizer() { if (window.BMXVoz) window.BMXVoz.falarIntro(TEXTO); }
+  /** Baymax na cabine (bmx3d.js, DESATIVADO): só fala quando a cabine abre e ele acorda
+      (evento bmx:cabine-aberta). Sem o aviso em 20 s, fala mesmo assim. */
+  function falar() {
+    if (!(window.BMX3D && window.BMX3D.desativado)) { dizer(); return; }
+    var dito = false;
+    function umaVez() { if (!dito) { dito = true; dizer(); } }
+    window.addEventListener('bmx:cabine-aberta', umaVez, { once: true });
+    setTimeout(umaVez, 20000);
+  }
 
   if (!raiz.classList.contains('intro-on')) {
     // sem intro (movimento reduzido ou #sem-intro): interface direto, fala igual

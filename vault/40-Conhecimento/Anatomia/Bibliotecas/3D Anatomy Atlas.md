@@ -1,7 +1,7 @@
 ---
 type: biblioteca
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 biblioteca: 3d-anatomy-atlas
 prioridade: 4
 ---

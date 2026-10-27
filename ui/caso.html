@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <link rel="stylesheet" href="caso.css">
 <link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="atlas.css">
 <script type="importmap">
   { "imports": { "three": "./vendor/three/three.module.min.js" } }
 </script>
@@ -141,7 +142,7 @@
       </div>
       <div class="bloco" id="blocoDev" hidden>
         <h3>Próximo passo</h3>
-        <p>Explore abaixo as perguntas que ajudam a descrever o que sente.</p>
+        <p>Veja abaixo, em “Para este caso”, o que observar e as demonstrações guiadas.</p>
       </div>
     </section>
   </aside>
@@ -159,31 +160,11 @@
     </section>
   </section>
 
-  <section class="card explorar" aria-labelledby="explorarTitulo">
-    <div class="explorar-topo">
-      <div><p class="sobretitulo">INVESTIGAÇÃO GUIADA</p><h2 id="explorarTitulo">Entenda o que está sentindo</h2>
-        <p>Escolha uma queixa e percorra as pistas. O roteiro é voltado a adultos; crianças e gestantes precisam de avaliação individual. Os nomes abaixo são possibilidades, não resultados.</p></div>
-      <label class="busca-wrap"><span>Buscar sintoma, possibilidade ou remédio</span><input id="buscaQueixa" type="search" placeholder="Ex.: perna inchada, febre, paracetamol" autocomplete="off"></label>
-    </div>
-    <div class="explorar-layout">
-      <nav class="queixas-lista" id="queixasLista" aria-label="Queixas para explorar"></nav>
-      <div class="guia-painel" id="guia" aria-live="polite"><p class="vazio-txt">Escolha uma queixa para ver o que observar.</p></div>
-    </div>
-    <details class="galeria-remedios" id="galeriaRemedios">
-      <summary>Personalizar imagens das orientações <span>25 fotos</span></summary>
-      <p>Escolha uma imagem para cada tema. A preferência fica salva neste navegador. Fotos e embalagens são ilustrativas: não identificam comprimidos, composição, dose ou indicação para você.</p>
-      <div class="galeria-grade" id="galeriaGrade" aria-live="polite"><p>Carregando imagens…</p></div>
-    </details>
-  </section>
-
-  <section class="card demos-secao" id="demos" aria-labelledby="demosTitulo">
-    <div class="demos-topo">
-      <div><p class="sobretitulo">DEMONSTRAÇÕES GUIADAS</p><h2 id="demosTitulo">Veja explicado, no corpo, passo a passo</h2>
-        <p>A IA conduz: fala, move a câmera, destaca cada parte e mostra o que observar. Escolha a profundidade (Simples, Intermediário ou Aprofundado). É um atlas de referência: não mostra o seu exame.</p></div>
-      <label class="busca-wrap"><span>Buscar demonstração <em id="demosConta"></em></span><input id="demosBusca" type="search" placeholder="Ex.: cabeça, joelho, ossos" autocomplete="off"></label>
-    </div>
-    <div class="demos-filtros" id="demosFiltros" role="group" aria-label="Tipo de demonstração"></div>
-    <div class="demos-grade" id="demosGrade" aria-live="polite"><p>Carregando demonstrações…</p></div>
+  <!-- ── para este caso: atlas, demonstrações guiadas, o que observar, possibilidades e remédios (com fotos), tudo do contexto ── -->
+  <section class="card paracaso" id="paraCaso" aria-labelledby="paraCasoTitulo" hidden>
+    <div class="paracaso-topo"><h2 id="paraCasoTitulo">Para este caso</h2><span id="paraCasoSub"></span></div>
+    <div class="paracaso-acoes" id="paraCasoAcoes"></div>
+    <div class="paracaso-corpo" id="paraCasoCorpo" aria-live="polite"></div>
   </section>
 </main>
 
@@ -193,5 +174,6 @@
 <script src="caso.js"></script>
 <script src="demo.js"></script>
 <script type="module" src="corpo3d.js"></script>
+<script type="module" src="atlas.js"></script>
 </body>
 </html>

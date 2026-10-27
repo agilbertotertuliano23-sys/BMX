@@ -41,6 +41,7 @@ if _env.exists():
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 import anatomia    # noqa: E402
+import atlas       # noqa: E402
 import casos       # noqa: E402
 import clinica     # noqa: E402
 import commands    # noqa: E402
@@ -311,6 +312,13 @@ class Handler(BaseHTTPRequestHandler):
 
         if p == "/api/demos":   # catálogo de demonstrações guiadas (50), sem dados da pessoa
             return self._json(demo.catalogo())
+
+        if p == "/api/atlas":   # Atlas 3D de materialização: estudos + peças 3D do catálogo, sem dados da pessoa
+            q = parse_qs(urlparse(self.path).query)
+            if "caso" in q:     # ?caso=<id> (vazio = o ativo): a aula montada a partir do caso, com o que a pessoa contou
+                aula = atlas.para_caso(q["caso"][0])
+                return self._json(aula) if aula else self._json({"error": "sem caso para explicar"}, 404)
+            return self._json(atlas.dados())
 
         if p == "/api/caso":
             cid = parse_qs(urlparse(self.path).query).get("id", [""])[0]

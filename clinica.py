@@ -89,7 +89,8 @@ def guia(qid):
                                    referencias=[dict(id=f, **inv["fontes"][f])
                                                 for f in inv["medicamentos"][i]["fontes"] if f in inv["fontes"]])
                               for i in ids if i in inv["medicamentos"]],
-                fontes=fontes)
+                fontes=fontes, exemplo=detalhe.get("exemplo"), consulta=detalhe.get("consulta", []),
+                compreensao=detalhe.get("compreensao", ""), revisao=detalhe.get("revisao", {}))
 
 
 def identificar(message, limite=2):
@@ -131,7 +132,7 @@ def contexto(queixas):
     for q in queixas:
         g = guia(q["id"])
         out.append(f"### {q['queixa']}" + (f" (CIAP-2 {q['ciap2']})" if q.get("ciap2") else "") + "\n"
-                   f"Costuma ser: {'; '.join(c['nome'] for c in q['causas_frequentes'])}.\n"
+                   f"Possibilidades educativas, sem ordem de probabilidade: {'; '.join(c['nome'] for c in q['causas_frequentes'])}.\n"
                    f"Não deixar passar: {'; '.join(c['nome'] for c in q['nao_perder'])}.\n"
                    f"Sinais de alerta: {'; '.join(q['sinais_de_alerta'])}.\n"
                    f"Perguntas que mais ajudam: {' '.join(q['perguntas_chave'])}\n"
@@ -180,7 +181,7 @@ def gerar_nota():
         linhas.append(
             f"## {q['queixa']}\n"
             f"- **CIAP-2:** {q['ciap2']} · **frequência:** {q['frequencia']}\n"
-            f"- **costuma ser:** " + "; ".join(f"{c['nome']} ({c['cid10']})" for c in q["causas_frequentes"]) + "\n"
+            f"- **possibilidades para avaliação (sem ordem de probabilidade):** " + "; ".join(f"{c['nome']} ({c['cid10']})" for c in q["causas_frequentes"]) + "\n"
             f"- **não deixar passar:** " + "; ".join(f"{c['nome']} ({c['cid10']})" for c in q["nao_perder"]) + "\n"
             f"- **sinais de alerta:** " + "; ".join(q["sinais_de_alerta"]) + "\n"
             f"- **perguntas-chave:** " + " ".join(q["perguntas_chave"]) + "\n"
@@ -188,7 +189,8 @@ def gerar_nota():
     aviso = "> Nota gerada a partir de `queixas-de-entrada.json` (`python clinica.py nota`). Edite a tabela, não esta nota.\n\n"
     texto = (f"---\ntype: clinica\ngerado: queixas-de-entrada.json\nupdated: {datetime.date.today().isoformat()}\n---\n\n"
              "# Queixas de entrada\n\n" + aviso
-             + "O que mais leva gente ao pronto-socorro, à UPA e à UBS, e como cada queixa se abre. "
+             + "Queixas catalogadas para organizar perguntas e preparação da consulta. As listas não estimam a chance de uma doença. "
+               "Os códigos e diagnósticos diferenciais aguardam revisão profissional. "
                "Ver [[Anatomia — Índice]].\n\n" + "\n".join(linhas)
              + "\n## Fontes\n" + "\n".join(f"- {f}" for f in tab["fontes"]) + "\n")
     f = PASTA / "Queixas de entrada.md"

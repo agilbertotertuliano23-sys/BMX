@@ -1,7 +1,7 @@
 ---
 type: regiao
 gerado: catalogo-anatomico.json
-updated: 2026-10-22
+updated: 2026-10-27
 regiao: fossa-iliaca-esquerda
 ---
 
@@ -21,5 +21,6 @@ Parte da [[Anatomia — Índice]].
 [[Região — Umbigo (periumbilical)]], [[Região — Baixo ventre (pelve)]], [[Região — Quadril e glúteo]]
 
 ## Relatos que apontam aqui
+- **dor-pelvica**: No baixo ventre, no meio, ficam a bexiga e, em mulheres, o útero; de cada lado ficam os ovários, e por trás o intestino grosso.
 - **abdome-inferior-esquerdo**: No quadrante inferior esquerdo passam o final do intestino grosso, o ureter esquerdo e, em mulheres, o ovário esquerdo.
-- **colica-renal**: A dor do cálculo acompanha o trajeto do ureter: começa nas costas e desce para a virilha.
+- **colica-renal**: Um cálculo pode causar dor no flanco com irradiação para a virilha; localização e padrão não confirmam a causa.

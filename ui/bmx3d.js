@@ -15,6 +15,17 @@ const ALTURA = 4.7;
 const CENTRO_Y = -0.35;
 /** gire 180° aqui (Math.PI) se o modelo aparecer de costas */
 const GIRO_Y = 0;
+/** true = Baymax desativado: no palco fica só a caixa de carregamento, fechada
+    (models/baymax-caixa.glb); sem aceno, sem tela da barriga. false = o Baymax de sempre. */
+const DESATIVADO = true;
+/** a caixa fechada fica de frente para a câmera (0); gire em radianos para virá-la */
+const GIRO_CAIXA = 0;
+/** Baymax dentro da cabine, em metros da cabine. Medido com a pose de repouso aplicada
+    (arquivo: x = lado, y = profundidade, z = altura 0…6,83; braços a ±2,55): com 0,18 ele
+    tem 1,6 m, raio máximo 0,46 (parede interna em 0,641; os conectores do quadril, até 0,433,
+    encostam nos braços) e a cabeça fica a ~0,55 m do teto (2,143). Pés na plataforma (y 0,369,
+    sobre as marcas de apoio em z 0,06). */
+const BAYMAX_NA_CAIXA = { escala: 0.18, pesY: 0.369, pesZ: 0.06 };
 
 const canvas = document.getElementById('bmx3d');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -71,17 +82,46 @@ function sombraContato(largura) {
    (o shader espelha o lado x<0). Números conferidos num protótipo em Python
    que renderiza a malha deformada antes de ir para cá. */
 const REPOUSO = [-1.32, -0.22, 0];          // braços colados ao corpo, mãos no quadril (pose de referência)
-const ACENO = [-0.55, 1.95, -1.57];          // cotovelo na altura do peito, palma de frente
+/* Solto, o braço abre pro lado (ombro -0,55). Na cabine isso atravessaria a porta aberta
+   (0,79 m do centro; as dobradiças ficam a 0,685). Pose do aceno do filme (cotovelo baixo e
+   para fora, antebraço quase vertical, palma de frente) ajustada ao vão da cabine, medida com a
+   malha deformada e a porta aberta: mão a ~1,4 m (altura do queixo, 0,42 m do centro), braço a no
+   máximo 0,72 m do centro, só roçando a dobradiça. */
+/* Aceno do Baymax na cabine, a partir da prancha humana: o braço sobe junto ao corpo, com o ombro
+   levando o cotovelo bem para a frente (1,0 rad, em direção à câmera) em vez de abri-lo para o lado;
+   o antebraço fica vertical com a palma de frente (torção +1,57: o polegar do Baymax fica sobre a
+   palma; com -1,57 aparecia o dorso da mão) e a mão à altura da cabeça. O "oi" é giratório: a mão
+   gira em volta do antebraço (±0,65 rad) enquanto o cotovelo balança um quarto de volta defasado, de
+   modo que a mão desenha um pequeno círculo. Medido com a malha deformada e a porta aberta: cotovelo
+   a 0,34 m do centro, braço a no máximo 0,53 m, a ≥ 13 cm da porta e sem entrar no tronco nos
+   extremos do balanço e da rotação. */
+const ACENO = DESATIVADO ? [-0.6, 2.0, 1.57] : [-0.55, 1.95, -1.57];
+/** balanço do ombro para a frente no aceno (rad); 0 = como antes */
+const FRENTE_ACENO = DESATIVADO ? 1.0 : 0;
+/** o ombro vira para a frente 3× mais rápido que o cotovelo sobe: assim o braço não bate na porta */
+const FRENTE_ADIANTADA = DESATIVADO ? 3 : 1;
+/** amplitude [ombro, cotovelo, torção], fase (rad) de cada junta e período (ms) do balanço da mão */
+const BALANCO = DESATIVADO ? [0.04, 0.22, 0.65] : [0.035, 0.13, 0.06];
+const BALANCO_FASE = DESATIVADO ? [0, -Math.PI / 2, 0] : [0, 0, 0];
+const BALANCO_MS = DESATIVADO ? 1000 : 1150;
 const braco = { d: REPOUSO.slice(), e: REPOUSO.slice() };   // d: x>0 (esquerda do Baymax) · e: x<0 (direita)
 const uBracoD = { value: new THREE.Vector3() };
 const uBracoE = { value: new THREE.Vector3() };
 const uCabeca = { value: new THREE.Vector2() };   // [giro para os lados, inclinação]
 const uPiscar = { value: 0 };                       // 0 olho aberto … 1 fechado
+/* O braço do filme é mais grosso e o aceno vem para a frente (o ombro leva o cotovelo em
+   direção à câmera), por isso o braço parece curto e redondo. Só na cabine: uGrosso incha o
+   braço (menos a mão) e uFrente balança o ombro para a frente, em radianos [esquerda, direita]. */
+const uFrente = { value: new THREE.Vector2() };
+const uGrosso = { value: DESATIVADO ? 1.15 : 1 };
 
 const POSE_GLSL = /* glsl */`
 uniform vec3 uBracoD;
 uniform vec3 uBracoE;
 uniform vec2 uCabeca;
+uniform vec2 uFrente;
+uniform float uGrosso;
+varying vec3 vObj;      // posição no arquivo (antes da pose): o desenho dos olhos é feito nela
 vec2 bmxRot(vec2 v, float a) { float c = cos(a), s = sin(a); return vec2(c * v.x - s * v.y, s * v.x + c * v.y); }
 void bmxPose(inout vec3 p, inout vec3 n) {
   vec3 p0 = p;
@@ -99,38 +139,56 @@ void bmxPose(inout vec3 p, inout vec3 n) {
   float wY = smoothstep(4.3, 4.8, p0.z);
   float wO = smoothstep(0.95, 1.75, ax) * wY;
   float wC = smoothstep(2.8, 3.5, ax) * wY;
-  vec2 t = bmxRot(vec2(p.y, p.z - 5.4), a.z);
-  p.y = mix(p.y, t.x, wC); p.z = mix(p.z, t.y + 5.4, wC);
-  n.yz = bmxRot(n.yz, a.z * wC);
+  // braço mais grosso em volta do eixo dele (y=0, z=5.55), sem mexer na mão
+  float kG = 1.0 + (uGrosso - 1.0) * smoothstep(1.6, 2.2, ax) * (1.0 - smoothstep(3.8, 4.3, ax)) * wY;
+  p.y *= kG; p.z = 5.55 + (p.z - 5.55) * kG;
+  // Torção, dobra e ombro giram cada vértice por uma FRAÇÃO do ângulo (não misturam a posição girada
+  // com a parada), senão a seção do braço encolhe e a malha se dobra para dentro no cotovelo.
+  // A torção vai crescendo ao longo do antebraço (do cotovelo ao pulso) e a dobra usa uma zona larga.
+  float wT = smoothstep(3.0, 4.4, ax) * wY;
+  float wB = smoothstep(2.3, 3.9, ax) * wY;
+  vec2 t = bmxRot(vec2(p.y, p.z - 5.4), a.z * wT);
+  p.y = t.x; p.z = t.y + 5.4;
+  n.yz = bmxRot(n.yz, a.z * wT);
   vec2 E = vec2(sinal * 3.15, 5.4);
-  p.xz = mix(p.xz, bmxRot(p.xz - E, a.y) + E, wC);
-  n.xz = bmxRot(n.xz, a.y * wC);
+  p.xz = bmxRot(p.xz - E, a.y * wB) + E;
+  n.xz = bmxRot(n.xz, a.y * wB);
   vec2 S = vec2(sinal * 1.35, 5.4);
-  p.xz = mix(p.xz, bmxRot(p.xz - S, a.x) + S, wO);
+  p.xz = bmxRot(p.xz - S, a.x * wO) + S;
   n.xz = bmxRot(n.xz, a.x * wO);
+  // balanço do ombro para a frente (eixo vertical): braço pendurado não muda, braço erguido vem para a câmera
+  float fw = -sinal * (p0.x >= 0.0 ? uFrente.x : uFrente.y);
+  p.xy = bmxRot(p.xy - vec2(sinal * 1.35, 0.0), fw * wO) + vec2(sinal * 1.35, 0.0);
+  n.xy = bmxRot(n.xy, fw * wO);
 }
 `;
 
-/* Piscar: os olhos estão pintados na textura (um ponto preto + traço, espelhado
-   para os dois lados do rosto, em uv 0.7678,0.8977, raio 0.0082). A pálpebra cor
-   de vinil cobre o ponto de cima e de baixo até sobrar só o traço, amostrando a
-   pele logo ao lado de cada ponto para manter a mesma sombra. */
+/* Olhos. Na textura eles são um ponto pequeno e borrado + traço, e em volta há o contorno do oval da
+   textura, que aparece como um crescente cinza em cima de cada olho (as "sobrancelhas"). A malha dos
+   olhos tem UV comprimido, então o desenho é feito pela posição 3D no arquivo (vObj: x = lado, y =
+   profundidade, z = altura): a região dos olhos é apagada com a cor da pele e os olhos são redesenhados
+   nítidos, como no logo do BMX (topo esquerdo): dois pontos pretos grandes ligados por um traço fino,
+   cor #14212e, na mesma proporção (ponto 0,18 da distância entre os olhos; traço 0,2 do diâmetro).
+   Olhos em (±0,231; z 6,357). A piscada achata só os pontos (até 8% da altura), como no logo. */
 const PISCAR_GLSL = /* glsl */`
-#ifdef USE_MAP
-if (uPiscar > 0.001) {
-  const vec2 OC = vec2(0.7678, 0.8977);
-  const float OR = 0.0111;
-  const vec2 OL = vec2(-0.9837, 0.1799);
-  const vec2 OP = vec2(-0.1799, -0.9837);
-  vec2 dd = (vMapUv - OC) / OR;
-  float al = dot(dd, OL), ac = dot(dd, OP);
-  float disco = 1.0 - smoothstep(0.95, 1.15, length(dd));
-  float aberto = max(1.0 - uPiscar, 0.12);
-  float tampa = disco * smoothstep(aberto, aberto + 0.08, abs(ac));
-  vec2 uvPele = OC + OL * al * OR + OP * sign(ac) * OR * 1.35;
-  diffuseColor.rgb = mix(diffuseColor.rgb, diffuse * texture2D(map, uvPele).rgb, tampa);
+{
+  const float XO = 0.231;          // meia distância entre os olhos
+  const float ZO = 6.357;          // altura dos olhos
+  const float RAIO = 0.08;         // raio do ponto (0,35 da meia distância... 0,18 da distância toda)
+  const float TRACO = 0.016;       // meia espessura do traço
+  float frente = 1.0 - smoothstep(-0.36, -0.30, vObj.y);          // só a frente do rosto
+  // 1) apaga a região dos olhos (pontos, traço, sombra e o contorno do oval) com a cor da pele
+  vec2 e = vec2(abs(vObj.x) / 0.47, (vObj.z - 6.46) / 0.37);
+  float apaga = (1.0 - smoothstep(0.84, 1.0, length(e))) * frente;
+  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.80, 0.81, 0.82), apaga);
+  // 2) desenha o olho do logo; piscando, o ponto vira uma elipse achatada
+  float sy = max(1.0 - uPiscar * 0.92, 0.08);
+  float aa = max(length(fwidth(vObj.xz)) * 0.7, 1e-4);
+  float dPonto = (length(vec2(abs(vObj.x) - XO, (vObj.z - ZO) / sy)) - RAIO) * mix(sy, 1.0, 0.5);
+  float dTraco = max(abs(vObj.z - ZO) - TRACO, abs(vObj.x) - XO);
+  float tinta = (1.0 - smoothstep(-aa, aa, min(dPonto, dTraco))) * frente;
+  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.007, 0.015, 0.027), tinta);
 }
-#endif
 `;
 
 function aplicarPose(material) {
@@ -139,11 +197,13 @@ function aplicarPose(material) {
     shader.uniforms.uBracoE = uBracoE;
     shader.uniforms.uCabeca = uCabeca;
     shader.uniforms.uPiscar = uPiscar;
+    shader.uniforms.uFrente = uFrente;
+    shader.uniforms.uGrosso = uGrosso;
     shader.vertexShader = POSE_GLSL + shader.vertexShader
       .replace('#include <beginnormal_vertex>',
         'vec3 objectNormal = vec3( normal );\nvec3 bmxP = vec3( position );\nbmxPose( bmxP, objectNormal );')
-      .replace('#include <begin_vertex>', 'vec3 transformed = bmxP;');
-    shader.fragmentShader = 'uniform float uPiscar;\n' + shader.fragmentShader
+      .replace('#include <begin_vertex>', 'vec3 transformed = bmxP;\nvObj = position;');
+    shader.fragmentShader = 'uniform float uPiscar;\nvarying vec3 vObj;\n' + shader.fragmentShader
       .replace('#include <map_fragment>', '#include <map_fragment>\n' + PISCAR_GLSL);
   };
   material.customProgramCacheKey = () => 'bmx-pose';
@@ -224,18 +284,96 @@ let modelo = null, sombra = null, escalaBase = 1, baseY = 0, telaObj = null;
 let estado = 'ocioso';
 let entrada = null;                     // instante em que a subida começou
 let acenoDesde = null, acenoPendente = false;
+let acordado = false;                   // na cabine: só reage depois que as portas abrem e ele acorda
+let proxyBaymax = null;                 // cilindro invisível onde os cliques "acertam" o Baymax
+let baymaxCabine = null;                // o Baymax dentro da cabine (a cabine em si não se mexe)
 const alvo = { x: 0, y: 0 };            // mouse normalizado -1..1
 
 /* baymax-suave.glb: o mesmo modelo com subdivisão de Loop x2 (models/suavizar_glb.py),
    arredondado como o personagem; o original fica de reserva. */
 const carregador = new GLTFLoader();
 function carregarModelo(url, reserva) {
-  carregador.load(url, montar, undefined, (err) => {
+  carregador.load(url, DESATIVADO ? montarCaixa : montar, undefined, (err) => {
     if (reserva) { console.warn('[BMX] ' + url + ' falhou; usando ' + reserva, err); carregarModelo(reserva, null); }
     else console.warn('[BMX] não consegui carregar o modelo 3D', err);
   });
 }
-carregarModelo('models/baymax-suave.glb', 'models/baymax.glb');
+/* Abertura da cabine, depois que a interface abre e a caixa termina de subir:
+   a câmera se aproxima do controlador da porta direita, segura um instante e então
+   as portas abrem (±105° nas dobradiças, mesmo ângulo do arquivo do Blender) enquanto
+   a câmera recua para enquadrar a cabine aberta. Tempos em ms, contados da entrada. */
+const CABINE = { espera: 2400, aproxima: 1900, segura: 1000, abre: 2400, recua: 2800 };
+const PORTA_ABERTA = 105 * Math.PI / 180;
+/** ele acorda quando as portas já abriram 70% */
+const ACORDA_EM = CABINE.espera + CABINE.aproxima + CABINE.segura + CABINE.abre * 0.7;
+const cabine = { d: null, e: null, controle: null };
+const camBase = camera.position.clone();
+const camFoco = new THREE.Vector3(), camAlvo = new THREE.Vector3(), camPerto = new THREE.Vector3();
+
+/** onde a câmera termina: rosto e tronco do Baymax (centro em y 1,2 m da cabine; ~1,3 m de altura visível) */
+const ROSTO_CORPO = { centro: new THREE.Vector3(0, 1.2, BAYMAX_NA_CAIXA.pesZ), distancia: 4.8 };
+const camBaymax = new THREE.Vector3(), alvoBaymax = new THREE.Vector3();
+
+function animarCabine(ms) {
+  const aAbre = CABINE.espera + CABINE.aproxima + CABINE.segura;
+  let foco = 0;                                   // 0 = enquadramento normal … 1 = em cima do controlador
+  if (ms >= CABINE.espera) foco = ms < aAbre ? suaveIO(Math.min(1, (ms - CABINE.espera) / CABINE.aproxima)) : 1;
+  const aberta = ms < aAbre ? 0 : suaveIO(Math.min(1, (ms - aAbre) / CABINE.abre));
+  const segue = ms < aAbre ? 0 : suaveIO(Math.min(1, (ms - aAbre) / CABINE.recua));   // do controlador para o Baymax
+  if (cabine.d) cabine.d.rotation.y = aberta * PORTA_ABERTA;
+  if (cabine.e) cabine.e.rotation.y = -aberta * PORTA_ABERTA;
+  if (!cabine.controle || !modelo) return;
+  cabine.controle.getWorldPosition(camFoco);      // acompanha o controlador enquanto a porta gira
+  camAlvo.set(0, 0, 0).lerp(camFoco, foco);
+  camPerto.copy(camFoco).add(new THREE.Vector3(-0.25, 0.1, 3.4));
+  camera.position.lerpVectors(camBase, camPerto, foco);
+  if (segue > 0) {                                // portas abrindo: a câmera vai do controlador ao rosto e corpo dele
+    modelo.localToWorld(alvoBaymax.copy(ROSTO_CORPO.centro));
+    camBaymax.copy(alvoBaymax).add(new THREE.Vector3(0, 0.05, ROSTO_CORPO.distancia));
+    camera.position.lerp(camBaymax, segue);
+    camAlvo.lerp(alvoBaymax, segue);
+  }
+  camera.lookAt(camAlvo);
+}
+
+if (DESATIVADO) carregarModelo('models/baymax-caixa.glb', null);
+else carregarModelo('models/baymax-suave.glb', 'models/baymax.glb');
+
+/* Baymax desativado: a caixa de carregamento (2,4 m × 1,6 m) ocupa o lugar dele.
+   Mesma normalização do Baymax (centro no X/Z, base no chão, altura = ALTURA),
+   sem pose no shader e sem tela da barriga (telaObj fica null). */
+function montarCaixa(gltf) {
+  modelo = gltf.scene;
+  modelo.traverse((o) => {
+    if (o.isMesh) o.frustumCulled = false;
+    // pivôs das portas (nas dobradiças) e a tela do controlador, que é filho da porta direita
+    if (/PORTA.*DIREITA/.test(o.name)) cabine.d = o;
+    else if (/PORTA.*ESQUERDA/.test(o.name)) cabine.e = o;
+    else if (/Controle.*tela/.test(o.name)) cabine.controle = o;
+  });
+  const caixa = new THREE.Box3().setFromObject(modelo);
+  const tam = caixa.getSize(new THREE.Vector3());
+  const centro = caixa.getCenter(new THREE.Vector3());
+  escalaBase = ALTURA / tam.y;
+  modelo.position.set(-centro.x, -caixa.min.y, -centro.z);
+  // o giro fica num grupo à parte para ser em volta do centro da caixa
+  const giro = new THREE.Group();
+  giro.add(modelo);
+  giro.rotation.y = GIRO_CAIXA;
+  corpo.add(giro);
+  corpo.scale.setScalar(escalaBase);
+  sombra = sombraContato(Math.max(tam.x, tam.z) * escalaBase * 1.5);
+  sombra.position.y = 0.01;
+  pivo.add(sombra);
+  baseY = CENTRO_Y - ALTURA / 2;
+  colocarBaymax('models/baymax-suave.glb', 'models/baymax.glb');
+  // a luz fria do anel do teto (na prancha o interior brilha azul-claro) banha o Baymax por cima
+  const luzInterior = new THREE.PointLight(0xbfe6ff, 0.7, 6, 1.5);
+  luzInterior.position.set(0, 2.0, 0.2);
+  modelo.add(luzInterior);
+  ajusta();
+  if (window.__bmxRevelado) entrar();
+}
 
 function montar(gltf) {
   modelo = gltf.scene;
@@ -265,6 +403,62 @@ function montar(gltf) {
   baseY = CENTRO_Y - ALTURA / 2;
   ajusta();
   if (window.__bmxRevelado) entrar();
+}
+
+/* Ambiente de reflexo só do Baymax (na prancha de referência ele é de vinil branco liso e brilhante,
+   com reflexos claros de caixas de luz e um fundo azulado vindo da iluminação interna da cabine).
+   É um panorama pintado num canvas, convertido uma vez em mapa de reflexo. */
+let ambienteBaymax = null;
+function criarAmbienteBaymax() {
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 256;
+  const g = c.getContext('2d');
+  const grad = g.createLinearGradient(0, 0, 0, 256);
+  grad.addColorStop(0, '#ffffff'); grad.addColorStop(0.35, '#e3f3ff');
+  grad.addColorStop(0.55, '#a9d6f2'); grad.addColorStop(0.78, '#4d6f8a'); grad.addColorStop(1, '#1d2e3d');
+  g.fillStyle = grad; g.fillRect(0, 0, 512, 256);
+  g.shadowColor = '#ffffff'; g.shadowBlur = 34; g.fillStyle = '#ffffff';
+  [[96, 78], [416, 78], [256, 46]].forEach(([x, y]) => g.fillRect(x - 44, y - 24, 88, 48));
+  const tex = new THREE.CanvasTexture(c);
+  tex.mapping = THREE.EquirectangularReflectionMapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const gerador = new THREE.PMREMGenerator(renderer);
+  const env = gerador.fromEquirectangular(tex).texture;
+  gerador.dispose(); tex.dispose();
+  return env;
+}
+
+/** o Baymax desativado em pé na plataforma, braços ao longo do corpo, olhos fechados (ver quadro) */
+function colocarBaymax(url, reserva) {
+  carregador.load(url, (gltf) => {
+    const b = gltf.scene;
+    b.traverse((o) => {
+      if (o.isMesh && o.material) {
+        o.material.side = THREE.FrontSide;
+        if (o.material.map) o.material.map.anisotropy = 4;
+        // vinil branco liso e brilhante, levemente frio, como na prancha (a textura original é cinza e fosca)
+        ambienteBaymax = ambienteBaymax || criarAmbienteBaymax();
+        o.material.envMap = ambienteBaymax;
+        o.material.envMapIntensity = 0.45;
+        o.material.roughness = 0.5;
+        o.material.color.setRGB(1.0, 1.0, 1.02);
+        aplicarPose(o.material);
+        o.frustumCulled = false;
+      }
+    });
+    b.scale.setScalar(BAYMAX_NA_CAIXA.escala);
+    // a matriz do nó raiz do arquivo põe a altura em y e a frente em +z
+    b.position.set(0, BAYMAX_NA_CAIXA.pesY, BAYMAX_NA_CAIXA.pesZ);
+    modelo.add(b);
+    baymaxCabine = b;
+    // alvo invisível dos cliques: a pose é feita no shader, então a malha não serve para o raycast
+    proxyBaymax = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.45, 1.25, 12), new THREE.MeshBasicMaterial({ visible: false }));
+    proxyBaymax.position.set(0, BAYMAX_NA_CAIXA.pesY + 0.62, BAYMAX_NA_CAIXA.pesZ);
+    modelo.add(proxyBaymax);
+  }, undefined, (err) => {
+    if (reserva) { console.warn('[BMX] ' + url + ' falhou; usando ' + reserva, err); colocarBaymax(reserva, null); }
+    else console.warn('[BMX] não consegui carregar o Baymax da cabine', err);
+  });
 }
 
 function entrar() {
@@ -312,6 +506,7 @@ const molaE = { pos: REPOUSO.slice(), vel: [0, 0, 0] };   // braço que acena (d
 let ultimoQuadro = 0;
 
 function acenar() {
+  if (DESATIVADO && !acordado) return;
   if (!modelo || entrada === null) { acenoPendente = true; return; }
   acenoDesde = performance.now();
 }
@@ -320,10 +515,10 @@ function acenar() {
 function alvoAceno(ms) {
   if (ms < ACENO_SEGURA_MS) {
     if (reduz) return ACENO;
-    // balanço lento do antebraço, entrando aos poucos para não dar tranco
+    // balanço do antebraço, entrando aos poucos para não dar tranco
     const entra = Math.min(1, ms / 450);
-    const f = Math.sin(ms / 1150 * Math.PI * 2);
-    return [ACENO[0] + 0.035 * f * entra, ACENO[1] + 0.13 * f * entra, ACENO[2] + 0.06 * f * entra];
+    const fase = ms / BALANCO_MS * Math.PI * 2;
+    return [0, 1, 2].map((i) => ACENO[i] + BALANCO[i] * Math.sin(fase + BALANCO_FASE[i]) * entra);
   }
   return ms < ACENO_SEGURA_MS + 1100 ? REPOUSO : null;
 }
@@ -384,7 +579,7 @@ function animarRosto(agora, ergue) {
   }
   // cabeça: de tempos em tempos olha de um lado para o outro, só quando está ocioso
   if (!olharEm) olharEm = agora + 7500;     // depois do aceno e do holograma
-  if (olharDesde === null && agora >= olharEm && estado === 'ocioso' && acenoDesde === null && !reduz) {
+  if (olharDesde === null && agora >= olharEm && estado === 'ocioso' && acenoDesde === null && !reduz && !DESATIVADO) {
     olharDesde = agora;
     olharLado = Math.random() < 0.5 ? 1 : -1;
   }
@@ -395,6 +590,46 @@ function animarRosto(agora, ergue) {
   }
   // acenando, a cabeça inclina para o lado da mão
   uCabeca.value.set(giro, giro * 0.14 + 0.08 * ergue);
+}
+
+/* ── Baymax na cabine: acorda e reage ────────────────────────────────────
+   Dorme (olhos fechados, cabeça pendida) até as portas quase terminarem de abrir; aí abre
+   os olhos, levanta a cabeça e acena. Depois: a cabeça acompanha o mouse, o clique nele
+   faz acenar de novo, pensando inclina a cabeça e falando balança de leve. */
+let seguirX = 0, inclinaY = 0;
+function acordar(agora, ergue, t) {
+  const acorda = suaveIO(Math.min(1, Math.max(0, (agora - entrada - ACORDA_EM) / 700)));
+  if (acorda <= 0) { uPiscar.value = 1; uCabeca.value.set(0, 0.08); return; }
+  if (acorda >= 1 && !acordado) {
+    acordado = true;
+    acenar();
+    window.dispatchEvent(new Event('bmx:cabine-aberta'));   // intro.js começa a falar agora
+  }
+  animarRosto(agora, ergue);
+  uPiscar.value = Math.max(uPiscar.value, 1 - acorda);            // os olhos abrem
+  seguirX = suave(seguirX, acordado ? alvo.x * 0.4 : 0, 0.08);    // olha para onde o mouse está
+  const fala = estado === 'falando' ? Math.sin(t * 3.2) * 0.05 : 0;
+  inclinaY = suave(inclinaY, (estado === 'pensando' ? 0.1 : 0) + 0.08 * (1 - acorda), 0.08);
+  uCabeca.value.x += seguirX + fala;
+  uCabeca.value.y += inclinaY;
+}
+
+const raio = new THREE.Raycaster(), ponto = new THREE.Vector2();
+/** o ponteiro está sobre o Baymax (e não sobre um painel, botão ou campo da interface)? */
+function sobreBaymax(e) {
+  if (!proxyBaymax || !acordado) return false;
+  if (e.target.closest && e.target.closest('button,a,input,textarea,select,.coluna,.barra,header,aside,#holo,#visaoCaso')) return false;
+  ponto.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight * 2 - 1));
+  raio.setFromCamera(ponto, camera);
+  return raio.intersectObject(proxyBaymax).length > 0;
+}
+if (DESATIVADO) {
+  let mao = false;
+  window.addEventListener('pointermove', (e) => {
+    const sobre = sobreBaymax(e);
+    if (sobre !== mao) { mao = sobre; document.body.style.cursor = sobre ? 'pointer' : ''; }
+  }, { passive: true });
+  window.addEventListener('pointerdown', (e) => { if (sobreBaymax(e) && acenoDesde === null) acenar(); });
 }
 
 /* ── laço ────────────────────────────── */
@@ -410,6 +645,7 @@ function quadro() {
   // subida de entrada: 1.4 s, de baixo e um pouco menor
   const p = Math.min(1, (performance.now() - entrada) / 1400);
   const e = saida(p);
+  if (DESATIVADO) animarCabine(performance.now() - entrada);
 
   // respiração: mais rápida em alerta, mais funda falando
   const ritmo = estado === 'alerta' ? 2.4 : 1.25;
@@ -436,13 +672,16 @@ function quadro() {
   // subindo e descendo: mola rápida que passa um pouco do ponto; parado no alto: macia
   const segurando = acenoDesde !== null && performance.now() - acenoDesde < ACENO_SEGURA_MS && performance.now() - acenoDesde > 400;
   // ω=9 → sobe/desce em ~250 ms, como no vídeo (conferido em simulação a 60 qps)
-  passoMola(molaE, alvoE, dt, segurando ? 8 : 9, segurando ? 0.9 : 0.68);
+  // na cabine a mola de segurar é mais dura para acompanhar o balanço da mão sem amortecer
+  passoMola(molaE, alvoE, dt, segurando ? (DESATIVADO ? 14 : 8) : 9, segurando ? 0.9 : 0.68);
   const k = erguido();
+  uFrente.value.set(0, Math.min(1, k * FRENTE_ADIANTADA) * FRENTE_ACENO);                     // o ombro leva o braço que acena para a frente
   braco.d = [repouso[0] + 0.05 * k, repouso[1], repouso[2]];   // o outro braço abre um tiquinho junto
   braco.e = molaE.pos;
   uBracoD.value.fromArray(braco.d);
   uBracoE.value.fromArray(braco.e);
-  animarRosto(performance.now(), k);
+  if (DESATIVADO) acordar(performance.now(), k, t);
+  else animarRosto(performance.now(), k);
 
   // tela da barriga: acende, enche as barras, pulsa enquanto o holograma está aberto
   tela.luz = suave(tela.luz, tela.alvo, 0.08);
@@ -464,7 +703,10 @@ function quadro() {
   pivo.rotation.x = suave(pivo.rotation.x, CORPO_PARADO ? 0 : alvo.y * 0.05, 0.04);
   // pensando, inclina de leve; acenando, o corpo pende um pouco para o lado da mão
   const incl = (estado === 'pensando' && !CORPO_PARADO ? Math.sin(t * 1.6) * 0.035 + 0.03 : 0) + 0.035 * k;
-  pivo.rotation.z = suave(pivo.rotation.z, incl, 0.08);
+  if (DESATIVADO) {
+    // na cabine, quem pende é só o Baymax (em volta dos pés); a cabine fica parada
+    if (baymaxCabine) baymaxCabine.rotation.z = suave(baymaxCabine.rotation.z, incl, 0.08);
+  } else pivo.rotation.z = suave(pivo.rotation.z, incl, 0.08);
 
   if (sombra) sombra.material.opacity = 0.85 + r * 0.1;
   renderer.render(cena, camera);
@@ -480,9 +722,15 @@ function paraTela(obj, v) {
 window.BMX3D = {
   acenar: acenar,
   /** 'on' acende a tela da barriga; 'pulso' faz as barras respirarem; 'off' apaga */
-  tela: (modo) => { tela.alvo = modo === 'off' ? 0 : 1; tela.pulso = modo === 'pulso'; },
+  desativado: DESATIVADO,
+  _dbg: () => ({ camera, modelo, baymaxCabine, cena, renderer }),  tela: (modo) => { tela.alvo = modo === 'off' ? 0 : 1; tela.pulso = modo === 'pulso'; },
   /** centro e largura da tela da barriga em pixels da janela, ou null antes do modelo */
   ancora: () => {
+    if (DESATIVADO && proxyBaymax && entrada !== null) {          // na cabine: o peito do Baymax
+      proxyBaymax.getWorldPosition(v1);
+      const c = paraTela(proxyBaymax, v1), b = paraTela(proxyBaymax, v2.copy(v1));
+      return { x: c.x, y: c.y, w: 90 };
+    }
     if (!telaObj || entrada === null) return null;
     const c = paraTela(telaObj.ancora, v1), b = paraTela(telaObj.borda, v2);
     return { x: c.x, y: c.y, w: Math.abs(b.x - c.x) * 2 };
