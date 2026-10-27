@@ -325,6 +325,7 @@ function botaoPlay() { S.ui.play.textContent = S.tocando ? 'Pausar' : 'Continuar
 
 async function tocarDe(i) {
   if (!S.estudo) return;
+  if (window.BMXFase && window.BMXFase.tutorialAberto()) return;   // com o guia aberto a aula espera (as setas são do guia)
   S.rodada++;
   const r = S.rodada;
   S.palco.cancelar(); pararFala();
@@ -507,6 +508,7 @@ async function iniciarAula(e, caso) {
   S.caso = caso;
   u.raiz.hidden = false; u.raiz.classList.remove('saindo'); S.aberto = true; document.body.classList.add('atl-aberto');
   u.lib.hidden = true; u.fecho.hidden = true; soltarSeta(); legenda('');
+  u.passo.textContent = ''; u.etapa.textContent = ''; u.prog.style.width = '0';   // nada da aula anterior
   u.pular.hidden = !caso; u.demo.hidden = !caso;
   cobrir('', e.titulo);
   if (!S.palco) S.palco = criarPalco(u.palco);

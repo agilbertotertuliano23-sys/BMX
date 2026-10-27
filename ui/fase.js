@@ -10,7 +10,7 @@
   'use strict';
   var token = (document.querySelector('meta[name="bmx-token"]') || {}).content || '';
   var TITULOS = { entrada: 'Entrada', atendimento: 'Atendimento', atlas: 'Atlas 3D', painel: 'Painel do caso', demo: 'Demonstração guiada' };
-  var pilha = [], ui = null, botoes = null, ocupado = false, tut = null, conexaoP = null;
+  var pilha = [], ui = null, botoes = null, ocupado = false, tut = null, tutAtual = null, conexaoP = null;
   var msgs = {}, carregadas = {};
 
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
@@ -133,11 +133,14 @@
   /** Abre o tutorial da tela se for uma das 3 primeiras conexões da pessoa e ele ainda não passou nesta conexão. */
   function tutorial(fase, forcar) {
     var passos = (window.BMX_TUTORIAIS || {})[fase];
-    if (!passos || !passos.length || tut) return Promise.resolve(false);
+    if (!passos || !passos.length) return Promise.resolve(false);
+    if (tut) return tutAtual.then(function () { return tutorial(fase, forcar); });   // um guia por vez: o seguinte espera o aberto fechar
     return conexao(fase).then(function (c) {
       if (!forcar && (c.entradas > c.vezes || vistos()[fase])) return false;
+      if (tut) return tutAtual.then(function () { return tutorial(fase, forcar); });   // outro abriu enquanto a conexão era contada
       marcarVisto(fase);
-      return abrirTutorial(fase, passos, c, !!forcar);
+      tutAtual = abrirTutorial(fase, passos, c, !!forcar);
+      return tutAtual;
     });
   }
 
@@ -251,7 +254,11 @@
   function abrir(qual) {
     var c = atual();
     if (!c) return;
-    if (qual === 'ajuda') { tutorial(c.fase, true); return; }
+    if (qual === 'ajuda') {
+      if (c.pausar) { try { c.pausar(); } catch (e) { /* a tela cuida de si */ } }   // a aula não segue por baixo do guia
+      tutorial(c.fase, true);
+      return;
+    }
     if (qual === 'chat' && !c.chat) qual = 'feedback';
     montarUi();
     if (!ui.painel.hidden && ui.aba === qual) { fechar(); return; }

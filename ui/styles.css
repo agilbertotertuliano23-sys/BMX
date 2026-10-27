@@ -394,6 +394,7 @@ body.modo-caso .visao-caso iframe { margin-bottom: 68px; }
 #bmx3d { transition: opacity 1.2s ease, transform 0.6s ease; }
 body.modo-caso #bmx3d.pronto { opacity: 0.1; transform: scale(0.96); transition: opacity 0.6s ease, transform 0.6s ease; }
 body.modo-caso .holo { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+body.modo-caso .holo * { pointer-events: none !important; }   /* .holo-painel tem pointer-events: auto: invisível, ainda roubaria cliques do painel (e gravaria uma nota de dor) */
 .seguir { display: flex; align-items: center; gap: 6px; margin: -2px 0 6px; font-size: 11px; font-weight: 700; color: var(--tinta-3); cursor: pointer; }
 .seguir input { margin: 0; accent-color: var(--azul); }
 @media (max-width: 960px) {
