@@ -4,7 +4,7 @@ services:
     name: bmx
     runtime: docker
     plan: free
-    autoDeploy: false
+    autoDeploy: true
     healthCheckPath: /healthz
     envVars:
       - key: BMX_CLOUD
