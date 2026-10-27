@@ -30,10 +30,12 @@ function log(tipo, rotulo, msg) {
 /* A voz do Fish lê [colchetes] como direção de fala e não os pronuncia. Na tela
    viram etiquetas; a voz do navegador recebe o texto sem elas (voz.js). */
 var TAG_RE = /\[([^\][]{1,90})\]/g;
+/* [atlas] é a decisão do BMX de levar a conversa ao atlas 3D: serve à interface, não aparece na tela nem vira "tom" */
+var ATLAS_TAG = /^\s*atlas\s*$/i;
 function ultimaTag(texto) {
   var achou = null, m;
   TAG_RE.lastIndex = 0;
-  while ((m = TAG_RE.exec(texto)) !== null) achou = m[1];
+  while ((m = TAG_RE.exec(texto)) !== null) { if (!ATLAS_TAG.test(m[1])) achou = m[1]; }
   return achou;
 }
 /* *palavra* é ênfase para a voz (persona.md); na tela vira negrito, sem os asteriscos */
@@ -44,7 +46,7 @@ function renderFalado(el, texto) {
   var html = '', ultimo = 0, m;
   TAG_RE.lastIndex = 0;
   while ((m = TAG_RE.exec(texto)) !== null) {
-    html += enfase(esc(texto.slice(ultimo, m.index))) + '<span class="tag">' + esc(m[1]) + '</span>';
+    html += enfase(esc(texto.slice(ultimo, m.index))) + (ATLAS_TAG.test(m[1]) ? '' : '<span class="tag">' + esc(m[1]) + '</span>');
     ultimo = m.index + m[0].length;
   }
   el.innerHTML = html + enfase(esc(texto.slice(ultimo)));
@@ -311,10 +313,11 @@ window.addEventListener('bmx:fala-fim', atualizarEntrada);
    ambulância" não gera nenhum. Por isso o caso ativo também é perguntado ao abrir a página e antes de falar. */
 function descobrirCaso() {
   return fetch('/api/caso', { headers: headers() }).then(function (r) { return r.json(); })
-    .then(function (d) { if (d && d.caso && d.caso.id) casoIdAtual = d.caso.id; })
+    .then(function (d) { if (d && d.caso && d.caso.id) casoIdAtual = d.caso.id; mostrarBotaoAtlas(); })
     .catch(function () { /* sem caso: o painel não abre sozinho */ });
 }
 descobrirCaso();
+function mostrarBotaoAtlas() { $('#btnAtlasAgora').hidden = !casoIdAtual; }
 
 function podeIncorporar() { return true; }   // em tela estreita o painel abre por cima, em tela cheia (styles.css)
 function casoAberto() { return document.body.classList.contains('modo-caso'); }
@@ -370,24 +373,27 @@ chkSeguir.addEventListener('change', function () {
   try { localStorage.setItem(SEGUIR_CHAVE, chkSeguir.checked ? 'on' : 'off'); } catch (e) { /* sem armazenamento */ }
 });
 
-/* Conversa → atlas → painel: depois que o BMX termina de falar a resposta, e se a conversa mexeu no caso (queixa nova,
-   sinal confirmado ou descartado, lado, nível), o atlas explica no corpo o que a pessoa contou; ao fim, o painel do
-   caso abre e fica aberto até a pessoa voltar ao Baymax. A mesma situação do caso não repete a aula. */
-var casoMudou = false, aulasVistas = {};
-function explicarNoAtlas() {
-  if (!casoMudou) return;
-  casoMudou = false;
-  if (!chkSeguir.checked || !casoIdAtual || !window.BMXAtlas || window.BMXAtlas.aberto()) return;
+/* Conversa → atlas → painel: quem decide a hora é o BMX (a LLM). Quando ele termina a resposta com a marcação [atlas],
+   o servidor manda o evento `atlas`; depois que a fala acaba, o atlas explica no corpo o que a pessoa contou e, ao fim,
+   o painel do caso abre e fica aberto até a pessoa voltar ao Baymax. A mesma situação do caso não repete a aula.
+   O botão "Mostrar no atlas 3D agora" abre a aula quando a pessoa quiser (`forcar`), sem esperar o BMX. */
+var atlasPedido = false, aulasVistas = {};
+function explicarNoAtlas(forcar) {
+  if (!atlasPedido && !forcar) return;
+  atlasPedido = false;
+  if (!casoIdAtual || !window.BMXAtlas || window.BMXAtlas.aberto()) return;
+  if (!forcar && !chkSeguir.checked) return;
   var cid = casoIdAtual;
   fetch('/api/atlas?caso=' + encodeURIComponent(cid), { headers: headers() })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (aula) {
       if (!aula || !aula.assinatura) return;
-      if (aulasVistas[cid] === aula.assinatura) return;           // nada novo para explicar
+      if (!forcar && aulasVistas[cid] === aula.assinatura) return;           // nada novo para explicar
       aulasVistas[cid] = aula.assinatura;
       return window.BMXAtlas.abrirCaso(cid, function (motivo) {
         if (motivo === 'fechar') return;
         abrirCaso(false);
+        if (motivo === 'remedios') focarNoCaso('remedios');                     // "Ver remédios" no fim da aula
         if (motivo === 'demo') setTimeout(function () { enviarAoCaso({ t: 'demo' }); }, casoFramePronto ? 900 : 3500);   // o painel começa a demonstração do contexto
       })
         .then(function (ok) { if (!ok) abrirCaso(false); });       // sem aula possível, vai direto ao painel
@@ -465,7 +471,7 @@ async function enviar(mensagem) {
   if (resposta.trim()) {
     await descobrirCaso();
     try { await window.BMXVoz.falar(resposta.trim()); } finally { emFala = false; atualizarEntrada(); }
-    explicarNoAtlas();                       // só uma resposta do BMX leva ao atlas; a introdução não
+    explicarNoAtlas();                       // só abre se o BMX marcou [atlas] nesta resposta
   }
   else window.BMXVoz.retomarEscuta();
 }
@@ -510,8 +516,12 @@ function evento(ev) {
     case 'caso':
       if (ev.como !== 'atualizado') log('mem', 'CASO', (ev.como || '') + ' → ' + ev.id + ' · ' + (ev.titulo || ''));
       casoIdAtual = ev.id;
-      casoMudou = true;
+      mostrarBotaoAtlas();
       if (casoAberto()) atualizarCaso();
+      break;
+    case 'atlas':                            // o BMX decidiu que já dá para mostrar no corpo
+      if (ev.caso) casoIdAtual = ev.caso;
+      atlasPedido = true;
       break;
     case 'ficha':
       window.open(ev.url, '_blank', 'noopener');
@@ -542,6 +552,27 @@ montarAcoes();
 inspetor(null);
 carregarGrafo(false);
 $('#vozDica').textContent = 'clique em Falar';
+$('#btnAtlasAgora').addEventListener('click', function () { explicarNoAtlas(true); });
+
+/* ── ajuda por fase (fase.js): tutorial nas 3 primeiras conexões e sugestão/erro. A conversa sobre a tela
+   fica no atlas, no painel e nas demonstrações; aqui o próprio Atendimento já é o chat. ── */
+function contextoAtendimento() {
+  var falas = Array.prototype.slice.call(document.querySelectorAll('#transcricao .bolha')).slice(-4).map(function (b) {
+    return (b.classList.contains('eu') ? 'Pessoa: ' : 'BMX: ') + b.textContent.slice(0, 260);
+  });
+  return ('Tela: Atendimento, a conversa principal com o BMX. Caso em foco: ' + (casoIdAtual || 'nenhum')
+    + '. Últimas mensagens: ' + (falas.join(' | ') || 'nenhuma ainda') + '.').slice(0, 1200);
+}
+if (window.BMXFase) {
+  window.BMXFase.montar({ fase: 'atendimento', ancora: '.topo', antes: '.btn-192', chat: false, contexto: contextoAtendimento });
+  var abrirGuia = function () { setTimeout(function () { window.BMXFase.tutorial('atendimento'); }, 600); };
+  if (window.__bmxRevelado) abrirGuia(); else window.addEventListener('bmx:revelar', abrirGuia, { once: true });
+}
+/* com o painel do caso aberto, os botões da barra dele falam com a ajuda que mora dentro do painel (iframe) */
+document.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('[data-bf-pai]');
+  if (b) enviarAoCaso({ t: 'bf', aba: b.dataset.bfPai });
+});
 
 $('#btnEnviar').onclick = function () { var v = $('#pergunta').value; $('#pergunta').value = ''; enviar(v); };
 $('#pergunta').addEventListener('keydown', function (e) {

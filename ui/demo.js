@@ -169,10 +169,31 @@
       nv.appendChild(b);
     });
   }
-  function fechar() { st.rodada++; st.tocando = false; pararFala(); $('#demo').hidden = true; document.body.classList.remove('em-demo'); }
+  function fechar() {
+    st.rodada++; st.tocando = false; pararFala(); $('#demo').hidden = true; document.body.classList.remove('em-demo');
+    if (window.BMXFase) window.BMXFase.sair('demo');
+  }
+
+  /* ── ajuda por fase (fase.js): conversar sobre o passo em exibição; abrir o chat pausa a demonstração ── */
+  function contextoDemo() {
+    if (!st.r) return 'Tela: Demonstração guiada, ainda carregando o roteiro.';
+    var p = st.r.passos[st.i] || {};
+    return ['Tela: Demonstração guiada "' + st.r.titulo + '", passo ' + (st.i + 1) + ' de ' + st.r.passos.length + ': ' + (p.titulo || '') + '. Profundidade: ' + st.nivel + '.',
+      'Resumo do passo: ' + (p.resumo || ''), 'Explicação: ' + (p.explicacao || ''), p.aprofundar ? 'Aprofundamento: ' + p.aprofundar : '',
+      (p.termos || []).length ? 'Termos: ' + p.termos.map(function (t) { return t.tecnico + ' = ' + t.simples; }).join('; ') : ''
+    ].filter(Boolean).join('\n').slice(0, 3000);
+  }
+  function pausarDemo() { if (st.tocando) { st.rodada++; st.tocando = false; pararFala(); botaoPlay(); } }
+  function entrarFase() {
+    if (!window.BMXFase) return;
+    window.BMXFase.entrar({ fase: 'demo', chat: true, ancora: '.demo-topo', antes: '#demoFechar', contexto: contextoDemo, pausar: pausarDemo,
+      sugestoes: ['O que é isso que estou vendo?', 'Por que isso importa no meu caso?', 'Explique de um jeito mais simples'],
+      vazio: 'Pergunte sobre o passo que está na tela. A demonstração fica em pausa enquanto você conversa.' });
+  }
 
   async function assistir(rid) {
     var box = $('#demo'); box.hidden = false; document.body.classList.add('em-demo');
+    entrarFase();
     st.rodada++; pararFala();
     $('#demoTitulo').textContent = 'Preparando…'; $('#demoAviso').textContent = '';
     $('#demoResumo').textContent = 'A IA está escrevendo a explicação deste roteiro. Na primeira vez pode levar alguns segundos.';
@@ -184,7 +205,9 @@
       try { r = await api('/api/demo', { roteiro: rid, rapido: true }, 15000); }
       catch (e2) { $('#demoResumo').textContent = 'Não consegui preparar esta demonstração agora: ' + (e2.message || 'erro') + '.'; return; }
     }
-    st.r = r; montarPalco(r); irPara(0);
+    st.r = r; montarPalco(r);
+    if (window.BMXFase) await window.BMXFase.tutorial('demo');      // nas 3 primeiras conexões, o guia da demonstração vem antes da fala
+    if (st.r === r) irPara(0);                                       // (se a pessoa trocou de roteiro durante o guia, não toca o antigo)
   }
 
   /* ── ligação ──────────────────────────────────────────────────────── */

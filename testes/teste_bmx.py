@@ -380,6 +380,75 @@ def revisao_conhecimento():
         confere(not re.search(r"[A-Za-z]+\?[A-Za-z]+|\ufffd", texto), f"UTF-8 preservado em {nome}")
 
 
+# ── 9. atlas decidido pelo modelo, conversa por fase, retorno e tutorial ──
+def ajuda_por_fase():
+    print("\n9. Atlas decidido pelo modelo, conversa por fase, retorno e tutorial")
+    import atlas
+    import fase
+
+    # a marcação [atlas] é da interface: some do texto que vai ao registro e à voz
+    confere(fase.sem_marca_atlas("[calm] Vou te mostrar no corpo. [atlas]") == "[calm] Vou te mostrar no corpo.",
+            "[atlas] sai do texto gravado e fica o tom")
+
+    # quando levar ao atlas: o servidor diz se já há base, o modelo decide com a marcação
+    caso = {"caso": "C-TESTE-1", "regiao": "", "nivel": "", "discriminadores": []}
+    confere("Ainda não é hora" in fase.dica_atlas(caso) and "região" in fase.dica_atlas(caso), "sem região: ainda não é hora")
+    caso = {"caso": "C-TESTE-1", "regiao": "lombar", "nivel": "", "discriminadores": [{"estado": "nao"}, {"estado": ""}]}
+    confere("Ainda não é hora" in fase.dica_atlas(caso), "só um sinal checado e sem nível: ainda não é hora")
+    caso["discriminadores"].append({"estado": "sim"})
+    confere("Já há base" in fase.dica_atlas(caso), "região e dois sinais checados: já há base")
+    alerta = safety.check("estou com um aperto no peito")
+    confere(not fase.pedir_atlas("Certo. [atlas]", caso, alerta), "com alerta de emergência a marcação é ignorada")
+    confere(not fase.pedir_atlas("Certo, e a dor piora?", caso), "sem a marcação o atlas não abre")
+    confere(not fase.pedir_atlas("Certo. [atlas]", None), "sem caso o atlas não abre")
+    confere(fase.pedir_atlas("Vou te mostrar no corpo. [atlas]", caso), "com a marcação e o caso, o atlas abre")
+    confere("já foi apresentado" in fase.dica_atlas(caso), "depois de apresentado e sem novidade, o modelo é avisado para não repetir")
+    caso["discriminadores"].append({"estado": "nao"})
+    confere("Já há base" in fase.dica_atlas(caso), "um sinal novo checado libera uma nova apresentação")
+
+    # a aula do caso sabe se o painel tem remédios para mostrar
+    casos.soltar()   # os testes anteriores deixam um caso ativo; o relato abaixo precisa escolher o caso sozinho
+    relato = "estou com dor de cabeça desde ontem"
+    c, _ = casos.resolver(relato, clinica.identificar(relato), anatomia.relacionar(relato))
+    aula = atlas.para_caso(c["caso"])
+    e = aula["estudos"][0] if aula else {}
+    confere(bool(e) and "remedios" in e["conversa"], "a aula do caso traz se há remédios no painel")
+    confere(not e or e["conversa"]["remedios"] == ("remédios" in e["fecho_caso"]), "o fecho da aula cita os remédios só quando há")
+
+    # conversa por fase: pergunta sobre a tela, sem mexer no caso
+    visto = {}
+
+    def llm(sistema, mensagem):
+        visto.update(sistema=sistema, mensagem=mensagem)
+        return "[calm] **Esse** é o rim.\n- Fica atrás do abdome."
+    antes = len(casos.listar(todos=True))
+    r, al = fase.responder("atlas", "o que é isso?", "Tela: Atlas 3D, passo 2 do rim.", [{"q": "oi", "a": "olá"}], llm)
+    confere(r == "Esse é o rim.\nFica atrás do abdome." and al is None, f"resposta sai limpa (sem tom, markdown nem lista): {r!r}")
+    confere("Na tela agora" in visto["sistema"] and "passo 2 do rim" in visto["sistema"] and "Atlas 3D" in visto["sistema"],
+            "o modelo recebe a descrição da tela")
+    confere("Conversa até agora" in visto["mensagem"] and "o que é isso?" in visto["mensagem"], "o fio da conversa vai junto")
+    confere(len(casos.listar(todos=True)) == antes, "perguntar sobre a tela não abre caso")
+    _, al = fase.responder("painel", "estou com aperto no peito", "", [], llm)
+    confere(bool(al), "pergunta com sinal de emergência devolve o alerta")
+
+    # armazenamento: conversas e retornos ficam gravados e voltam
+    pid = memory.paciente()
+    fase.registrar_conversa("atlas", "o que é isso?", r, "Tela: Atlas 3D", None)
+    fase.registrar_conversa("painel", "e o remédio?", "Confira a ficha.", "Tela: painel", al)
+    hist = fase.historico("atlas")
+    confere(len(hist) == 1 and hist[0]["q"] == "o que é isso?", "o histórico da fase volta só com as trocas dela")
+    linha = fase.registrar_feedback("atlas", "inconsistencia", "o ponto 2 está no lugar errado", "Tela: Atlas 3D")
+    confere(linha["tipo"] == "inconsistencia" and linha["fase"] == "atlas" and linha["tela"], "retorno guarda tipo, fase e a tela")
+    confere(len(fase.feedback_do(pid)) == 1 and len(fase.conversa_do(pid)) == 2, "retornos e conversas ficam gravados por paciente")
+    confere(fase.feedback_restaurar(pid, fase.feedback_do(pid)) == 0 and fase.conversa_restaurar(pid, fase.conversa_do(pid)) == 0,
+            "restaurar do Upstash não duplica")
+    confere(fase.feedback_restaurar("OUTRO", fase.feedback_do(pid)) == 0, "restaurar ignora registro de outro paciente")
+
+    # tutorial: a conexão é contada por paciente (o tutorial vale para as 3 primeiras)
+    a, b = fase.entrar(), fase.entrar()
+    confere(b["entradas"] == a["entradas"] + 1 and a["vezes"] == 3, f"cada conexão soma 1 ({a['entradas']} → {b['entradas']})")
+
+
 if __name__ == "__main__":
     try:
         vinhetas()
@@ -390,6 +459,7 @@ if __name__ == "__main__":
         estruturas_hubmap()
         demonstracoes()
         revisao_conhecimento()
+        ajuda_por_fase()
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     print(f"\n{'TUDO OK' if not FALHAS else str(len(FALHAS)) + ' FALHA(S)'}")

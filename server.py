@@ -46,6 +46,7 @@ import casos       # noqa: E402
 import clinica     # noqa: E402
 import commands    # noqa: E402
 import demo        # noqa: E402
+import fase        # noqa: E402
 import memory      # noqa: E402
 import nuvem       # noqa: E402
 import painel      # noqa: E402
@@ -324,6 +325,10 @@ class Handler(BaseHTTPRequestHandler):
             cid = parse_qs(urlparse(self.path).query).get("id", [""])[0]
             return self._json(painel.dados(cid))
 
+        if p == "/api/fase":   # ?fase=atlas: as últimas perguntas e respostas desta pessoa naquela tela
+            nome = parse_qs(urlparse(self.path).query).get("fase", [""])[0]
+            return self._json(fase.historico(nome) if nome in fase.FASES else [])
+
         if p == "/ficha":
             q = parse_qs(urlparse(self.path).query)
             cid = q.get("caso", [""])[0]
@@ -379,7 +384,8 @@ class Handler(BaseHTTPRequestHandler):
         if nuvem.uso_excedido(p):
             return self._json({"error": "limite de uso atingido, aguarde alguns minutos"}, 429)
         ctype = self.headers.get("Content-Type", "").split(";", 1)[0].lower()
-        if p in {"/api/run", "/api/speak", "/api/new", "/api/cancel"} and ctype != "application/json":
+        if p in {"/api/run", "/api/speak", "/api/new", "/api/cancel", "/api/fase", "/api/feedback", "/api/tutorial"} \
+                and ctype != "application/json":
             return self._json({"error": "application/json required"}, 415)
         try:
             raw = self._read(MAX_AUDIO if p == "/api/listen" else MAX_JSON)
@@ -403,6 +409,15 @@ class Handler(BaseHTTPRequestHandler):
             else:
                 r = demo.roteiro(rid)
             return self._json(r)
+
+        if p == "/api/tutorial":   # uma conexão nova: o tutorial de cada tela aparece nas 3 primeiras
+            return self._json(fase.entrar())
+
+        if p == "/api/fase":
+            return self._fase(raw)
+
+        if p == "/api/feedback":
+            return self._feedback(raw)
 
         if p == "/api/speak":
             try:
@@ -441,6 +456,48 @@ class Handler(BaseHTTPRequestHandler):
                 RUN_LOCK.release()
 
         return self._json({"error": "no such endpoint"}, 404)
+
+    def _fase(self, raw):
+        """POST /api/fase: pergunta aberta sobre a tela em que a pessoa está (atlas, painel, demonstração)."""
+        try:
+            d = json.loads(raw or b"{}")
+            nome, pergunta = str(d.get("fase") or ""), " ".join(str(d.get("pergunta") or "").split())
+        except (json.JSONDecodeError, UnicodeDecodeError, AttributeError):
+            return self._json({"error": "JSON inválido"}, 400)
+        if nome not in fase.FASES or not pergunta:
+            return self._json({"error": "fase ou pergunta inválida"}, 400)
+        if len(pergunta) > fase.MAX_PERGUNTA:
+            return self._json({"error": "pergunta longa demais"}, 413)
+        if not RUN_LOCK.acquire(timeout=25):   # uma LLM por vez, como no chat
+            return self._json({"error": "O BMX ainda está respondendo. Tente de novo em instantes."}, 409)
+        try:
+            resposta, alerta = fase.responder(nome, pergunta, d.get("contexto"), d.get("historico"), _llm_demo)
+        except RuntimeError as e:
+            return self._json({"error": str(e)[:200]}, 503)
+        finally:
+            RUN_LOCK.release()
+        fase.registrar_conversa(nome, pergunta, resposta, d.get("contexto"), alerta)
+        registro.acesso("pergunta_fase", fase=nome, alerta=(alerta or {}).get("level"))
+        if nuvem.CLOUD:
+            persistencia.agendar(memory.paciente())
+        return self._json({"resposta": resposta, "alerta": alerta})
+
+    def _feedback(self, raw):
+        """POST /api/feedback: sugestão ou inconsistência, com o que estava na tela."""
+        try:
+            d = json.loads(raw or b"{}")
+            nome, tipo, texto = str(d.get("fase") or ""), str(d.get("tipo") or ""), str(d.get("texto") or "").strip()
+        except (json.JSONDecodeError, UnicodeDecodeError, AttributeError):
+            return self._json({"error": "JSON inválido"}, 400)
+        if nome not in fase.FASES or tipo not in fase.TIPOS or len(texto) < 3:
+            return self._json({"error": "escreva um pouco mais para eu registrar"}, 400)
+        if len(texto) > fase.MAX_FEEDBACK:
+            return self._json({"error": "texto longo demais"}, 413)
+        fase.registrar_feedback(nome, tipo, texto, d.get("contexto"))
+        registro.acesso("feedback", fase=nome, tipo=tipo)
+        if nuvem.CLOUD:
+            persistencia.agendar(memory.paciente())
+        return self._json({"ok": True})
 
     def _stream(self, raw):
         try:
@@ -517,7 +574,7 @@ class Handler(BaseHTTPRequestHandler):
         if caso:
             emit(dict(t="caso", id=caso["caso"], como=como, titulo=caso.get("queixa", "")))
         system = "\n\n".join(b for b in (commands.context_block(message, alert, rel, queixas),
-                                         casos.contexto(caso, como)) if b) or None
+                                         casos.contexto(caso, como), fase.dica_atlas(caso)) if b) or None
         usadas = [n["title"] for n in memory.relevant(message)]
         hit = memory.top_match(message)
         if hit:
@@ -548,16 +605,19 @@ class Handler(BaseHTTPRequestHandler):
                             queixa=",".join(q["id"] for q in queixas),
                             estruturas=len(rel["estruturas"]) if rel else 0)
             texto = "".join(resposta) or f"(sem resposta: {status})"
-            atendimento, analise = registro.turno(original, texto, alert, usadas, rel, comando,
+            limpo = fase.sem_marca_atlas(texto)   # [atlas] é só para a interface: não vai ao registro nem ao caso
+            atendimento, analise = registro.turno(original, limpo, alert, usadas, rel, comando,
                                                   clinica.resumo(queixas), caso["titulo"] if caso else None)
             if caso:
                 dor = re.match(r"/dor\s+(\d{1,2})", original)
-                casos.turno(caso, original, texto, atendimento, alert, queixas, rel, analise,
+                casos.turno(caso, original, limpo, atendimento, alert, queixas, rel, analise,
                             SESSION.get("ultima", ""),
                             int(dor.group(1)) if dor and int(dor.group(1)) <= 10 else None)
                 memory.build_graph(force=True)
                 emit(dict(t="caso", id=caso["caso"], como="atualizado", titulo=caso.get("queixa", "")))
-            SESSION["ultima"] = texto
+                if status == "ok" and fase.pedir_atlas(texto, caso, alert):   # o modelo decidiu: já dá para mostrar no corpo
+                    emit(dict(t="atlas", caso=caso["caso"]))
+            SESSION["ultima"] = limpo
             if nuvem.CLOUD:
                 persistencia.agendar(memory.paciente())
         except (OSError, ValueError) as e:

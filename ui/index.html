@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="intro.css">
 <link rel="stylesheet" href="atlas.css">
+<link rel="stylesheet" href="fase.css">
 <script type="importmap">
   { "imports": { "three": "./vendor/three/three.module.min.js" } }
 </script>
@@ -95,6 +96,7 @@
         <span class="tom" id="tomAgora"></span></div>
       <label class="seguir" title="Depois da resposta, o atlas 3D explica no corpo o que você contou e, em seguida, o painel do caso abre">
         <input type="checkbox" id="chkSeguir" checked> explicar no atlas 3D e abrir o painel</label>
+      <button type="button" class="bf-btn bf-atlas-agora" id="btnAtlasAgora" hidden title="Abrir já a aula do atlas 3D com o que você contou">Mostrar no atlas 3D agora</button>
       <div class="transcricao" id="transcricao">
         <div class="vazio">Conte o que está sentindo, toque na escala de dor ou use <b>Triagem</b>.</div>
       </div>
@@ -118,6 +120,11 @@
     <div class="visao-barra">
       <button type="button" id="btnVoltar">← Voltar ao Baymax</button>
       <span class="visao-dica">o painel destaca cada parte enquanto o BMX explica</span>
+      <span class="bf-botoes bf-pai">
+        <button type="button" class="bf-btn" data-bf-pai="chat" title="Tire dúvidas sobre o que está no painel">Perguntar</button>
+        <button type="button" class="bf-btn" data-bf-pai="feedback" title="Conte o que melhorar ou o que está inconsistente">Sugestão</button>
+        <button type="button" class="bf-btn redondo" data-bf-pai="ajuda" title="Ver o tutorial do painel" aria-label="Tutorial do painel">?</button>
+      </span>
     </div>
     <iframe id="casoFrame" title="Painel do caso" tabindex="-1"></iframe>
   </section>
@@ -181,6 +188,8 @@
 
 <script src="graph.js"></script>
 <script src="voz.js"></script>
+<script src="tutoriais.js"></script>
+<script src="fase.js"></script>
 <script src="app.js"></script>
 <script src="holograma.js"></script>
 <script src="intro.js"></script>

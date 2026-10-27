@@ -144,14 +144,17 @@ const HTML = [
   '  <svg class="atl-linha" id="atlLinha" aria-hidden="true"><defs><marker id="atlSeta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z"/></marker></defs><path/></svg>',
   '  <div class="atl-marcas" aria-hidden="true"></div>',
   '  <div class="atl-call" id="atlCall" hidden><i></i><div><b></b><p></p><small></small><em></em></div></div>',
+  '  <div class="atl-prog" aria-hidden="true"><i id="atlProg"></i></div>',
   '  <header class="atl-topo">',
   '    <div class="atl-marca-bmx"><svg viewBox="0 0 64 40" aria-hidden="true"><ellipse cx="32" cy="20" rx="30" ry="18" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="19" cy="20" r="4.5" fill="currentColor"/><circle cx="45" cy="20" r="4.5" fill="currentColor"/><rect x="19" y="19" width="26" height="2" fill="currentColor"/></svg><b>Atlas</b></div>',
-  '    <p class="atl-etapa" id="atlEtapa"></p>',
+  '    <div class="atl-centro"><p class="atl-etapa" id="atlEtapa"></p><p class="atl-passo" id="atlPasso"></p></div>',
   '    <div class="atl-topo-dir">',
+  '      <button type="button" id="atlPerguntar" class="atl-btn atl-perg" data-bf="chat" title="Pausa a aula e deixa você perguntar sobre o que está vendo">Perguntar</button>',
   '      <button type="button" id="atlVoz" class="atl-btn" aria-pressed="true" title="Ligar ou desligar a voz">Voz</button>',
   '      <button type="button" id="atlDemo" class="atl-btn" hidden title="Abrir a demonstração guiada deste caso">Demonstração</button>',
-  '      <button type="button" id="atlDemo" class="atl-btn" hidden title="Abrir a demonstração guiada deste caso">Demonstração</button>',
   '      <button type="button" id="atlPular" class="atl-btn atl-pular" hidden>Ver painel</button>',
+  '      <button type="button" class="atl-btn atl-so-larga" data-bf="feedback" title="Conte o que melhorar ou o que está inconsistente">Sugestão</button>',
+  '      <button type="button" class="atl-btn atl-ajuda" data-bf="ajuda" aria-label="Tutorial do atlas" title="Ver o tutorial do atlas">?</button>',
   '      <button type="button" id="atlFechar" class="atl-btn atl-x" aria-label="Fechar o atlas">×</button>',
   '    </div>',
   '  </header>',
@@ -183,6 +186,7 @@ function montarTela() {
   const call = $('#atlCall', raiz);
   S.ui = {
     raiz: raiz, palco: $('#atlPalco', raiz), trilha: $('#atlTrilha', raiz), legenda: $('#atlLegenda', raiz), etapa: $('#atlEtapa', raiz),
+    passo: $('#atlPasso', raiz), prog: $('#atlProg', raiz),
     carregando: $('#atlCarregando', raiz), lib: $('#atlLib', raiz), linha: $('#atlLinha', raiz), play: $('#atlPlay', raiz),
     call: call, callN: call.querySelector('i'), callT: call.querySelector('b'), callP: call.querySelector('p'), callC: call.querySelector('small'), callA: call.querySelector('em'),
     trans: $('#atlTrans', raiz), fecho: $('#atlFecho', raiz), pular: $('#atlPular', raiz), demo: $('#atlDemo', raiz), voz: $('#atlVoz', raiz)
@@ -205,6 +209,7 @@ function montarTela() {
   raiz.addEventListener('click', function (e) { const c = e.target.closest && e.target.closest('[data-atlas]'); if (c) abrirEstudo(c.dataset.atlas); });
   document.addEventListener('keydown', function (e) {
     if (!S.aberto) return;
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;   // digitando no chat: as setas e o espaço são do texto
     if (e.key === 'Escape') fechar('fechar');
     else if (e.key === 'ArrowRight') tocarDe(S.i + 1);
     else if (e.key === 'ArrowLeft') tocarDe(S.i - 1);
@@ -312,6 +317,8 @@ function marcarPasso() {
   const doEst = S.passos.filter(function (p) { return p.est === passo.est; });
   const n = doEst.indexOf(passo) + 1;
   S.ui.etapa.textContent = NOMES[passo.est] + (doEst.length > 1 ? ' · ' + n + ' de ' + doEst.length : '');
+  S.ui.passo.textContent = 'Passo ' + (S.i + 1) + ' de ' + S.passos.length + ' · ' + passo.titulo;   // onde a pessoa está na aula
+  S.ui.prog.style.width = ((S.i + 1) / S.passos.length * 100).toFixed(1) + '%';
   S.ui.raiz.dataset.tipo = passo.tipo;
 }
 function botaoPlay() { S.ui.play.textContent = S.tocando ? 'Pausar' : 'Continuar'; }
@@ -347,6 +354,11 @@ function mostrarFecho(modo) {
     box.appendChild(linha);
   });
   if (modo !== 'contexto' && c.nivel && c.nivel_nome) box.appendChild(el('p', null, 'Nível de atendimento: ' + c.nivel_nome));
+  if (modo !== 'contexto' && c.remedios) {   // os remédios do caso moram no painel: daqui dá para ir direto a eles
+    const rem = el('button', 'atl-btn atl-remedios', 'Ver alívio e remédios no painel'); rem.type = 'button';
+    rem.onclick = function () { concluir('remedios'); };
+    box.appendChild(rem);
+  }
   box.appendChild(el('small', null, 'Atlas de referência: não é o seu exame nem um diagnóstico.'));
   box.hidden = false;
 }
@@ -437,6 +449,31 @@ async function executar(passo, r) {
   await esperar(500);
 }
 
+/* ── ajuda por fase (fase.js): conversar sobre o passo em exibição; abrir o chat pausa a aula ──── */
+function contextoAtlas() {
+  const e = S.estudo;
+  if (!e) return 'Tela: Atlas 3D, biblioteca de estudos. A pessoa ainda não escolheu uma aula.';
+  const p = S.passos[Math.min(S.i, S.passos.length - 1)], c = e.conversa || {};
+  const linhas = ['Tela: Atlas 3D, aula "' + e.titulo + '"' + (S.caso ? ', montada a partir do caso da pessoa.' : ', de referência (não é o caso dela).')];
+  if (p) linhas.push('Passo ' + (S.i + 1) + ' de ' + S.passos.length + ' (' + NOMES[p.est] + '): ' + p.titulo + '.', 'O que a aula diz neste passo: ' + textosDe(p).join(' '));
+  if (S.caso && c.relato) {
+    linhas.push('Relato da pessoa: ' + c.relato + (c.onde ? ' Região: ' + c.onde + '.' : '') + (c.dor ? ' Dor ' + c.dor + '/10.' : ''),
+      'Confirmou: ' + ((c.confirmou || []).join('; ') || 'nada') + '. Descartou: ' + ((c.descartou || []).join('; ') || 'nada') + '. Falta checar: ' + ((c.falta || []).join('; ') || 'nada') + '.');
+    if (c.nivel_nome) linhas.push('Nível de atendimento: ' + c.nivel_nome + '.');
+  }
+  return linhas.join('\n').slice(0, 3000);
+}
+function pausarAula() {
+  if (!S.tocando) return;
+  S.rodada++; S.tocando = false; if (S.palco) S.palco.cancelar(); pararFala(); botaoPlay();
+}
+function entrarFase() {
+  if (!window.BMXFase) return;
+  window.BMXFase.entrar({ fase: 'atlas', tema: 'escuro', botoes: false, chat: true, contexto: contextoAtlas, pausar: pausarAula,
+    sugestoes: ['O que estou vendo agora?', 'Por que isso importa no meu caso?', 'Explique de um jeito mais simples'],
+    vazio: 'Pergunte sobre o que está na tela. A aula fica em pausa enquanto você conversa; depois é só tocar em Continuar.' });
+}
+
 /* ── abrir e fechar ───────────────────────────────────────────────────────────────────────────── */
 function mostrarBiblioteca() {
   const u = montarTela();
@@ -487,6 +524,13 @@ async function iniciarAula(e, caso) {
   S.palco.estado(0);
   textosDe(S.passos[0]).concat(textosDe(S.passos[1])).forEach(preparar);
   descobrir(500);
+  entrarFase();
+  if (caso && window.BMXFase) {                    // nas 3 primeiras conexões, o guia do atlas vem antes da aula
+    const r = S.rodada;
+    await esperar(900);                            // a cortina sobe primeiro
+    await window.BMXFase.tutorial('atlas');
+    if (!S.aberto || S.estudo !== e || r !== S.rodada) return true;   // a pessoa fechou ou mudou de aula durante o guia
+  }
   tocarDe(0);
   return true;
 }
@@ -515,6 +559,7 @@ async function abrirCaso(cid, aoFim) {
 
 function ocultar() {
   S.ui.raiz.hidden = true; S.ui.raiz.classList.remove('saindo'); S.aberto = false; S.estudo = null; S.caso = false;
+  if (window.BMXFase) window.BMXFase.sair('atlas');
   document.body.classList.remove('atl-aberto');
   descobrir(0);
 }
@@ -544,6 +589,7 @@ async function abrir(id) {
   try { await carregarDados(); } catch (err) { alert('Não consegui abrir o atlas agora.'); return; }
   S.ui.raiz.hidden = false; S.aberto = true; document.body.classList.add('atl-aberto');
   if (!S.palco) S.palco = criarPalco(S.ui.palco);
+  entrarFase();
   mostrarBiblioteca();
 }
 

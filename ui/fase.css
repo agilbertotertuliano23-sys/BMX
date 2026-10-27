@@ -1,0 +1,103 @@
+/* BMX · ajuda por fase (ui/fase.js): botões, conversa sobre a tela, sugestão/inconsistência e tutorial.
+   Prefixo bf- em tudo: caso.css e atlas.css têm classes genéricas que não podem pegar aqui. */
+
+.bf, .bf-tut {
+  --bf-fundo: #ffffff; --bf-fundo2: #f2f6fa; --bf-txt: #14212e; --bf-mudo: #5a6b7a; --bf-linha: #d3dde6;
+  --bf-acento: #1b8fc4; --bf-acento-txt: #ffffff; --bf-aviso: #fdecea; --bf-aviso-txt: #9c251b;
+  font-family: Nunito, system-ui, sans-serif; font-size: 14px; color: var(--bf-txt);
+}
+.bf[data-tema="escuro"], .bf-tut[data-tema="escuro"] {
+  --bf-fundo: #0a1d33; --bf-fundo2: #0e2742; --bf-txt: #e4f2ff; --bf-mudo: #8fb0cf; --bf-linha: rgba(53, 200, 255, .3);
+  --bf-acento: #35c8ff; --bf-acento-txt: #04121f; --bf-aviso: rgba(255, 77, 94, .16); --bf-aviso-txt: #ffc9ce;
+}
+.bf *, .bf-tut * { box-sizing: border-box; }
+/* as páginas têm estilos globais de `button` (a de entrada, por exemplo, põe largura total e margem): aqui não valem */
+.bf button, .bf-tut button, .bf-botoes button { width: auto; margin: 0; }
+.bf [hidden], .bf-tut [hidden] { display: none !important; }
+
+/* botões (ancorados no cabeçalho da página ou soltos no canto) */
+.bf-botoes { display: inline-flex; gap: 6px; align-items: center; }
+.bf-botoes.solto { position: fixed; right: 12px; bottom: 12px; z-index: 2100; }
+.bf-btn {
+  font: inherit; font-size: 13px; font-weight: 800; min-height: 36px; padding: 6px 13px; border-radius: 999px; cursor: pointer;
+  background: #fff; color: #14212e; border: 1px solid #c5d3df; box-shadow: 0 1px 0 rgba(20, 33, 46, .04);
+}
+.bf-btn:hover, .bf-btn:focus-visible { border-color: #1b8fc4; color: #075d88; outline: none; }
+.bf-btn.on { background: #14212e; color: #fff; border-color: #14212e; }
+.bf-btn.redondo { width: 36px; padding: 0; }
+
+.bf-botoes.bf-pai { margin-left: auto; }
+.bf-atlas-agora { align-self: flex-start; margin: 0 0 8px; min-height: 32px; font-size: 12px; }
+body.modo-caso .topo .bf-botoes { display: none; }   /* com o painel do caso aberto, valem os botões da barra do painel */
+
+/* painel: conversa e sugestão */
+.bf-painel {
+  position: fixed; right: 14px; bottom: 14px; z-index: 2100; width: min(390px, calc(100vw - 20px)); max-height: min(72vh, 580px);
+  display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: var(--bf-fundo); color: var(--bf-txt);
+  border: 1px solid var(--bf-linha); box-shadow: 0 18px 50px -12px rgba(8, 20, 34, .45);
+}
+.bf[data-tema="escuro"] .bf-painel { bottom: 84px; }
+.bf-cab { display: flex; align-items: center; gap: 8px; padding: 10px 12px 0; }
+.bf-cab b { flex: 1; font-size: 14px; font-weight: 900; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bf-x { border: 0; background: transparent; color: var(--bf-mudo); font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 8px; border-radius: 8px; }
+.bf-x:hover { color: var(--bf-txt); background: var(--bf-fundo2); }
+.bf-abas { display: flex; gap: 4px; padding: 8px 12px 0; border-bottom: 1px solid var(--bf-linha); }
+.bf-abas button { font: inherit; font-size: 12.5px; font-weight: 800; padding: 7px 11px; border: 0; background: transparent; color: var(--bf-mudo); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.bf-abas button[aria-selected="true"] { color: var(--bf-txt); border-bottom-color: var(--bf-acento); }
+
+.bf-msgs { flex: 1; min-height: 120px; overflow: auto; display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+.bf-msg { max-width: 88%; padding: 8px 11px; border-radius: 12px; line-height: 1.45; font-size: 13.5px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bf-msg.eu { align-self: flex-end; background: var(--bf-acento); color: var(--bf-acento-txt); border-bottom-right-radius: 4px; }
+.bf-msg.bmx { align-self: flex-start; background: var(--bf-fundo2); border: 1px solid var(--bf-linha); border-bottom-left-radius: 4px; }
+.bf-msg.pensando { color: var(--bf-mudo); font-style: italic; }
+.bf-msg.erro { background: var(--bf-aviso); color: var(--bf-aviso-txt); border-color: transparent; }
+.bf-vazio { margin: 0; color: var(--bf-mudo); font-size: 13px; line-height: 1.45; }
+.bf-sug { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 8px; }
+.bf-sug button { font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer; border: 1px solid var(--bf-linha); background: var(--bf-fundo2); color: var(--bf-txt); }
+.bf-sug button:hover { border-color: var(--bf-acento); }
+.bf-alerta { margin: 0 12px 8px; padding: 9px 11px; border-radius: 12px; background: var(--bf-aviso); color: var(--bf-aviso-txt); font-weight: 800; font-size: 13px; }
+.bf-alerta a { color: inherit; margin-left: 8px; }
+.bf-form { display: flex; gap: 6px; padding: 10px 12px 12px; border-top: 1px solid var(--bf-linha); }
+.bf-form input, .bf-form textarea, .bf-form select {
+  flex: 1; min-width: 0; font: inherit; font-size: 13.5px; padding: 9px 11px; border-radius: 10px; color: var(--bf-txt);
+  background: var(--bf-fundo); border: 1px solid var(--bf-linha);
+}
+.bf-form input:focus, .bf-form textarea:focus, .bf-form select:focus { outline: 2px solid var(--bf-acento); outline-offset: -1px; }
+.bf-enviar { font: inherit; font-size: 13px; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 0; cursor: pointer; background: var(--bf-acento); color: var(--bf-acento-txt); }
+.bf-enviar:disabled { opacity: .55; cursor: default; }
+.bf-fb { display: flex; flex-direction: column; gap: 8px; padding: 12px; overflow: auto; }
+.bf-fb label { font-size: 12px; font-weight: 800; color: var(--bf-mudo); display: flex; flex-direction: column; gap: 4px; }
+.bf-fb textarea { min-height: 96px; resize: vertical; font: inherit; font-size: 13.5px; padding: 9px 11px; border-radius: 10px; color: var(--bf-txt); background: var(--bf-fundo); border: 1px solid var(--bf-linha); }
+.bf-fb select { font: inherit; font-size: 13.5px; padding: 9px 11px; border-radius: 10px; color: var(--bf-txt); background: var(--bf-fundo); border: 1px solid var(--bf-linha); }
+.bf-fb small { color: var(--bf-mudo); line-height: 1.4; font-size: 12px; }
+.bf-fb .bf-enviar { align-self: flex-start; }
+.bf-ok { color: #14783c; font-weight: 800; font-size: 13px; min-height: 18px; }
+.bf[data-tema="escuro"] .bf-ok { color: #7ee2a8; }
+
+/* tutorial */
+.bf-tut { position: fixed; inset: 0; z-index: 2200; }
+.bf-tut-fundo { position: absolute; inset: 0; background: rgba(6, 14, 24, .62); }
+.bf-tut-foco {
+  position: absolute; border-radius: 14px; pointer-events: none; border: 2px solid var(--bf-acento);
+  box-shadow: 0 0 0 9999px rgba(6, 14, 24, .62), 0 0 22px 2px var(--bf-acento); transition: all .25s ease;
+}
+.bf-tut-card {
+  position: absolute; width: min(360px, calc(100vw - 24px)); padding: 16px 16px 14px; border-radius: 16px; background: var(--bf-fundo); color: var(--bf-txt);
+  border: 1px solid var(--bf-linha); box-shadow: 0 20px 56px -12px rgba(0, 0, 0, .55);
+}
+.bf-tut-tag { display: block; margin-bottom: 6px; font: 800 10.5px/1.2 ui-monospace, Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--bf-acento); }
+.bf-tut-card b { display: block; font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+.bf-tut-card p { margin: 0 0 12px; line-height: 1.5; color: var(--bf-txt); font-size: 14px; }
+.bf-tut-pontos { display: flex; gap: 5px; margin-bottom: 12px; }
+.bf-tut-pontos i { width: 18px; height: 5px; border-radius: 3px; background: var(--bf-linha); }
+.bf-tut-pontos i.on { background: var(--bf-acento); }
+.bf-tut-acoes { display: flex; gap: 8px; align-items: center; }
+.bf-tut-acoes .pula { margin-right: auto; font: inherit; font-size: 12.5px; font-weight: 700; color: var(--bf-mudo); background: transparent; border: 0; cursor: pointer; padding: 6px 4px; text-decoration: underline; }
+.bf-tut-acoes button:not(.pula) { font: inherit; font-size: 13px; font-weight: 800; padding: 8px 15px; border-radius: 10px; cursor: pointer; border: 1px solid var(--bf-linha); background: var(--bf-fundo2); color: var(--bf-txt); }
+.bf-tut-acoes .prox { background: var(--bf-acento) !important; color: var(--bf-acento-txt) !important; border-color: transparent !important; }
+.bf-tut-rodape { display: block; margin-top: 10px; font-size: 11.5px; color: var(--bf-mudo); line-height: 1.4; }
+
+@media (max-width: 640px) {
+  .bf-painel, .bf[data-tema="escuro"] .bf-painel { left: 8px; right: 8px; width: auto; bottom: 8px; max-height: 70vh; }
+}
+@media (prefers-reduced-motion: reduce) { .bf-tut-foco { transition: none; } }

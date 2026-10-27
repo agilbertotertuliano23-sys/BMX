@@ -292,11 +292,16 @@ def para_caso(cid=""):
     if nivel:
         fecho.append(f"O BMX classificou o seu caso como {c.get('nivel_nome', nivel).lower()}."
                      + (" Siga a orientação que ele deu na conversa." if nivel in ("urgente", "emergencia") else ""))
+    import clinica   # o painel só mostra remédios sem sinal de alerta e quando a queixa tem opções no guia
+    guia = clinica.guia(c.get("queixa_id")) if c.get("queixa_id") else None
+    remedios = bool(guia and guia["medicamentos"]) and nivel != "emergencia" and not sim
+    if remedios:
+        fecho.append("No painel você também vê as opções comuns de alívio e remédios, com foto e cuidados.")
     fecho.append("Isto é informação para conversar com um profissional, não um diagnóstico. Vou abrir o painel do caso.")
     e["fecho_caso"] = " ".join(fecho)
     e["conversa"] = dict(titulo=c.get("titulo", ""), onde=onde, lado=lado, relato=relato, nivel=nivel,
                          nivel_nome=c.get("nivel_nome", ""), dor=c.get("dor_ultima") or c.get("dor_max") or "",
-                         confirmou=sim, descartou=nao, falta=falta[:3], proximo=proximo)
+                         confirmou=sim, descartou=nao, falta=falta[:3], proximo=proximo, remedios=remedios)
     assin = hashlib.sha1(json.dumps([sorted(ids), sim, nao, nivel, c.get("lado", "")], ensure_ascii=False).encode()).hexdigest()[:12]
     return dict(aviso=d.get("aviso", ""), estudos=[e], caso=c["id"], assinatura=assin, modo="caso")
 

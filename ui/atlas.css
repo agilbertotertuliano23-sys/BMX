@@ -178,6 +178,21 @@ body.atl-aberto { overflow: hidden; }
 .atl-referencias a { display: block; color: #b4e6ff; margin: 8px 0; }
 .atl-referencias b { display: block; margin-top: 12px; }
 .atl-referencias p { margin: 8px 0; }
+/* onde a pessoa está na aula: barra de progresso no topo e "Passo X de N" com o título do passo */
+.atl-prog { position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 4; background: rgba(53, 200, 255, .12); pointer-events: none; }
+.atl-prog i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--azul), var(--azul2)); box-shadow: 0 0 10px var(--azul); transition: width .45s ease; }
+.atl-centro { flex: 1; min-width: 0; text-align: center; pointer-events: none; }
+.atl-centro .atl-etapa { display: block; }
+.atl-passo { margin: 3px 0 0; font-size: 13px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.atl-perg { background: rgba(53, 200, 255, .18); border-color: var(--azul); color: #fff; }
+.atl-ajuda { width: 38px; padding: 0; }
+.atl-remedios { align-self: flex-start; background: rgba(80, 200, 140, .16); border-color: rgba(80, 200, 140, .55); color: #d8f8e6; }
+.atl-remedios:hover { background: rgba(80, 200, 140, .3); border-color: #7ee2a8; }
+@media (max-width: 640px) {
+  .atl-so-larga { display: none; }
+  .atl-centro { text-align: left; }
+  .atl-passo { font-size: 11px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .atl-marca i, .atl-card::after, .atl-carregando i { animation: none; }
   .atl-fecho, .atl-marca span { animation: none; }

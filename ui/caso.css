@@ -682,3 +682,41 @@ body { grid-template-rows: auto auto auto auto; }
   .achado h1 { font-size: 14px; }
   .sistema { padding: 3px 7px; }
 }
+
+/* ══ remédios em destaque ═════════════════════════════════════════════════════════════════════════
+   O bloco "Alívio e remédios" é a parte do painel que a pessoa mais procura: fica em cor própria (verde), com
+   contador de opções, fotos maiores e as cautelas visíveis, em vez de cortado em duas linhas como o resto. */
+.pc-remedios.destaque { padding: 12px 14px; border-radius: 16px; background: linear-gradient(160deg, #effaf4 0%, #e6f4fb 100%); border: 1.5px solid #8fd1b0; box-shadow: 0 8px 22px -14px rgba(20, 120, 80, .6); }
+.pc-rem-topo { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; flex-wrap: wrap; }
+.pc-rem-icone { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 10px; background: #14783c; color: #fff; }
+.pc-rem-icone svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pc-remedios.destaque .pc-rem-topo h3 { margin: 0; font-size: 14px; letter-spacing: 0; text-transform: none; color: #0e4d2a; }
+.pc-remedios.destaque .pc-rem-topo h3 small { display: block; margin: 1px 0 0; font-size: 11px; color: #3f6b55; }
+.pc-rem-conta { margin-left: auto; padding: 3px 10px; border-radius: 999px; background: #14783c; color: #fff; font-size: 11px; font-weight: 800; }
+.pc-remedios.destaque .pc-regra { margin: 2px 0 6px; padding: 7px 10px; border-radius: 10px; background: rgba(255, 255, 255, .75); border-left: 3px solid #14783c; font-size: 12px; line-height: 1.4; color: #12432a; font-weight: 700; }
+.pc-remedios.destaque .med-card { border-color: #b7dfca; box-shadow: 0 2px 8px -6px rgba(20, 120, 80, .6); }
+.pc-remedios.destaque .med-texto > b { font-size: 13.5px; color: #0e4d2a; }
+.pc-remedios.destaque .alergia-aviso { margin: 4px 0; padding: 7px 10px; border-radius: 9px; background: #fdecea; color: #9c251b; font-weight: 800; }
+.pc-remedios.foco { animation: remedioFoco 1.4s ease-in-out 3; }
+@keyframes remedioFoco { 0%, 100% { box-shadow: 0 0 0 0 rgba(20, 120, 80, 0); } 50% { box-shadow: 0 0 0 5px rgba(20, 120, 80, .45); } }
+.paracaso-acoes .btn-remedios { background: #14783c; border-color: #14783c; color: #fff; }
+.paracaso-acoes .btn-remedios small { color: #d6f3e2; }
+.paracaso-acoes .btn-remedios:hover { background: #0e5f2f; border-color: #0e5f2f; }
+
+@media (min-width: 1000px) {
+  /* a coluna do "Para este caso" fica mais larga e os remédios deixam de ser cortados */
+  body .painel { grid-template-columns: minmax(210px, 236px) minmax(0, 1fr) minmax(0, 1fr) minmax(360px, 460px); }
+  .pc-remedios.destaque { padding: 9px 11px; }
+  .pc-remedios.destaque .pc-rem-topo h3 { font-size: 13px; }
+  .pc-remedios.destaque .pc-regra { display: block; -webkit-line-clamp: unset; font-size: 11.5px; padding: 5px 8px; }
+  .pc-remedios.destaque .med-lista { gap: 7px; }
+  .pc-remedios.destaque .med-card { padding: 7px 9px; gap: 9px; }
+  .pc-remedios.destaque .med-fotos { width: 148px; max-width: 42%; }
+  .pc-remedios.destaque .med-foto, .pc-remedios.destaque .med-foto img { width: 62px; }
+  .pc-remedios.destaque .med-foto img { height: 62px; }
+  .pc-remedios.destaque .med-texto { font-size: 11.5px; }
+  .pc-remedios.destaque .med-texto > b { font-size: 12.5px; }
+  .pc-remedios.destaque .med-texto p { display: block; -webkit-line-clamp: unset; overflow: visible; }
+  .pc-remedios.destaque .med-texto .cautela { display: block; }
+  .paracaso-acoes .btn-remedios { order: -1; }
+}

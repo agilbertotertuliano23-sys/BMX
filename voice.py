@@ -158,8 +158,8 @@ def speak(text):
     """Returns mp3 bytes, or raises. The caller decides what to do on failure."""
     if not available():
         raise RuntimeError("sem FISH_AUDIO_API_KEY — a voz do navegador assume")
-    # [nível: …] é marcação para o painel do caso, não direção de fala.
-    text = re.sub(r"\[\s*n[ií]vel\b[^\]]*\]", "", text or "").strip()
+    # [nível: …] e [atlas] são marcações para a interface (painel do caso, atlas 3D), não direção de fala.
+    text = re.sub(r"\[\s*(?:n[ií]vel\b[^\]]*|atlas)\s*\]", "", text or "", flags=re.I).strip()
     if not text:
         raise ValueError("empty text")
 

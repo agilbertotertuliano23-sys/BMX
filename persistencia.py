@@ -16,6 +16,7 @@ import threading
 import urllib.request
 
 import commands
+import fase
 import memory
 import usuarios
 
@@ -58,7 +59,8 @@ def _foto(pid):
     arquivos = {p.relative_to(memory.VAULT).as_posix(): p.read_text(encoding="utf-8", errors="replace")
                 for p in _arquivos(pid)}
     estado = commands.load()["pacientes"].get(pid, {})
-    return json.dumps({"files": arquivos, "estado": estado}, ensure_ascii=False)
+    return json.dumps({"files": arquivos, "estado": estado, "feedback": fase.feedback_do(pid),
+                       "conversas": fase.conversa_do(pid)}, ensure_ascii=False)
 
 
 def salvar(pid):
@@ -125,6 +127,8 @@ def restaurar():
                     destino.write_text(texto, encoding="utf-8")
             if foto.get("estado"):
                 commands.update_state(lambda s, p=pid, e=foto["estado"]: s["pacientes"].__setitem__(p, e))
+            fase.feedback_restaurar(pid, foto.get("feedback"))
+            fase.conversa_restaurar(pid, foto.get("conversas"))
             n += 1
         return n
     except Exception as e:  # noqa: BLE001

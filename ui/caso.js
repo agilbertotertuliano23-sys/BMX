@@ -14,6 +14,7 @@ var esc = function (s) {
 var DADOS = null, rodando = false, falar = false, corpoPronto = false, camadasConfiguradas = false;
 window.BMXCaso = { id: function () { return DADOS && DADOS.caso ? DADOS.caso.id : ''; } };   // o botão "Atlas 3D" abre a aula deste caso
 var pacienteGuia = '';
+var tutorialChamado = false, INCORPORADO = document.documentElement.classList.contains('incorporado');
 var imagensRemedios = [], DEMOS = [];
 var nomesTemasImagem = { dor_febre: 'Dor e febre', antiinflamatorio: 'Anti-inflamatório',
   reidratacao: 'Reidratação', urticaria: 'Alergia e urticária', alivio_tosse: 'Tosse e garganta' };
@@ -69,6 +70,7 @@ function render() {
   renderCamadas(d.camadas);
   renderParaCaso(d);
   mostrarCorpo();
+  if (c && !tutorialChamado && window.BMXFase) { tutorialChamado = true; setTimeout(function () { window.BMXFase.tutorial('painel'); }, 900); }
 }
 
 function semAcento(s) {
@@ -112,16 +114,20 @@ function renderParaCaso(d) {
   var ids = (c.queixa_id ? ['queixa:' + c.queixa_id] : []).concat(meds.map(function (m) { return 'remedio:' + m.id; }));
   var demos = ids.map(function (id) { return DEMOS.find(function (x) { return x.id === id; }); }).filter(Boolean);
   $('#paraCasoAcoes').innerHTML = '<button type="button" class="btn-atlas" data-atlas-abrir="1">Ver no atlas 3D</button>'
+    + (meds.length ? '<button type="button" class="btn-remedios" data-foco-remedios="1">Ver remédios<small>' + meds.length + (meds.length === 1 ? ' opção' : ' opções') + '</small></button>' : '')
     + demos.map(function (x) {
       return '<button type="button" class="demo-btn" data-demo="' + esc(x.id) + '">▶ ' + esc(x.titulo) + '<small>demonstração guiada</small></button>';
     }).join('');
   if (!g) { $('#paraCasoCorpo').innerHTML = ''; return; }
   var html = '';
   if (g.medicamentos.length) {
-    html += '<div class="pc-remedios"><h3>Alívio e remédios <small>informação geral para adultos</small></h3>';
+    html += '<div class="pc-remedios destaque" id="pcRemedios"><div class="pc-rem-topo"><span class="pc-rem-icone" aria-hidden="true">'
+      + '<svg viewBox="0 0 24 24"><path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l10-10a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></span>'
+      + '<h3>Alívio e remédios <small>informação geral para adultos</small></h3>'
+      + (alerta ? '' : '<span class="pc-rem-conta">' + g.medicamentos.length + (g.medicamentos.length === 1 ? ' opção' : ' opções') + '</span>') + '</div>';
     if (alerta) html += '<p class="pc-aviso">Há sinal de alerta neste caso. Procure atendimento antes de pensar em remédios para aliviar os sintomas.</p>';
     else {
-      html += '<p>Não é prescrição nem escolha individual de medicamento.'
+      html += '<p class="pc-regra">Não é prescrição nem escolha individual de medicamento.'
         + (fixa ? ' Confira as alergias, condições e medicamentos da Ficha fixa com um profissional.' : ' Informe alergias, doenças, gravidez e remédios em uso ao farmacêutico ou profissional.') + '</p>'
         + '<div class="med-lista">' + meds.map(function (m) {
           var exemplos = m.exemplos || [];
@@ -164,8 +170,9 @@ function renderParaCaso(d) {
 /** Começa a demonstração guiada da queixa do caso (pedida pelo atlas); espera o cartão existir. */
 function pedirDemo(tentativa) {
   var b = document.querySelector('#paraCasoAcoes [data-demo^="queixa:"]');
-  if (b) { b.click(); return; }
-  if ((tentativa || 0) < 16) setTimeout(function () { pedirDemo((tentativa || 0) + 1); }, 500);
+  var guia = !!(window.BMXFase && window.BMXFase.tutorialAberto());   // com o tutorial aberto a demonstração espera ele fechar
+  if (b && !guia) { b.click(); return; }
+  if (guia || (tentativa || 0) < 16) setTimeout(function () { pedirDemo(guia ? tentativa : (tentativa || 0) + 1); }, 500);
 }
 
 function renderSeletores(d) {
@@ -411,6 +418,16 @@ var SECOES = { dor: '.medida:nth-of-type(1)', nivel: '.medida:nth-of-type(2)', s
 var focoTimer = null;
 function focar(secao) {
   Array.prototype.forEach.call(document.querySelectorAll('.foco'), function (n) { n.classList.remove('foco'); });
+  if (secao === 'remedios') {                         // o bloco dos remédios, dentro do cartão "Para este caso"
+    var rem = document.querySelector('#paraCaso .pc-remedios');
+    if (rem) {
+      rem.classList.add('foco');
+      rem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      clearTimeout(focoTimer);
+      focoTimer = setTimeout(function () { rem.classList.remove('foco'); }, 4500);
+    }
+    return;
+  }
   var alvo = SECOES[secao] && document.querySelector(SECOES[secao]);
   if (!alvo) return;
   alvo = alvo.closest('.card') || alvo;
@@ -425,6 +442,36 @@ window.addEventListener('message', function (e) {
   if (e.data.t === 'atualizar') carregar(e.data.id || (DADOS && DADOS.caso ? DADOS.caso.id : ''));
   else if (e.data.t === 'foco') focar(e.data.secao);
   else if (e.data.t === 'demo') pedirDemo(0);
+  else if (e.data.t === 'bf' && window.BMXFase) window.BMXFase.abrir(String(e.data.aba || ''));   // botões da barra do painel, na tela do Baymax
 });
+document.addEventListener('click', function (e) {
+  if (e.target.closest && e.target.closest('[data-foco-remedios]')) focar('remedios');
+});
+
+/* ── ajuda por fase (fase.js): conversar sobre o painel, sugestão/erro e tutorial ─────────────── */
+function contextoPainel() {
+  var d = DADOS, c = d && d.caso;
+  if (!c) return 'Tela: Painel do caso, ainda sem caso aberto.';
+  var sinais = c.discriminadores || [];
+  var por = function (estado) { return sinais.filter(function (x) { return x.estado === estado; }).map(function (x) { return x.sinal; }).join('; ') || 'nenhum'; };
+  var g = (d.catalogo || []).find(function (x) { return x.id === c.queixa_id; });
+  var alerta = c.nivel === 'emergencia' || sinais.some(function (x) { return x.estado === 'sim'; });
+  var meds = g && !alerta ? g.medicamentos.map(function (m) { return m.titulo + ': ' + m.texto + ' Cautela: ' + m.cautelas; }) : [];
+  return [
+    'Tela: Painel do caso. Caso ' + c.id + ': ' + c.titulo + (c.regiao_nome ? ', região ' + c.regiao_nome : '') + (c.lado ? ', lado ' + c.lado : '') + '.',
+    'Nível de atendimento: ' + (c.nivel_nome || 'a definir') + '. Dor: ' + (c.dor_ultima || c.dor_max || 'sem registro') + '/10.',
+    'Sinais de alerta confirmados: ' + por('sim') + '. Descartados: ' + por('nao') + '. Ainda não perguntados: ' + por('') + '.',
+    'Estruturas destacadas no corpo: ' + (c.estruturas || []).map(function (e) { return e.nome; }).join(', ') + '.',
+    'Ficha fixa: ' + ((d.fixa || []).map(function (f) { return f.tipo + ' ' + f.titulo; }).join('; ') || 'nada registrado') + '.',
+    'Remédios mostrados na tela: ' + (meds.length ? meds.join(' | ') : alerta ? 'nenhum, porque há sinal de alerta e a tela pede atendimento antes' : 'nenhum para esta queixa') + '.',
+    'Possibilidades para discutir com um profissional: ' + ((g && g.possibilidades) ? g.possibilidades.map(function (p) { return p.nome; }).join(', ') : 'nenhuma') + '.',
+    'Plano: ' + ((c.plano || []).join(' ') || 'ainda sem plano') + '.'
+  ].join('\n').slice(0, 3000);
+}
+if (window.BMXFase) {
+  window.BMXFase.montar({ fase: 'painel', ancora: '.acoes-topo', antes: '#btnFicha', botoes: !INCORPORADO, chat: true, contexto: contextoPainel,
+    sugestoes: ['O que significa o meu nível de atendimento?', 'Para que serve cada remédio listado?', 'O que devo observar nos próximos dias?'],
+    vazio: 'Pergunte sobre o que está neste painel: o nível, os sinais, o corpo 3D ou os remédios. Para contar algo novo sobre o que você sente, use a conversa do Atendimento.' });
+}
 
 carregar('');

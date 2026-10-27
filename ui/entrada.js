@@ -69,6 +69,12 @@
     b.addEventListener('click', function () { mostrar('passo-nome'); $('nome').focus(); });
   });
 
+  /* tutorial da entrada (fase.js): ainda não se sabe quem é a pessoa, então não há chat nem sugestão aqui, só o guia */
+  if (window.BMXFase) {
+    window.BMXFase.montar({ fase: 'entrada', chat: false, feedback: false });
+    setTimeout(function () { window.BMXFase.tutorial('entrada'); }, 500);
+  }
+
   $('salvar').addEventListener('click', async function () {
     var corpo = {};
     ['nome', 'idade', 'sexo', 'peso', 'altura', 'alergias', 'remedios', 'condicoes', 'contato', 'pin']
